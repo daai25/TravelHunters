@@ -1,72 +1,12 @@
 [
   {
-    "objectID": "modelling_report.html",
-    "href": "modelling_report.html",
-    "title": "Modelling Report",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "About This Documentation",
     "section": "",
-    "text": "The report should summarise the details of the modelling activities, e.g. machine learning experiments.\n\n\n\nAim of the modelling - consistent with Data Mining Goals in the project charta\nData set(s) and/or feature set used (references to the data report)\nDescription of the independent variables and (if applicable) the target variable\nType of model used or developed\n\n\n\n\nOverview of the models used and/or implemented and their configurations\n\nDetailed description of the model used (e.g. literature references, specification of the software library, exact module, version or other implementation details etc.)\nGraphical representation of the modelling pipeline\nIf applicable: link to the code of the modelling pipeline, version information in code repository, configuration files\nIf possible, links to the artefacts of the executed modelling pipeline (training experiment)\nLink to the literature in which the model/method is described\nHyperparameters\n\n\n\n\nKey figures dependent on the model and modelling objective\n\nRMSD, ROC/Lift-Charts, AUC, Confusion Matrix, Accuracy, Precision, Recall\nCoherence, Perplexity, …\nIf applicable: analyses/plots of (hyper)parameter screenings\n\n\n\n\n\nIf applicable: Results from the application of “explanatory models”\nWere the modelling objectives achieved?\nThe findings resulting from the modelling phase: can the project objective be achieved with the results from the modelling phase?\nHow can the findings be used? Are there any limitations?\n\n\n\n\n\nConclusions of the key findings from the modelling phase\nDiscussion about limitations\nProposal for extensions and further work\nProposal for the deployment of the generated insights/model",
+    "text": "The Data Science Process [1]\n\n\nThis is an example on how to incorporate executable Python code and show a figure output:\n\n\nCode\nimport matplotlib.pyplot as plt\nimport numpy as np\n\n# Generate sample data\nx = np.linspace(0, 2*np.pi, 100)\ny = np.sin(x)\n\n# Create the plot\nfig, ax = plt.subplots(figsize=(8, 5))\n\nax.plot(x, y, color='blue', linewidth=2)\n\nax.set_xlabel('x')\nax.set_ylabel('y')\nax.set_title('Plot title')\n\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: A simple demonstration of executable Python code producing a figure object.\n\n\n\n\n\nThen the figure can be referenced with Figure 1.\n\n\n\n\nReferences\n\n1. Doemer D, Kempf M. Is it ops that make data science scientific? Archives of Data Science, Series A (Online First). 2022;8(2):12 S.",
     "crumbs": [
-      "Modelling Report"
-    ]
-  },
-  {
-    "objectID": "modelling_report.html#initial-situation",
-    "href": "modelling_report.html#initial-situation",
-    "title": "Modelling Report",
-    "section": "",
-    "text": "Aim of the modelling - consistent with Data Mining Goals in the project charta\nData set(s) and/or feature set used (references to the data report)\nDescription of the independent variables and (if applicable) the target variable\nType of model used or developed",
-    "crumbs": [
-      "Modelling Report"
-    ]
-  },
-  {
-    "objectID": "modelling_report.html#model-descriptions",
-    "href": "modelling_report.html#model-descriptions",
-    "title": "Modelling Report",
-    "section": "",
-    "text": "Overview of the models used and/or implemented and their configurations\n\nDetailed description of the model used (e.g. literature references, specification of the software library, exact module, version or other implementation details etc.)\nGraphical representation of the modelling pipeline\nIf applicable: link to the code of the modelling pipeline, version information in code repository, configuration files\nIf possible, links to the artefacts of the executed modelling pipeline (training experiment)\nLink to the literature in which the model/method is described\nHyperparameters",
-    "crumbs": [
-      "Modelling Report"
-    ]
-  },
-  {
-    "objectID": "modelling_report.html#results",
-    "href": "modelling_report.html#results",
-    "title": "Modelling Report",
-    "section": "",
-    "text": "Key figures dependent on the model and modelling objective\n\nRMSD, ROC/Lift-Charts, AUC, Confusion Matrix, Accuracy, Precision, Recall\nCoherence, Perplexity, …\nIf applicable: analyses/plots of (hyper)parameter screenings",
-    "crumbs": [
-      "Modelling Report"
-    ]
-  },
-  {
-    "objectID": "modelling_report.html#model-interpretation",
-    "href": "modelling_report.html#model-interpretation",
-    "title": "Modelling Report",
-    "section": "",
-    "text": "If applicable: Results from the application of “explanatory models”\nWere the modelling objectives achieved?\nThe findings resulting from the modelling phase: can the project objective be achieved with the results from the modelling phase?\nHow can the findings be used? Are there any limitations?",
-    "crumbs": [
-      "Modelling Report"
-    ]
-  },
-  {
-    "objectID": "modelling_report.html#conclusions-and-next-steps",
-    "href": "modelling_report.html#conclusions-and-next-steps",
-    "title": "Modelling Report",
-    "section": "",
-    "text": "Conclusions of the key findings from the modelling phase\nDiscussion about limitations\nProposal for extensions and further work\nProposal for the deployment of the generated insights/model",
-    "crumbs": [
-      "Modelling Report"
-    ]
-  },
-  {
-    "objectID": "evaluation.html",
-    "href": "evaluation.html",
-    "title": "Evaluation",
-    "section": "",
-    "text": "Evaluation\nThis protocol summarises the decisions from the evaluation of the data mining phase, which are made, for example, in a workshop together with the client and other stakeholders.\nDecide:\n\nDo results meet user needs?\nContinuation of the project yes/no\nPlanning of the deployment\nCarry out an additional data mining iteration\n\nAcquire more or different data\nImprovements in the modelling\nAddress governance issues\nor ethical considerations\n…\n\n\nAny presentation material created for such a workshop should also be stored in the docs folder.\nIt is important to list who was involved in the decisions and when they were made.\nThe structure and level of detail of this protocol should be tailored to the customs of the relevant organisation and the requirements of the decision-makers. It might include already a high level description of the envisioned product to be deployed.",
-    "crumbs": [
-      "Evaluation"
+      "About This Documentation"
     ]
   },
   {
@@ -140,16 +80,6 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "About This Documentation",
-    "section": "",
-    "text": "The Data Science Process [1]\n\n\nThis is an example on how to incorporate executable Python code and show a figure output:\n\n\nCode\nimport matplotlib.pyplot as plt\nimport numpy as np\n\n# Generate sample data\nx = np.linspace(0, 2*np.pi, 100)\ny = np.sin(x)\n\n# Create the plot\nfig, ax = plt.subplots(figsize=(8, 5))\n\nax.plot(x, y, color='blue', linewidth=2)\n\nax.set_xlabel('x')\nax.set_ylabel('y')\nax.set_title('Plot title')\n\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: A simple demonstration of executable Python code producing a figure object.\n\n\n\n\n\nThen the figure can be referenced with Figure 1.\n\n\n\n\nReferences\n\n1. Doemer D, Kempf M. Is it ops that make data science scientific? Archives of Data Science, Series A (Online First). 2022;8(2):12 S.",
-    "crumbs": [
-      "About This Documentation"
-    ]
-  },
-  {
     "objectID": "data_report.html",
     "href": "data_report.html",
     "title": "Data Report",
@@ -177,6 +107,76 @@
     "text": "Name\nQuelle\nStorage location\n\n\n\n\nProcessed Dataset 1\nName/short description of the data source\nLink and/or short description of the location where the data is stored, e.g. accessible to the team\n\n\nProcessed Dataset 2\n…\n…\n\n\n\n\n\n\n\nDescription of what information the dataset contains\nDetails and reasons for the processing steps -&gt; Traceability and ensuring reproducibility\nHow can the data be accessed? Description, scripts, tools, …\n…\n\n\n\n\n\n\n\n\n\n\n…",
     "crumbs": [
       "Data Report"
+    ]
+  },
+  {
+    "objectID": "evaluation.html",
+    "href": "evaluation.html",
+    "title": "Evaluation",
+    "section": "",
+    "text": "Evaluation\nThis protocol summarises the decisions from the evaluation of the data mining phase, which are made, for example, in a workshop together with the client and other stakeholders.\nDecide:\n\nDo results meet user needs?\nContinuation of the project yes/no\nPlanning of the deployment\nCarry out an additional data mining iteration\n\nAcquire more or different data\nImprovements in the modelling\nAddress governance issues\nor ethical considerations\n…\n\n\nAny presentation material created for such a workshop should also be stored in the docs folder.\nIt is important to list who was involved in the decisions and when they were made.\nThe structure and level of detail of this protocol should be tailored to the customs of the relevant organisation and the requirements of the decision-makers. It might include already a high level description of the envisioned product to be deployed.",
+    "crumbs": [
+      "Evaluation"
+    ]
+  },
+  {
+    "objectID": "modelling_report.html",
+    "href": "modelling_report.html",
+    "title": "Modelling Report",
+    "section": "",
+    "text": "The report should summarise the details of the modelling activities, e.g. machine learning experiments.\n\n\n\nAim of the modelling - consistent with Data Mining Goals in the project charta\nData set(s) and/or feature set used (references to the data report)\nDescription of the independent variables and (if applicable) the target variable\nType of model used or developed\n\n\n\n\nOverview of the models used and/or implemented and their configurations\n\nDetailed description of the model used (e.g. literature references, specification of the software library, exact module, version or other implementation details etc.)\nGraphical representation of the modelling pipeline\nIf applicable: link to the code of the modelling pipeline, version information in code repository, configuration files\nIf possible, links to the artefacts of the executed modelling pipeline (training experiment)\nLink to the literature in which the model/method is described\nHyperparameters\n\n\n\n\nKey figures dependent on the model and modelling objective\n\nRMSD, ROC/Lift-Charts, AUC, Confusion Matrix, Accuracy, Precision, Recall\nCoherence, Perplexity, …\nIf applicable: analyses/plots of (hyper)parameter screenings\n\n\n\n\n\nIf applicable: Results from the application of “explanatory models”\nWere the modelling objectives achieved?\nThe findings resulting from the modelling phase: can the project objective be achieved with the results from the modelling phase?\nHow can the findings be used? Are there any limitations?\n\n\n\n\n\nConclusions of the key findings from the modelling phase\nDiscussion about limitations\nProposal for extensions and further work\nProposal for the deployment of the generated insights/model",
+    "crumbs": [
+      "Modelling Report"
+    ]
+  },
+  {
+    "objectID": "modelling_report.html#initial-situation",
+    "href": "modelling_report.html#initial-situation",
+    "title": "Modelling Report",
+    "section": "",
+    "text": "Aim of the modelling - consistent with Data Mining Goals in the project charta\nData set(s) and/or feature set used (references to the data report)\nDescription of the independent variables and (if applicable) the target variable\nType of model used or developed",
+    "crumbs": [
+      "Modelling Report"
+    ]
+  },
+  {
+    "objectID": "modelling_report.html#model-descriptions",
+    "href": "modelling_report.html#model-descriptions",
+    "title": "Modelling Report",
+    "section": "",
+    "text": "Overview of the models used and/or implemented and their configurations\n\nDetailed description of the model used (e.g. literature references, specification of the software library, exact module, version or other implementation details etc.)\nGraphical representation of the modelling pipeline\nIf applicable: link to the code of the modelling pipeline, version information in code repository, configuration files\nIf possible, links to the artefacts of the executed modelling pipeline (training experiment)\nLink to the literature in which the model/method is described\nHyperparameters",
+    "crumbs": [
+      "Modelling Report"
+    ]
+  },
+  {
+    "objectID": "modelling_report.html#results",
+    "href": "modelling_report.html#results",
+    "title": "Modelling Report",
+    "section": "",
+    "text": "Key figures dependent on the model and modelling objective\n\nRMSD, ROC/Lift-Charts, AUC, Confusion Matrix, Accuracy, Precision, Recall\nCoherence, Perplexity, …\nIf applicable: analyses/plots of (hyper)parameter screenings",
+    "crumbs": [
+      "Modelling Report"
+    ]
+  },
+  {
+    "objectID": "modelling_report.html#model-interpretation",
+    "href": "modelling_report.html#model-interpretation",
+    "title": "Modelling Report",
+    "section": "",
+    "text": "If applicable: Results from the application of “explanatory models”\nWere the modelling objectives achieved?\nThe findings resulting from the modelling phase: can the project objective be achieved with the results from the modelling phase?\nHow can the findings be used? Are there any limitations?",
+    "crumbs": [
+      "Modelling Report"
+    ]
+  },
+  {
+    "objectID": "modelling_report.html#conclusions-and-next-steps",
+    "href": "modelling_report.html#conclusions-and-next-steps",
+    "title": "Modelling Report",
+    "section": "",
+    "text": "Conclusions of the key findings from the modelling phase\nDiscussion about limitations\nProposal for extensions and further work\nProposal for the deployment of the generated insights/model",
+    "crumbs": [
+      "Modelling Report"
     ]
   }
 ]
