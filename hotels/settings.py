@@ -1,4 +1,4 @@
-# Scrapy settings for travelscraper project
+# Scrapy settings for hotels project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,14 +7,14 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "travelscraper"
+BOT_NAME = "hotels"
 
-SPIDER_MODULES = ["travelscraper.spiders"]
-NEWSPIDER_MODULE = "travelscraper.spiders"
+SPIDER_MODULES = ["hotels.spiders"]
+NEWSPIDER_MODULE = "hotels.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "travelscraper (+http://www.yourdomain.com)"
+#USER_AGENT = "hotels (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -45,13 +45,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "travelscraper.middlewares.TravelscraperSpiderMiddleware": 543,
+#    "hotels.middlewares.HotelsSpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    "travelscraper.middlewares.TravelscraperDownloaderMiddleware": 543,
+#    "hotels.middlewares.HotelsDownloaderMiddleware": 543,
 #}
 
 # Enable or disable extensions
@@ -63,7 +63,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    "travelscraper.pipelines.TravelscraperPipeline": 300,
+#    "hotels.pipelines.HotelsPipeline": 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -90,10 +90,16 @@ ROBOTSTXT_OBEY = True
 # Set settings whose default value is deprecated to a future-proof value
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
-SELENIUM_DRIVER_NAME = 'firefox'
-SELENIUM_DRIVER_EXECUTABLE_PATH = '/Users/leonakryeziu/Downloads/geckodriver'
-SELENIUM_DRIVER_ARGUMENTS = []
 
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy_selenium.SeleniumMiddleware': 800
+# Playwright settings
+DOWNLOAD_HANDLERS = {
+    "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+    "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
 }
+
+PLAYWRIGHT_BROWSER_TYPE = "firefox"
+PLAYWRIGHT_LAUNCH_OPTIONS = {
+    "headless": True,
+    "timeout": 30 * 1000,
+}
+PLAYWRIGHT_DEFAULT_NAVIGATION_TIMEOUT = 60 * 1000
