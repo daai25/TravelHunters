@@ -8,7 +8,7 @@ class HolidayCheckSeleniumSpider(scrapy.Spider):
         yield SeleniumRequest(
             url="https://www.holidaycheck.de/dh/hotels-schweiz/7c1716d2-4c24-3d44-9dc5-66aac6c5c0fb",
             callback=self.parse,
-            wait_time=5,
+            wait_time=10,
         )
 
     def parse(self, response):

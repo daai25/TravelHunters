@@ -92,7 +92,7 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 SELENIUM_DRIVER_NAME = 'firefox'
 SELENIUM_DRIVER_EXECUTABLE_PATH = '/Users/leonakryeziu/Downloads/geckodriver'
-SELENIUM_DRIVER_ARGUMENTS = ['-headless']  # ← oder einfach [] für sichtbaren Browser
+SELENIUM_DRIVER_ARGUMENTS = []
 
 DOWNLOADER_MIDDLEWARES = {
     'scrapy_selenium.SeleniumMiddleware': 800

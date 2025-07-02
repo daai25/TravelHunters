@@ -8,6 +8,8 @@ dependencies:
   - jupyterlab
   - pandas
   - python=3.10
+  - playwright
+  - pip
   - scikit-learn
   - scikit-plot
   - seaborn
@@ -16,3 +18,4 @@ dependencies:
       - python-dotenv
       - ydata-profiling
       - scrapy
+      - scrapy-playwright
