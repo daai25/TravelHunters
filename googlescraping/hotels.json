@@ -1,0 +1,1176 @@
+{
+   "html_attributions" : [],
+   "next_page_token" : "ATKogpfrws8m5IAGHVMVxvkROu1BRCL4NL-WmF_AuzKy96fxMkp54rQFI_JPOpqNw5Lbux08Ye0o7Zjcr-cz5Gf6abx9W63d352kmm7oWCiyDG_2rjb9vhK1bmWWh__0byvV5wCWTCylN9MKT18HKi4JRqDKv1HAJDVwb30ikl1jNe3NMvlx7ILI9rF3QS4g3CaUHt-i0eWHCXoHqbYbTEz5eX0oSL4dE9Fcw45ZGXPMchJQaJ4j1Jnpd45PVUxhdcMynbv3AwFLFxo4k83p1oq9bEjxAUv7Gyb59yBd56hpqg2UNR3BrId8iPLxV00eCLc9a1cS4itxQvBis0ReLU6_j4MxibGf2RCDjiJbRVuGYhGiX5sL0e7BsdrCRqn32DkOv2Azs-iZlyuq719LVMw7sQ2F0zmmWrUGbeqLF9RZ5Jz0ZJBclp8QqySvkSXagoaXJd5LTXeZEcKopU17",
+   "results" : 
+   [
+      {
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3768866,
+               "lng" : 8.541694
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.43466510489039,
+                  "lng" : 8.625452857661037
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.32021840892072,
+                  "lng" : 8.448018098135877
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/geocode-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Zürich",
+         "photos" : 
+         [
+            {
+               "height" : 3000,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/108376782473295876236\"\u003eZbigniew Rak\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpeYRXcUSXAJPfz8aP_u3GwjiUn-5K64xWSBkdiQMUgLsd_axQjxLCpSRWPbU4Bzy1KJ90jWfZYoS7dPm2R7hpt4Zv3OpciYO2J8qebMqdminzW_oT5ezjiUhPYKBMZu5Jc8bMAyw5tRIDj2E70oDevetWnzfQbPpqkGQMPpfiInndLmRQ7hAD3Q9NluORwjuWf6EpluBVUKldhtmfUtnRA9vfTuj9-wW2JBo43EQcQwspNUmKUaHK2-K9l22P4DnyV91FwIQeAuqUHVlyhpUc0Fc5SHeBGY7BMEI1plQAgN1M0mzhsbkLcjeb7MszgVrIMAt1MItf_oIiiqVR415AY6FCv6dickJXbZeO9uTuaCOkKTzkmenP6h2rCnvucAbvRUnRkzTG1JhQEZGp8IUWkEj0b4_8KuMCYJk46nmpMRKJzPG792waqiMp9LY-MwV1j1I3lnQtMuZxwEu9YFkAhvzfgUYa8OwWLqBgV6CUi50La15Wkw7RaHiiv1NyVuVuAyfrpHMJItExXHrGMstAq6RtKEF1gqFjfzdnuSBBWcoNvYvHy0a-2IFj-C4nwOR4vGLgL00LKSCEWEBU7_jkGKOkntpc_wbU45-sB0eVXnmR8KuFkkkpC-iaOgmSFZ8YuzzA",
+               "width" : 4000
+            }
+         ],
+         "place_id" : "ChIJGaK-SZcLkEcRA9wf5_GNbuY",
+         "reference" : "ChIJGaK-SZcLkEcRA9wf5_GNbuY",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "locality",
+            "political"
+         ],
+         "vicinity" : "Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.38029999999999,
+               "lng" : 8.506393899999997
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.38158818029149,
+                  "lng" : 8.507649180291502
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3788902197085,
+                  "lng" : 8.504951219708497
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "Crowne Plaza Zurich by IHG",
+         "photos" : 
+         [
+            {
+               "height" : 1152,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/101419557140666801829\"\u003eCrowne Plaza Zurich by IHG\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpef1Fxq9N_sstK-zOwKgaJcvdOS_wRCHN97jnG2offO6zgmNIo2WcqwyFTd1cOqfEuBPj0h5EdRENZBNJuzlp4tJ1hm0iaazr9Bjgl1I_5b8gCgvdIoRddYIh6G3syDlpO51Yij_OviaGLQ5EHscMKybtqS81CacPLQgVt_OaKgi2mtlZIYp6P9W6059Ek8aihAtlbUPXdeW9PN4CaErcSbaUxRbVJVbZbjHxqUR5fq9Cg-CAD8LkwmLN-rxeoS-4YF9O2HfLPRmbvtlnRp3eQ9N0FVUZ1ljda8dl7hCsPdcl-DZFu3U4GZB2HXPAEthMuCbMtAS2M",
+               "width" : 2048
+            }
+         ],
+         "place_id" : "ChIJY3evPzAKkEcRFM2gVZmN7Z8",
+         "plus_code" : 
+         {
+            "compound_code" : "9GJ4+4H Zürich, Switzerland",
+            "global_code" : "8FVC9GJ4+4H"
+         },
+         "rating" : 4,
+         "reference" : "ChIJY3evPzAKkEcRFM2gVZmN7Z8",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 3438,
+         "vicinity" : "Badenerstrasse 420, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3909662,
+               "lng" : 8.509516399999997
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.3920568302915,
+                  "lng" : 8.510929430291501
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3893588697085,
+                  "lng" : 8.508231469708498
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "25hours Hotel Zürich West",
+         "opening_hours" : 
+         {
+            "open_now" : true
+         },
+         "photos" : 
+         [
+            {
+               "height" : 4870,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/104452223649725634930\"\u003e25hours Hotel Zürich West\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpcPYNxbKQK8t2zRyf0S-N6MtXHe1j2-VtlAoD0RqxDykTt9h7RZ_Rw85gq_OnlgYZWLMJKTHf1xf0V-Vgm3_E56kLAbiKwaetrqxr03P4DHOUmydDe08sg9TDN6Lz9SgeUGm3GAIi9CcsG_VCogTipYAvyvjJ1orrXgeFhUdI60up3dXgaUjotkGsuERZxMaNigh0ZK7_K0aoagOBWmzi9n9n5RbLLvr2s5ag0alEcrRZlTgn5teVHMX8uckhopTYS0_4j15oxeGowp39oGPUUe4DGP075fP38LiRIUyMrOnjlb-uUkgQzJKDjytFXCWbmulwR2Rrk",
+               "width" : 6500
+            }
+         ],
+         "place_id" : "ChIJk6luREgKkEcRcQkMKzY5-as",
+         "plus_code" : 
+         {
+            "compound_code" : "9GR5+9R Zürich, Switzerland",
+            "global_code" : "8FVC9GR5+9R"
+         },
+         "rating" : 4.4,
+         "reference" : "ChIJk6luREgKkEcRcQkMKzY5-as",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "bar",
+            "lodging",
+            "restaurant",
+            "point_of_interest",
+            "food",
+            "establishment"
+         ],
+         "user_ratings_total" : 1447,
+         "vicinity" : "Pfingstweidstrasse 102, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3785392,
+               "lng" : 8.509201400000002
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.3799412302915,
+                  "lng" : 8.510633280291502
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3772432697085,
+                  "lng" : 8.507935319708498
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "Hotel Stoller",
+         "photos" : 
+         [
+            {
+               "height" : 2607,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/100591559225251848483\"\u003eHotel Stoller\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpdJhFcC8TNeZszF6O8KUDGli5ARq5BuR8HdEfGruLuWC7_qRpvV3IaDnSehGmKahK1ljWf9PSGQZxY0-QIIqgt7Xgs6AwFSeLTgYY3oMzMZTvo_xyYLL-zsVBNDfWwyT68w_BPFOYycVtKA2jzCjTaFd9vYMjH4MdYS4yfWEVxHHmjzvOxDliq5hZJYMSBjNT8HKYoqqaJvHTUFinqHZSr1Pav0NLUMB6AaRsDoYIJ6wap-sGABbJu5_2muoD9pfLrRLrKWH_EILid-_YAglqIp0yaxvVj_yz7KH9KBBp1-FGKmAJMZ9S_vP7vxeDCt9J7t4Cnuggo",
+               "width" : 2683
+            }
+         ],
+         "place_id" : "ChIJY41BMSUKkEcRh0lHEKRHRjw",
+         "plus_code" : 
+         {
+            "compound_code" : "9GH5+CM Zürich, Switzerland",
+            "global_code" : "8FVC9GH5+CM"
+         },
+         "rating" : 4.1,
+         "reference" : "ChIJY41BMSUKkEcRh0lHEKRHRjw",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 1062,
+         "vicinity" : "Badenerstrasse 357, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3881269,
+               "lng" : 8.5146175
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.3895797802915,
+                  "lng" : 8.515861730291503
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3868818197085,
+                  "lng" : 8.513163769708498
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "Renaissance Zurich Tower Hotel",
+         "photos" : 
+         [
+            {
+               "height" : 320,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/111993035995149150368\"\u003eRenaissance Zurich Tower Hotel\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpfb8jb9-xtYccZ4jW6WppKn2kzewoSSsBABoNDkvlMaL84hziSipGiCkN-7rdk3Ikb7caIJuuI3_ft_qqxEE8G8UeZESU_LyomDxwtSWvlGEu4RxgPRVR59nm_eGFg7hQvXDzv1hsRpnN8qJzQjVmJB8ttFjR7RLLyTEQWw_CprZMLbNOw5X8qT3a5jpQ5s-QsD3mSNoAf_QKnFjWn-_ApvtR_EJEwfbWvnkr-x51nYmJuN8gfIuw2gOYXag_ZZuB1Y94CmQZHrqKIyvDLlLp8qrSy71l22gb9xZH1G8YVcoDdsisyTgyld4AN7LyaKZLw2_HYkm_k",
+               "width" : 480
+            }
+         ],
+         "place_id" : "ChIJhSn9pDgKkEcR72PClUKjnJM",
+         "plus_code" : 
+         {
+            "compound_code" : "9GQ7+7R Zürich, Switzerland",
+            "global_code" : "8FVC9GQ7+7R"
+         },
+         "rating" : 4.3,
+         "reference" : "ChIJhSn9pDgKkEcR72PClUKjnJM",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 1806,
+         "vicinity" : "Turbinenstrasse 20, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.389367,
+               "lng" : 8.522048300000002
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.3906418802915,
+                  "lng" : 8.523319530291502
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3879439197085,
+                  "lng" : 8.520621569708499
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "Hotel Züri by Fassbind",
+         "opening_hours" : 
+         {
+            "open_now" : true
+         },
+         "photos" : 
+         [
+            {
+               "height" : 1365,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/108489688988562464051\"\u003eHotel Züri by Fassbind\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpf5UrUxdv225edJbFYgEZNN-jevxgSTxVo4ulzgjgn74yR2jpYDdND-jnnOvfoFFHO09SKaxqG4v4QZEv0zKLq617pK89lufFz1J-G662pG57ET5acjtFaO_fY7qDmuR8ajcN1tZ_AN1DHhOAv9JxfrKLCz5oovlS1WBSY9M4g0rGXenYQzQMySPgBf-tuqEq30LAJAWZkhIA5n7_2-7XtuKn2xVEkwaxQSI_HFjp0rK4XxaBg8GGbdkUpfsE7GE8uIi9Qy7h8VZyrWoQGLKAaE0O_WwoCPfx3Usz2dZS2sxwESIPJ7KCYqnP_1xkDEzjvz-yY6cAY",
+               "width" : 2048
+            }
+         ],
+         "place_id" : "ChIJm5SRO0AKkEcRw92n11ylTPg",
+         "plus_code" : 
+         {
+            "compound_code" : "9GQC+PR Zürich, Switzerland",
+            "global_code" : "8FVC9GQC+PR"
+         },
+         "rating" : 4.1,
+         "reference" : "ChIJm5SRO0AKkEcRw92n11ylTPg",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 1237,
+         "vicinity" : "Heinrichstrasse 254, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3889874,
+               "lng" : 8.516218799999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.3903721802915,
+                  "lng" : 8.517459680291502
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3876742197085,
+                  "lng" : 8.514761719708497
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "ibis budget Zurich City West",
+         "photos" : 
+         [
+            {
+               "height" : 768,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/115164437010564989311\"\u003eibis budget Zurich City West\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpdfHa1DTB2R1Crc_bPW_eMizosb0RAihtAQlVANh3CQibf1V1kF4yjYBPNUXyxAsv3iXN4toczx1payQEc3CK94kmtNzeSfwAeaR7kSmWxKuiIxevn_11-XkUqJQ1q-b5Mpbwy1ZsM1HcTXmrpwUH5SXnMwlj5jdCHo3ikXK3yQLj0kZ11rxmnCAom7jRg34aqRUKkn2qKcbGefGs6v3sxFa-tVQOgWM4YCVmoYWAtUrpcS-ogAYq0b6DEEBsmH2915KfUNmvDEt3PgxdSxr9UQJCon7LF-A7Q1vKWFx86DOqqqh7h4aAkNt03fo7aeI1RD5tlQUPc",
+               "width" : 1024
+            }
+         ],
+         "place_id" : "ChIJcS-qSEcKkEcRIHlgyLoynk4",
+         "plus_code" : 
+         {
+            "compound_code" : "9GQ8+HF Zürich, Switzerland",
+            "global_code" : "8FVC9GQ8+HF"
+         },
+         "rating" : 3.6,
+         "reference" : "ChIJcS-qSEcKkEcRIHlgyLoynk4",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 1983,
+         "vicinity" : "Technoparkstrasse 2, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3778046,
+               "lng" : 8.511904000000001
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.3790945802915,
+                  "lng" : 8.513316480291502
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3763966197085,
+                  "lng" : 8.510618519708498
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "Hotel Olympia",
+         "photos" : 
+         [
+            {
+               "height" : 3461,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/104868665957505409753\"\u003eHotel Olympia\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpceBbaJtw7seNLIZR9xJnLFJb8uKK5951T-7g-nIoCzF2lLaPPscmf2lo7FN2GBvEdH6CK73CpWJapz2Mjh0ReOaokmTDl-854uCRupVpcfnlOVBaMHInyjAUx_VgHbFzNOJrcuFXwLYOYQaoaYdUEzDwojLtPK4aW9jytQ4sxxcARWALwJWyJWoPfnFJZGvdcmsiJ32SOANGjulfCl7fAVp06PX2lD0yOcCd74eTDLKKnQBrreSv_gP4q31UzCVD1tYZsyvBPQUOxZdqdj97cbtsK4963sNKGhOJ95llMSVV-F7Py_hhx7P7GN1xZguzwbj2dIojo",
+               "width" : 5200
+            }
+         ],
+         "place_id" : "ChIJzxBSvyQKkEcRC2PtIGm_xTQ",
+         "plus_code" : 
+         {
+            "compound_code" : "9GH6+4Q Zürich, Switzerland",
+            "global_code" : "8FVC9GH6+4Q"
+         },
+         "rating" : 3.3,
+         "reference" : "ChIJzxBSvyQKkEcRC2PtIGm_xTQ",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 572,
+         "vicinity" : "Badenerstrasse 324, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3891116,
+               "lng" : 8.516802799999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.39053388029149,
+                  "lng" : 8.518156130291503
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.38783591970849,
+                  "lng" : 8.515458169708499
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "Novotel Zurich City-West",
+         "photos" : 
+         [
+            {
+               "height" : 2467,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/107099691708382194224\"\u003eNovotel Zurich City-West\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpfjhyyo93kCyvPiGuCXdpSmAaDypS4a3vXtPcRcAHi552txHMsIEei0yhUUZvzpRfGTOXdVVLS9rbzItjuinZUBAST1hlLc93JhjqwgHqYPbLkG08waf8LBAjK686-PJw4VZesZQDfgJhUc0abW1Zklj2YME2mxymTSEfGwpVpw0ci21rVFFZ4MsQmSDx7pAEawmbXpiX4JoRE2_Loq9JzlsHhWsxJ1J-xL8zRnIXFh853P_tFknQSpj-yR2V5zhVSgLiDIT9w0cb_BW-voSNlnU1ePS958nev408QgNAN4-7SjK3YSZ5WtqReD2io_mwZTcLHKioI",
+               "width" : 3700
+            }
+         ],
+         "place_id" : "ChIJv36kS0cKkEcRVxQJAsV-8rI",
+         "plus_code" : 
+         {
+            "compound_code" : "9GQ8+JP Zürich, Switzerland",
+            "global_code" : "8FVC9GQ8+JP"
+         },
+         "rating" : 4.2,
+         "reference" : "ChIJv36kS0cKkEcRVxQJAsV-8rI",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 2125,
+         "vicinity" : "Am Turbinenplatz, Schiffbaustrasse 13, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3875273,
+               "lng" : 8.4854097
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.3887473302915,
+                  "lng" : 8.4867692302915
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3860493697085,
+                  "lng" : 8.484071269708496
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "Hotel Spirgarten",
+         "opening_hours" : 
+         {
+            "open_now" : true
+         },
+         "photos" : 
+         [
+            {
+               "height" : 2247,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/114351413886200444151\"\u003eBest Western Hotel Spirgarten Altstetten - Zürich\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpeD4cWNYP0hHirOppzh9tHO99YW2H2NgiFsuoVNmZWaikUPLEbfB5Buj6mFkJ8vAZAOJcfZ9lGhNi_K9oH0vN2oKJ9uz-aAQ2OtnE0weSIj_Sx6wVYW9wPY1LdVjGLPPrwE_9TvGcKc9RVjNtw9H6ntxvdW3kdUVtIqoSlAqFpXJEfIju1zvYFDkApqbSv1dHFlGSr1RVPKUuBIMl9XBJbpxKy8Owzk7DS_i87Y6ZXrC18nWEg5bb5_0F5n00wmJ26DPkfqiyeVpws7Aqw49DPs9pHIJdPM5bRDdmYLHz9ra2ZOn9zeRuDNqmHC_Lprjv5yX-mxxYA",
+               "width" : 3000
+            }
+         ],
+         "place_id" : "ChIJBZflJcYLkEcR9sl0igW2kI4",
+         "plus_code" : 
+         {
+            "compound_code" : "9FQP+25 Zürich, Switzerland",
+            "global_code" : "8FVC9FQP+25"
+         },
+         "rating" : 4.1,
+         "reference" : "ChIJBZflJcYLkEcR9sl0igW2kI4",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "bar",
+            "lodging",
+            "restaurant",
+            "point_of_interest",
+            "food",
+            "establishment"
+         ],
+         "user_ratings_total" : 852,
+         "vicinity" : "Lindenplatz 5, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3772518,
+               "lng" : 8.523000999999997
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.3786430802915,
+                  "lng" : 8.5243797802915
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3759451197085,
+                  "lng" : 8.521681819708496
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "Guesthouse fürDich",
+         "photos" : 
+         [
+            {
+               "height" : 1944,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/105574756109555352855\"\u003eGuesthouse fürDich\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpdecd0fxtJJo4QohDkpPl-YxuWfngfwcEnkodiBoxgFznRcvxDHPI8NoNI__iQ9KsUsA64E4IZ2oW7og8_0oYaBgByyLPU3qGoZzEAsv86gcxPOzgoHctJ3N4IsSwFrrFsVW3dcdJPV7IJkauFTMXpjeG-eYblOqXQo6s0Z_lK6T_R0a4gycsOMt_V8MesI2ns5nCeAJwxqAY3kfmBXvQkYSJ3FllzBcMUyfOYPFeJrRIv_6fs8JYGdLfRCJZyGVHiMGPuJOp8fuL_F-FU2uq2O-vGyKCbiAqNdpWAZ0vCZzlJmhG84NjsdbWZQR7kaFbvuz1gCHBs",
+               "width" : 3000
+            }
+         ],
+         "place_id" : "ChIJSaTezxkKkEcR-BJKD0J-ysQ",
+         "plus_code" : 
+         {
+            "compound_code" : "9GGF+W6 Zürich, Switzerland",
+            "global_code" : "8FVC9GGF+W6"
+         },
+         "rating" : 4.4,
+         "reference" : "ChIJSaTezxkKkEcR-BJKD0J-ysQ",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 422,
+         "vicinity" : "Stauffacherstrasse 141, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3873444,
+               "lng" : 8.4940499
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.3886419302915,
+                  "lng" : 8.495183530291502
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3859439697085,
+                  "lng" : 8.492485569708498
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "THE FLAG Zürich",
+         "opening_hours" : 
+         {
+            "open_now" : true
+         },
+         "photos" : 
+         [
+            {
+               "height" : 1334,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/104666563714751690835\"\u003eTHE FLAG Zürich\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpfy2Bk_bHAGgeM9NI4QlhKLeEUTtvxityr2Lqt4V0VJ-91tDCTwdZsL8gKg_lCwQERO0LSQaIS1M8Wj_VBWmT14Kv5BMR0oiBqOdszuncupjeIcizuzg71AqSZHWNwlJn1thNI13sRrpUBhbMyEm3uQAiVrblOg0J9svQEQ1D2dRGjvPWGZ7iBfpnPh_P5MsNJf2J7v6rlIbm9aqcSkLItYg0tacCzklEkZWFQTv96RnuzRr8yM7Tc-CLHXsim14YGSzfVPdh4Licdf72XngvZmxi7Lx_8xE4E3Nbk6d3NhkftUSVZGTK1HUIwgH3zr6I-ycmbbsY0",
+               "width" : 2000
+            }
+         ],
+         "place_id" : "ChIJv-qmkMkLkEcRr_Ws94hCj_E",
+         "plus_code" : 
+         {
+            "compound_code" : "9FPV+WJ Zürich, Switzerland",
+            "global_code" : "8FVC9FPV+WJ"
+         },
+         "rating" : 4.3,
+         "reference" : "ChIJv-qmkMkLkEcRr_Ws94hCj_E",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "art_gallery",
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 1176,
+         "vicinity" : "Baslerstrasse 100, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3695504,
+               "lng" : 8.513715900000001
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.37097293029151,
+                  "lng" : 8.515110980291501
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.36827496970851,
+                  "lng" : 8.512413019708497
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "Neufeld",
+         "opening_hours" : 
+         {
+            "open_now" : true
+         },
+         "photos" : 
+         [
+            {
+               "height" : 1366,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/117984330445521153906\"\u003eHotel Restaurant Neufeld\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpdkgV8E3DDyIfM1ApH2rs2KVgeXebpqvlDANPUBaR-KaIgrBLjYpwov8Snk6M2v5DiQ9bSRMuK7ZZoreU4tKzD3GfBaxEoqIbOg1XDmrsz4Wi9Xntz6XZC9glPx4r3RdjSQ-5q2qEWtA-SsNbkoZsZch-1c6af8ETUEZ1DSvemB02fAXgLqnnAOnTyRgWP7kItirhgrWqLbrwZmqd-IYMm3JVfQr-BV9kMP94_62GEYaa0qXr6tNucSwd2Qe_CUuA7gMkiSVMPQfJ1RzFdFInxIVozXWa5zspMG-MbU5ue6bKX4CoaEX6HOFi5f3khdPBjSIIohjv8",
+               "width" : 2048
+            }
+         ],
+         "place_id" : "ChIJe1jZiyAKkEcRw3zzUjYLWeE",
+         "plus_code" : 
+         {
+            "compound_code" : "9G97+RF Zürich, Switzerland",
+            "global_code" : "8FVC9G97+RF"
+         },
+         "rating" : 4.1,
+         "reference" : "ChIJe1jZiyAKkEcRw3zzUjYLWeE",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "lodging",
+            "restaurant",
+            "point_of_interest",
+            "food",
+            "establishment"
+         ],
+         "user_ratings_total" : 365,
+         "vicinity" : "Friesenbergstrasse 15, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3785548,
+               "lng" : 8.520530599999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.37996793029149,
+                  "lng" : 8.521881780291501
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3772699697085,
+                  "lng" : 8.519183819708497
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "Hotel Greulich",
+         "opening_hours" : 
+         {
+            "open_now" : true
+         },
+         "photos" : 
+         [
+            {
+               "height" : 3024,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/117423657567225939387\"\u003eStefan Lang\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpdT-D5aFi1GExCNfDHIOYNqffP-Qr0TaXuaKbvQ6i_hfPCntRlQunBxHOuK_aO3kaTT3Qez9r2tQjVSgUbVp6iQqVKvdlXkKFGYA1GfQZ5X9PuE6JPQuc9ptkk2U2TgFW2WAsIdI9ODOqF-NDFo3fEI96lpQWx2hSEE8ISQKVifh-t6cPR8-Uo05h9HtM2dc1WTD1xSFospjijBBKdQz2fPmfqX8VD2f1oVqW77BKayqcAqaLs2qpdv2_qcXw2YSR1cmBWKY_G8GNs9H3fav384vXTNAmVKrxMu1xWhx86n6diDPxTpiG812yYK7OZnpNnApJlFZQ76khzSNSAqkMpjz2J20xSB5u4pT3imD3jqeYd5B9SHrnKcIJzXbwe04YQVUtIcPIW2ftAhSJqu8CMfqXatWCiWj2ooef9MlOBjA9CUUmYEerIXfdv8SA2tqVNY6iq8oT7HQQ7AGYaCYX1RWl19_uLgwAerUETlZHx6oNS8Ks7M3Ni1ovDtL1vhO7kta_5Dc7SOYtfjfSX7aD65UCFbWrrc1i0TsUmwxhqyVEzhQy9HqSbrfH_MUdi6RQaWbeYIhwPlyymv4UuHIStZktqHQ9AQVXFW6zSpNMJ6o5qVmB2tALX37dCTfsbcRx4N0Q",
+               "width" : 4032
+            }
+         ],
+         "place_id" : "ChIJ01SjRkinmkcRB2B7NgiuhWs",
+         "plus_code" : 
+         {
+            "compound_code" : "9GHC+C6 Zürich, Switzerland",
+            "global_code" : "8FVC9GHC+C6"
+         },
+         "rating" : 4.5,
+         "reference" : "ChIJ01SjRkinmkcRB2B7NgiuhWs",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 329,
+         "vicinity" : "Herman-Greulich-Strasse 56, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3734304,
+               "lng" : 8.5189468
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.3747402802915,
+                  "lng" : 8.520257880291503
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.37204231970851,
+                  "lng" : 8.517559919708498
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "living downtown GmbH",
+         "photos" : 
+         [
+            {
+               "height" : 4000,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/100351058110959546960\"\u003eEl mostafa Mouden\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpfxVMKo6dvZemCW5hqncDobYBzgl3S9vhOHqjaArUKtoH1svHQW9NDunYvoxAbMCw2LHmxl5KSEGsfZEYX9eDd62k74M2l39yES6-L3IMbq0A_ROHeqH1FS0p4p0YCwK5ykts9BSoMvUPcSPAFy4lV33i95djeCBnpEwv-vKKPZPkYjtLIm15QKc0MTpW2j0Us3yKyoVdbmrgpb7AJhzOGMlTq2WobSxNArvbp4nKTnSXWBKvW3Hd5RK6AJvJ68MyklJBq-6az6y88DHvPxz9D0Hy3wWbBKHQAXOB6lyn7A4tUWPmfJCn9xaA0trXwjJYvtARN9NrcsTzI5x8zw3AFJvmfIEO1kqT5xXldNBWGWYk7UAhQ0EQV6Tlljf_q7RW7kw_EmjFIW-Nms0r_RS1yqI6KThF-jEHJIAZZ2-UN3i9C1uRF9qT917Ld_LyhhjrUiZQZ48fFT2prE-A1_9irqbjpDO0S81pQOqWK6gyoiJB0Vu0KT2FcHU4T5ATrgJ8jld2AjPZsxfcVKvBLJfdoaE4kV1tmPlkb8e9sn7_vJluB7-R627zZlbcErA6vaNdm4DLMUNOq5iAhP9rz6Ef91Mrm3uWwbgKKyNPRhhpn4fiqOYI50nLlK8J4htD-gxfmaTVVZ",
+               "width" : 3000
+            }
+         ],
+         "place_id" : "ChIJDW2H4gaemkcRAgi28QY4Ebs",
+         "plus_code" : 
+         {
+            "compound_code" : "9GF9+9H Zürich, Switzerland",
+            "global_code" : "8FVC9GF9+9H"
+         },
+         "rating" : 3,
+         "reference" : "ChIJDW2H4gaemkcRAgi28QY4Ebs",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 53,
+         "vicinity" : "Weststrasse 146, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3906179,
+               "lng" : 8.5099304
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.39199018029149,
+                  "lng" : 8.510691380291501
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.38929221970849,
+                  "lng" : 8.507993419708498
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "Sheraton Zurich Hotel",
+         "photos" : 
+         [
+            {
+               "height" : 320,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/104072397313660431568\"\u003eSheraton Zurich Hotel\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpfM7s74x2RQDQC1K1h0CIqJsn_U7S7Joe7RBWsv85KpwBLkPyBStDgnwtmNR88yjpZWIiikrNLFLuiH99BQtwsMOpYKbHyDd3SwVs2cSyv0dWJZEiMBLjRi0rT_-f3vvGOrW10qmhG9wyqKaBtylawTPGyccWNQKXcXhrQoOBaAmMl-FUKXVUQv0VxEISMJWaT_zCdkc9hRaK4LQBmDBgUnu8TfCoorzdqe3m2TflhkleV2u3zSJKbf6vH_1mn7Bgh7uR7sm98mPpPiYfGtDiLVjcjRpa0EqjwWtKievpI3mGQOeu9aqdnL0-x0nlcnX3WfZN_qkAw",
+               "width" : 569
+            }
+         ],
+         "place_id" : "ChIJ__-_ZEgKkEcRcwLBHWRY_vc",
+         "plus_code" : 
+         {
+            "compound_code" : "9GR5+6X Zürich, Switzerland",
+            "global_code" : "8FVC9GR5+6X"
+         },
+         "rating" : 4.3,
+         "reference" : "ChIJ__-_ZEgKkEcRcwLBHWRY_vc",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 1501,
+         "vicinity" : "Pfingstweidstrasse 100, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3793976,
+               "lng" : 8.527410999999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.3807769302915,
+                  "lng" : 8.528796830291503
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3780789697085,
+                  "lng" : 8.526098869708498
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+         "icon_background_color" : "#909CE1",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+         "name" : "Republik AG",
+         "photos" : 
+         [
+            {
+               "height" : 3280,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/102768221989986099338\"\u003eRichard Hoechner\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpd1cV1F4W4Tfcp7vp86IfAXUmp1MrZ2RgPrYknqIVtuowUe6WHhzMCavJDcrFxzupoFJ2xQyVFGGUGt1ZIxC6KFjLx2ZmPMjmGDPm5wnZ1BPAQP_APFhNbltf0BPLJMclUAzwdhn0JRpTgb_VxX_fLPrBWKtTSpTpJTixKUaw9UvxtEMlR45xA3LzH0TRuu0-QCbiDQfFQs7DEeyjiEtKGukUy5eAmkjTGOPYiu9WVutMqUxEDlpEPOenbBT7CbxQ32lOZygL2XnWfrSrQrkpxsR3cAk6r2kc5XbdeCnHSojOeR4UjkfxLiDdxY2lZH1iE1gks2f3SSQosLE5MDFybMKNfBqGsjOSf9FPvj2PHbySXif6qZqz-ih7BVudaGoP4DWat7I0eY0jn0LIxxW8pE7Np-MMiNi6dLLb7YFJHI6zwM_R6cjnJKPykQNUyPRElZIfl8qiheoR1PkR4UurpoDKK5uClx18XhbIkGR4PCUnoOWnrVlvyFrTJzvi2wM0R598ZAPCyWPxX2lcajVcI_H8QUVBseAAiFE3PCBkX_W1YELEtWV2Ihv_72eMST9LnW9EpwA3aONeFBH7Lr1G6CZeAKXzluZB2fiE7cr15QvbfdTRheMg6ekW4UykYfFh3LGA",
+               "width" : 4928
+            }
+         ],
+         "place_id" : "ChIJC-iwwhAKkEcRiUt8eNQsAyw",
+         "plus_code" : 
+         {
+            "compound_code" : "9GHG+QX Zürich, Switzerland",
+            "global_code" : "8FVC9GHG+QX"
+         },
+         "rating" : 3.6,
+         "reference" : "ChIJC-iwwhAKkEcRiUt8eNQsAyw",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 106,
+         "vicinity" : "Sihlhallenstrasse 1, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3860056,
+               "lng" : 8.5171572
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.3874374802915,
+                  "lng" : 8.518051280291502
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3847395197085,
+                  "lng" : 8.515353319708497
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+         "name" : "CLOUDS",
+         "opening_hours" : 
+         {
+            "open_now" : true
+         },
+         "photos" : 
+         [
+            {
+               "height" : 1575,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/107948353258675756865\"\u003eCLOUDS\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpedVzrCeTtf7yEjs33_J17rbh1sJ3WrxkbUw-H_wsKMRc6sRorYwx-_RUC0HhEIUc3UCZg3qTvhm69VtQa9WFCBfZc3r6uGANQFLYYik0Bo_AwCteSAF4RQSfuAW9Qxloj6_yWLPHcjA5CUmm_P-9-LOLWJxlE9ESeAcR9gtmte8yAG-RpmaEKKhwVKefInQPwpAZQZ6zg_j3jI5sOBOE5CeE6NSZU_4U9ZJaa8ryl_8lYxoiBAMXHtXWuKbmDBzSHVqhuUVwqd7uiN9mYJnWFCdBEt7fsnKitCeJQp2rURvWuXCZJtHUN1tyogEYE5oWVW2VCXyH0",
+               "width" : 2362
+            }
+         ],
+         "place_id" : "ChIJWxeh7AAKkEcRkYBoJQ5gnJY",
+         "plus_code" : 
+         {
+            "compound_code" : "9GP8+CV Zürich, Switzerland",
+            "global_code" : "8FVC9GP8+CV"
+         },
+         "price_level" : 3,
+         "rating" : 4.1,
+         "reference" : "ChIJWxeh7AAKkEcRkYBoJQ5gnJY",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "bar",
+            "restaurant",
+            "point_of_interest",
+            "food",
+            "establishment"
+         ],
+         "user_ratings_total" : 2418,
+         "vicinity" : "Maagplatz 5, Zürich"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3799508,
+               "lng" : 8.5274217
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.3812518802915,
+                  "lng" : 8.528735180291502
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.3785539197085,
+                  "lng" : 8.526037219708497
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/bar-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/bar_pinlet",
+         "name" : "Old Gregory Pub",
+         "opening_hours" : 
+         {
+            "open_now" : false
+         },
+         "photos" : 
+         [
+            {
+               "height" : 3000,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/102718903808921636894\"\u003eChristophe Hayoz\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpe7ERAyE0uigMcR4_DRv3d1b8Oe_5kBwbSU9XHfQfu3grc9oonFo4xFWYFwkPkn3nyr9akfCkOynzj95SEpv1VubAh4z8o5sTFeFBdAzrRUFCeoayxPOl7HjRfDDrL-TH5YTMdkJxajOWL1PXKGXkIzrnmFAEE6x9kRWdupVqOlC1nJT9pA1yoycz6lKllzG7ctluVwMcqo4X6_L6yQgDrXKQkiae0ACRjG0GuhxTgp9JM08JOPufY_rNLM8H5-Rw7y46vy0g6GWI3-CWe-kZ6dfeql0qPgFAkq0TWxxucxoM0s_H8HGrEnEJfjVFzG3CIwV333dCi17EXjmvNnQ5HARdffeO6tYwDLTq8-7x8RHk9KC7SxWejpKTq54jwG7lm9EHvP4Q3zYbXrm4G_iJzMhMe19koZpDEa0H29cTUwdUY9KcRvRDmDYwSKK1Ftbh8Y89LzXkozfRwjZdSa8l5pJATZzMD03yOEDyq8DkmV75stVcAdhjPbH68Mg6eVy0Ze4gyOk0jEaNgnIyQ73hdUiicrhqk_eVHzba8ONjI0Rua-TJsJ0OtDQB2hCDQcPT6338atNuxSRHxCmtU8fnTHjbqm9rp2N0Ci2CuElY0QR8_OV5rgTvc2e7ytANVM",
+               "width" : 5333
+            }
+         ],
+         "place_id" : "ChIJixdY5xAKkEcRdq9EeTC2eEI",
+         "plus_code" : 
+         {
+            "compound_code" : "9GHG+XX Zürich, Switzerland",
+            "global_code" : "8FVC9GHG+XX"
+         },
+         "price_level" : 2,
+         "rating" : 3.7,
+         "reference" : "ChIJixdY5xAKkEcRdq9EeTC2eEI",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "bar",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 351,
+         "vicinity" : "Schöneggstrasse 6, Zürich"
+      },
+      {
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.3882368,
+               "lng" : 8.483050799999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.40376406471658,
+                  "lng" : 8.506095140098212
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.37409005484579,
+                  "lng" : 8.450343026949168
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/geocode-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Altstetten",
+         "photos" : 
+         [
+            {
+               "height" : 2250,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/118115080819670871640\"\u003eSacha Leu CH\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATKogpetKt4Uo4qaEkXnzFmyw9QCSTb2njTmo-r6jjQtzU_psMuc24fOE0ENnOl7T_B2TFl4sEIIWwUSqtPLu75e-1j17vkvHQ28-LBnvH6TBHMhIT1yocm7LnujzxFFWf0LRDh4NCulS-aEgA7mdctM9VBDG7sf6Gm8PFs8Cr274CURlT5Ji2AWUBi9asWPmkHjB_7i-WaIeSe9iwQ6QCdd9GU4yIQG-C5bs2Zpc7x8HrriQxFHQiQca9IrxpV43wBWEB3VX9LqzumDP1iHXv0_S5kZewc4WWHvXB7dCdVjWNBTD-9ZhNvxuY-oN6wcy1joPkQnNLnnrLreRnfoNgtlfHK145a5tkM0e2ZegkFohOxf2DDUBAvwED-OTvtJqF8pSuaLMmWeJcQDGOUKOQyYyv3W6v7s2uM28kyZedZvc-4el9LTXiFMdC9esHyG39sE78-FgzKPjArgQgk5e4w8v1cXAbBYOlDFU3-A6gAtaB8lRpWh-VRfYkw8X0t4ZCv7tg32qfvXLTRsqRPj3LUzLVTIlz9BoX3bel1Mw2y2ZwLIb3Ntoy37yZcuh_3R4-j3WoKADLQ9TPsDEFqCqMBj6_PrpOVB6kUlZsuqEJ3Fdynx6N_LstTqW3nbOd2i-e0Hdm4S5w",
+               "width" : 4000
+            }
+         ],
+         "place_id" : "ChIJHdJw5MALkEcR4BDV4V5BzR8",
+         "reference" : "ChIJHdJw5MALkEcR4BDV4V5BzR8",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "sublocality_level_2",
+            "sublocality",
+            "political"
+         ],
+         "vicinity" : "Altstetten"
+      }
+   ],
+   "status" : "OK"
+}
