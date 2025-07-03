@@ -1,0 +1,647 @@
+[
+  {
+    "city": "Agios Ioannis Mykonos",
+    "latitude": 37.4232372,
+    "longitude": 25.3122663
+  },
+  {
+    "city": "Agios Sostis Mykonos",
+    "latitude": 37.477912,
+    "longitude": 25.3603612
+  },
+  {
+    "city": "Agios Stefanos",
+    "latitude": 38.1410051,
+    "longitude": 23.8575845
+  },
+  {
+    "city": "Agrari",
+    "latitude": 22.7735109,
+    "longitude": 75.5842229
+  },
+  {
+    "city": "Akrotiri",
+    "latitude": 34.6008434,
+    "longitude": 32.9561709
+  },
+  {
+    "city": "Amed",
+    "latitude": 37.9162222,
+    "longitude": 40.2363542
+  },
+  {
+    "city": "Amsterdam",
+    "latitude": 52.3698407,
+    "longitude": 4.8886879
+  },
+  {
+    "city": "Ano Mera",
+    "latitude": 37.4469809,
+    "longitude": 25.3923486
+  },
+  {
+    "city": "Auckland",
+    "latitude": -36.852095,
+    "longitude": 174.7631803
+  },
+  {
+    "city": "Baa Atoll",
+    "latitude": 5.1864551,
+    "longitude": 73.0081847
+  },
+  {
+    "city": "Bangkok",
+    "latitude": 13.7011652,
+    "longitude": 100.4925374
+  },
+  {
+    "city": "Barcelona",
+    "latitude": 41.3819793,
+    "longitude": 2.1804154
+  },
+  {
+    "city": "Beijing",
+    "latitude": 40.190632,
+    "longitude": 116.412144
+  },
+  {
+    "city": "Berlin",
+    "latitude": 52.5017923,
+    "longitude": 13.2842678
+  },
+  {
+    "city": "Bogotá",
+    "latitude": 4.6193201,
+    "longitude": -74.0753692
+  },
+  {
+    "city": "Brisbane",
+    "latitude": -27.4434045,
+    "longitude": 153.0373122
+  },
+  {
+    "city": "Budapest",
+    "latitude": 47.4991627,
+    "longitude": 19.0351431
+  },
+  {
+    "city": "Buenos Aires",
+    "latitude": -34.5980713,
+    "longitude": -58.3755029
+  },
+  {
+    "city": "Cairo",
+    "latitude": 30.0443879,
+    "longitude": 31.2357257
+  },
+  {
+    "city": "Cala Llenya",
+    "latitude": 39.0189357,
+    "longitude": 1.5873204
+  },
+  {
+    "city": "Cancún",
+    "latitude": 21.1527467,
+    "longitude": -86.8425761
+  },
+  {
+    "city": "Canggu",
+    "latitude": -8.6658835,
+    "longitude": 115.1401231
+  },
+  {
+    "city": "Cape Town",
+    "latitude": -33.9281512,
+    "longitude": 18.3789695
+  },
+  {
+    "city": "Casablanca",
+    "latitude": 33.5890411,
+    "longitude": -7.6638742
+  },
+  {
+    "city": "Chicago",
+    "latitude": 41.8755616,
+    "longitude": -87.6244212
+  },
+  {
+    "city": "Copenhagen",
+    "latitude": 55.6268635,
+    "longitude": 12.6452245
+  },
+  {
+    "city": "Dal",
+    "latitude": 44.636201,
+    "longitude": -63.5919961
+  },
+  {
+    "city": "Dhangethi",
+    "latitude": 3.6072065,
+    "longitude": 72.9557647
+  },
+  {
+    "city": "Dhidhdhoo",
+    "latitude": 6.8873393,
+    "longitude": 73.1140202
+  },
+  {
+    "city": "Dhiffushi",
+    "latitude": 3.4755122,
+    "longitude": 72.8243678
+  },
+  {
+    "city": "Dhigurah",
+    "latitude": 3.5253477,
+    "longitude": 72.9229753
+  },
+  {
+    "city": "Dubai",
+    "latitude": 25.082135,
+    "longitude": 55.1445921
+  },
+  {
+    "city": "Eidsvoll",
+    "latitude": 60.4162964,
+    "longitude": 11.2555442
+  },
+  {
+    "city": "Elia",
+    "latitude": 35.1331227,
+    "longitude": 32.913372
+  },
+  {
+    "city": "Es Cana",
+    "latitude": 38.9010622,
+    "longitude": 1.4194506
+  },
+  {
+    "city": "Fenfushi",
+    "latitude": 2.2896256,
+    "longitude": 73.2668182
+  },
+  {
+    "city": "Fira",
+    "latitude": 36.4166,
+    "longitude": 25.4324
+  },
+  {
+    "city": "Fulidhoo",
+    "latitude": 3.680268,
+    "longitude": 73.4157992
+  },
+  {
+    "city": "Gaafu Alifu Atoll",
+    "latitude": 0.6125,
+    "longitude": 73.3237
+  },
+  {
+    "city": "Gardermoen",
+    "latitude": 60.1931498,
+    "longitude": 11.0968156
+  },
+  {
+    "city": "Geneva",
+    "latitude": 46.1990533,
+    "longitude": 6.1392343
+  },
+  {
+    "city": "Gjerdrum",
+    "latitude": 60.0787767,
+    "longitude": 11.0206123
+  },
+  {
+    "city": "Gystad",
+    "latitude": 60.139195,
+    "longitude": 11.2069428
+  },
+  {
+    "city": "Hangnaameedhoo",
+    "latitude": 3.8490218,
+    "longitude": 72.9561952
+  },
+  {
+    "city": "Helsinki",
+    "latitude": 60.1570639,
+    "longitude": 24.9116552
+  },
+  {
+    "city": "Hong Kong",
+    "latitude": 22.2445517,
+    "longitude": 114.2053888
+  },
+  {
+    "city": "Ibiza Town",
+    "latitude": 38.9066,
+    "longitude": 1.4207
+  },
+  {
+    "city": "Imerovigli",
+    "latitude": 36.4325579,
+    "longitude": 25.4228307
+  },
+  {
+    "city": "Jessheim",
+    "latitude": 60.1415121,
+    "longitude": 11.1751516
+  },
+  {
+    "city": "Johannesburg",
+    "latitude": -26.1793635,
+    "longitude": 28.1344198
+  },
+  {
+    "city": "Kintamani",
+    "latitude": -8.2505623,
+    "longitude": 115.3330086
+  },
+  {
+    "city": "Klofta",
+    "latitude": 60.0753432,
+    "longitude": 11.1391499
+  },
+  {
+    "city": "Klouvas",
+    "latitude": 37.451466,
+    "longitude": 25.3581967
+  },
+  {
+    "city": "Kuala Lumpur",
+    "latitude": 3.108948,
+    "longitude": 101.6680679
+  },
+  {
+    "city": "Kuta",
+    "latitude": -8.716574,
+    "longitude": 115.174288
+  },
+  {
+    "city": "Las Vegas",
+    "latitude": 36.115051,
+    "longitude": -115.1727996
+  },
+  {
+    "city": "Lima",
+    "latitude": -12.1443238,
+    "longitude": -77.0256333
+  },
+  {
+    "city": "Lisbon",
+    "latitude": 38.7312586,
+    "longitude": -9.1394358
+  },
+  {
+    "city": "London",
+    "latitude": 51.5427965,
+    "longitude": -0.1624803
+  },
+  {
+    "city": "Los Angeles",
+    "latitude": 34.0827278,
+    "longitude": -118.4479802
+  },
+  {
+    "city": "Madrid",
+    "latitude": 40.4176527,
+    "longitude": -3.7079547
+  },
+  {
+    "city": "Makunudhoo",
+    "latitude": 6.4091403,
+    "longitude": 72.7053955
+  },
+  {
+    "city": "Male City",
+    "latitude": 4.1779879,
+    "longitude": 73.5107387
+  },
+  {
+    "city": "Mandhoo",
+    "latitude": 3.6980743,
+    "longitude": 72.7097189
+  },
+  {
+    "city": "Marrakech",
+    "latitude": 31.6225589,
+    "longitude": -8.0083128
+  },
+  {
+    "city": "Meedhoo",
+    "latitude": 5.4580652,
+    "longitude": 72.9548515
+  },
+  {
+    "city": "Meemu Atoll",
+    "latitude": 2.9588985,
+    "longitude": 73.493683
+  },
+  {
+    "city": "Megalokhori",
+    "latitude": 36.3758,
+    "longitude": 25.4317
+  },
+  {
+    "city": "Melbourne",
+    "latitude": -37.8040544,
+    "longitude": 144.9661734
+  },
+  {
+    "city": "Miami Beach",
+    "latitude": 25.7907,
+    "longitude": -80.1300
+  },
+  {
+    "city": "Montréal",
+    "latitude": 45.495554,
+    "longitude": -73.5704458
+  },
+  {
+    "city": "Mumbai",
+    "latitude": 18.9582,
+    "longitude": 72.8321
+  },
+  {
+    "city": "Mushimasgali",
+    "latitude": 3.9587909,
+    "longitude": 72.913303
+  },
+  {
+    "city": "Mýkonos City",
+    "latitude": 37.4447,
+    "longitude": 25.3263
+  },
+  {
+    "city": "Nannestad",
+    "latitude": 60.2267034,
+    "longitude": 10.9409407
+  },
+  {
+    "city": "New Delhi",
+    "latitude": 28.5499844,
+    "longitude": 77.1215185
+  },
+  {
+    "city": "New York",
+    "latitude": 40.7464906,
+    "longitude": -74.0015283
+  },
+  {
+    "city": "Nika Island",
+    "latitude": 4.1811587,
+    "longitude": 72.7669264
+  },
+  {
+    "city": "Noonu",
+    "latitude": 59.5096183,
+    "longitude": 26.2017024
+  },
+  {
+    "city": "North Male Atoll",
+    "latitude": 4.4378138,
+    "longitude": 73.5396643
+  },
+  {
+    "city": "Nusa Dua",
+    "latitude": -8.8016777,
+    "longitude": 115.2239305
+  },
+  {
+    "city": "Oia",
+    "latitude": 44.8071071,
+    "longitude": 7.7029974
+  },
+  {
+    "city": "Osaka",
+    "latitude": 34.6690306,
+    "longitude": 135.5015715
+  },
+  {
+    "city": "Oslo",
+    "latitude": 59.9222241,
+    "longitude": 10.7066491
+  },
+  {
+    "city": "Paris",
+    "latitude": 48.8575,
+    "longitude": 2.3514
+  },
+  {
+    "city": "Payangan",
+    "latitude": -8.4252668,
+    "longitude": 115.2455213
+  },
+  {
+    "city": "Perivolos",
+    "latitude": 36.3454,
+    "longitude": 25.4647
+  },
+  {
+    "city": "Perth",
+    "latitude": -31.954341,
+    "longitude": 115.8778894
+  },
+  {
+    "city": "Phuket Town",
+    "latitude": 7.8864847,
+    "longitude": 98.3926823
+  },
+  {
+    "city": "Platis Yialos Mykonos",
+    "latitude": 37.4138,
+    "longitude": 25.3470
+  },
+  {
+    "city": "Playa d'en Bossa",
+    "latitude": 38.8961728,
+    "longitude": 1.415486
+  },
+  {
+    "city": "Playa del Carmen",
+    "latitude": 20.6281551,
+    "longitude": -87.0757516
+  },
+  {
+    "city": "Plintri",
+    "latitude": 37.4147688,
+    "longitude": 25.368539
+  },
+  {
+    "city": "Portinatx",
+    "latitude": 39.1104253,
+    "longitude": 1.5181252
+  },
+  {
+    "city": "Prague",
+    "latitude": 50.0017463,
+    "longitude": 14.353292
+  },
+  {
+    "city": "Puerto de San Miguel",
+    "latitude": 42.7928388,
+    "longitude": -2.7786017
+  },
+  {
+    "city": "Raa Atoll",
+    "latitude": 5.6201607,
+    "longitude": 72.9372853
+  },
+  {
+    "city": "Rio de Janeiro",
+    "latitude": -22.9997404,
+    "longitude": -43.3659929
+  },
+  {
+    "city": "Rome",
+    "latitude": 41.8967,
+    "longitude": 12.4822
+  },
+  {
+    "city": "San Antonio",
+    "latitude": 29.4246002,
+    "longitude": -98.4951405
+  },
+  {
+    "city": "San Antonio Bay",
+    "latitude": 28.2991058,
+    "longitude": -96.7125327
+  },
+  {
+    "city": "San Francisco",
+    "latitude": 37.7875138,
+    "longitude": -122.407159
+  },
+  {
+    "city": "Sant Joan de Labritja",
+    "latitude": 39.0549089,
+    "longitude": 1.459313
+  },
+  {
+    "city": "Santa Agnès de Corona",
+    "latitude": 39.0386072,
+    "longitude": 1.336234
+  },
+  {
+    "city": "Santa Eularia des Riu",
+    "latitude": 38.9846117,
+    "longitude": 1.534421
+  },
+  {
+    "city": "Santiago de Compostela",
+    "latitude": 42.8769,
+    "longitude": -8.5442
+  },
+  {
+    "city": "Sao Paulo",
+    "latitude": -23.5601219,
+    "longitude": -46.6500338
+  },
+  {
+    "city": "Selemadeg",
+    "latitude": -8.5085881,
+    "longitude": 115.0223197
+  },
+  {
+    "city": "Seminyak",
+    "latitude": -8.6910,
+    "longitude": 115.1678
+  },
+  {
+    "city": "Seoul",
+    "latitude": 37.5177,
+    "longitude": 127.0473
+  },
+  {
+    "city": "Shanghai",
+    "latitude": 31.2509454,
+    "longitude": 121.4920743
+  },
+  {
+    "city": "Shaviyani Atoll",
+    "latitude": 4.2121469,
+    "longitude": 72.8659695
+  },
+  {
+    "city": "Singapore",
+    "latitude": 1.299966,
+    "longitude": 103.8552892
+  },
+  {
+    "city": "South Male Atoll",
+    "latitude": 3.9690661,
+    "longitude": 73.4311274
+  },
+  {
+    "city": "Stockholm",
+    "latitude": 59.4031236,
+    "longitude": 17.9424221
+  },
+  {
+    "city": "Super Paradise Beach",
+    "latitude": 37.4147688,
+    "longitude": 25.368539
+  },
+  {
+    "city": "Sydney",
+    "latitude": -33.8930556,
+    "longitude": 151.2633333
+  },
+  {
+    "city": "Tabanan",
+    "latitude": -8.5566523,
+    "longitude": 115.0013121
+  },
+  {
+    "city": "Talamanca",
+    "latitude": 41.736093,
+    "longitude": 1.9780786
+  },
+  {
+    "city": "Thundufushi",
+    "latitude": 3.7864,
+    "longitude": 72.7315
+  },
+  {
+    "city": "Tokyo",
+    "latitude": 35.6985172,
+    "longitude": 139.7755248
+  },
+  {
+    "city": "Toronto",
+    "latitude": 43.6696714,
+    "longitude": -79.3887524
+  },
+  {
+    "city": "Tourlos",
+    "latitude": 37.4640029,
+    "longitude": 25.3298953
+  },
+  {
+    "city": "Tulum",
+    "latitude": 20.2114,
+    "longitude": -87.4654
+  },
+  {
+    "city": "Ubud",
+    "latitude": -8.5069,
+    "longitude": 115.2625
+  },
+  {
+    "city": "Uluwatu",
+    "latitude": -8.8272855,
+    "longitude": 115.0889841
+  },
+  {
+    "city": "Vancouver",
+    "latitude": 49.2828495,
+    "longitude": -123.1206248
+  },
+  {
+    "city": "Vienna",
+    "latitude": 48.2100072,
+    "longitude": 16.3697034
+  },
+  {
+    "city": "Zürich",
+    "latitude": 47.3787138,
+    "longitude": 8.5212002
+  }
+]
