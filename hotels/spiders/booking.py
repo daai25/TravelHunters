@@ -6,19 +6,100 @@ import re
 class BookingSpider(Spider):
     name = 'booking'
     start_urls = [
+        # Europa
+        'https://www.booking.com/searchresults.html?ss=Paris&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=London&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Rome&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Barcelona&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Amsterdam&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Berlin&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Vienna&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Prague&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Budapest&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Lisbon&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Madrid&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Stockholm&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Copenhagen&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Oslo&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Helsinki&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
         'https://www.booking.com/searchresults.html?ss=Zurich&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
-        'https://www.booking.com/searchresults.html?ss=Bern&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Geneva&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        
+        # Nordamerika
+        'https://www.booking.com/searchresults.html?ss=New+York&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Los+Angeles&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Chicago&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=San+Francisco&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Miami&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Las+Vegas&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Toronto&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Vancouver&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Montreal&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        
+        # Asien
+        'https://www.booking.com/searchresults.html?ss=Tokyo&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Osaka&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Seoul&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Beijing&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Shanghai&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Hong+Kong&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Singapore&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Bangkok&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Kuala+Lumpur&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Mumbai&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Delhi&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Dubai&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        
+        # Australien & Ozeanien
+        'https://www.booking.com/searchresults.html?ss=Sydney&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Melbourne&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Brisbane&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Perth&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Auckland&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        
+        # Südamerika
+        'https://www.booking.com/searchresults.html?ss=Rio+de+Janeiro&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Sao+Paulo&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Buenos+Aires&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Lima&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Santiago&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Bogota&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        
+        # Afrika
+        'https://www.booking.com/searchresults.html?ss=Cape+Town&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Johannesburg&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Cairo&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Marrakech&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Casablanca&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        
+        # Beliebte Urlaubsziele
+        'https://www.booking.com/searchresults.html?ss=Bali&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Phuket&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Maldives&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Santorini&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Mykonos&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Ibiza&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Cancun&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Tulum&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
+        'https://www.booking.com/searchresults.html?ss=Playa+del+Carmen&checkin=2025-08-01&checkout=2025-08-03&group_adults=2&no_rooms=1',
     ]
     
     custom_settings = {
         'ROBOTSTXT_OBEY': False,
-        'DOWNLOAD_DELAY': 3,
+        'DOWNLOAD_DELAY': 2,  # Schneller für mehr URLs
+        'RANDOMIZE_DOWNLOAD_DELAY': 0.5,
         'USER_AGENT': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         'HTTPERROR_ALLOWED_CODES': [404, 403, 500, 502, 503],
-        'CONCURRENT_REQUESTS': 1,
+        'CONCURRENT_REQUESTS': 2,  # Mehr parallele Requests
+        'CONCURRENT_REQUESTS_PER_DOMAIN': 2,
         'AUTOTHROTTLE_ENABLED': True,
-        'AUTOTHROTTLE_START_DELAY': 2,
-        'AUTOTHROTTLE_MAX_DELAY': 10,
+        'AUTOTHROTTLE_START_DELAY': 1,
+        'AUTOTHROTTLE_MAX_DELAY': 5,
+        'AUTOTHROTTLE_TARGET_CONCURRENCY': 2.0,
+        'COOKIES_ENABLED': True,
+        'RETRY_ENABLED': True,
+        'RETRY_TIMES': 3,
+        'RETRY_HTTP_CODES': [500, 502, 503, 504, 408, 429],
     }
 
     def parse(self, response):
@@ -30,6 +111,52 @@ class BookingSpider(Spider):
             f.write(response.text)
         print("💾 HTML saved to debug_booking_response.html")
         
+        # Folge den Hotels auf der aktuellen Seite
+        yield from self.extract_hotels(response)
+        
+        # Suche nach "Nächste Seite" Links für Pagination
+        next_page_selectors = [
+            'a[aria-label*="Next"]::attr(href)',
+            'a[aria-label*="Weiter"]::attr(href)', 
+            '.bui-pagination__next-arrow a::attr(href)',
+            '.sr-pagination__next a::attr(href)',
+            '.paging-next a::attr(href)',
+            'a[data-testid="pagination-next"]::attr(href)',
+            'a.bui-pagination__link--next::attr(href)'
+        ]
+        
+        next_page_url = None
+        for selector in next_page_selectors:
+            next_url = response.css(selector).get()
+            if next_url:
+                next_page_url = response.urljoin(next_url)
+                break
+        
+        # Auch manuell die nächste Seite generieren (offset-basiert)
+        if not next_page_url:
+            current_url = response.url
+            if 'offset=' in current_url:
+                # Aktuelle Offset extrahieren
+                import re
+                offset_match = re.search(r'offset=(\d+)', current_url)
+                if offset_match:
+                    current_offset = int(offset_match.group(1))
+                    next_offset = current_offset + 25  # Booking.com zeigt normalerweise 25 pro Seite
+                    if next_offset <= 100:  # Limitiere auf 4 Seiten pro Stadt
+                        next_page_url = re.sub(r'offset=\d+', f'offset={next_offset}', current_url)
+            else:
+                # Erste Pagination - füge offset=25 hinzu
+                separator = '&' if '?' in current_url else '?'
+                next_page_url = f"{current_url}{separator}offset=25"
+        
+        # Folge der nächsten Seite
+        if next_page_url:
+            print(f"🔄 Following next page: {next_page_url}")
+            yield response.follow(next_page_url, callback=self.parse)
+        else:
+            print("🏁 No more pages found for this search")
+    
+    def extract_hotels(self, response):
         # Verschiedene Selektoren für Booking.com Hotels
         hotel_selectors = [
             '[data-testid="property-card"]',
