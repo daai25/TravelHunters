@@ -33,7 +33,7 @@ website:
           - modelling_report.qmd
       - section: "Evaluation & Deployment"
         contents:
-          - evaluation.md
+          - evaluation.qmd
 
 bibliography: refs.bib
 csl: vancouver-brackets.csl
