@@ -1,0 +1,1350 @@
+[
+  {
+    "name": "Dubrovnik",
+    "latitude": 42.6491029,
+    "longitude": 18.0939501
+  },
+  {
+    "name": "Cape Town",
+    "latitude": -33.9288301,
+    "longitude": 18.4172197
+  },
+  {
+    "name": "New York City",
+    "latitude": 40.7127281,
+    "longitude": -74.0060152
+  },
+  {
+    "name": "Europe",
+    "latitude": 51.0,
+    "longitude": 10.0
+  },
+  {
+    "name": "Krakow",
+    "latitude": 50.0469432,
+    "longitude": 19.9971534
+  },
+  {
+    "name": "Hamburg",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Florence",
+    "latitude": 43.7697955,
+    "longitude": 11.2556404
+  },
+  {
+    "name": "Porto",
+    "latitude": 41.1502195,
+    "longitude": -8.6103497
+  },
+  {
+    "name": "Outback Queensland",
+    "latitude": -20.7274568,
+    "longitude": 139.49896
+  },
+  {
+    "name": "San Francisco",
+    "latitude": 37.7792588,
+    "longitude": -122.4193286
+  },
+  {
+    "name": "Savannah",
+    "latitude": 32.0790074,
+    "longitude": -81.0921335
+  },
+  {
+    "name": "Spain",
+    "latitude": 39.3260685,
+    "longitude": -4.8379791
+  },
+  {
+    "name": "Vienna",
+    "latitude": 48.2083537,
+    "longitude": 16.3725042
+  },
+  {
+    "name": "Washington DC",
+    "latitude": 38.8950368,
+    "longitude": -77.0365427
+  },
+  {
+    "name": "San Diego",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Berlin",
+    "latitude": 52.510885,
+    "longitude": 13.3989367
+  },
+  {
+    "name": "Athens",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Istanbul",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Prague",
+    "latitude": 50.0874654,
+    "longitude": 14.4212535
+  },
+  {
+    "name": "Lisbon",
+    "latitude": 38.7077507,
+    "longitude": -9.1365919
+  },
+  {
+    "name": "Rome",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Paris",
+    "latitude": 48.8588897,
+    "longitude": 2.320041
+  },
+  {
+    "name": "London",
+    "latitude": 51.5074456,
+    "longitude": -0.1277653
+  },
+  {
+    "name": "Dubai",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Amsterdam",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Barcelona",
+    "latitude": 41.3825802,
+    "longitude": 2.177073
+  },
+  {
+    "name": "Venice",
+    "latitude": 45.4371908,
+    "longitude": 12.3345898
+  },
+  {
+    "name": "Seville",
+    "latitude": 37.3886303,
+    "longitude": -5.9953403
+  },
+  {
+    "name": "Reykjavik",
+    "latitude": 64.145981,
+    "longitude": -21.9422367
+  },
+  {
+    "name": "Melbourne",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Mumbai",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Cairo",
+    "latitude": 30.0443879,
+    "longitude": 31.2357257
+  },
+  {
+    "name": "Tokyo",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Ho Chi Minh",
+    "latitude": 10.7763897,
+    "longitude": 106.7011391
+  },
+  {
+    "name": "Hoi An",
+    "latitude": 15.8885853,
+    "longitude": 108.3366575
+  },
+  {
+    "name": "Abu Dhabi",
+    "latitude": 24.4538352,
+    "longitude": 54.3774014
+  },
+  {
+    "name": "Budapest",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Agadir",
+    "latitude": 30.4205162,
+    "longitude": -9.5838532
+  },
+  {
+    "name": "Hanoi",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Cusco",
+    "latitude": -13.5170887,
+    "longitude": -71.9785356
+  },
+  {
+    "name": "Dublin",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Sydney",
+    "latitude": -33.8698439,
+    "longitude": 151.2082848
+  },
+  {
+    "name": "Split",
+    "latitude": 43.5116383,
+    "longitude": 16.4399659
+  },
+  {
+    "name": "Crete",
+    "latitude": 41.4445334,
+    "longitude": -87.6313829
+  },
+  {
+    "name": "Da Nang",
+    "latitude": 16.068,
+    "longitude": 108.212
+  },
+  {
+    "name": "New Delhi",
+    "latitude": 28.6430858,
+    "longitude": 77.2192671
+  },
+  {
+    "name": "Marrakech",
+    "latitude": 31.6258257,
+    "longitude": -7.9891608
+  },
+  {
+    "name": "Ubud",
+    "latitude": -8.5068977,
+    "longitude": 115.2622931
+  },
+  {
+    "name": "Osaka",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Granada",
+    "latitude": 37.1734995,
+    "longitude": -3.5995337
+  },
+  {
+    "name": "Germany",
+    "latitude": 51.1638175,
+    "longitude": 10.4478313
+  },
+  {
+    "name": "Malaga",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Cartagena",
+    "latitude": 10.4265566,
+    "longitude": -75.5441671
+  },
+  {
+    "name": "Vancouver",
+    "latitude": 49.2608724,
+    "longitude": -123.113952
+  },
+  {
+    "name": "Rotorua",
+    "latitude": -38.1381493,
+    "longitude": 176.252922
+  },
+  {
+    "name": "Hiroshima",
+    "latitude": 34.3917241,
+    "longitude": 132.4517589
+  },
+  {
+    "name": "Warsaw",
+    "latitude": 52.2337172,
+    "longitude": 21.0714322
+  },
+  {
+    "name": "Cologne",
+    "latitude": 50.938361,
+    "longitude": 6.959974
+  },
+  {
+    "name": "Phuket",
+    "latitude": 7.9366015,
+    "longitude": 98.3529292
+  },
+  {
+    "name": "Palermo",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Buenos Aires",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Nice",
+    "latitude": 43.7009358,
+    "longitude": 7.2683912
+  },
+  {
+    "name": "Bogota",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Seoul",
+    "latitude": 37.5666791,
+    "longitude": 126.9782914
+  },
+  {
+    "name": "Bucharest",
+    "latitude": 44.4361414,
+    "longitude": 26.1027202
+  },
+  {
+    "name": "Copenhagen",
+    "latitude": 55.6867243,
+    "longitude": 12.5700724
+  },
+  {
+    "name": "Chicago",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Charleston",
+    "latitude": 32.7884363,
+    "longitude": -79.9399309
+  },
+  {
+    "name": "Boston",
+    "latitude": 42.3554334,
+    "longitude": -71.060511
+  },
+  {
+    "name": "Bali",
+    "latitude": -8.2271303,
+    "longitude": 115.1919203
+  },
+  {
+    "name": "Atlanta",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Doha",
+    "latitude": 25.2856329,
+    "longitude": 51.5264162
+  },
+  {
+    "name": "Cancun",
+    "latitude": 21.1527467,
+    "longitude": -86.8425761
+  },
+  {
+    "name": "Bangkok",
+    "latitude": 13.7524938,
+    "longitude": 100.4935089
+  },
+  {
+    "name": "Lima",
+    "latitude": -12.0621065,
+    "longitude": -77.0365256
+  },
+  {
+    "name": "Rio de Janeiro",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Verona",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Brussels",
+    "latitude": 50.8465573,
+    "longitude": 4.351697
+  },
+  {
+    "name": "Chiang Mai",
+    "latitude": 18.7882778,
+    "longitude": 98.9858802
+  },
+  {
+    "name": "Munich",
+    "latitude": 48.1371079,
+    "longitude": 11.5753822
+  },
+  {
+    "name": "Milan",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Miami",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Mexico City",
+    "latitude": 19.3207722,
+    "longitude": -99.1514678
+  },
+  {
+    "name": "Maui",
+    "latitude": 20.8029568,
+    "longitude": -156.3106833
+  },
+  {
+    "name": "Madrid",
+    "latitude": 40.4167047,
+    "longitude": -3.7035825
+  },
+  {
+    "name": "Los Angeles",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Liverpool",
+    "latitude": 53.4071991,
+    "longitude": -2.99168
+  },
+  {
+    "name": "Las Vegas",
+    "latitude": 36.1716997,
+    "longitude": -115.146357
+  },
+  {
+    "name": "Edinburgh",
+    "latitude": 55.9533456,
+    "longitude": -3.1883749
+  },
+  {
+    "name": "Naples",
+    "latitude": 40.8358846,
+    "longitude": 14.2487679
+  },
+  {
+    "name": "Nashville",
+    "latitude": 36.1622767,
+    "longitude": -86.7742984
+  },
+  {
+    "name": "Netherlands",
+    "latitude": 52.2434979,
+    "longitude": 5.6343227
+  },
+  {
+    "name": "New Orleans",
+    "latitude": 29.9759983,
+    "longitude": -90.0782127
+  },
+  {
+    "name": "Orlando",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "South Korea",
+    "latitude": 36.638392,
+    "longitude": 127.6961188
+  },
+  {
+    "name": "Portugal",
+    "latitude": 39.6621648,
+    "longitude": -8.1353519
+  },
+  {
+    "name": "Scottish Highlands",
+    "latitude": 56.8,
+    "longitude": -5.0
+  },
+  {
+    "name": "Japan",
+    "latitude": 36.5748441,
+    "longitude": 139.2394179
+  },
+  {
+    "name": "Tuscany",
+    "latitude": 43.4586541,
+    "longitude": 11.1389204
+  },
+  {
+    "name": "Australia",
+    "latitude": -24.7761086,
+    "longitude": 134.755
+  },
+  {
+    "name": "Patagonia",
+    "latitude": 31.5402016,
+    "longitude": -110.753927
+  },
+  {
+    "name": "Florida",
+    "latitude": 27.7567667,
+    "longitude": -81.4639835
+  },
+  {
+    "name": "Colombia",
+    "latitude": 4.099917,
+    "longitude": -72.9088133
+  },
+  {
+    "name": "Puerto Rico",
+    "latitude": 18.2247706,
+    "longitude": -66.4858295
+  },
+  {
+    "name": "Croatia",
+    "latitude": 45.3658443,
+    "longitude": 15.6575209
+  },
+  {
+    "name": "Salzburg",
+    "latitude": 47.7981346,
+    "longitude": 13.0464806
+  },
+  {
+    "name": "Ha Long",
+    "latitude": 20.8875313,
+    "longitude": 107.1117498
+  },
+  {
+    "name": "Belgium",
+    "latitude": 50.6402809,
+    "longitude": 4.6667145
+  },
+  {
+    "name": "Austin",
+    "latitude": 30.2711286,
+    "longitude": -97.7436995
+  },
+  {
+    "name": "Hong Kong",
+    "latitude": 22.350627,
+    "longitude": 114.1849161
+  },
+  {
+    "name": "Thailand",
+    "latitude": 14.8971921,
+    "longitude": 100.83273
+  },
+  {
+    "name": "Frankfurt",
+    "latitude": 50.1106444,
+    "longitude": 8.6820917
+  },
+  {
+    "name": "New Zealand",
+    "latitude": -41.5000831,
+    "longitude": 172.8344077
+  },
+  {
+    "name": "Morocco",
+    "latitude": 28.3347722,
+    "longitude": -10.3713379
+  },
+  {
+    "name": "China",
+    "latitude": 35.0000663,
+    "longitude": 104.999955
+  },
+  {
+    "name": "Denmark",
+    "latitude": 55.670249,
+    "longitude": 10.3333283
+  },
+  {
+    "name": "Switzerland",
+    "latitude": 46.7985624,
+    "longitude": 8.2319736
+  },
+  {
+    "name": "United Kingdom",
+    "latitude": 54.7023545,
+    "longitude": -3.2765753
+  },
+  {
+    "name": "Mexico",
+    "latitude": 23.6585116,
+    "longitude": -102.0077097
+  },
+  {
+    "name": "Vietnam",
+    "latitude": 15.9266657,
+    "longitude": 107.9650855
+  },
+  {
+    "name": "Turkiye",
+    "latitude": 39.294076,
+    "longitude": 35.2316631
+  },
+  {
+    "name": "Norway",
+    "latitude": 61.1529386,
+    "longitude": 8.7876653
+  },
+  {
+    "name": "South Africa",
+    "latitude": -28.8166236,
+    "longitude": 24.991639
+  },
+  {
+    "name": "Greece",
+    "latitude": 38.9953683,
+    "longitude": 21.9877132
+  },
+  {
+    "name": "France",
+    "latitude": 46.603354,
+    "longitude": 1.8883335
+  },
+  {
+    "name": "Italy",
+    "latitude": 42.6384261,
+    "longitude": 12.674297
+  },
+  {
+    "name": "Portland",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Toronto",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Philadelphia",
+    "latitude": 39.9527237,
+    "longitude": -75.1635262
+  },
+  {
+    "name": "Houston",
+    "latitude": 29.7589382,
+    "longitude": -95.3676974
+  },
+  {
+    "name": "Manchester",
+    "latitude": 53.4794892,
+    "longitude": -2.2451148
+  },
+  {
+    "name": "Tulum",
+    "latitude": 20.429647,
+    "longitude": -87.6529306
+  },
+  {
+    "name": "Montreal",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Kuala Lumpur",
+    "latitude": 3.1526589,
+    "longitude": 101.7022205
+  },
+  {
+    "name": "Oslo",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Geneva",
+    "latitude": 46.2017559,
+    "longitude": 6.1466014
+  },
+  {
+    "name": "Alanya",
+    "latitude": 36.8865728,
+    "longitude": 30.7030242
+  },
+  {
+    "name": "Stockhol",
+    "latitude": null,
+    "longitude": null,
+    "error": "Location not found"
+  },
+  {
+    "name": "Valencia",
+    "latitude": 39.4697065,
+    "longitude": -0.3763353
+  },
+  {
+    "name": "Singapore",
+    "latitude": 1.357107,
+    "longitude": 103.8194992
+  },
+  {
+    "name": "Zurich",
+    "latitude": 47.3744489,
+    "longitude": 8.5410422
+  },
+  {
+    "name": "Marseille",
+    "latitude": 43.2961743,
+    "longitude": 5.3699525
+  },
+  {
+    "name": "Antalya",
+    "latitude": 36.8865728,
+    "longitude": 30.7030242
+  },
+  {
+    "name": "Guatemala",
+    "latitude": 15.5855545,
+    "longitude": -90.345759
+  },
+  {
+    "name": "Slovenia",
+    "latitude": 46.1199444,
+    "longitude": 14.8153333
+  },
+  {
+    "name": "Caribbean",
+    "latitude": 18.4,
+    "longitude": -75.0
+  },
+  {
+    "name": "Romania",
+    "latitude": 45.9852129,
+    "longitude": 24.6859225
+  },
+  {
+    "name": "Czechia",
+    "latitude": 49.7439047,
+    "longitude": 15.3381061
+  },
+  {
+    "name": "Jordan",
+    "latitude": 31.1667049,
+    "longitude": 36.941628
+  },
+  {
+    "name": "Indonesia",
+    "latitude": -2.4833826,
+    "longitude": 117.8902853
+  },
+  {
+    "name": "Utah",
+    "latitude": 39.4225192,
+    "longitude": -111.714358
+  },
+  {
+    "name": "Albania",
+    "latitude": 41.000028,
+    "longitude": 19.9999619
+  },
+  {
+    "name": "Malaysia",
+    "latitude": 4.5693754,
+    "longitude": 102.2656823
+  },
+  {
+    "name": "Canary Islands",
+    "latitude": 28.2863989,
+    "longitude": -16.7960118
+  },
+  {
+    "name": "Maldives",
+    "latitude": 3.7203503,
+    "longitude": 73.2244152
+  },
+  {
+    "name": "Chile",
+    "latitude": -31.7613365,
+    "longitude": -71.3187697
+  },
+  {
+    "name": "Galapagos",
+    "latitude": 40.696359,
+    "longitude": -3.3387789
+  },
+  {
+    "name": "Hawaii",
+    "latitude": 19.5938015,
+    "longitude": -155.4283701
+  },
+  {
+    "name": "Sri Lanka",
+    "latitude": 7.5554942,
+    "longitude": 80.7137847
+  },
+  {
+    "name": "Canada",
+    "latitude": 61.0666922,
+    "longitude": -107.991707
+  },
+  {
+    "name": "Tenerife",
+    "latitude": 28.2935785,
+    "longitude": -16.6214471
+  },
+  {
+    "name": "Southeast Asia",
+    "latitude": -8.7287308,
+    "longitude": 115.2365646
+  },
+  {
+    "name": "Mallorca",
+    "latitude": 39.613432,
+    "longitude": 2.8829185
+  },
+  {
+    "name": "South America",
+    "latitude": -21.0002179,
+    "longitude": -61.0006565
+  },
+  {
+    "name": "India",
+    "latitude": 22.3511148,
+    "longitude": 78.6677428
+  },
+  {
+    "name": "Egypt",
+    "latitude": 26.2540493,
+    "longitude": 29.2675469
+  },
+  {
+    "name": "Finland",
+    "latitude": 63.2467777,
+    "longitude": 25.9209164
+  },
+  {
+    "name": "Philippines",
+    "latitude": 12.7503486,
+    "longitude": 122.7312101
+  },
+  {
+    "name": "Poland",
+    "latitude": 52.215933,
+    "longitude": 19.134422
+  },
+  {
+    "name": "Brazil",
+    "latitude": -10.3333333,
+    "longitude": -53.2
+  },
+  {
+    "name": "Costa Rica",
+    "latitude": 10.2735633,
+    "longitude": -84.0739102
+  },
+  {
+    "name": "Cambodia",
+    "latitude": 12.5433216,
+    "longitude": 104.8144914
+  },
+  {
+    "name": "Kenya",
+    "latitude": 1.4419683,
+    "longitude": 38.4313975
+  },
+  {
+    "name": "New England",
+    "latitude": 44.2057083,
+    "longitude": -70.7537839
+  },
+  {
+    "name": "United Arab Emirates",
+    "latitude": 24.0002488,
+    "longitude": 53.9994829
+  },
+  {
+    "name": "Bahamas",
+    "latitude": 24.7736546,
+    "longitude": -78.0000547
+  },
+  {
+    "name": "Ecuador",
+    "latitude": -1.3397668,
+    "longitude": -79.3666965
+  },
+  {
+    "name": "Argentina",
+    "latitude": -34.9964963,
+    "longitude": -64.9672817
+  },
+  {
+    "name": "Sweden",
+    "latitude": 59.6749712,
+    "longitude": 14.5208584
+  },
+  {
+    "name": "Scotland",
+    "latitude": 56.7861112,
+    "longitude": -4.1140518
+  },
+  {
+    "name": "Iceland",
+    "latitude": 64.9841821,
+    "longitude": -18.1059013
+  },
+  {
+    "name": "Ireland",
+    "latitude": 52.865196,
+    "longitude": -7.9794599
+  },
+  {
+    "name": "Alaska",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Peru",
+    "latitude": -6.8699697,
+    "longitude": -75.0458515
+  },
+  {
+    "name": "Colorado",
+    "latitude": 38.7251776,
+    "longitude": -105.607716
+  },
+  {
+    "name": "Florida Keys",
+    "latitude": 24.6736205,
+    "longitude": -81.4981792
+  },
+  {
+    "name": "Santorini",
+    "latitude": 36.4071112,
+    "longitude": 25.4566637
+  },
+  {
+    "name": "Big Sur",
+    "latitude": 36.1437044,
+    "longitude": -121.564593
+  },
+  {
+    "name": "Bermuda",
+    "latitude": 32.3040273,
+    "longitude": -64.7563086
+  },
+  {
+    "name": "Taiwan",
+    "latitude": 23.9739374,
+    "longitude": 120.9820179
+  },
+  {
+    "name": "Sicily",
+    "latitude": 37.587794,
+    "longitude": 14.155048
+  },
+  {
+    "name": "Oman",
+    "latitude": 21.0000287,
+    "longitude": 57.0036901
+  },
+  {
+    "name": "Tunisia",
+    "latitude": 33.8439408,
+    "longitude": 9.400138
+  },
+  {
+    "name": "Jerez de la Frontera",
+    "latitude": 36.6816936,
+    "longitude": -6.1377402
+  },
+  {
+    "name": "Masai Mara",
+    "latitude": -1.4881431,
+    "longitude": 35.1054095
+  },
+  {
+    "name": "Serengeti",
+    "latitude": -1.9622631,
+    "longitude": 34.7690573
+  },
+  {
+    "name": "Ngorongoro",
+    "latitude": -3.0735158,
+    "longitude": 35.4205768
+  },
+  {
+    "name": "Joshua Tree National Park",
+    "latitude": 33.8970671,
+    "longitude": -115.9511158
+  },
+  {
+    "name": "Cyprus",
+    "latitude": 34.9174159,
+    "longitude": 32.8899027
+  },
+  {
+    "name": "Cadiz",
+    "latitude": 10.956652,
+    "longitude": 123.3057034
+  },
+  {
+    "name": "Ohio",
+    "latitude": 40.2253569,
+    "longitude": -82.6881395
+  },
+  {
+    "name": "Tennessee",
+    "latitude": 35.7730076,
+    "longitude": -86.2820081
+  },
+  {
+    "name": "Pennsylvania",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Wisconsin",
+    "latitude": 44.4308975,
+    "longitude": -89.6884637
+  },
+  {
+    "name": "Mississippi",
+    "latitude": 32.9715285,
+    "longitude": -89.7348497
+  },
+  {
+    "name": "Kentucky",
+    "latitude": 37.5726028,
+    "longitude": -85.1551411
+  },
+  {
+    "name": "Virginia",
+    "latitude": 37.1232245,
+    "longitude": -78.4927721
+  },
+  {
+    "name": "Texas",
+    "latitude": 31.2638905,
+    "longitude": -98.5456116
+  },
+  {
+    "name": "South Carolina",
+    "latitude": 33.6874388,
+    "longitude": -80.4363743
+  },
+  {
+    "name": "Nevada",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Oahu",
+    "latitude": 21.4834364,
+    "longitude": -158.0364837
+  },
+  {
+    "name": "Illinois",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Jamaica",
+    "latitude": 18.1850507,
+    "longitude": -77.3947693
+  },
+  {
+    "name": "Minnesota",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Seychelles",
+    "latitude": -4.6574977,
+    "longitude": 55.4540146
+  },
+  {
+    "name": "Rhode Island",
+    "latitude": 41.7962409,
+    "longitude": -71.5992372
+  },
+  {
+    "name": "Colombo",
+    "latitude": 6.9388614,
+    "longitude": 79.8542005
+  },
+  {
+    "name": "Montenegro",
+    "latitude": 42.9868853,
+    "longitude": 19.5180992
+  },
+  {
+    "name": "Slovakia",
+    "latitude": 48.7411522,
+    "longitude": 19.4528646
+  },
+  {
+    "name": "Montana",
+    "latitude": 47.3752671,
+    "longitude": -109.638757
+  },
+  {
+    "name": "Georgia",
+    "latitude": 32.3293809,
+    "longitude": -83.1137366
+  },
+  {
+    "name": "New Hampshire",
+    "latitude": 43.4849133,
+    "longitude": -71.6553992
+  },
+  {
+    "name": "Arizona",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Louisiana",
+    "latitude": 30.8703881,
+    "longitude": -92.007126
+  },
+  {
+    "name": "Maryland",
+    "latitude": 39.5162401,
+    "longitude": -76.9382069
+  },
+  {
+    "name": "New Mexico",
+    "latitude": 34.5802074,
+    "longitude": -105.996047
+  },
+  {
+    "name": "Idaho",
+    "latitude": 43.6447642,
+    "longitude": -114.015407
+  },
+  {
+    "name": "Alabama",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Massachusetts",
+    "latitude": 42.3788774,
+    "longitude": -72.032366
+  },
+  {
+    "name": "Michigan",
+    "latitude": 43.6211955,
+    "longitude": -84.6824346
+  },
+  {
+    "name": "Asia",
+    "latitude": 51.2086975,
+    "longitude": 89.2343748
+  },
+  {
+    "name": "Bulgaria",
+    "latitude": 42.6073975,
+    "longitude": 25.4856617
+  },
+  {
+    "name": "Ibiza",
+    "latitude": 38.9743901,
+    "longitude": 1.4197463
+  },
+  {
+    "name": "Gdansk",
+    "latitude": 54.4288032,
+    "longitude": 18.798327
+  },
+  {
+    "name": "Scandinavia",
+    "latitude": 44.4584557,
+    "longitude": -89.1467759
+  },
+  {
+    "name": "Belize",
+    "latitude": 17.1204943,
+    "longitude": -88.6859028
+  },
+  {
+    "name": "Austria",
+    "latitude": 47.59397,
+    "longitude": 14.12456
+  },
+  {
+    "name": "Maine",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Saudi Arabia",
+    "latitude": 25.6242618,
+    "longitude": 42.3528328
+  },
+  {
+    "name": "Malta",
+    "latitude": 35.8885993,
+    "longitude": 14.4476911
+  },
+  {
+    "name": "Albufeira",
+    "latitude": 37.088241,
+    "longitude": -8.2526339
+  },
+  {
+    "name": "Heraklion",
+    "latitude": 31.302979,
+    "longitude": 30.120813
+  },
+  {
+    "name": "Rishikesh",
+    "latitude": 30.1086537,
+    "longitude": 78.2916193
+  },
+  {
+    "name": "Wellington",
+    "latitude": -41.2887953,
+    "longitude": 174.7772114
+  },
+  {
+    "name": "North Carolina",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Oregon",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Missouri",
+    "latitude": 38.7604815,
+    "longitude": -92.5617875
+  },
+  {
+    "name": "West Virginia",
+    "latitude": 38.4758406,
+    "longitude": -80.8408415
+  },
+  {
+    "name": "Leipzig",
+    "latitude": 51.3406321,
+    "longitude": 12.3747329
+  },
+  {
+    "name": "Hanover",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Fukuoka",
+    "latitude": 33.6251241,
+    "longitude": 130.6180016
+  },
+  {
+    "name": "Queenstown",
+    "latitude": -45.0321923,
+    "longitude": 168.661
+  },
+  {
+    "name": "Cairns",
+    "latitude": -16.9206657,
+    "longitude": 145.7721854
+  },
+  {
+    "name": "Honolulu",
+    "latitude": 21.304547,
+    "longitude": -157.855676
+  },
+  {
+    "name": "Goreme",
+    "latitude": 38.642089,
+    "longitude": 34.8296234
+  },
+  {
+    "name": "Key West",
+    "latitude": 24.5548262,
+    "longitude": -81.8020722
+  },
+  {
+    "name": "Santiago de Compostela",
+    "latitude": 42.8804219,
+    "longitude": -8.5458608
+  },
+  {
+    "name": "Ajaccio",
+    "latitude": 41.9263991,
+    "longitude": 8.7376029
+  },
+  {
+    "name": "Shanghai",
+    "latitude": null,
+    "longitude": null,
+    "error": "Service timed out"
+  },
+  {
+    "name": "Sapporo",
+    "latitude": 43.061936,
+    "longitude": 141.3542924
+  },
+  {
+    "name": "Denver",
+    "latitude": 39.7392364,
+    "longitude": -104.984862
+  }
+]
