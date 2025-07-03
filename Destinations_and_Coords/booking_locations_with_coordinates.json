@@ -1,0 +1,2902 @@
+[
+  {
+    "location": "01. Budavár, Budapest",
+    "latitude": 47.4991627,
+    "longitude": 19.0351431
+  },
+  {
+    "location": "01. Innere Stadt, Vienna",
+    "latitude": 48.2100072,
+    "longitude": 16.3697034
+  },
+  {
+    "location": "02. Leopoldstadt, Vienna",
+    "latitude": 48.2006384,
+    "longitude": 16.4268953
+  },
+  {
+    "location": "03. Landstraße, Vienna",
+    "latitude": 48.1936436,
+    "longitude": 16.3962862
+  },
+  {
+    "location": "05. Belváros - Lipótváros, Budapest",
+    "latitude": 47.4999448,
+    "longitude": 19.0505488
+  },
+  {
+    "location": "06. Mariahilf, Vienna",
+    "latitude": 48.1954752,
+    "longitude": 16.3470234
+  },
+  {
+    "location": "06. Terézváros, Budapest",
+    "latitude": 47.5085165,
+    "longitude": 19.0651215
+  },
+  {
+    "location": "07. Erzsébetváros, Budapest",
+    "latitude": 47.5021317,
+    "longitude": 19.0729096
+  },
+  {
+    "location": "07. Neubau, Vienna",
+    "latitude": 48.2020916,
+    "longitude": 16.3490418
+  },
+  {
+    "location": "08. Josefstadt, Vienna",
+    "latitude": 48.2105982,
+    "longitude": 16.35175
+  },
+  {
+    "location": "08. Józsefváros, Budapest",
+    "latitude": 47.4905952,
+    "longitude": 19.0873404
+  },
+  {
+    "location": "10. Favoriten, Vienna",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "10th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "11th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "12. Hegyvidék, Budapest",
+    "latitude": 47.5106013,
+    "longitude": 18.9668757
+  },
+  {
+    "location": "12th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "14th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "15. Rudolfsheim-Fünfhaus, Vienna",
+    "latitude": 48.2042225,
+    "longitude": 16.3164586
+  },
+  {
+    "location": "15th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "16th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "17th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "18th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "19. Kispest, Budapest",
+    "latitude": 47.4493327,
+    "longitude": 19.1441196
+  },
+  {
+    "location": "19th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "20. Brigittenau, Vienna",
+    "latitude": 48.2335838,
+    "longitude": 16.3719917
+  },
+  {
+    "location": "2nd arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "4th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "6th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "7th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "8th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "9th arr., Paris",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Aerocity, New Delhi (Aerocity)",
+    "latitude": 28.5499844,
+    "longitude": 77.1215185
+  },
+  {
+    "location": "Agios Ioannis Mykonos",
+    "latitude": 37.4232372,
+    "longitude": 25.3122663
+  },
+  {
+    "location": "Agios Sostis Mykonos",
+    "latitude": 37.477912,
+    "longitude": 25.3603612
+  },
+  {
+    "location": "Agios Stefanos",
+    "latitude": 38.1410051,
+    "longitude": 23.8575845
+  },
+  {
+    "location": "Agrari",
+    "latitude": 22.7735109,
+    "longitude": 75.5842229
+  },
+  {
+    "location": "Akrotiri",
+    "latitude": 34.6008434,
+    "longitude": 32.9561709
+  },
+  {
+    "location": "Al Sufouh, Dubai (Beach & Coast)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Amager Vest, Copenhagen",
+    "latitude": 55.6268635,
+    "longitude": 12.6452245
+  },
+  {
+    "location": "Amed",
+    "latitude": 37.9162222,
+    "longitude": 40.2363542
+  },
+  {
+    "location": "Amsterdam City Centre, Amsterdam",
+    "latitude": 52.3698407,
+    "longitude": 4.8886879
+  },
+  {
+    "location": "Amsterdam Noord, Amsterdam",
+    "latitude": 52.3730796,
+    "longitude": 4.8924534
+  },
+  {
+    "location": "Anfa, Casablanca",
+    "latitude": 33.5890411,
+    "longitude": -7.6638742
+  },
+  {
+    "location": "Anfa, Casablanca (Ain Diab)",
+    "latitude": 33.5918883,
+    "longitude": -7.6768418
+  },
+  {
+    "location": "Ano Mera",
+    "latitude": 37.4469809,
+    "longitude": 25.3923486
+  },
+  {
+    "location": "Arroios, Lisbon",
+    "latitude": 38.7312586,
+    "longitude": -9.1394358
+  },
+  {
+    "location": "Auckland",
+    "latitude": -36.852095,
+    "longitude": 174.7631803
+  },
+  {
+    "location": "Auckland Central Business District, Auckland",
+    "latitude": -36.8485478,
+    "longitude": 174.7616874
+  },
+  {
+    "location": "Auckland Central Business District, Auckland (Britomart)",
+    "latitude": -36.8445568,
+    "longitude": 174.7691726
+  },
+  {
+    "location": "Auckland Central Business District, Auckland (Queen Street)",
+    "latitude": -36.8491824,
+    "longitude": 174.7652221
+  },
+  {
+    "location": "Auckland Central Business District, Auckland (Viaduct Harbour)",
+    "latitude": -36.8432042,
+    "longitude": 174.7606833
+  },
+  {
+    "location": "Aussersihl, Zürich",
+    "latitude": 47.3787138,
+    "longitude": 8.5212002
+  },
+  {
+    "location": "Avenidas Novas, Lisbon",
+    "latitude": 38.7364362,
+    "longitude": -9.1498249
+  },
+  {
+    "location": "Baa Atoll",
+    "latitude": 5.1864551,
+    "longitude": 73.0081847
+  },
+  {
+    "location": "Bandra, Mumbai (Western Suburbs)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Bang Kho Laem, Bangkok (Rama III)",
+    "latitude": 13.7011652,
+    "longitude": 100.4925374
+  },
+  {
+    "location": "Bang Rak, Bangkok",
+    "latitude": 13.7239499,
+    "longitude": 100.5159599
+  },
+  {
+    "location": "Bang Rak, Bangkok (Embassy District)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Bang Rak, Bangkok (Riverside)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Bangsar South, Kuala Lumpur (Bangsar South)",
+    "latitude": 3.108948,
+    "longitude": 101.6680679
+  },
+  {
+    "location": "Bantry Bay, Cape Town",
+    "latitude": -33.9281512,
+    "longitude": 18.3789695
+  },
+  {
+    "location": "Barra da Tijuca, Rio de Janeiro",
+    "latitude": -22.9997404,
+    "longitude": -43.3659929
+  },
+  {
+    "location": "Barranco, Lima (Costa Verde)",
+    "latitude": -12.1443238,
+    "longitude": -77.0256333
+  },
+  {
+    "location": "Beach & Coast, Dubai (Beach & Coast)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Beach & Coast, Dubai (Bluewaters Island)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Bedfordview, Johannesburg",
+    "latitude": -26.1793635,
+    "longitude": 28.1344198
+  },
+  {
+    "location": "Beijing",
+    "latitude": 40.190632,
+    "longitude": 116.412144
+  },
+  {
+    "location": "Bel Air , Los Angeles",
+    "latitude": 34.0827278,
+    "longitude": -118.4479802
+  },
+  {
+    "location": "Bela Vista, Sao Paulo",
+    "latitude": -23.5601219,
+    "longitude": -46.6500338
+  },
+  {
+    "location": "Bela Vista, Sao Paulo (Avenida Paulista)",
+    "latitude": -23.5667506,
+    "longitude": -46.6500019
+  },
+  {
+    "location": "Berawa, Canggu",
+    "latitude": -8.6658835,
+    "longitude": 115.1401231
+  },
+  {
+    "location": "Beverly Hills, Los Angeles",
+    "latitude": 34.0696501,
+    "longitude": -118.3963062
+  },
+  {
+    "location": "Bloor-Yorkville, Toronto",
+    "latitude": 43.6696714,
+    "longitude": -79.3887524
+  },
+  {
+    "location": "Bloor-Yorkville, Toronto (Bloor-Yorkville)",
+    "latitude": 43.6704704,
+    "longitude": -79.3872523
+  },
+  {
+    "location": "Bloor-Yorkville, Toronto (The Annex)",
+    "latitude": 43.6679873,
+    "longitude": -79.3976213
+  },
+  {
+    "location": "Bondi, Sydney (Sydney Eastern Suburbs)",
+    "latitude": -33.8930556,
+    "longitude": 151.2633333
+  },
+  {
+    "location": "Botafogo, Rio de Janeiro",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Bowen Hills, Brisbane",
+    "latitude": -27.4434045,
+    "longitude": 153.0373122
+  },
+  {
+    "location": "Brickfields, Kuala Lumpur (Mid Valley)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Brisbane",
+    "latitude": -27.4689623,
+    "longitude": 153.0235009
+  },
+  {
+    "location": "Brisbane CBD, Brisbane",
+    "latitude": -27.466829,
+    "longitude": 153.0273743
+  },
+  {
+    "location": "Buenos Aires City Centre, Buenos Aires",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Bugis, Singapore",
+    "latitude": 1.299966,
+    "longitude": 103.8552892
+  },
+  {
+    "location": "Bukit Bintang, Kuala Lumpur (Bukit Bintang)",
+    "latitude": 3.1460769,
+    "longitude": 101.7115145
+  },
+  {
+    "location": "Bur Dubai, Dubai (Bur Dubai)",
+    "latitude": 25.2625014,
+    "longitude": 55.288811
+  },
+  {
+    "location": "Business Bay, Dubai",
+    "latitude": 25.1894266,
+    "longitude": 55.264819
+  },
+  {
+    "location": "Business Bay, Dubai (Sheikh Zayed Road)",
+    "latitude": 25.1912836,
+    "longitude": 55.2604063
+  },
+  {
+    "location": "Cairo",
+    "latitude": 30.0443879,
+    "longitude": 31.2357257
+  },
+  {
+    "location": "Cala Llenya",
+    "latitude": 39.0189357,
+    "longitude": 1.5873204
+  },
+  {
+    "location": "Camden, London",
+    "latitude": 51.5427965,
+    "longitude": -0.1624803
+  },
+  {
+    "location": "Camps Bay, Cape Town",
+    "latitude": -33.9547736,
+    "longitude": 18.3818524
+  },
+  {
+    "location": "Camps Bay, Cape Town (Bakoven)",
+    "latitude": -33.9593204,
+    "longitude": 18.3700509
+  },
+  {
+    "location": "Campuhan, Ubud (Campuhan)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Cancún",
+    "latitude": 21.1527467,
+    "longitude": -86.8425761
+  },
+  {
+    "location": "Candelaria - Centro Historico, Bogotá",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Cape Town",
+    "latitude": -33.9288301,
+    "longitude": 18.4172197
+  },
+  {
+    "location": "Cape Town CBD, Cape Town",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Cape Town CBD, Cape Town (Foreshore)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Carlton, Melbourne (Lygon Street)",
+    "latitude": -37.8040544,
+    "longitude": 144.9661734
+  },
+  {
+    "location": "Central Delhi, New Delhi",
+    "latitude": 28.6430858,
+    "longitude": 77.2192671
+  },
+  {
+    "location": "Central Station, Rome",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Central Suburbs, Mumbai (Vikhroli)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Centro Internacional, Bogotá",
+    "latitude": 4.6136147,
+    "longitude": -74.0705686
+  },
+  {
+    "location": "Centro, Madrid",
+    "latitude": 40.4176527,
+    "longitude": -3.7079547
+  },
+  {
+    "location": "Centro, Playa del Carmen",
+    "latitude": 20.6281551,
+    "longitude": -87.0757516
+  },
+  {
+    "location": "Centro, Playa del Carmen (5th Avenue)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Centro, Rio de Janeiro (Lapa)",
+    "latitude": -22.9021923,
+    "longitude": -43.1752886
+  },
+  {
+    "location": "Chamberi, Madrid",
+    "latitude": 40.4389621,
+    "longitude": -3.705302
+  },
+  {
+    "location": "Chanakyapuri, New Delhi",
+    "latitude": 28.5946775,
+    "longitude": 77.1885212
+  },
+  {
+    "location": "Chaoyang, Beijing",
+    "latitude": 39.9204498,
+    "longitude": 116.4369109
+  },
+  {
+    "location": "Chaoyang, Beijing (Beijing CBD)",
+    "latitude": 39.8983894,
+    "longitude": 116.4736155
+  },
+  {
+    "location": "Chaoyang, Beijing (Yansha)",
+    "latitude": 39.8769802,
+    "longitude": 116.4808103
+  },
+  {
+    "location": "Chapinero, Bogotá",
+    "latitude": 4.6453552,
+    "longitude": -74.0619385
+  },
+  {
+    "location": "Chapinero, Bogotá (Chicó)",
+    "latitude": 4.6526267,
+    "longitude": -74.0638785
+  },
+  {
+    "location": "Chapinero, Bogotá (Financial District)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Chapinero, Bogotá (Zona Rosa)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Charlottenburg-Wilmersdorf, Berlin",
+    "latitude": 52.5017923,
+    "longitude": 13.2842678
+  },
+  {
+    "location": "Chatuchak, Bangkok",
+    "latitude": 13.8030357,
+    "longitude": 100.5502304
+  },
+  {
+    "location": "Chelsea, New York",
+    "latitude": 40.7464906,
+    "longitude": -74.0015283
+  },
+  {
+    "location": "Chicago",
+    "latitude": 41.8755616,
+    "longitude": -87.6244212
+  },
+  {
+    "location": "Chicago Loop, Chicago",
+    "latitude": 41.8796055,
+    "longitude": -87.6230829
+  },
+  {
+    "location": "Chinatown, Singapore",
+    "latitude": 1.2829435,
+    "longitude": 103.8441517
+  },
+  {
+    "location": "Chinatown, Singapore (Shenton Way)",
+    "latitude": 1.2736372,
+    "longitude": 103.8463101
+  },
+  {
+    "location": "Chiyoda, Tokyo (Akihabara)",
+    "latitude": 35.6985172,
+    "longitude": 139.7755248
+  },
+  {
+    "location": "Chow Kit, Kuala Lumpur (Golden Triangle)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Christianshavn, Copenhagen",
+    "latitude": 55.6723737,
+    "longitude": 12.5885782
+  },
+  {
+    "location": "Chuo Ward, Osaka (Dotonbori)",
+    "latitude": 34.6690306,
+    "longitude": 135.5015715
+  },
+  {
+    "location": "Chuo Ward, Osaka (Namba)",
+    "latitude": 34.667249,
+    "longitude": 135.4997208
+  },
+  {
+    "location": "Chuo Ward, Osaka (Osaka Station, Umeda, Yodoyabashi, Hommachi)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Chuo Ward, Osaka (Shinsaibashi)",
+    "latitude": 34.6753372,
+    "longitude": 135.4991998
+  },
+  {
+    "location": "Chuo Ward, Osaka (Shinsaibashi, Namba, Yotsubashi)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Chuo Ward, Tokyo (Ginza)",
+    "latitude": 35.6671881,
+    "longitude": 139.7608411
+  },
+  {
+    "location": "Chuo Ward, Tokyo (Nihonbashi)",
+    "latitude": 35.6878375,
+    "longitude": 139.7893648
+  },
+  {
+    "location": "Churchgate, Mumbai (Mumbai Historical And Heritage)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "City Bowl, Cape Town (Foreshore)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "City Centre, Zürich",
+    "latitude": 53.4822197,
+    "longitude": -2.242722
+  },
+  {
+    "location": "City Hall, Singapore",
+    "latitude": 1.2930272,
+    "longitude": 103.8526448
+  },
+  {
+    "location": "City of London, London",
+    "latitude": 51.5150512,
+    "longitude": -0.0931264
+  },
+  {
+    "location": "City-Centre, Santiago de Compostela",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Ciutat Vella, Barcelona",
+    "latitude": 41.3819793,
+    "longitude": 2.1804154
+  },
+  {
+    "location": "Clarke Quay, Singapore",
+    "latitude": 1.2903938,
+    "longitude": 103.8454241
+  },
+  {
+    "location": "Colaba, Mumbai (Mumbai Historical And Heritage)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Connaught Place, New Delhi",
+    "latitude": 28.6314022,
+    "longitude": 77.2193791
+  },
+  {
+    "location": "Consolação, Sao Paulo",
+    "latitude": -23.557818,
+    "longitude": -46.6605373
+  },
+  {
+    "location": "Consolação, Sao Paulo (Avenida Paulista)",
+    "latitude": -23.5568602,
+    "longitude": -46.6614121
+  },
+  {
+    "location": "Consolação, Sao Paulo (Higienopolis)",
+    "latitude": -23.5489592,
+    "longitude": -46.6523049
+  },
+  {
+    "location": "Copacabana, Rio de Janeiro",
+    "latitude": -22.971974,
+    "longitude": -43.1842997
+  },
+  {
+    "location": "Copenhagen City Centre, Copenhagen",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Costa Mujeres, Cancún (Costa Mujeres)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Dal",
+    "latitude": 44.636201,
+    "longitude": -63.5919961
+  },
+  {
+    "location": "De Pijp, Amsterdam",
+    "latitude": 52.3533455,
+    "longitude": 4.8969623
+  },
+  {
+    "location": "Deira, Dubai (Deira)",
+    "latitude": 25.270035,
+    "longitude": 55.3191538
+  },
+  {
+    "location": "Dhangethi",
+    "latitude": 3.6072065,
+    "longitude": 72.9557647
+  },
+  {
+    "location": "Dhidhdhoo",
+    "latitude": 6.8873393,
+    "longitude": 73.1140202
+  },
+  {
+    "location": "Dhiffushi",
+    "latitude": 3.4755122,
+    "longitude": 72.8243678
+  },
+  {
+    "location": "Dhigurah",
+    "latitude": 3.5253477,
+    "longitude": 72.9229753
+  },
+  {
+    "location": "Docklands, Melbourne",
+    "latitude": -37.8175423,
+    "longitude": 144.9394923
+  },
+  {
+    "location": "Dongcheng, Beijing",
+    "latitude": 39.9057136,
+    "longitude": 116.3912972
+  },
+  {
+    "location": "Dongcheng, Beijing (Houhai)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Dongcheng, Beijing (Qianmen)",
+    "latitude": 39.8986819,
+    "longitude": 116.3925008
+  },
+  {
+    "location": "Dongcheng, Beijing (Sanlitun)",
+    "latitude": 39.9344629,
+    "longitude": 116.4380141
+  },
+  {
+    "location": "Dongcheng, Beijing (Wangfujing Shopping Area)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Downtown Cairo, Cairo",
+    "latitude": 30.0887612,
+    "longitude": 31.2898195
+  },
+  {
+    "location": "Downtown Cancun, Cancún",
+    "latitude": 21.1668341,
+    "longitude": -86.8294776
+  },
+  {
+    "location": "Downtown Dubai, Dubai",
+    "latitude": 25.1947581,
+    "longitude": 55.2780591
+  },
+  {
+    "location": "Downtown Kuta, Kuta",
+    "latitude": -8.716574,
+    "longitude": 115.174288
+  },
+  {
+    "location": "Downtown Los Angeles, Los Angeles",
+    "latitude": 34.047996,
+    "longitude": -118.2521002
+  },
+  {
+    "location": "Downtown Montreal, Montréal",
+    "latitude": 45.495554,
+    "longitude": -73.5704458
+  },
+  {
+    "location": "Downtown Montreal, Montréal (Gay Village)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Downtown Montreal, Montréal (Golden Square Mile)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Downtown Montreal, Montréal (Quartier des Spectacles)",
+    "latitude": 45.5052895,
+    "longitude": -73.5640756
+  },
+  {
+    "location": "Downtown Montreal, Montréal (The Underground City)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Downtown San Francisco, San Francisco",
+    "latitude": 37.7875138,
+    "longitude": -122.407159
+  },
+  {
+    "location": "Downtown Toronto, Toronto",
+    "latitude": 43.649439,
+    "longitude": -79.397457
+  },
+  {
+    "location": "Downtown Toronto, Toronto (Entertainment District)",
+    "latitude": 43.6469697,
+    "longitude": -79.3932081
+  },
+  {
+    "location": "Downtown Toronto, Toronto (Fashion District)",
+    "latitude": 43.6469697,
+    "longitude": -79.3932081
+  },
+  {
+    "location": "Downtown Toronto, Toronto (Kensington Market)",
+    "latitude": 43.6533451,
+    "longitude": -79.3986434
+  },
+  {
+    "location": "Downtown Toronto, Toronto (Queen West)",
+    "latitude": 43.6447324,
+    "longitude": -79.3905978
+  },
+  {
+    "location": "Downtown Toronto, Toronto (Yonge - Dundas)",
+    "latitude": 43.6565367,
+    "longitude": -79.3810223
+  },
+  {
+    "location": "Downtown Vancouver, Vancouver",
+    "latitude": 49.2828495,
+    "longitude": -123.1206248
+  },
+  {
+    "location": "Downtown Vancouver, Vancouver (Coal Harbour)",
+    "latitude": 49.2903749,
+    "longitude": -123.1292813
+  },
+  {
+    "location": "Downtown and Cultural Centre, Bogotá (Downtown and Cultural Centre)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Downtown, Geneva",
+    "latitude": 46.1990533,
+    "longitude": 6.1392343
+  },
+  {
+    "location": "Dubai Marina, Dubai (Beach & Coast)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Dubai Marina, Dubai (Sheikh Zayed Road)",
+    "latitude": 25.082135,
+    "longitude": 55.1445921
+  },
+  {
+    "location": "Dubai Production City , Dubai",
+    "latitude": 25.0321457,
+    "longitude": 55.191307
+  },
+  {
+    "location": "Dyanapura, Seminyak (Dyanapura)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "East Melbourne, Melbourne",
+    "latitude": -37.812498,
+    "longitude": 144.9858851
+  },
+  {
+    "location": "East Perth, Perth",
+    "latitude": -31.954341,
+    "longitude": 115.8778894
+  },
+  {
+    "location": "East of the Las Vegas Strip, Las Vegas",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Eidsvoll",
+    "latitude": 60.4162964,
+    "longitude": 11.2555442
+  },
+  {
+    "location": "Eixample, Barcelona",
+    "latitude": 41.3936885,
+    "longitude": 2.1636552
+  },
+  {
+    "location": "Elia",
+    "latitude": 35.1331227,
+    "longitude": 32.913372
+  },
+  {
+    "location": "Enge, Zürich",
+    "latitude": 47.3617894,
+    "longitude": 8.528708
+  },
+  {
+    "location": "Es Cana",
+    "latitude": 38.9010622,
+    "longitude": 1.4194506
+  },
+  {
+    "location": "Escher Wyss, Zürich",
+    "latitude": 47.3908991,
+    "longitude": 8.5153597
+  },
+  {
+    "location": "Etobicoke, Toronto",
+    "latitude": 43.6435559,
+    "longitude": -79.5656326
+  },
+  {
+    "location": "Fenfushi",
+    "latitude": 2.2896256,
+    "longitude": 73.2668182
+  },
+  {
+    "location": "Financial District, San Francisco",
+    "latitude": 37.7936467,
+    "longitude": -122.3989378
+  },
+  {
+    "location": "Financial District, Toronto",
+    "latitude": 43.6486382,
+    "longitude": -79.3802817
+  },
+  {
+    "location": "Financial District, Toronto (Entertainment District)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Financial District, Toronto (Financial District)",
+    "latitude": 43.6481125,
+    "longitude": -79.3844631
+  },
+  {
+    "location": "Fira City Centre, Fira",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Fisherman's Wharf, San Francisco",
+    "latitude": 37.8081325,
+    "longitude": -122.4165913
+  },
+  {
+    "location": "Fitzroy, Melbourne",
+    "latitude": -37.8010382,
+    "longitude": 144.9792611
+  },
+  {
+    "location": "Fortitude Valley, Brisbane",
+    "latitude": -27.4572735,
+    "longitude": 153.0362663
+  },
+  {
+    "location": "Friedrichshain-Kreuzberg, Berlin",
+    "latitude": 52.5011154,
+    "longitude": 13.4442848
+  },
+  {
+    "location": "Frogner, Oslo",
+    "latitude": 59.9222241,
+    "longitude": 10.7066491
+  },
+  {
+    "location": "Fulidhoo",
+    "latitude": 3.680268,
+    "longitude": 73.4157992
+  },
+  {
+    "location": "Gaafu Alifu Atoll",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Gallo Manor, Johannesburg",
+    "latitude": -26.0641667,
+    "longitude": 28.0780556
+  },
+  {
+    "location": "Gamle Oslo, Oslo",
+    "latitude": 59.8992367,
+    "longitude": 10.7347673
+  },
+  {
+    "location": "Gangnam-Gu, Seoul",
+    "latitude": 37.5177,
+    "longitude": 127.0473
+  },
+  {
+    "location": "Garden City, Cairo",
+    "latitude": 30.0348192,
+    "longitude": 31.2315001
+  },
+  {
+    "location": "Gardens, Cape Town",
+    "latitude": -33.9327778,
+    "longitude": 18.4097222
+  },
+  {
+    "location": "Gardermoen",
+    "latitude": 60.1931498,
+    "longitude": 11.0968156
+  },
+  {
+    "location": "Garhoud, Dubai",
+    "latitude": 25.2460624,
+    "longitude": 55.3421342
+  },
+  {
+    "location": "Geneva",
+    "latitude": 46.2017559,
+    "longitude": 6.1466014
+  },
+  {
+    "location": "Geylang, Singapore (Red Light District)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Giza, Cairo",
+    "latitude": 30.0268119,
+    "longitude": 31.2059186
+  },
+  {
+    "location": "Gjerdrum",
+    "latitude": 60.0787767,
+    "longitude": 11.0206123
+  },
+  {
+    "location": "Glebe, Sydney",
+    "latitude": -33.8777782,
+    "longitude": 151.1862377
+  },
+  {
+    "location": "Green Point, Cape Town",
+    "latitude": -33.9042571,
+    "longitude": 18.4059682
+  },
+  {
+    "location": "Greenwich Village, New York",
+    "latitude": 40.7321522,
+    "longitude": -73.9964093
+  },
+  {
+    "location": "Grey Lynn, Auckland",
+    "latitude": -36.859922,
+    "longitude": 174.7364178
+  },
+  {
+    "location": "Grunerlokka, Oslo",
+    "latitude": 59.9254713,
+    "longitude": 10.7774212
+  },
+  {
+    "location": "Gystad",
+    "latitude": 60.139195,
+    "longitude": 11.2069428
+  },
+  {
+    "location": "Hackney, London",
+    "latitude": 51.5432402,
+    "longitude": -0.0493621
+  },
+  {
+    "location": "Hangnaameedhoo",
+    "latitude": 3.8490218,
+    "longitude": 72.9561952
+  },
+  {
+    "location": "Hay Hassani, Casablanca",
+    "latitude": 33.5702887,
+    "longitude": -7.678495
+  },
+  {
+    "location": "Hell's Kitchen, New York",
+    "latitude": 40.7642255,
+    "longitude": -73.9923477
+  },
+  {
+    "location": "Henderson, Las Vegas",
+    "latitude": 36.0233662,
+    "longitude": -115.0825027
+  },
+  {
+    "location": "Hivernage, Marrakech",
+    "latitude": 31.6225589,
+    "longitude": -8.0083128
+  },
+  {
+    "location": "Hochelaga-Maisonneuve, Montréal",
+    "latitude": 45.5502413,
+    "longitude": -73.5443688
+  },
+  {
+    "location": "Hollywood, Los Angeles",
+    "latitude": 34.0980031,
+    "longitude": -118.329523
+  },
+  {
+    "location": "Hong Kong Island, Hong Kong (Hong Kong Island)",
+    "latitude": 22.2445517,
+    "longitude": 114.2053888
+  },
+  {
+    "location": "Hongkou, Shanghai (The Bund)",
+    "latitude": 31.2509454,
+    "longitude": 121.4920743
+  },
+  {
+    "location": "Houghton, Johannesburg",
+    "latitude": -26.1664144,
+    "longitude": 28.05429
+  },
+  {
+    "location": "Huangpu, Shanghai",
+    "latitude": 31.2323437,
+    "longitude": 121.4691024
+  },
+  {
+    "location": "Huangpu, Shanghai (People's Square Area)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Huangpu, Shanghai (The Bund)",
+    "latitude": 31.2353356,
+    "longitude": 121.487632
+  },
+  {
+    "location": "Ibiza City Centre, Ibiza Town",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Illinois Medical District, Chicago",
+    "latitude": 41.869296,
+    "longitude": -87.6743976
+  },
+  {
+    "location": "Imerovigli",
+    "latitude": 36.4325579,
+    "longitude": 25.4228307
+  },
+  {
+    "location": "Ipanema, Rio de Janeiro",
+    "latitude": -22.9839557,
+    "longitude": -43.2022163
+  },
+  {
+    "location": "Islington, London",
+    "latitude": 51.5384287,
+    "longitude": -0.0999051
+  },
+  {
+    "location": "Itaim Bibi District, Sao Paulo",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Itaim Bibi District, Sao Paulo (Berrini)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Jardim Paulista, Sao Paulo (Avenida Paulista)",
+    "latitude": -23.5643727,
+    "longitude": -46.6530765
+  },
+  {
+    "location": "Jardim Paulista, Sao Paulo (Jardins)",
+    "latitude": -23.5644061,
+    "longitude": -46.6682839
+  },
+  {
+    "location": "Jessheim",
+    "latitude": 60.1415121,
+    "longitude": 11.1751516
+  },
+  {
+    "location": "Jing'an, Shanghai",
+    "latitude": 31.2295183,
+    "longitude": 121.4427835
+  },
+  {
+    "location": "Johannesburg",
+    "latitude": -26.205,
+    "longitude": 28.049722
+  },
+  {
+    "location": "Jonction, Geneva",
+    "latitude": 46.1988322,
+    "longitude": 6.1254635
+  },
+  {
+    "location": "Jongno-Gu, Seoul",
+    "latitude": 37.5806949,
+    "longitude": 126.9827989
+  },
+  {
+    "location": "Juhu, Mumbai (Western Suburbs)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Jumeirah Beach Residence, Dubai (Beach & Coast)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Jung-Gu, Seoul",
+    "latitude": 37.5560719,
+    "longitude": 126.9723599
+  },
+  {
+    "location": "Jätkäsaari, Helsinki",
+    "latitude": 60.1570639,
+    "longitude": 24.9116552
+  },
+  {
+    "location": "KL Sentral Train Station, Kuala Lumpur",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Kaartinkaupunki, Helsinki",
+    "latitude": 60.165257,
+    "longitude": 24.9489606
+  },
+  {
+    "location": "Kallio, Helsinki",
+    "latitude": 60.1839816,
+    "longitude": 24.9524515
+  },
+  {
+    "location": "Kampong Glam, Singapore",
+    "latitude": 1.3050553,
+    "longitude": 103.8660981
+  },
+  {
+    "location": "Kamppi, Helsinki",
+    "latitude": 60.1676264,
+    "longitude": 24.9317093
+  },
+  {
+    "location": "Kangaroo Point, Brisbane",
+    "latitude": -27.473864,
+    "longitude": 153.0367847
+  },
+  {
+    "location": "Kartika Plaza, Kuta (Kartika Plaza)",
+    "latitude": -8.7302765,
+    "longitude": 115.1677573
+  },
+  {
+    "location": "Kasbah, Marrakech",
+    "latitude": 31.5971984,
+    "longitude": -7.9870581
+  },
+  {
+    "location": "Katajanokka, Helsinki",
+    "latitude": 60.167148,
+    "longitude": 24.9684046
+  },
+  {
+    "location": "Khar, Mumbai (Western Suburbs)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Khlong San, Bangkok (Riverside)",
+    "latitude": 13.7263392,
+    "longitude": 100.5086736
+  },
+  {
+    "location": "Khlong Toei, Bangkok (Sukhumvit)",
+    "latitude": 13.7069228,
+    "longitude": 100.5998658
+  },
+  {
+    "location": "Kintamani",
+    "latitude": -8.2505623,
+    "longitude": 115.3330086
+  },
+  {
+    "location": "Kista, Stockholm",
+    "latitude": 59.4031236,
+    "longitude": 17.9424221
+  },
+  {
+    "location": "Kita, Osaka (Osaka Station, Umeda, Yodoyabashi, Hommachi)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Klofta",
+    "latitude": 60.0753432,
+    "longitude": 11.1391499
+  },
+  {
+    "location": "Klouvas",
+    "latitude": 37.451466,
+    "longitude": 25.3581967
+  },
+  {
+    "location": "Kluuvi, Helsinki",
+    "latitude": 60.1717794,
+    "longitude": 24.9413548
+  },
+  {
+    "location": "Koreatown, Los Angeles",
+    "latitude": 34.0617936,
+    "longitude": -118.305447
+  },
+  {
+    "location": "Kowloon City District, Hong Kong (Kowloon)",
+    "latitude": 22.3301595,
+    "longitude": 114.1899368
+  },
+  {
+    "location": "Kuala Lumpur City-Centre, Kuala Lumpur",
+    "latitude": 3.1559503,
+    "longitude": 101.7145746
+  },
+  {
+    "location": "Kungsholmen, Stockholm",
+    "latitude": 59.3327422,
+    "longitude": 18.0237719
+  },
+  {
+    "location": "LAX Area, Los Angeles",
+    "latitude": 33.8206803,
+    "longitude": -118.3247437
+  },
+  {
+    "location": "La Veleta, Tulum (La Veleta)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Las Vegas Strip, Las Vegas",
+    "latitude": 36.115051,
+    "longitude": -115.1727996
+  },
+  {
+    "location": "Leme, Rio de Janeiro",
+    "latitude": -22.961704,
+    "longitude": -43.1669042
+  },
+  {
+    "location": "Les Corts, Barcelona",
+    "latitude": 41.385244,
+    "longitude": 2.1328626
+  },
+  {
+    "location": "Lima",
+    "latitude": -12.0621065,
+    "longitude": -77.0365256
+  },
+  {
+    "location": "Lima Historic Centre, Lima",
+    "latitude": -12.0438514,
+    "longitude": -77.030057
+  },
+  {
+    "location": "Little India, Singapore",
+    "latitude": 1.3080457,
+    "longitude": 103.8517708
+  },
+  {
+    "location": "Los Angeles",
+    "latitude": 34.0536909,
+    "longitude": -118.242766
+  },
+  {
+    "location": "Lower East Side, New York",
+    "latitude": 40.7159357,
+    "longitude": -73.9868057
+  },
+  {
+    "location": "Lujiazui, Shanghai (Lujiazui)",
+    "latitude": 31.2401682,
+    "longitude": 121.4979446
+  },
+  {
+    "location": "Maarif, Casablanca",
+    "latitude": 33.5836296,
+    "longitude": -7.6367005
+  },
+  {
+    "location": "Magnificent Mile, Chicago",
+    "latitude": 41.8945229,
+    "longitude": -87.624228
+  },
+  {
+    "location": "Mahipalpur, New Delhi",
+    "latitude": 28.544537,
+    "longitude": 77.1279229
+  },
+  {
+    "location": "Makunudhoo",
+    "latitude": 6.4091403,
+    "longitude": 72.7053955
+  },
+  {
+    "location": "Male City",
+    "latitude": 4.1779879,
+    "longitude": 73.5107387
+  },
+  {
+    "location": "Mandhoo",
+    "latitude": 3.6980743,
+    "longitude": 72.7097189
+  },
+  {
+    "location": "Manhattan, New York",
+    "latitude": 40.7896239,
+    "longitude": -73.9598939
+  },
+  {
+    "location": "Manly, Sydney",
+    "latitude": -33.7971937,
+    "longitude": 151.2879845
+  },
+  {
+    "location": "Mapo-Gu, Seoul",
+    "latitude": 37.566571,
+    "longitude": 126.9015317
+  },
+  {
+    "location": "Mapo-Gu, Seoul (Hongdae)",
+    "latitude": 37.5503552,
+    "longitude": 126.9254433
+  },
+  {
+    "location": "Marina Bay, Singapore",
+    "latitude": 1.2843221,
+    "longitude": 103.8761413
+  },
+  {
+    "location": "Marina Bay, Singapore (Shenton Way)",
+    "latitude": 1.2775332,
+    "longitude": 103.850739
+  },
+  {
+    "location": "Marrakech",
+    "latitude": 31.6258257,
+    "longitude": -7.9891608
+  },
+  {
+    "location": "Medina, Marrakech",
+    "latitude": 31.6329766,
+    "longitude": -7.9884912
+  },
+  {
+    "location": "Meedhoo",
+    "latitude": 5.4580652,
+    "longitude": 72.9548515
+  },
+  {
+    "location": "Meemu Atoll",
+    "latitude": 2.9588985,
+    "longitude": 73.493683
+  },
+  {
+    "location": "Megalokhori",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Melbourne",
+    "latitude": -37.8142454,
+    "longitude": 144.9631732
+  },
+  {
+    "location": "Melbourne CBD, Melbourne",
+    "latitude": -37.8141705,
+    "longitude": 144.9655616
+  },
+  {
+    "location": "Melbourne CBD, Melbourne (Chinatown)",
+    "latitude": -37.8118113,
+    "longitude": 144.9676286
+  },
+  {
+    "location": "Melbourne CBD, Melbourne (Collins Street)",
+    "latitude": -37.8132473,
+    "longitude": 144.9739372
+  },
+  {
+    "location": "Melrose, Johannesburg (Melrose)",
+    "latitude": -26.1415884,
+    "longitude": 28.0637621
+  },
+  {
+    "location": "Microcentro, Buenos Aires (Microcentro)",
+    "latitude": -34.5980713,
+    "longitude": -58.3755029
+  },
+  {
+    "location": "Mid-Beach, Miami Beach",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Midtown East, New York",
+    "latitude": 40.7598219,
+    "longitude": -73.9724708
+  },
+  {
+    "location": "Milnerton, Cape Town (Milnerton)",
+    "latitude": -33.8663621,
+    "longitude": 18.5244844
+  },
+  {
+    "location": "Minato, Tokyo (Akasaka)",
+    "latitude": 35.6716786,
+    "longitude": 139.7356224
+  },
+  {
+    "location": "Minato, Tokyo (Ginza)",
+    "latitude": 35.6767002,
+    "longitude": 139.7342799
+  },
+  {
+    "location": "Minato, Tokyo (Roppongi)",
+    "latitude": 35.6624568,
+    "longitude": 139.7334981
+  },
+  {
+    "location": "Minato, Tokyo (Shiba)",
+    "latitude": 35.6505871,
+    "longitude": 139.7495267
+  },
+  {
+    "location": "Minato, Tokyo (Shiodome)",
+    "latitude": 35.6614374,
+    "longitude": 139.7589371
+  },
+  {
+    "location": "Miraflores, Lima",
+    "latitude": -12.1206214,
+    "longitude": -77.0294993
+  },
+  {
+    "location": "Miraflores, Lima (Costa Verde)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Misericordia, Lisbon",
+    "latitude": 38.7114084,
+    "longitude": -9.1507477
+  },
+  {
+    "location": "Mitte, Berlin",
+    "latitude": 52.517012,
+    "longitude": 13.3888222
+  },
+  {
+    "location": "Moema, Sao Paulo",
+    "latitude": -23.597085,
+    "longitude": -46.6628884
+  },
+  {
+    "location": "Moema, Sao Paulo (Vila Nova Conceicao)",
+    "latitude": -23.5918073,
+    "longitude": -46.666124
+  },
+  {
+    "location": "Moncloa-Aravaca, Madrid",
+    "latitude": 40.457749,
+    "longitude": -3.7827941
+  },
+  {
+    "location": "Monserrat, Buenos Aires (Mayo Avenue)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Monserrat, Buenos Aires (Microcentro)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Mouille Point, Cape Town",
+    "latitude": -33.9000229,
+    "longitude": 18.4038842
+  },
+  {
+    "location": "Murray Hill, New York",
+    "latitude": 40.7481574,
+    "longitude": -73.97875
+  },
+  {
+    "location": "Mushimasgali",
+    "latitude": 3.9587909,
+    "longitude": 72.913303
+  },
+  {
+    "location": "Mykonos City Centre, Mýkonos City",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Mýkonos City",
+    "latitude": 51.5121809,
+    "longitude": -0.1834
+  },
+  {
+    "location": "Namba, Osaka (Namba)",
+    "latitude": 34.6652731,
+    "longitude": 135.5027692
+  },
+  {
+    "location": "Nannestad",
+    "latitude": 60.2267034,
+    "longitude": 10.9409407
+  },
+  {
+    "location": "Navona, Rome",
+    "latitude": 41.8989282,
+    "longitude": 12.4731178
+  },
+  {
+    "location": "Near North Side, Chicago",
+    "latitude": 41.8999648,
+    "longitude": -87.6345914
+  },
+  {
+    "location": "New Cairo City, Cairo",
+    "latitude": 30.0277688,
+    "longitude": 31.4756825
+  },
+  {
+    "location": "New Delhi",
+    "latitude": 28.6430858,
+    "longitude": 77.2192671
+  },
+  {
+    "location": "New Territories, Hong Kong (Lantau)",
+    "latitude": 22.2714281,
+    "longitude": 113.9440813
+  },
+  {
+    "location": "Newham, London",
+    "latitude": 51.5300157,
+    "longitude": 0.0293091
+  },
+  {
+    "location": "Newlands, Cape Town",
+    "latitude": -33.9742832,
+    "longitude": 18.4572951
+  },
+  {
+    "location": "Nika Island",
+    "latitude": 4.1811587,
+    "longitude": 72.7669264
+  },
+  {
+    "location": "Nishi Ward, Osaka (Shinsaibashi)",
+    "latitude": 34.6753751,
+    "longitude": 135.4992026
+  },
+  {
+    "location": "Nishinari Ward, Osaka (Minami)",
+    "latitude": 34.6270606,
+    "longitude": 135.4833087
+  },
+  {
+    "location": "NoMad, New York",
+    "latitude": 40.7446884,
+    "longitude": -73.9882851
+  },
+  {
+    "location": "Nob Hill, San Francisco",
+    "latitude": 37.7944792,
+    "longitude": -122.4155921
+  },
+  {
+    "location": "Noonu",
+    "latitude": 59.5096183,
+    "longitude": 26.2017024
+  },
+  {
+    "location": "Norrmalm, Stockholm",
+    "latitude": 59.3340818,
+    "longitude": 18.0629048
+  },
+  {
+    "location": "North Male Atoll",
+    "latitude": 4.4378138,
+    "longitude": 73.5396643
+  },
+  {
+    "location": "North Melbourne, Melbourne",
+    "latitude": -37.8076092,
+    "longitude": 144.9423514
+  },
+  {
+    "location": "North Sydney, Sydney",
+    "latitude": -33.8354519,
+    "longitude": 151.2083011
+  },
+  {
+    "location": "Northbridge, Perth",
+    "latitude": -31.9478509,
+    "longitude": 115.8575464
+  },
+  {
+    "location": "Notre-Dame-de-Grace, Montréal",
+    "latitude": 45.4679674,
+    "longitude": -73.6289223
+  },
+  {
+    "location": "Nusa Dua",
+    "latitude": -8.8016777,
+    "longitude": 115.2239305
+  },
+  {
+    "location": "Oia",
+    "latitude": 44.8071071,
+    "longitude": 7.7029974
+  },
+  {
+    "location": "Oia Caldera, Oia",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Old Montreal, Montréal (Old Montreal)",
+    "latitude": 45.489746,
+    "longitude": -75.475388
+  },
+  {
+    "location": "Old Town Toronto, Toronto",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Old Town Toronto, Toronto (Old Town Toronto)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Old Town, Phuket Town (Old Town)",
+    "latitude": 7.8864847,
+    "longitude": 98.3926823
+  },
+  {
+    "location": "Oost, Amsterdam",
+    "latitude": 52.3518137,
+    "longitude": 4.9305528
+  },
+  {
+    "location": "Orchard, Singapore",
+    "latitude": 1.3031207,
+    "longitude": 103.8313759
+  },
+  {
+    "location": "Orchard, Singapore (Tanglin)",
+    "latitude": 1.3042705,
+    "longitude": 103.8239124
+  },
+  {
+    "location": "Osaka Bay, Osaka (Osaka Bay)",
+    "latitude": 34.5159116,
+    "longitude": 135.1616873
+  },
+  {
+    "location": "Oslo",
+    "latitude": 59.9133301,
+    "longitude": 10.7389701
+  },
+  {
+    "location": "Oslo City Centre, Oslo",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Ota Ward, Tokyo (Kamata)",
+    "latitude": 35.5645998,
+    "longitude": 139.7278262
+  },
+  {
+    "location": "Oud Zuid, Amsterdam",
+    "latitude": 52.3478927,
+    "longitude": 4.8769539
+  },
+  {
+    "location": "Oud-West, Amsterdam",
+    "latitude": 52.3648146,
+    "longitude": 4.8697619
+  },
+  {
+    "location": "Paharganj, New Delhi (Chandni Chowk)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Palermo, Buenos Aires",
+    "latitude": -34.5803362,
+    "longitude": -58.4245236
+  },
+  {
+    "location": "Palermo, Buenos Aires (Palermo Hollywood)",
+    "latitude": -34.5816985,
+    "longitude": -58.4344985
+  },
+  {
+    "location": "Palermo, Buenos Aires (Palermo Soho)",
+    "latitude": -34.5870582,
+    "longitude": -58.428178
+  },
+  {
+    "location": "Palm Jumeirah, Dubai (Beach & Coast)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Pankow, Berlin",
+    "latitude": 52.5979174,
+    "longitude": 13.435316
+  },
+  {
+    "location": "Pantheon, Rome",
+    "latitude": 41.8986159,
+    "longitude": 12.4768334
+  },
+  {
+    "location": "Paquis, Geneva",
+    "latitude": 46.219521,
+    "longitude": 6.1473139
+  },
+  {
+    "location": "Pathumwan, Bangkok (Ploenchit)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Payangan",
+    "latitude": -8.4252668,
+    "longitude": 115.2455213
+  },
+  {
+    "location": "Pecatu, Uluwatu",
+    "latitude": -8.8272855,
+    "longitude": 115.0889841
+  },
+  {
+    "location": "Pengosekan, Ubud (Pengosekan)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Perdizes, Sao Paulo",
+    "latitude": -23.5379295,
+    "longitude": -46.6806705
+  },
+  {
+    "location": "Perdizes, Sao Paulo (Pompeia)",
+    "latitude": -23.5305556,
+    "longitude": -46.6849797
+  },
+  {
+    "location": "Perivolos Beach, Perivolos",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Perth",
+    "latitude": -31.9558967,
+    "longitude": 115.8605784
+  },
+  {
+    "location": "Perth CBD, Perth",
+    "latitude": -31.9552998,
+    "longitude": 115.8589156
+  },
+  {
+    "location": "Petit-Saconnex / Servette, Geneva",
+    "latitude": 46.2198771,
+    "longitude": 6.1275632
+  },
+  {
+    "location": "Petitenget, Seminyak (Petitenget)",
+    "latitude": -8.6719113,
+    "longitude": 115.1603218
+  },
+  {
+    "location": "Phra Nakhon, Bangkok (Khaosan)",
+    "latitude": 13.7587665,
+    "longitude": 100.4975792
+  },
+  {
+    "location": "Phra Nakhon, Bangkok (Riverside)",
+    "latitude": 13.7624761,
+    "longitude": 100.4894877
+  },
+  {
+    "location": "Phuket Town",
+    "latitude": 13.7276952,
+    "longitude": 100.5825434
+  },
+  {
+    "location": "Pinheiros, Sao Paulo",
+    "latitude": -23.5672147,
+    "longitude": -46.7019523
+  },
+  {
+    "location": "Platis Yialos Mykonos",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Playa d'en Bossa",
+    "latitude": 38.8961728,
+    "longitude": 1.415486
+  },
+  {
+    "location": "Playa del Carmen",
+    "latitude": 20.6308643,
+    "longitude": -87.0779503
+  },
+  {
+    "location": "Playacar Fase II, Playa del Carmen (Playacar Fase II)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Plintri",
+    "latitude": 37.4147688,
+    "longitude": 25.368539
+  },
+  {
+    "location": "Pom Prap Sattru Phai, Bangkok (Chinatown)",
+    "latitude": 13.7405701,
+    "longitude": 100.5071581
+  },
+  {
+    "location": "Portinatx",
+    "latitude": 39.1104253,
+    "longitude": 1.5181252
+  },
+  {
+    "location": "Prague 1, Prague",
+    "latitude": 50.0017463,
+    "longitude": 14.353292
+  },
+  {
+    "location": "Prague 2, Prague",
+    "latitude": 50.0874452,
+    "longitude": 14.4447081
+  },
+  {
+    "location": "Prague 5, Prague",
+    "latitude": 50.0856753,
+    "longitude": 14.4493771
+  },
+  {
+    "location": "Prague 6, Prague",
+    "latitude": 50.0785219,
+    "longitude": 14.4218795
+  },
+  {
+    "location": "Prague 7, Prague",
+    "latitude": 50.0725299,
+    "longitude": 14.4241899
+  },
+  {
+    "location": "Prague 8, Prague",
+    "latitude": 50.049857,
+    "longitude": 14.3454501
+  },
+  {
+    "location": "Pudong, Shanghai (Lujiazui)",
+    "latitude": 31.2405753,
+    "longitude": 121.4931395
+  },
+  {
+    "location": "Pudu, Kuala Lumpur (Pudu)",
+    "latitude": 3.1349483,
+    "longitude": 101.7120511
+  },
+  {
+    "location": "Puerto Madero, Buenos Aires",
+    "latitude": -34.6103764,
+    "longitude": -58.3622067
+  },
+  {
+    "location": "Puerto de San Miguel",
+    "latitude": 42.7928388,
+    "longitude": -2.7786017
+  },
+  {
+    "location": "Pyrmont, Sydney (Darling Harbour)",
+    "latitude": -33.8720358,
+    "longitude": 151.1977762
+  },
+  {
+    "location": "Raa Atoll",
+    "latitude": 5.6201607,
+    "longitude": 72.9372853
+  },
+  {
+    "location": "Randburg, Johannesburg",
+    "latitude": -26.1853203,
+    "longitude": 27.9971831
+  },
+  {
+    "location": "Ratchathewi, Bangkok",
+    "latitude": 13.7532229,
+    "longitude": 100.5318599
+  },
+  {
+    "location": "Recoleta, Buenos Aires (Barrio Norte)",
+    "latitude": -34.5927233,
+    "longitude": -58.4023659
+  },
+  {
+    "location": "Recreio dos Bandeirantes, Rio de Janeiro",
+    "latitude": -23.0185151,
+    "longitude": -43.4634021
+  },
+  {
+    "location": "República, Sao Paulo",
+    "latitude": -23.5453345,
+    "longitude": -46.6422571
+  },
+  {
+    "location": "Retiro, Buenos Aires",
+    "latitude": -34.5893488,
+    "longitude": -58.3732169
+  },
+  {
+    "location": "Retiro, Buenos Aires (Barrio Norte)",
+    "latitude": -34.5883896,
+    "longitude": -58.4065793
+  },
+  {
+    "location": "Rione Monti, Rome",
+    "latitude": 41.8948271,
+    "longitude": 12.4928952
+  },
+  {
+    "location": "River North, Chicago",
+    "latitude": 41.8958413,
+    "longitude": -87.6356943
+  },
+  {
+    "location": "Robertson Quay, Singapore",
+    "latitude": 1.2917517,
+    "longitude": 103.8413036
+  },
+  {
+    "location": "Roches Noires, Casablanca",
+    "latitude": 33.5931914,
+    "longitude": -7.5957822
+  },
+  {
+    "location": "Rome",
+    "latitude": 41.8933203,
+    "longitude": 12.4829321
+  },
+  {
+    "location": "Rosebank, Johannesburg (Rosebank)",
+    "latitude": -26.145068,
+    "longitude": 28.0441424
+  },
+  {
+    "location": "Ruoholahti, Helsinki",
+    "latitude": 60.1622391,
+    "longitude": 24.9136163
+  },
+  {
+    "location": "Saint-Gervais / des Grottes, Geneva",
+    "latitude": 46.2069018,
+    "longitude": 6.1418934
+  },
+  {
+    "location": "Saint-Jean and Charmilles, Geneva",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Salamanca, Madrid",
+    "latitude": 40.4270451,
+    "longitude": -3.6806024
+  },
+  {
+    "location": "Samphanthawong, Bangkok (Chinatown)",
+    "latitude": 13.739335,
+    "longitude": 100.5084178
+  },
+  {
+    "location": "San Antonio",
+    "latitude": 29.4246002,
+    "longitude": -98.4951405
+  },
+  {
+    "location": "San Antonio Bay",
+    "latitude": 28.2991058,
+    "longitude": -96.7125327
+  },
+  {
+    "location": "San Giovanni, Rome",
+    "latitude": 41.8821694,
+    "longitude": 12.5077273
+  },
+  {
+    "location": "San Isidro, Lima",
+    "latitude": -12.0989209,
+    "longitude": -77.0346439
+  },
+  {
+    "location": "San Telmo, Buenos Aires",
+    "latitude": -34.6214013,
+    "longitude": -58.37375
+  },
+  {
+    "location": "Sandton, Johannesburg",
+    "latitude": -26.1853203,
+    "longitude": 27.9971831
+  },
+  {
+    "location": "Sanlitun, Beijing (Sanlitun)",
+    "latitude": 39.9361049,
+    "longitude": 116.4488126
+  },
+  {
+    "location": "Sant Joan de Labritja",
+    "latitude": 39.0549089,
+    "longitude": 1.459313
+  },
+  {
+    "location": "Sant Martí, Barcelona",
+    "latitude": 41.4084102,
+    "longitude": 2.2031889
+  },
+  {
+    "location": "Santa Agnès de Corona",
+    "latitude": 39.0386072,
+    "longitude": 1.336234
+  },
+  {
+    "location": "Santa Eularia des Riu",
+    "latitude": 38.9846117,
+    "longitude": 1.534421
+  },
+  {
+    "location": "Santa Maria Maior, Lisbon",
+    "latitude": 38.7122372,
+    "longitude": -9.135738
+  },
+  {
+    "location": "Santa Monica, Los Angeles",
+    "latitude": 34.0194704,
+    "longitude": -118.491227
+  },
+  {
+    "location": "Santa Teresa, Rio de Janeiro",
+    "latitude": -22.9215542,
+    "longitude": -43.1860269
+  },
+  {
+    "location": "Santiago de Compostela",
+    "latitude": 42.8804219,
+    "longitude": -8.5458608
+  },
+  {
+    "location": "Santo Antonio, Lisbon",
+    "latitude": 38.7220648,
+    "longitude": -9.1514289
+  },
+  {
+    "location": "Sants-Montjuïc, Barcelona",
+    "latitude": 41.3694609,
+    "longitude": 2.1441845
+  },
+  {
+    "location": "Sao Vicente, Lisbon",
+    "latitude": 38.7183476,
+    "longitude": -9.1250713
+  },
+  {
+    "location": "Sathorn, Bangkok (Embassy District)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Saude, Sao Paulo (Vila Clementino)",
+    "latitude": -23.6011556,
+    "longitude": -46.6352124
+  },
+  {
+    "location": "Saxonwold, Johannesburg",
+    "latitude": -26.1583333,
+    "longitude": 28.0394444
+  },
+  {
+    "location": "Sayan, Ubud (Campuhan)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Sayan, Ubud (Penestanan)",
+    "latitude": -8.5119399,
+    "longitude": 115.2378113
+  },
+  {
+    "location": "Scarborough, Perth",
+    "latitude": -31.898491,
+    "longitude": 115.7571254
+  },
+  {
+    "location": "Sea Point, Cape Town",
+    "latitude": -33.9172222,
+    "longitude": 18.3922222
+  },
+  {
+    "location": "Seebach, Zürich",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Seefeld, Zürich",
+    "latitude": 47.3577831,
+    "longitude": 8.5510737
+  },
+  {
+    "location": "Selemadeg",
+    "latitude": -8.5085881,
+    "longitude": 115.0223197
+  },
+  {
+    "location": "Seocho-Gu, Seoul",
+    "latitude": 37.4835,
+    "longitude": 127.0322
+  },
+  {
+    "location": "Seodaemun-Gu, Seoul",
+    "latitude": 37.5790747,
+    "longitude": 126.9367861
+  },
+  {
+    "location": "Shanghai",
+    "latitude": 31.2312707,
+    "longitude": 121.4700152
+  },
+  {
+    "location": "Shaviyani Atoll",
+    "latitude": 4.2121469,
+    "longitude": 72.8659695
+  },
+  {
+    "location": "Shenton Way, Singapore (Shenton Way)",
+    "latitude": 1.2735142,
+    "longitude": 103.846204
+  },
+  {
+    "location": "Shibuya Ward, Tokyo (Shinjuku Area)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Shinagawa Ward, Tokyo (Shinagawa Area)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Shinjuku Ward, Tokyo",
+    "latitude": 35.6092815,
+    "longitude": 140.1066278
+  },
+  {
+    "location": "Shinjuku Ward, Tokyo (Shinjuku Area)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Sidi Belyout, Casablanca",
+    "latitude": 33.6014715,
+    "longitude": -7.6019398
+  },
+  {
+    "location": "Sidi Belyout, Casablanca (Gauthier)",
+    "latitude": 33.5898333,
+    "longitude": -7.6306305
+  },
+  {
+    "location": "Sidi Belyout, Casablanca (Old Medina)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Singapore City Centre, Singapore",
+    "latitude": 1.2795017,
+    "longitude": 103.8451897
+  },
+  {
+    "location": "SoHo, New York",
+    "latitude": 40.72288,
+    "longitude": -73.9987505
+  },
+  {
+    "location": "South Beach, Miami Beach",
+    "latitude": 25.7744291,
+    "longitude": -80.1332415
+  },
+  {
+    "location": "South Brisbane, Brisbane",
+    "latitude": -27.479264,
+    "longitude": 153.0200774
+  },
+  {
+    "location": "South Loop, Chicago",
+    "latitude": 41.865853,
+    "longitude": -87.623988
+  },
+  {
+    "location": "South Male Atoll",
+    "latitude": 3.9690661,
+    "longitude": 73.4311274
+  },
+  {
+    "location": "South Mumbai, Mumbai (Central)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "South Mumbai, Mumbai (Mumbai Historical And Heritage)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "South Mumbai, Mumbai (Nariman Point)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "South of Market (SOMA), San Francisco",
+    "latitude": 37.7808925,
+    "longitude": -122.4009518
+  },
+  {
+    "location": "South of the Las Vegas Strip, Las Vegas",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Southbank, Melbourne",
+    "latitude": -37.8253618,
+    "longitude": 144.9640203
+  },
+  {
+    "location": "Southwark, London",
+    "latitude": 51.5061349,
+    "longitude": -0.1011379
+  },
+  {
+    "location": "Spagna, Rome",
+    "latitude": 41.9064475,
+    "longitude": 12.4829182
+  },
+  {
+    "location": "Spring Hill, Brisbane",
+    "latitude": -27.4614416,
+    "longitude": 153.0257338
+  },
+  {
+    "location": "St. Hanshaugen, Oslo",
+    "latitude": 59.9261982,
+    "longitude": 10.7400423
+  },
+  {
+    "location": "Stockholm",
+    "latitude": 59.3251172,
+    "longitude": 18.0710935
+  },
+  {
+    "location": "Streeterville, Chicago",
+    "latitude": 41.8934018,
+    "longitude": -87.622001
+  },
+  {
+    "location": "Subiaco, Perth",
+    "latitude": -31.9445901,
+    "longitude": 115.838043
+  },
+  {
+    "location": "Sumida Ward, Tokyo",
+    "latitude": 35.7104196,
+    "longitude": 139.8017421
+  },
+  {
+    "location": "Super Paradise Beach",
+    "latitude": 37.4147688,
+    "longitude": 25.368539
+  },
+  {
+    "location": "Surry Hills, Sydney",
+    "latitude": -33.8845123,
+    "longitude": 151.2100301
+  },
+  {
+    "location": "Sydhavnen, Copenhagen",
+    "latitude": 55.6528761,
+    "longitude": 12.5441947
+  },
+  {
+    "location": "Sydney CBD, Sydney",
+    "latitude": -33.8747259,
+    "longitude": 151.2053617
+  },
+  {
+    "location": "Sydney CBD, Sydney (Darling Harbour)",
+    "latitude": -33.8737722,
+    "longitude": 151.2044714
+  },
+  {
+    "location": "Sydney Olympic Park, Sydney",
+    "latitude": -33.842903,
+    "longitude": 151.072535
+  },
+  {
+    "location": "Södermalm, Stockholm",
+    "latitude": 59.3159445,
+    "longitude": 18.0779938
+  },
+  {
+    "location": "Sörnäinen, Helsinki",
+    "latitude": 60.1838848,
+    "longitude": 24.9644087
+  },
+  {
+    "location": "Tabanan",
+    "latitude": -8.5566523,
+    "longitude": 115.0013121
+  },
+  {
+    "location": "Taito, Tokyo (Asakusa)",
+    "latitude": 35.7175966,
+    "longitude": 139.7975626
+  },
+  {
+    "location": "Taka-Töölö, Helsinki",
+    "latitude": 60.1853441,
+    "longitude": 24.9167329
+  },
+  {
+    "location": "Talamanca",
+    "latitude": 41.736093,
+    "longitude": 1.9780786
+  },
+  {
+    "location": "Tankah Bay, Tulum (Tankah Bay)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Tempelhof-Schöneberg, Berlin",
+    "latitude": 52.4487714,
+    "longitude": 13.3893312
+  },
+  {
+    "location": "Tennoji Ward, Osaka (Minami)",
+    "latitude": 34.6460778,
+    "longitude": 135.5152685
+  },
+  {
+    "location": "Tetuan, Madrid",
+    "latitude": 40.4605781,
+    "longitude": -3.6982806
+  },
+  {
+    "location": "Teusaquillo, Bogotá (Calle 26)",
+    "latitude": 4.6193201,
+    "longitude": -74.0753692
+  },
+  {
+    "location": "Teusaquillo, Bogotá (Corferias)",
+    "latitude": 4.6303148,
+    "longitude": -74.0885834
+  },
+  {
+    "location": "The Harbourfront, Toronto",
+    "latitude": 43.6445345,
+    "longitude": -79.380381
+  },
+  {
+    "location": "The Harbourfront, Toronto (Entertainment District)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "The Harbourfront, Toronto (The Harbourfront)",
+    "latitude": 43.6444099,
+    "longitude": -79.3716807
+  },
+  {
+    "location": "The Village, Toronto",
+    "latitude": 43.5818862,
+    "longitude": -79.6179284
+  },
+  {
+    "location": "The Village, Toronto (The Village)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Thundufushi",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Toronto",
+    "latitude": 43.6534817,
+    "longitude": -79.3839347
+  },
+  {
+    "location": "Tourlos",
+    "latitude": 37.4640029,
+    "longitude": 25.3298953
+  },
+  {
+    "location": "Tower Hamlets, London",
+    "latitude": 51.5146145,
+    "longitude": -0.0350559
+  },
+  {
+    "location": "Trade Centre, Dubai (Sheikh Zayed Road)",
+    "latitude": 25.2248353,
+    "longitude": 55.2851186
+  },
+  {
+    "location": "Trastevere, Rome",
+    "latitude": 41.8911586,
+    "longitude": 12.4668459
+  },
+  {
+    "location": "Trevi, Rome",
+    "latitude": 41.900612,
+    "longitude": 12.4852384
+  },
+  {
+    "location": "Tribeca, New York",
+    "latitude": 40.7153802,
+    "longitude": -74.0093063
+  },
+  {
+    "location": "Trionfale, Rome",
+    "latitude": 41.9355047,
+    "longitude": 12.400213
+  },
+  {
+    "location": "Tulum",
+    "latitude": 20.429647,
+    "longitude": -87.6529306
+  },
+  {
+    "location": "Tulum City Centre, Tulum",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "UBC - University of British Columbia, Vancouver (UBC - University of British Columbia)",
+    "latitude": 49.2678865,
+    "longitude": -123.2476023
+  },
+  {
+    "location": "Ubud",
+    "latitude": -8.5068977,
+    "longitude": 115.2622931
+  },
+  {
+    "location": "Ubud City-Centre, Ubud",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Umeda, Osaka (Umeda)",
+    "latitude": 34.6961442,
+    "longitude": 135.492119
+  },
+  {
+    "location": "Umm Suqeim, Dubai (Beach & Coast)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Union Square, San Francisco",
+    "latitude": 37.7879363,
+    "longitude": -122.4075174
+  },
+  {
+    "location": "Universal City, Los Angeles",
+    "latitude": 34.1419225,
+    "longitude": -118.358411
+  },
+  {
+    "location": "Unterstrass, Zürich",
+    "latitude": 47.3914474,
+    "longitude": 8.5395724
+  },
+  {
+    "location": "Upper West Side, New York",
+    "latitude": 40.7870455,
+    "longitude": -73.9754163
+  },
+  {
+    "location": "Usaquen, Bogotá",
+    "latitude": 4.695219,
+    "longitude": -74.0309322
+  },
+  {
+    "location": "Vasastan, Stockholm",
+    "latitude": 59.3413498,
+    "longitude": 18.0489474
+  },
+  {
+    "location": "Vaticano Prati, Rome",
+    "latitude": 41.9077988,
+    "longitude": 12.4575801
+  },
+  {
+    "location": "Vesterbro, Copenhagen",
+    "latitude": 55.6660331,
+    "longitude": 12.552312
+  },
+  {
+    "location": "Via Veneto, Rome",
+    "latitude": 41.9062013,
+    "longitude": 12.489887
+  },
+  {
+    "location": "Vila Mariana, Sao Paulo (Avenida Paulista)",
+    "latitude": -23.5711951,
+    "longitude": -46.6445067
+  },
+  {
+    "location": "Waterfront, Cape Town",
+    "latitude": -33.9030556,
+    "longitude": 18.4216667
+  },
+  {
+    "location": "Waterfront, Cape Town (Silo District)",
+    "latitude": -33.9082485,
+    "longitude": 18.4222616
+  },
+  {
+    "location": "Wattana, Bangkok (Sukhumvit)",
+    "latitude": 13.7448009,
+    "longitude": 100.5600873
+  },
+  {
+    "location": "West End, Vancouver",
+    "latitude": 49.2841308,
+    "longitude": -123.1317949
+  },
+  {
+    "location": "West Hollywood, Los Angeles",
+    "latitude": 34.0923014,
+    "longitude": -118.3692894
+  },
+  {
+    "location": "West Loop, Chicago",
+    "latitude": 41.8821875,
+    "longitude": -87.6530635
+  },
+  {
+    "location": "West Los Angeles, Los Angeles",
+    "latitude": 34.0468546,
+    "longitude": -118.430254
+  },
+  {
+    "location": "West of the Las Vegas Strip, Las Vegas",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Western Suburbs, Mumbai (Andheri)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Western Suburbs, Mumbai (Western Suburbs)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Westerpark, Amsterdam",
+    "latitude": 52.3872276,
+    "longitude": 4.8717903
+  },
+  {
+    "location": "Westminster Borough, London",
+    "latitude": 51.5008561,
+    "longitude": -0.1217774
+  },
+  {
+    "location": "Westwood, Los Angeles",
+    "latitude": 34.0668947,
+    "longitude": -118.439944
+  },
+  {
+    "location": "Wiedikon, Zürich",
+    "latitude": 47.3662672,
+    "longitude": 8.5107128
+  },
+  {
+    "location": "Woolloomooloo, Sydney",
+    "latitude": -33.8718758,
+    "longitude": 151.2192218
+  },
+  {
+    "location": "Worli, Mumbai",
+    "latitude": 18.9988404,
+    "longitude": 72.8170327
+  },
+  {
+    "location": "Worli, Mumbai (Central)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Xicheng, Beijing",
+    "latitude": 39.9108672,
+    "longitude": 116.3599221
+  },
+  {
+    "location": "Xicheng, Beijing (Financial Street)",
+    "latitude": 39.9160815,
+    "longitude": 116.3531159
+  },
+  {
+    "location": "Xicheng, Beijing (Xidan)",
+    "latitude": 39.9057386,
+    "longitude": 116.3682035
+  },
+  {
+    "location": "Xuhui, Shanghai (Huaihai Road Commercial Area)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Yaletown, Vancouver",
+    "latitude": 49.2763217,
+    "longitude": -123.1209558
+  },
+  {
+    "location": "Yau Tsim Mong District, Hong Kong (Kowloon)",
+    "latitude": 22.3049255,
+    "longitude": 114.1616003
+  },
+  {
+    "location": "Yau Tsim Mong District, Hong Kong (Tsim Sha Tsui)",
+    "latitude": 22.2985604,
+    "longitude": 114.1736032
+  },
+  {
+    "location": "Yongsan-Gu, Seoul",
+    "latitude": 37.5534363,
+    "longitude": 126.9697994
+  },
+  {
+    "location": "Zabeel, Dubai (Bur Dubai)",
+    "latitude": 25.2399323,
+    "longitude": 55.3055537
+  },
+  {
+    "location": "Zama, Tulum",
+    "latitude": 20.2001555,
+    "longitude": -87.4638345
+  },
+  {
+    "location": "Zamalek, Cairo (Gezira)",
+    "latitude": 30.0557907,
+    "longitude": 31.2199341
+  },
+  {
+    "location": "Zeeburg, Amsterdam",
+    "latitude": 52.3742894,
+    "longitude": 4.9363368
+  },
+  {
+    "location": "Zona Hotelera, Cancún (Zona Hotelera)",
+    "latitude": 21.0722698,
+    "longitude": -86.7782391
+  },
+  {
+    "location": "Zona Hotelera, Tulum (Zona Hotelera)",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "location": "Zuideramstel, Amsterdam",
+    "latitude": 52.3285329,
+    "longitude": 4.8810954
+  },
+  {
+    "location": "Zuidoost, Amsterdam",
+    "latitude": 52.3148154,
+    "longitude": 4.9602346
+  },
+  {
+    "location": "Zürich",
+    "latitude": 47.3744489,
+    "longitude": 8.5410422
+  },
+  {
+    "location": "Zürichberg, Zürich",
+    "latitude": 47.3856804,
+    "longitude": 8.5668775
+  },
+  {
+    "location": "Östermalm, Stockholm",
+    "latitude": 59.336723,
+    "longitude": 18.0859178
+  },
+  {
+    "location": "Østerbro, Copenhagen",
+    "latitude": 55.7050841,
+    "longitude": 12.5826141
+  }
+]
