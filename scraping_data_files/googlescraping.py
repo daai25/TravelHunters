@@ -12,7 +12,7 @@ with open(api_key_path, "r") as file:
     API_KEY = file.read().strip()
 
 # Load destinations with coordinates
-destinations_file = os.path.join(script_dir, "../Destinations_and_Coords/destinations_with_coordinates.json")
+destinations_file = os.path.join(script_dir, "../data_aquisition/json/booking_locations_with_coordinates.json")
 with open(destinations_file, "r") as file:
     destinations = json.load(file)
 
