@@ -16,20 +16,34 @@ def init_driver():
     service = Service()  # Assumes chromedriver is in PATH
     return webdriver.Chrome(service=service, options=options)
 
-def get_insider_guide_links(driver, explorer_url, limit=5):
+def scroll_to_bottom(driver, pause_time=1.0, max_attempts=20):
+    last_height = driver.execute_script("return document.body.scrollHeight")
+    attempts = 0
+
+    while attempts < max_attempts:
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(pause_time)
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        if new_height == last_height:
+            break
+        last_height = new_height
+        attempts += 1
+
+def get_insider_guide_links(driver, explorer_url):
     driver.get(explorer_url)
     WebDriverWait(driver, 30).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, 'a.article'))
     )
-    links = []
+    
+    scroll_to_bottom(driver)  # Ensure all guides are loaded
+    
+    links = set()
     articles = driver.find_elements(By.CSS_SELECTOR, 'a.article')
     for a in articles:
         href = a.get_attribute('href')
-        if href and '/explorer/' in href and href not in links:
-            links.append(href)
-        if len(links) >= limit:
-            break
-    return links
+        if href and '/explorer/' in href:
+            links.add(href)
+    return list(links)
 
 def get_explore_city_link(driver, guide_url):
     driver.get(guide_url)
@@ -58,13 +72,13 @@ def main():
     driver = init_driver()
 
     try:
-        print("Collecting top 5 Insider Guide links...")
-        guide_links = get_insider_guide_links(driver, explorer_url, limit=5)
+        print("Collecting all Insider Guide links...")
+        guide_links = get_insider_guide_links(driver, explorer_url)
         print(f"Found {len(guide_links)} insider guides.\n")
 
         all_titles = []
         for i, guide_url in enumerate(guide_links):
-            print(f"[{i+1}/5] Visiting guide: {guide_url}")
+            print(f"[{i+1}/{len(guide_links)}] Visiting guide: {guide_url}")
             explore_link = get_explore_city_link(driver, guide_url)
             if explore_link:
                 print(f"  → Found explore link: {explore_link}")
