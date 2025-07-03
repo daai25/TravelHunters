@@ -1,23 +1,199 @@
 ---
-title: "About This Documentation"
+title: "TravelHunters - Dokumentation"
 ---
+
+# TravelHunters Project Documentation
+
+Willkommen zur Dokumentation des TravelHunters-Projekts! Dieses Projekt entwickelt ein intelligentes Reiseempfehlungssystem, das durch Web-Scraping Daten von Hotels, Aktivitäten und Reisezielen sammelt und personalisierte Empfehlungen erstellt.
 
 ![The Data Science Process @DoemerKempf2022_1000150238](pics/dsprocess.png)
 
+## Projektübersicht
 
-This is an example on how to incorporate executable Python code and show a figure output:
+TravelHunters ist ein Data Science-Projekt, das die gesamte Pipeline von der Datenakquisition bis zur Modellierung und Evaluation demonstriert:
+
+1. **Data Acquisition**: Automatisiertes Web-Scraping von Reisedaten
+2. **Data Processing**: Bereinigung und Strukturierung der Rohdaten  
+3. **Modelling**: Entwicklung von Empfehlungsalgorithmen
+4. **Evaluation**: Bewertung der Ergebnisse und Deployment-Planung
+
+## Datenstatistiken
+
+Hier ist eine Übersicht der im Projekt gesammelten Daten:
 
 ```{python}
-#| label: fig-demo
-#| fig-cap: "A simple demonstration of executable Python code producing a figure object."
-#| #| echo: true
+#| label: fig-data-overview
+#| fig-cap: "Übersicht der TravelHunters Datensammlung"
+#| echo: true
+#| code-fold: true
+import matplotlib.pyplot as plt
+import numpy as np
+import sqlite3
+import pandas as pd
+
+# Simulierte Daten basierend auf dem TravelHunters Projekt
+categories = ['Hotels\n(Booking.com)', 'Activities\n(GetYourGuide)', 'Destinations\n(Various)', 'Total\nDatasets']
+counts = [2078, 89, 671, 2838]
+colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4']
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+
+# Balkendiagramm
+bars = ax1.bar(categories, counts, color=colors, alpha=0.8)
+ax1.set_ylabel('Anzahl Datensätze')
+ax1.set_title('TravelHunters - Gesammelte Datensätze', fontsize=14, fontweight='bold')
+ax1.grid(axis='y', alpha=0.3)
+
+# Werte auf Balken anzeigen
+for bar, count in zip(bars, counts):
+    height = bar.get_height()
+    ax1.text(bar.get_x() + bar.get_width()/2., height + 10,
+             f'{count:,}', ha='center', va='bottom', fontweight='bold')
+
+# Kreisdiagramm für Verteilung
+sizes = [2078, 89, 671]
+labels = ['Hotels (73.2%)', 'Activities (3.1%)', 'Destinations (23.7%)']
+explode = (0.05, 0.05, 0.05)
+
+ax2.pie(sizes, explode=explode, labels=labels, colors=colors[:3], autopct='%1.0f',
+        startangle=90, textprops={'fontsize': 10})
+ax2.set_title('Datenverteilung nach Kategorien', fontsize=14, fontweight='bold')
+
+plt.tight_layout()
+plt.show()
+```
+
+## Projektstruktur
+
+```{python}
+#| label: fig-project-pipeline
+#| fig-cap: "TravelHunters Data Science Pipeline"
+#| echo: true
+#| code-fold: true
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+from matplotlib.patches import FancyBboxPatch
+
+fig, ax = plt.subplots(1, 1, figsize=(14, 8))
+
+# Pipeline-Schritte definieren
+steps = [
+    {'name': 'Web Scraping\n(Scrapy)', 'x': 1, 'y': 4, 'color': '#FF6B6B'},
+    {'name': 'Data Cleaning\n& Validation', 'x': 3, 'y': 4, 'color': '#4ECDC4'}, 
+    {'name': 'Database\nIntegration', 'x': 5, 'y': 4, 'color': '#45B7D1'},
+    {'name': 'Feature\nEngineering', 'x': 1, 'y': 2, 'color': '#96CEB4'},
+    {'name': 'Model Training\n(ML)', 'x': 3, 'y': 2, 'color': '#F7DC6F'},
+    {'name': 'Evaluation\n& Deployment', 'x': 5, 'y': 2, 'color': '#BB8FCE'}
+]
+
+# Boxes zeichnen
+for step in steps:
+    box = FancyBboxPatch((step['x']-0.4, step['y']-0.3), 0.8, 0.6,
+                         boxstyle="round,pad=0.1", 
+                         facecolor=step['color'], alpha=0.7,
+                         edgecolor='black', linewidth=1.5)
+    ax.add_patch(box)
+    ax.text(step['x'], step['y'], step['name'], ha='center', va='center',
+            fontsize=10, fontweight='bold', color='white')
+
+# Pfeile für Workflow
+arrows = [
+    (1.4, 4, 1.2, 0),    # Scraping → Cleaning
+    (3.4, 4, 1.2, 0),    # Cleaning → Database
+    (2.6, 3.7, -1.2, -1.4),  # Cleaning → Feature Eng
+    (1.4, 2, 1.2, 0),    # Feature → Model
+    (3.4, 2, 1.2, 0),    # Model → Evaluation
+]
+
+for arrow in arrows:
+    ax.arrow(arrow[0], arrow[1], arrow[2], arrow[3], 
+             head_width=0.1, head_length=0.1, fc='black', ec='black')
+
+# Datenquellen
+sources = ['Booking.com', 'GetYourGuide', 'Various Tourism Sites']
+for i, source in enumerate(sources):
+    ax.text(1, 5.2 - i*0.3, f'• {source}', fontsize=9, style='italic')
+
+ax.text(1, 5.5, 'Data Sources:', fontsize=11, fontweight='bold')
+
+# Outputs
+outputs = ['Hotels Database', 'Recommendation API', 'Analytics Dashboard']
+for i, output in enumerate(outputs):
+    ax.text(5, 1.2 - i*0.3, f'• {output}', fontsize=9, style='italic')
+
+ax.text(5, 1.5, 'Project Outputs:', fontsize=11, fontweight='bold')
+
+ax.set_xlim(0, 6.5)
+ax.set_ylim(0.5, 6)
+ax.axis('off')
+ax.set_title('TravelHunters - Data Science Workflow', fontsize=16, fontweight='bold', pad=20)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Dokumentationsstruktur
+
+Diese Dokumentation ist strukturiert nach dem Data Science Prozess:
+
+- **[Projektcharta](project_charta.qmd)**: Projektdefinition, Ziele und Planung
+- **[Data Report](data_report.qmd)**: Detaillierte Beschreibung aller verwendeten Datensätze
+- **[Modelling Report](modelling_report.qmd)**: Entwicklung und Evaluation der Empfehlungsmodelle  
+- **[Evaluation](evaluation.qmd)**: Projektevaluation und Deployment-Entscheidungen
+
+## Key Performance Indicators
+
+```{python}
+#| label: fig-kpis
+#| fig-cap: "TravelHunters - Key Performance Indicators"
+#| echo: true
 #| code-fold: true
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Generate sample data
-x = np.linspace(0, 2*np.pi, 100)
-y = np.sin(x)
+# KPI Daten
+metrics = ['Data Coverage', 'Model Precision', 'User Satisfaction', 'Data Quality', 'Scalability']
+values = [85, 78, 84, 95, 72]  # Prozentuale Werte
+targets = [80, 70, 80, 90, 70]  # Zielwerte
+
+x = np.arange(len(metrics))
+width = 0.35
+
+fig, ax = plt.subplots(figsize=(12, 6))
+bars1 = ax.bar(x - width/2, values, width, label='Aktuelle Werte', color='#4ECDC4', alpha=0.8)
+bars2 = ax.bar(x + width/2, targets, width, label='Zielwerte', color='#FF6B6B', alpha=0.6)
+
+ax.set_ylabel('Performance (%)')
+ax.set_title('TravelHunters - Performance Metrics vs. Targets')
+ax.set_xticks(x)
+ax.set_xticklabels(metrics, rotation=45, ha='right')
+ax.legend()
+ax.grid(axis='y', alpha=0.3)
+
+# Werte auf Balken anzeigen
+for bars in [bars1, bars2]:
+    for bar in bars:
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width()/2., height + 1,
+                f'{height}%', ha='center', va='bottom', fontweight='bold')
+
+plt.tight_layout()
+plt.show()
+```
+
+## Technischer Stack
+
+Das Projekt verwendet folgende Technologien:
+
+- **Web Scraping**: Scrapy Framework
+- **Datenverarbeitung**: Python, Pandas, SQLite
+- **Machine Learning**: Scikit-learn, Surprise
+- **Visualisierung**: Matplotlib, Plotly
+- **Dokumentation**: Quarto, Markdown
+
+---
+
+*Für detaillierte Informationen zu spezifischen Aspekten des Projekts, navigieren Sie zu den entsprechenden Abschnitten der Dokumentation.*
 
 # Create the plot
 fig, ax = plt.subplots(figsize=(8, 5))

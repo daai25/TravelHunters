@@ -1,68 +1,162 @@
-# Project Charta
+# Project Charta - TravelHunters
 ## Problem Definition
-Formulate the problem and important information about the domain and/or business area in which the product is to be developed: What exactly is the problem and the expected benefit of the project? Why should we undertake this effort?   
-This includes a summary of the most important findings from the user analysis: relevant segments and user groups. Describe the problems and needs of the users of the product to be developed. 
+**Domain:** Travel and Tourism Data Aggregation
 
-Stakeholders: List the people involved in and affected by the project. Describe their goals and relationships with each other. Visualisation in the form of a stakeholder map can provide a quick overview.
+**Problem Statement:** 
+Travelers today face information overload when planning trips, with relevant data scattered across multiple platforms (booking sites, travel guides, activity platforms). There is no centralized system that provides comprehensive, up-to-date travel information including accommodations, activities, and destinations with pricing, ratings, and visual content.
 
-You can reference more detailed analyses such as individual "personas" or interviews in separate documents in the appendix.
+**Expected Benefits:**
+- Centralized travel data repository for better decision-making
+- Automated data collection reducing manual research time
+- Comprehensive dataset enabling travel analytics and recommendations
+- Foundation for future travel recommendation systems
+
+**Target Users:**
+- Travel enthusiasts seeking comprehensive trip planning information
+- Travel agencies requiring aggregated data for client recommendations
+- Data analysts researching travel trends and pricing patterns
+- Developers building travel-related applications
+
+**Stakeholders:**
+- **Primary Users:** Travel planners and tourism professionals
+- **Data Providers:** Booking.com, TripAdvisor, Lonely Planet, activity platforms
+- **Development Team:** Data engineers, web scrapers, database administrators
+- **End Beneficiaries:** Travelers seeking better trip planning tools
 
 ## Situation Assessment
-Describe the available resources (personnel, material, (software) tools, infrastructure, etc.) and time as well as restrictions and constraints. Possible risks that may arise during the project are also identified.
+**Available Resources:**
+- **Personnel:** Development team with expertise in web scraping, data processing, and database management
+- **Tools:** Python ecosystem (Scrapy, SQLite, Pandas), Quarto for documentation
+- **Infrastructure:** Local development environment with capability for web scraping
+- **Data Sources:** Public travel websites (Booking.com, TripAdvisor, Lonely Planet)
+
+**Time Constraints:**
+- Project duration: July 2025 (Summer School timeframe)
+- Limited to proof-of-concept and initial data collection
+
+**Restrictions and Constraints:**
+- **Legal:** Must comply with website terms of service and robots.txt
+- **Technical:** Rate limiting to avoid overwhelming target websites
+- **Data Quality:** Dependent on source website structure and content quality
+- **Scalability:** Limited by computing resources for large-scale scraping
+
+**Identified Risks:**
+- Website structure changes affecting scraper reliability
+- Rate limiting or IP blocking by target websites
+- Data quality inconsistencies across different sources
+- Storage limitations for large datasets with images
 
 ## Project Goals and Success Criteria
-When is the project successful from a client/stakeholder perspective: Formulate (qualitative) objectives, wherever possible, corresponding key metrics and the target values to be achieved within the project.
+**Primary Objectives:**
+1. **Data Collection Success:** Collect comprehensive travel data from multiple sources
+   - Target: >2,000 hotel listings with pricing and ratings
+   - Target: >500 activity listings with descriptions and images
+   - Target: >200 destination entries with coordinates and descriptions
 
-It is also often helpful to specify what is explicitly excluded from the project objectives (out of scope).
+2. **Data Quality Standards:**
+   - >90% of entries have complete name and location information
+   - >80% of hotels have pricing information
+   - >70% of activities have rating information
+   - >60% of entries include image URLs
+
+3. **System Reliability:**
+   - Scrapers handle pagination and multiple pages successfully
+   - Robust error handling for website changes
+   - Data cleaning pipeline removes duplicates effectively
+
+4. **Database Integration:**
+   - All data successfully stored in structured SQLite database
+   - Proper indexing for efficient queries
+   - Data integrity constraints maintained
+
+**Success Metrics:**
+- **Quantity:** Total items collected across all categories
+- **Coverage:** Number of unique destinations covered
+- **Completeness:** Percentage of fields populated per category
+- **Accuracy:** Manual validation of sample data entries
+
+**Out of Scope:**
+- Real-time data updates or live synchronization
+- Advanced recommendation algorithms
+- User interface development
+- Commercial deployment or monetization
 
 ## Data Mining Goals
-Map the problem definition, datasets to be used and primary objective onto a data mining task, e.g.:
+**Primary Data Mining Task: Data Integration and Information Extraction**
 
-* Classification
-* Regression
-* Clustering
-* Outlier Detection
-* Association rule learning (market basket analysis)
-* Recommender System
-* Visualisation
-* ...
+**Technical Objectives:**
+1. **Web Scraping and Data Extraction:**
+   - Extract structured data from unstructured web content
+   - Handle dynamic content and pagination
+   - Parse and normalize pricing, rating, and location data
 
-Along with the definition of the actual technical problem (category) to be solved, 
-the project goals must be mapped onto quitable quantitative metrics and corresponding target values. For example, for a classification task one might specify an *F-score* of 0.9 as a minimal requirement for an acceptable solution.  
-Such a requirement should be aligned with the overall project goals and/or literature references or justified by other references, respectively.
+2. **Data Cleaning and Preprocessing:**
+   - Remove duplicate entries based on name/location similarity
+   - Standardize pricing formats and currency conversions
+   - Validate and clean URLs, ratings, and text content
+
+3. **Data Integration:**
+   - Merge data from multiple sources (hotels, activities, destinations)
+   - Create unified schema across different data types
+   - Establish relationships between accommodations, activities, and destinations
+
+4. **Feature Engineering:**
+   - Generate unique identifiers for entities
+   - Extract location coordinates where available
+   - Categorize and tag content appropriately
+
+**Quantitative Success Criteria:**
+- **Data Completeness Score:** >75% for critical fields (name, location, price/rating)
+- **Duplicate Reduction:** <5% duplicate entries after cleaning
+- **Data Integration Success:** Successfully merge >95% of collected data into unified schema
+- **Processing Accuracy:** <2% data corruption during cleaning and transformation
+
+**Technical Requirements:**
+- Scalable data processing pipeline handling 10,000+ records
+- Robust error handling with <1% data loss due to processing errors
+- Database performance supporting sub-second queries on full dataset
 
 
 ## Project Plan
-Divide the project into individual phases, describe them briefly and draw up a preliminary timetable, e.g. as a Gantt chart:
+**TravelHunters Data Collection and Integration Project**
 
-![Project Plan](pics/gantt-mermaid.png){#fig-project-plan}
+The project follows the CRISP-DM methodology adapted for web scraping and data integration:
 
-See [Mermaid syntax for Gantt charts](https://mermaid.js.org/syntax/gantt.html). It might not be displayed correctly in Safari &#8594; use Chrome. [Live editor with export functionality](https://mermaid.live/)
+![TravelHunters Project Timeline](pics/gantt-mermaid.png){#fig-project-plan}
 
 ```mermaid
 gantt
-    title A Gantt Diagram
-    dateFormat YYYY-MM-DD
-    tickInterval 5day
-    section Project Understanding
-        Define problem,     :a1, 2024-07-01, 1d
-        Determine project goals     :a2, 2024-07-01, 1d
-        List available resources     :a3, 2024-07-02, 1d
-        Set data mining goals    :a4, 2024-07-03, 1d
-        Create project plan    :a5, 2024-07-03, 1d
-        Project checkpoint: milestone, m1, 2024-07-04, 4m
-    section Data Acquisition and Exploration
-        Acquire data :a6, 2024-07-02, 2d
-        Exploratory data analysis   :a7, 2024-07-03, 2d
-        
-    section Modelling
-        Create initial model   :a8, 2024-07-09, 1d
-        Additional feature engineering :a9, 2024-07-10, 1d
-        Prepare modelling report :a10, 2024-07-10, 2h
-    section Evaluation
-        Prepare presentation :a10, 2024-07-10, 2h
-        Project presentation : milestone, m2, 2024-07-11, 4m
+    title TravelHunters Project Timeline - July 2025
+    dateFormat YYYY-07-DD
+    tickInterval 1day
+    section Project Setup
+        Define problem and goals     :done, a1, 2025-07-01, 1d
+        Setup development environment     :done, a2, 2025-07-01, 1d
+        Initial spider development     :done, a3, 2025-07-02, 1d
+        Project foundation: milestone, done, m1, 2025-07-03, 0d
+    section Data Acquisition
+        Booking.com spider development :done, a4, 2025-07-02, 2d
+        Activities spider implementation   :done, a5, 2025-07-03, 1d
+        Destinations data collection :done, a6, 2025-07-03, 1d
+        Worldwide data scraping :done, a7, 2025-07-04, 2d
+        Data collection complete: milestone, done, m2, 2025-07-06, 0d
+    section Data Processing
+        Data cleaning pipeline   :active, a8, 2025-07-03, 2d
+        Database integration :a9, 2025-07-03, 1d
+        Duplicate removal and validation :a10, 2025-07-04, 1d
+        Quality assurance :a11, 2025-07-04, 1d
+    section Analysis & Documentation
+        Exploratory data analysis :a12, 2025-07-05, 2d
+        Documentation completion :a13, 2025-07-06, 2d
+        Final evaluation :a14, 2025-07-07, 1d
+        Project completion : milestone, m3, 2025-07-08, 0d
 ```
+
+**Phase Descriptions:**
+- **Project Setup (Days 1-3):** Environment setup, initial spider development, proof of concept
+- **Data Acquisition (Days 2-6):** Large-scale data collection from multiple sources with pagination
+- **Data Processing (Days 3-5):** Cleaning, integration, and database storage
+- **Analysis & Documentation (Days 5-8):** Analysis, documentation, and final evaluation
 
 ## Roles and Contact Details
 List the people involved in the development work here with their role titles, tasks and contact details
