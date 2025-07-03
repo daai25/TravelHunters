@@ -23,17 +23,17 @@ website:
     style: "floating"
     search: true
     contents:
-      - section: "Projektübersicht"
+      - section: "Project Overview"
         contents:
           - index.qmd
           - project_charta.qmd
-      - section: "Daten & Modellierung"
+      - section: "Data & Modelling"
         contents:
           - data_report.qmd
           - modelling_report.qmd
       - section: "Evaluation & Deployment"
         contents:
-          - evaluation.qmd
+          - evaluation.md
 
 bibliography: refs.bib
 csl: vancouver-brackets.csl
