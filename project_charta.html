@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>project_charta – Sample Project</title>
+<title>project_charta – TravelHunters - Documentation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -39,13 +74,13 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a98ec624fb63d9b712fc3a6f62e2b305.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9344fb9851b4da3cab95007ef9d770dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -72,16 +107,55 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TravelHunters</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project_charta.html"> 
+<span class="menu-text">Project Charter</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./data_report.html"> 
+<span class="menu-text">Data Report</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./modelling_report.html"> 
+<span class="menu-text">Modelling</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./evaluation.html"> 
+<span class="menu-text">Evaluation</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project_charta.html">Project Charta</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Projektübersicht</a></li><li class="breadcrumb-item"><a href="./project_charta.html">Project Charta - TravelHunters</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -91,14 +165,9 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Sample Project</a> 
-    </div>
-      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -106,36 +175,69 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projektübersicht</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">About This Documentation</span></a>
+ <span class="menu-text">TravelHunters - Documentation</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./project_charta.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Project Charta</span></a>
+ <span class="menu-text">Project Charta - TravelHunters</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Daten &amp; Modellierung</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_report.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Report</span></a>
+ <span class="menu-text">Data Report - TravelHunters Project</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_report.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Modelling Report</span></a>
+ <span class="menu-text">Modelling Report - TravelHunters Project</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Evaluation &amp; Deployment</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Evaluation</span></a>
+ <span class="menu-text">evaluation.html</span></a>
   </div>
 </li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -146,99 +248,150 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#project-charta" id="toc-project-charta" class="nav-link active" data-scroll-target="#project-charta">Project Charta</a>
+  <li><a href="#project-charta---travelhunters" id="toc-project-charta---travelhunters" class="nav-link active" data-scroll-target="#project-charta---travelhunters"><span class="header-section-number">1</span> Project Charta - TravelHunters</a>
   <ul class="collapse">
-  <li><a href="#problem-definition" id="toc-problem-definition" class="nav-link" data-scroll-target="#problem-definition">Problem Definition</a></li>
-  <li><a href="#situation-assessment" id="toc-situation-assessment" class="nav-link" data-scroll-target="#situation-assessment">Situation Assessment</a></li>
-  <li><a href="#project-goals-and-success-criteria" id="toc-project-goals-and-success-criteria" class="nav-link" data-scroll-target="#project-goals-and-success-criteria">Project Goals and Success Criteria</a></li>
-  <li><a href="#data-mining-goals" id="toc-data-mining-goals" class="nav-link" data-scroll-target="#data-mining-goals">Data Mining Goals</a></li>
-  <li><a href="#project-plan" id="toc-project-plan" class="nav-link" data-scroll-target="#project-plan">Project Plan</a></li>
-  <li><a href="#roles-and-contact-details" id="toc-roles-and-contact-details" class="nav-link" data-scroll-target="#roles-and-contact-details">Roles and Contact Details</a></li>
+  <li><a href="#problem-definition" id="toc-problem-definition" class="nav-link" data-scroll-target="#problem-definition"><span class="header-section-number">1.1</span> Problem Definition</a></li>
+  <li><a href="#situation-assessment" id="toc-situation-assessment" class="nav-link" data-scroll-target="#situation-assessment"><span class="header-section-number">1.2</span> Situation Assessment</a></li>
+  <li><a href="#project-goals-and-success-criteria" id="toc-project-goals-and-success-criteria" class="nav-link" data-scroll-target="#project-goals-and-success-criteria"><span class="header-section-number">1.3</span> Project Goals and Success Criteria</a></li>
+  <li><a href="#data-mining-goals" id="toc-data-mining-goals" class="nav-link" data-scroll-target="#data-mining-goals"><span class="header-section-number">1.4</span> Data Mining Goals</a></li>
+  <li><a href="#project-plan" id="toc-project-plan" class="nav-link" data-scroll-target="#project-plan"><span class="header-section-number">1.5</span> Project Plan</a></li>
+  <li><a href="#roles-and-contact-details" id="toc-roles-and-contact-details" class="nav-link" data-scroll-target="#roles-and-contact-details"><span class="header-section-number">1.6</span> Roles and Contact Details</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="project_charta.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Projektübersicht</a></li><li class="breadcrumb-item"><a href="./project_charta.html">Project Charta - TravelHunters</a></li></ol></nav><h1 class="title display-7"></h1></header><div class="quarto-title-block"><div class="quarto-title-tools-only"><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 
 
 
 
-<section id="project-charta" class="level1">
-<h1>Project Charta</h1>
-<section id="problem-definition" class="level2">
-<h2 class="anchored" data-anchor-id="problem-definition">Problem Definition</h2>
-<p>Formulate the problem and important information about the domain and/or business area in which the product is to be developed: What exactly is the problem and the expected benefit of the project? Why should we undertake this effort?<br>
-This includes a summary of the most important findings from the user analysis: relevant segments and user groups. Describe the problems and needs of the users of the product to be developed.</p>
-<p>Stakeholders: List the people involved in and affected by the project. Describe their goals and relationships with each other. Visualisation in the form of a stakeholder map can provide a quick overview.</p>
-<p>You can reference more detailed analyses such as individual “personas” or interviews in separate documents in the appendix.</p>
+<section id="project-charta---travelhunters" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Project Charta - TravelHunters</h1>
+<section id="problem-definition" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="problem-definition"><span class="header-section-number">1.1</span> Problem Definition</h2>
+<p><strong>Domain:</strong> Travel and Tourism Data Aggregation</p>
+<p><strong>Problem Statement:</strong> Travelers today face information overload when planning trips, with relevant data scattered across multiple platforms (booking sites, travel guides, activity platforms). There is no centralized system that provides comprehensive, up-to-date travel information including accommodations, activities, and destinations with pricing, ratings, and visual content.</p>
+<p><strong>Expected Benefits:</strong> - Centralized travel data repository for better decision-making - Automated data collection reducing manual research time - Comprehensive dataset enabling travel analytics and recommendations - Foundation for future travel recommendation systems</p>
+<p><strong>Target Users:</strong> - Travel enthusiasts seeking comprehensive trip planning information - Travel agencies requiring aggregated data for client recommendations - Data analysts researching travel trends and pricing patterns - Developers building travel-related applications</p>
+<p><strong>Stakeholders:</strong> - <strong>Primary Users:</strong> Travel planners and tourism professionals - <strong>Data Providers:</strong> Booking.com, TripAdvisor, Lonely Planet, activity platforms - <strong>Development Team:</strong> Data engineers, web scrapers, database administrators - <strong>End Beneficiaries:</strong> Travelers seeking better trip planning tools</p>
 </section>
-<section id="situation-assessment" class="level2">
-<h2 class="anchored" data-anchor-id="situation-assessment">Situation Assessment</h2>
-<p>Describe the available resources (personnel, material, (software) tools, infrastructure, etc.) and time as well as restrictions and constraints. Possible risks that may arise during the project are also identified.</p>
+<section id="situation-assessment" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="situation-assessment"><span class="header-section-number">1.2</span> Situation Assessment</h2>
+<p><strong>Available Resources:</strong> - <strong>Personnel:</strong> Development team with expertise in web scraping, data processing, and database management - <strong>Tools:</strong> Python ecosystem (Scrapy, SQLite, Pandas), Quarto for documentation - <strong>Infrastructure:</strong> Local development environment with capability for web scraping - <strong>Data Sources:</strong> Public travel websites (Booking.com, TripAdvisor, Lonely Planet)</p>
+<p><strong>Time Constraints:</strong> - Project duration: July 2025 (Summer School timeframe) - Limited to proof-of-concept and initial data collection</p>
+<p><strong>Restrictions and Constraints:</strong> - <strong>Legal:</strong> Must comply with website terms of service and robots.txt - <strong>Technical:</strong> Rate limiting to avoid overwhelming target websites - <strong>Data Quality:</strong> Dependent on source website structure and content quality - <strong>Scalability:</strong> Limited by computing resources for large-scale scraping</p>
+<p><strong>Identified Risks:</strong> - Website structure changes affecting scraper reliability - Rate limiting or IP blocking by target websites - Data quality inconsistencies across different sources - Storage limitations for large datasets with images</p>
 </section>
-<section id="project-goals-and-success-criteria" class="level2">
-<h2 class="anchored" data-anchor-id="project-goals-and-success-criteria">Project Goals and Success Criteria</h2>
-<p>When is the project successful from a client/stakeholder perspective: Formulate (qualitative) objectives, wherever possible, corresponding key metrics and the target values to be achieved within the project.</p>
-<p>It is also often helpful to specify what is explicitly excluded from the project objectives (out of scope).</p>
-</section>
-<section id="data-mining-goals" class="level2">
-<h2 class="anchored" data-anchor-id="data-mining-goals">Data Mining Goals</h2>
-<p>Map the problem definition, datasets to be used and primary objective onto a data mining task, e.g.:</p>
+<section id="project-goals-and-success-criteria" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="project-goals-and-success-criteria"><span class="header-section-number">1.3</span> Project Goals and Success Criteria</h2>
+<p><strong>Primary Objectives:</strong> 1. <strong>Data Collection Success:</strong> Collect comprehensive travel data from multiple sources - Target: &gt;2,000 hotel listings with pricing and ratings - Target: &gt;500 activity listings with descriptions and images - Target: &gt;200 destination entries with coordinates and descriptions</p>
+<ol start="2" type="1">
+<li><strong>Data Quality Standards:</strong>
 <ul>
-<li>Classification</li>
-<li>Regression</li>
-<li>Clustering</li>
-<li>Outlier Detection</li>
-<li>Association rule learning (market basket analysis)</li>
-<li>Recommender System</li>
-<li>Visualisation</li>
-<li>…</li>
-</ul>
-<p>Along with the definition of the actual technical problem (category) to be solved, the project goals must be mapped onto quitable quantitative metrics and corresponding target values. For example, for a classification task one might specify an <em>F-score</em> of 0.9 as a minimal requirement for an acceptable solution.<br>
-Such a requirement should be aligned with the overall project goals and/or literature references or justified by other references, respectively.</p>
+<li><blockquote class="blockquote">
+<p>90% of entries have complete name and location information</p>
+</blockquote></li>
+<li><blockquote class="blockquote">
+<p>80% of hotels have pricing information</p>
+</blockquote></li>
+<li><blockquote class="blockquote">
+<p>70% of activities have rating information</p>
+</blockquote></li>
+<li><blockquote class="blockquote">
+<p>60% of entries include image URLs</p>
+</blockquote></li>
+</ul></li>
+<li><strong>System Reliability:</strong>
+<ul>
+<li>Scrapers handle pagination and multiple pages successfully</li>
+<li>Robust error handling for website changes</li>
+<li>Data cleaning pipeline removes duplicates effectively</li>
+</ul></li>
+<li><strong>Database Integration:</strong>
+<ul>
+<li>All data successfully stored in structured SQLite database</li>
+<li>Proper indexing for efficient queries</li>
+<li>Data integrity constraints maintained</li>
+</ul></li>
+</ol>
+<p><strong>Success Metrics:</strong> - <strong>Quantity:</strong> Total items collected across all categories - <strong>Coverage:</strong> Number of unique destinations covered - <strong>Completeness:</strong> Percentage of fields populated per category - <strong>Accuracy:</strong> Manual validation of sample data entries</p>
+<p><strong>Out of Scope:</strong> - Real-time data updates or live synchronization - Advanced recommendation algorithms - User interface development - Commercial deployment or monetization</p>
 </section>
-<section id="project-plan" class="level2">
-<h2 class="anchored" data-anchor-id="project-plan">Project Plan</h2>
-<p>Divide the project into individual phases, describe them briefly and draw up a preliminary timetable, e.g.&nbsp;as a Gantt chart:</p>
+<section id="data-mining-goals" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="data-mining-goals"><span class="header-section-number">1.4</span> Data Mining Goals</h2>
+<p><strong>Primary Data Mining Task: Data Integration and Information Extraction</strong></p>
+<p><strong>Technical Objectives:</strong> 1. <strong>Web Scraping and Data Extraction:</strong> - Extract structured data from unstructured web content - Handle dynamic content and pagination - Parse and normalize pricing, rating, and location data</p>
+<ol start="2" type="1">
+<li><strong>Data Cleaning and Preprocessing:</strong>
+<ul>
+<li>Remove duplicate entries based on name/location similarity</li>
+<li>Standardize pricing formats and currency conversions</li>
+<li>Validate and clean URLs, ratings, and text content</li>
+</ul></li>
+<li><strong>Data Integration:</strong>
+<ul>
+<li>Merge data from multiple sources (hotels, activities, destinations)</li>
+<li>Create unified schema across different data types</li>
+<li>Establish relationships between accommodations, activities, and destinations</li>
+</ul></li>
+<li><strong>Feature Engineering:</strong>
+<ul>
+<li>Generate unique identifiers for entities</li>
+<li>Extract location coordinates where available</li>
+<li>Categorize and tag content appropriately</li>
+</ul></li>
+</ol>
+<p><strong>Quantitative Success Criteria:</strong> - <strong>Data Completeness Score:</strong> &gt;75% for critical fields (name, location, price/rating) - <strong>Duplicate Reduction:</strong> &lt;5% duplicate entries after cleaning - <strong>Data Integration Success:</strong> Successfully merge &gt;95% of collected data into unified schema - <strong>Processing Accuracy:</strong> &lt;2% data corruption during cleaning and transformation</p>
+<p><strong>Technical Requirements:</strong> - Scalable data processing pipeline handling 10,000+ records - Robust error handling with &lt;1% data loss due to processing errors - Database performance supporting sub-second queries on full dataset</p>
+</section>
+<section id="project-plan" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="project-plan"><span class="header-section-number">1.5</span> Project Plan</h2>
+<p><strong>TravelHunters Data Collection and Integration Project</strong></p>
+<p>The project follows the CRISP-DM methodology adapted for web scraping and data integration:</p>
 <div id="fig-project-plan" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-project-plan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="pics/gantt-mermaid.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-project-plan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Project Plan
+Figure&nbsp;1: TravelHunters Project Timeline
 </figcaption>
 </figure>
 </div>
-<p>See <a href="https://mermaid.js.org/syntax/gantt.html">Mermaid syntax for Gantt charts</a>. It might not be displayed correctly in Safari → use Chrome. <a href="https://mermaid.live/">Live editor with export functionality</a></p>
 <pre class="mermaid"><code>gantt
-    title A Gantt Diagram
-    dateFormat YYYY-MM-DD
-    tickInterval 5day
-    section Project Understanding
-        Define problem,     :a1, 2024-07-01, 1d
-        Determine project goals     :a2, 2024-07-01, 1d
-        List available resources     :a3, 2024-07-02, 1d
-        Set data mining goals    :a4, 2024-07-03, 1d
-        Create project plan    :a5, 2024-07-03, 1d
-        Project checkpoint: milestone, m1, 2024-07-04, 4m
-    section Data Acquisition and Exploration
-        Acquire data :a6, 2024-07-02, 2d
-        Exploratory data analysis   :a7, 2024-07-03, 2d
-        
-    section Modelling
-        Create initial model   :a8, 2024-07-09, 1d
-        Additional feature engineering :a9, 2024-07-10, 1d
-        Prepare modelling report :a10, 2024-07-10, 2h
-    section Evaluation
-        Prepare presentation :a10, 2024-07-10, 2h
-        Project presentation : milestone, m2, 2024-07-11, 4m</code></pre>
+    title TravelHunters Project Timeline - July 2025
+    dateFormat YYYY-07-DD
+    tickInterval 1day
+    section Project Setup
+        Define problem and goals     :done, a1, 2025-07-01, 1d
+        Setup development environment     :done, a2, 2025-07-01, 1d
+        Initial spider development     :done, a3, 2025-07-02, 1d
+        Project foundation: milestone, done, m1, 2025-07-03, 0d
+    section Data Acquisition
+        Booking.com spider development :done, a4, 2025-07-02, 2d
+        Activities spider implementation   :done, a5, 2025-07-03, 1d
+        Destinations data collection :done, a6, 2025-07-03, 1d
+        Worldwide data scraping :done, a7, 2025-07-04, 2d
+        Data collection complete: milestone, done, m2, 2025-07-06, 0d
+    section Data Processing
+        Data cleaning pipeline   :active, a8, 2025-07-03, 2d
+        Database integration :a9, 2025-07-03, 1d
+        Duplicate removal and validation :a10, 2025-07-04, 1d
+        Quality assurance :a11, 2025-07-04, 1d
+    section Analysis &amp; Documentation
+        Exploratory data analysis :a12, 2025-07-05, 2d
+        Documentation completion :a13, 2025-07-06, 2d
+        Final evaluation :a14, 2025-07-07, 1d
+        Project completion : milestone, m3, 2025-07-08, 0d</code></pre>
+<p><strong>Phase Descriptions:</strong> - <strong>Project Setup (Days 1-3):</strong> Environment setup, initial spider development, proof of concept - <strong>Data Acquisition (Days 2-6):</strong> Large-scale data collection from multiple sources with pagination - <strong>Data Processing (Days 3-5):</strong> Cleaning, integration, and database storage - <strong>Analysis &amp; Documentation (Days 5-8):</strong> Analysis, documentation, and final evaluation</p>
 </section>
-<section id="roles-and-contact-details" class="level2">
-<h2 class="anchored" data-anchor-id="roles-and-contact-details">Roles and Contact Details</h2>
+<section id="roles-and-contact-details" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="roles-and-contact-details"><span class="header-section-number">1.6</span> Roles and Contact Details</h2>
 <p>List the people involved in the development work here with their role titles, tasks and contact details</p>
 
+
+<!-- -->
 
 </section>
 </section>
@@ -314,9 +467,60 @@ Figure&nbsp;1: Project Plan
       });
       clipboardModal.on('success', onCopySuccess);
     }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/daai25\.github\.io\/TravelHunters\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -642,7 +846,170 @@ Figure&nbsp;1: Project Plan
       }
     }
   });
-  </script>
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Project Charta - TravelHunters</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">## Problem Definition</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>**Domain:** Travel and Tourism Data Aggregation</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>**Problem Statement:** </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Travelers today face information overload when planning trips, with relevant data scattered across multiple platforms (booking sites, travel guides, activity platforms). There is no centralized system that provides comprehensive, up-to-date travel information including accommodations, activities, and destinations with pricing, ratings, and visual content.</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>**Expected Benefits:**</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Centralized travel data repository for better decision-making</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Automated data collection reducing manual research time</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Comprehensive dataset enabling travel analytics and recommendations</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Foundation for future travel recommendation systems</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>**Target Users:**</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Travel enthusiasts seeking comprehensive trip planning information</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Travel agencies requiring aggregated data for client recommendations</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Data analysts researching travel trends and pricing patterns</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Developers building travel-related applications</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>**Stakeholders:**</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Primary Users:** Travel planners and tourism professionals</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Providers:** Booking.com, TripAdvisor, Lonely Planet, activity platforms</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Development Team:** Data engineers, web scrapers, database administrators</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**End Beneficiaries:** Travelers seeking better trip planning tools</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## Situation Assessment</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>**Available Resources:**</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Personnel:** Development team with expertise in web scraping, data processing, and database management</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Tools:** Python ecosystem (Scrapy, SQLite, Pandas), Quarto for documentation</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Infrastructure:** Local development environment with capability for web scraping</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Sources:** Public travel websites (Booking.com, TripAdvisor, Lonely Planet)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>**Time Constraints:**</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Project duration: July 2025 (Summer School timeframe)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Limited to proof-of-concept and initial data collection</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>**Restrictions and Constraints:**</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Legal:** Must comply with website terms of service and robots.txt</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Technical:** Rate limiting to avoid overwhelming target websites</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Quality:** Dependent on source website structure and content quality</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Scalability:** Limited by computing resources for large-scale scraping</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>**Identified Risks:**</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Website structure changes affecting scraper reliability</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Rate limiting or IP blocking by target websites</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Data quality inconsistencies across different sources</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Storage limitations for large datasets with images</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Project Goals and Success Criteria</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>**Primary Objectives:**</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Data Collection Success:** Collect comprehensive travel data from multiple sources</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Target: &gt;2,000 hotel listings with pricing and ratings</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Target: &gt;500 activity listings with descriptions and images</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Target: &gt;200 destination entries with coordinates and descriptions</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Data Quality Standards:**</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>&gt;90% of entries have complete name and location information</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>&gt;80% of hotels have pricing information</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>&gt;70% of activities have rating information</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>&gt;60% of entries include image URLs</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**System Reliability:**</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Scrapers handle pagination and multiple pages successfully</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Robust error handling for website changes</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Data cleaning pipeline removes duplicates effectively</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Database Integration:**</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>All data successfully stored in structured SQLite database</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Proper indexing for efficient queries</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Data integrity constraints maintained</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>**Success Metrics:**</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Quantity:** Total items collected across all categories</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Coverage:** Number of unique destinations covered</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Completeness:** Percentage of fields populated per category</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Accuracy:** Manual validation of sample data entries</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>**Out of Scope:**</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Real-time data updates or live synchronization</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Advanced recommendation algorithms</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>User interface development</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Commercial deployment or monetization</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Mining Goals</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>**Primary Data Mining Task: Data Integration and Information Extraction**</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>**Technical Objectives:**</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Web Scraping and Data Extraction:**</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Extract structured data from unstructured web content</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Handle dynamic content and pagination</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Parse and normalize pricing, rating, and location data</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Data Cleaning and Preprocessing:**</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Remove duplicate entries based on name/location similarity</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Standardize pricing formats and currency conversions</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Validate and clean URLs, ratings, and text content</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Data Integration:**</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Merge data from multiple sources (hotels, activities, destinations)</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Create unified schema across different data types</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Establish relationships between accommodations, activities, and destinations</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Feature Engineering:**</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Generate unique identifiers for entities</span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Extract location coordinates where available</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Categorize and tag content appropriately</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>**Quantitative Success Criteria:**</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Completeness Score:** &gt;75% for critical fields (name, location, price/rating)</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Duplicate Reduction:** &lt;5% duplicate entries after cleaning</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Integration Success:** Successfully merge &gt;95% of collected data into unified schema</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Processing Accuracy:** &lt;2% data corruption during cleaning and transformation</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>**Technical Requirements:**</span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Scalable data processing pipeline handling 10,000+ records</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Robust error handling with &lt;1% data loss due to processing errors</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Database performance supporting sub-second queries on full dataset</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="fu">## Project Plan</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>**TravelHunters Data Collection and Integration Project**</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>The project follows the CRISP-DM methodology adapted for web scraping and data integration:</span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="al">![TravelHunters Project Timeline](pics/gantt-mermaid.png)</span>{#fig-project-plan}</span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a><span class="in">```mermaid</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>gantt</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>    title TravelHunters Project Timeline - July <span class="dv">2025</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>    dateFormat YYYY<span class="bn">-07</span>-DD</span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>    tickInterval <span class="dv">1</span>day</span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>    section Project Setup</span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>        Define problem <span class="ot">and</span> goals     :done, a1, <span class="dv">2025</span><span class="bn">-07-01</span>, <span class="dv">1</span>d</span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>        Setup development environment     :done, a2, <span class="dv">2025</span><span class="bn">-07-01</span>, <span class="dv">1</span>d</span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>        Initial spider development     :done, a3, <span class="dv">2025</span><span class="bn">-07-02</span>, <span class="dv">1</span>d</span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>        Project foundation: milestone, done, m1, <span class="dv">2025</span><span class="bn">-07-03</span>, <span class="dv">0</span>d</span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>    section Data Acquisition</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>        Booking.com spider development :done, a4, <span class="dv">2025</span><span class="bn">-07-02</span>, <span class="dv">2</span>d</span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>        Activities spider implementation   :done, a5, <span class="dv">2025</span><span class="bn">-07-03</span>, <span class="dv">1</span>d</span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>        Destinations data collection :done, a6, <span class="dv">2025</span><span class="bn">-07-03</span>, <span class="dv">1</span>d</span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>        Worldwide data scraping :done, a7, <span class="dv">2025</span><span class="bn">-07-04</span>, <span class="dv">2</span>d</span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>        Data collection complete: milestone, done, m2, <span class="dv">2025</span><span class="bn">-07-06</span>, <span class="dv">0</span>d</span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>    section Data Processing</span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>        Data cleaning pipeline   :active, a8, <span class="dv">2025</span><span class="bn">-07-03</span>, <span class="dv">2</span>d</span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a>        Database integration :a9, <span class="dv">2025</span><span class="bn">-07-03</span>, <span class="dv">1</span>d</span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>        Duplicate removal <span class="ot">and</span> validation :a10, <span class="dv">2025</span><span class="bn">-07-04</span>, <span class="dv">1</span>d</span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a>        Quality assurance :a11, <span class="dv">2025</span><span class="bn">-07-04</span>, <span class="dv">1</span>d</span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>    section Analysis &amp; Documentation</span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>        Exploratory data analysis :a12, <span class="dv">2025</span><span class="bn">-07-05</span>, <span class="dv">2</span>d</span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>        Documentation completion :a13, <span class="dv">2025</span><span class="bn">-07-06</span>, <span class="dv">2</span>d</span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>        Final evaluation :a14, <span class="dv">2025</span><span class="bn">-07-07</span>, <span class="dv">1</span>d</span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>        Project completion : milestone, m3, <span class="dv">2025</span><span class="bn">-07</span><span class="dv">-08</span>, <span class="dv">0</span>d</span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>**Phase Descriptions:**</span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Project Setup (Days 1-3):** Environment setup, initial spider development, proof of concept</span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Acquisition (Days 2-6):** Large-scale data collection from multiple sources with pagination</span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Processing (Days 3-5):** Cleaning, integration, and database storage</span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Analysis &amp; Documentation (Days 5-8):** Analysis, documentation, and final evaluation</span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a><span class="fu">## Roles and Contact Details</span></span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>List the people involved in the development work here with their role titles, tasks and contact details</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 

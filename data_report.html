@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>data_report – Sample Project</title>
+<title>data_report – TravelHunters - Documentation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -39,13 +74,13 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a98ec624fb63d9b712fc3a6f62e2b305.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9344fb9851b4da3cab95007ef9d770dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -72,16 +107,55 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TravelHunters</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project_charta.html"> 
+<span class="menu-text">Project Charter</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./data_report.html"> 
+<span class="menu-text">Data Report</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./modelling_report.html"> 
+<span class="menu-text">Modelling</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./evaluation.html"> 
+<span class="menu-text">Evaluation</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_report.html">Data Report</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_report.html">Daten &amp; Modellierung</a></li><li class="breadcrumb-item"><a href="./data_report.html">Data Report - TravelHunters Project</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -91,14 +165,9 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Sample Project</a> 
-    </div>
-      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -106,36 +175,69 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projektübersicht</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">About This Documentation</span></a>
+ <span class="menu-text">TravelHunters - Documentation</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./project_charta.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Project Charta</span></a>
+ <span class="menu-text">Project Charta - TravelHunters</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Daten &amp; Modellierung</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_report.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Data Report</span></a>
+ <span class="menu-text">Data Report - TravelHunters Project</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_report.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Modelling Report</span></a>
+ <span class="menu-text">Modelling Report - TravelHunters Project</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Evaluation &amp; Deployment</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Evaluation</span></a>
+ <span class="menu-text">evaluation.html</span></a>
   </div>
 </li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -146,37 +248,40 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-report" id="toc-data-report" class="nav-link active" data-scroll-target="#data-report">Data Report</a>
+  <li><a href="#data-report---travelhunters-project" id="toc-data-report---travelhunters-project" class="nav-link active" data-scroll-target="#data-report---travelhunters-project"><span class="header-section-number">1</span> Data Report - TravelHunters Project</a>
   <ul class="collapse">
-  <li><a href="#raw-data" id="toc-raw-data" class="nav-link" data-scroll-target="#raw-data">Raw data</a>
+  <li><a href="#raw-data" id="toc-raw-data" class="nav-link" data-scroll-target="#raw-data"><span class="header-section-number">1.1</span> Raw Data</a>
   <ul class="collapse">
-  <li><a href="#overview-raw-datasets" id="toc-overview-raw-datasets" class="nav-link" data-scroll-target="#overview-raw-datasets">Overview Raw Datasets</a></li>
-  <li><a href="#details-dataset-1" id="toc-details-dataset-1" class="nav-link" data-scroll-target="#details-dataset-1">Details Dataset 1</a></li>
+  <li><a href="#overview-of-raw-datasets" id="toc-overview-of-raw-datasets" class="nav-link" data-scroll-target="#overview-of-raw-datasets"><span class="header-section-number">1.1.1</span> Overview of Raw Datasets</a></li>
+  <li><a href="#details-booking.com-hotels-dataset" id="toc-details-booking.com-hotels-dataset" class="nav-link" data-scroll-target="#details-booking.com-hotels-dataset"><span class="header-section-number">1.1.2</span> Details Booking.com Hotels Dataset</a></li>
+  <li><a href="#details-activities-dataset" id="toc-details-activities-dataset" class="nav-link" data-scroll-target="#details-activities-dataset"><span class="header-section-number">1.1.3</span> Details Activities Dataset</a></li>
+  <li><a href="#entity-relationship-diagram" id="toc-entity-relationship-diagram" class="nav-link" data-scroll-target="#entity-relationship-diagram"><span class="header-section-number">1.1.4</span> Entity Relationship Diagram</a></li>
+  <li><a href="#data-quality" id="toc-data-quality" class="nav-link" data-scroll-target="#data-quality"><span class="header-section-number">1.1.5</span> Data Quality</a></li>
   </ul></li>
-  <li><a href="#processed-data" id="toc-processed-data" class="nav-link" data-scroll-target="#processed-data">Processed Data</a>
+  <li><a href="#processed-data" id="toc-processed-data" class="nav-link" data-scroll-target="#processed-data"><span class="header-section-number">1.2</span> Processed Data</a>
   <ul class="collapse">
-  <li><a href="#overview-processed-datasets" id="toc-overview-processed-datasets" class="nav-link" data-scroll-target="#overview-processed-datasets">Overview Processed Datasets</a></li>
-  <li><a href="#details-processed-dataset-1" id="toc-details-processed-dataset-1" class="nav-link" data-scroll-target="#details-processed-dataset-1">Details Processed Dataset 1</a></li>
-  <li><a href="#details-processed-dataset-2" id="toc-details-processed-dataset-2" class="nav-link" data-scroll-target="#details-processed-dataset-2">Details Processed Dataset 2</a></li>
+  <li><a href="#overview-of-processed-datasets" id="toc-overview-of-processed-datasets" class="nav-link" data-scroll-target="#overview-of-processed-datasets"><span class="header-section-number">1.2.1</span> Overview of Processed Datasets</a></li>
+  <li><a href="#details-merged-travel-data" id="toc-details-merged-travel-data" class="nav-link" data-scroll-target="#details-merged-travel-data"><span class="header-section-number">1.2.2</span> Details Merged Travel Data</a></li>
+  <li><a href="#details-processed-dataset-2" id="toc-details-processed-dataset-2" class="nav-link" data-scroll-target="#details-processed-dataset-2"><span class="header-section-number">1.2.3</span> Details Processed Dataset 2</a></li>
   </ul></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="data_report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_report.html">Daten &amp; Modellierung</a></li><li class="breadcrumb-item"><a href="./data_report.html">Data Report - TravelHunters Project</a></li></ol></nav><h1 class="title display-7"></h1></header><div class="quarto-title-block"><div class="quarto-title-tools-only"><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 
 
 
 
-<section id="data-report" class="level1">
-<h1>Data Report</h1>
-<p>All information on the data used in the project is compiled in the data report in order to ensure the traceability and reproducibility of the results and to enable a systematic expansion of the database.</p>
-<p>Typically, in the exploratory analysis of the acquired raw data, quality and other issues are identified, which require pre-processing, merging of individual datasets and feature engineering into processed datasets. Therefore, this template provides a separate section for the processed data, which then serves as a starting point for the modelling activities. This needs to be adapted to the specific project requirements.</p>
-<section id="raw-data" class="level2">
-<h2 class="anchored" data-anchor-id="raw-data">Raw data</h2>
-<section id="overview-raw-datasets" class="level3">
-<h3 class="anchored" data-anchor-id="overview-raw-datasets">Overview Raw Datasets</h3>
+<section id="data-report---travelhunters-project" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Data Report - TravelHunters Project</h1>
+<p>This document describes all data used in the TravelHunters project and ensures traceability and reproducibility of results.</p>
+<p>The TravelHunters project collects and processes travel data from various sources to create a comprehensive dataset for hotels, activities, and destinations. Data is collected through web scraping, cleaned, and stored in a structured database.</p>
+<section id="raw-data" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="raw-data"><span class="header-section-number">1.1</span> Raw Data</h2>
+<section id="overview-of-raw-datasets" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="overview-of-raw-datasets"><span class="header-section-number">1.1.1</span> Overview of Raw Datasets</h3>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 12%">
@@ -186,92 +291,195 @@ ul.task-list li input[type="checkbox"] {
 <thead>
 <tr class="header">
 <th>Name</th>
-<th>Quelle</th>
-<th>Storage location</th>
+<th>Source</th>
+<th>Storage Location</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Dataset 1</td>
-<td>Name/short description of the data source</td>
-<td>Link and/or short description of the location where the data is stored, e.g.&nbsp;accessible to the team</td>
+<td>Booking.com Hotels</td>
+<td>Booking.com via Scrapy Spider</td>
+<td><code>data_acquisition/json_backup/booking_worldwide.json</code></td>
 </tr>
 <tr class="even">
-<td>Dataset 2</td>
-<td>…</td>
-<td>…</td>
+<td>Activities Data</td>
+<td>GetYourGuide via Scrapy Spider</td>
+<td><code>data_acquisition/json_backup/activities_worldwide.json</code></td>
+</tr>
+<tr class="odd">
+<td>Destinations Data</td>
+<td>Tourism Websites via Scrapy Spider</td>
+<td><code>data_acquisition/json_backup/destinations_worldwide.json</code></td>
+</tr>
+<tr class="even">
+<td>Accommodations Data</td>
+<td>Various Sources (Hostelworld, Airbnb)</td>
+<td><code>data_acquisition/json_backup/hotels.json</code></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="details-dataset-1" class="level3">
-<h3 class="anchored" data-anchor-id="details-dataset-1">Details Dataset 1</h3>
+<section id="details-booking.com-hotels-dataset" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="details-booking.com-hotels-dataset"><span class="header-section-number">1.1.2</span> Details Booking.com Hotels Dataset</h3>
 <ul>
-<li>Description of what information the dataset contains</li>
-<li>Details of the data source/provider</li>
-<li>Information on data procurement: description and possibly references to resources (download scripts, tools, online services, …). Any new team member should be able to acquire the data indepentendently following these instructions.</li>
-<li>Legal aspects of data use, licences, etc.</li>
-<li>Data governance aspects: Categorisation of the data based on internal business requirements, e.g.&nbsp;public, business-relevant, personal</li>
-<li>If applicable: categorisation into dependent (target variable, regressor) and independent (regressor) variables</li>
-<li>…</li>
+<li><strong>Description</strong>: Hotel data from Booking.com including names, ratings, prices, locations and image URLs</li>
+<li><strong>Data Source</strong>: Booking.com website via Scrapy Spider (<code>scraping_data_files/spiders/booking.py</code>)</li>
+<li><strong>Data Acquisition</strong>: Automated web scraping with pagination for worldwide coverage</li>
+<li><strong>Legal Aspects</strong>: Publicly available data, respecting robots.txt</li>
+<li><strong>Data Classification</strong>: Public business data</li>
+<li><strong>Variables</strong>: Hotel name, rating, price, location, image URLs, description</li>
 </ul>
-<section id="data-catalogue" class="level4">
-<h4 class="anchored" data-anchor-id="data-catalogue">Data Catalogue</h4>
-<p>The data catalogue basically represents an extended schema of a relational database.</p>
+<section id="data-catalogue---hotels" class="level4" data-number="1.1.2.1">
+<h4 data-number="1.1.2.1" class="anchored" data-anchor-id="data-catalogue---hotels"><span class="header-section-number">1.1.2.1</span> Data Catalogue - Hotels</h4>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Column index</th>
-<th>Column name</th>
+<th>Column Index</th>
+<th>Column Name</th>
 <th>Datatype</th>
-<th>Values (Range, validation rules)</th>
-<th>Short description</th>
+<th>Values</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>name</td>
+<td>TEXT</td>
+<td>String</td>
+<td>Hotel name</td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>rating</td>
+<td>REAL</td>
+<td>0.0-10.0</td>
+<td>Hotel rating</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>3</td>
+<td>price</td>
+<td>TEXT</td>
+<td>String/NULL</td>
+<td>Price information</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>location</td>
+<td>TEXT</td>
+<td>String</td>
+<td>Hotel location</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>image_urls</td>
+<td>TEXT</td>
+<td>JSON Array</td>
+<td>Hotel image URLs</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>description</td>
+<td>TEXT</td>
+<td>String/NULL</td>
+<td>Hotel description</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>source</td>
+<td>TEXT</td>
+<td>String</td>
+<td>Data source (booking.com)</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="if-applicable-entity-relationship-diagram" class="level4">
-<h4 class="anchored" data-anchor-id="if-applicable-entity-relationship-diagram">If applicable: Entity Relationship Diagram</h4>
 </section>
-<section id="data-quality" class="level4">
-<h4 class="anchored" data-anchor-id="data-quality">Data Quality</h4>
+<section id="details-activities-dataset" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="details-activities-dataset"><span class="header-section-number">1.1.3</span> Details Activities Dataset</h3>
+<ul>
+<li><strong>Description</strong>: Activities and tours from GetYourGuide with prices, ratings and locations</li>
+<li><strong>Data Source</strong>: GetYourGuide website via Scrapy Spider (<code>scraping_data_files/spiders/activities.py</code>)</li>
+<li><strong>Data Acquisition</strong>: Web scraping with pagination for various destinations</li>
+<li><strong>Data Classification</strong>: Public business data</li>
+</ul>
+<section id="data-catalogue---activities" class="level4" data-number="1.1.3.1">
+<h4 data-number="1.1.3.1" class="anchored" data-anchor-id="data-catalogue---activities"><span class="header-section-number">1.1.3.1</span> Data Catalogue - Activities</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Column Index</th>
+<th>Column Name</th>
+<th>Datatype</th>
+<th>Values</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>title</td>
+<td>TEXT</td>
+<td>String</td>
+<td>Activity title</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>price</td>
+<td>TEXT</td>
+<td>String/NULL</td>
+<td>Price information</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>rating</td>
+<td>REAL</td>
+<td>0.0-5.0</td>
+<td>Activity rating</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>location</td>
+<td>TEXT</td>
+<td>String</td>
+<td>Activity location</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>image_urls</td>
+<td>TEXT</td>
+<td>JSON Array</td>
+<td>Activity image URLs</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>source</td>
+<td>TEXT</td>
+<td>String</td>
+<td>Data source (getyourguide.com)</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
+<section id="entity-relationship-diagram" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="entity-relationship-diagram"><span class="header-section-number">1.1.4</span> Entity Relationship Diagram</h3>
+<p>The ER diagram is located at <code>docs/er_diagramm/er_diagramm-ER.svg</code> and shows the relationships between Hotels, Activities and Destinations.</p>
 </section>
-<section id="processed-data" class="level2">
-<h2 class="anchored" data-anchor-id="processed-data">Processed Data</h2>
-<section id="overview-processed-datasets" class="level3">
-<h3 class="anchored" data-anchor-id="overview-processed-datasets">Overview Processed Datasets</h3>
+<section id="data-quality" class="level3" data-number="1.1.5">
+<h3 data-number="1.1.5" class="anchored" data-anchor-id="data-quality"><span class="header-section-number">1.1.5</span> Data Quality</h3>
+<ul>
+<li><strong>Completeness</strong>: &gt;95% of hotels have names and locations, ~80% have ratings</li>
+<li><strong>Consistency</strong>: Uniform data formats through validation and cleaning</li>
+<li><strong>Currency</strong>: Data regularly updated through re-scraping</li>
+<li><strong>Accuracy</strong>: Automatic validation of URLs and data formats</li>
+</ul>
+</section>
+</section>
+<section id="processed-data" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="processed-data"><span class="header-section-number">1.2</span> Processed Data</h2>
+<section id="overview-of-processed-datasets" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="overview-of-processed-datasets"><span class="header-section-number">1.2.1</span> Overview of Processed Datasets</h3>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 12%">
@@ -281,43 +489,59 @@ ul.task-list li input[type="checkbox"] {
 <thead>
 <tr class="header">
 <th>Name</th>
-<th>Quelle</th>
-<th>Storage location</th>
+<th>Source</th>
+<th>Storage Location</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Processed Dataset 1</td>
-<td>Name/short description of the data source</td>
-<td>Link and/or short description of the location where the data is stored, e.g.&nbsp;accessible to the team</td>
+<td>Merged Travel Data</td>
+<td>Consolidation of all raw data</td>
+<td><code>data_acquisition/merged_travel_data.json</code></td>
 </tr>
 <tr class="even">
-<td>Processed Dataset 2</td>
-<td>…</td>
-<td>…</td>
+<td>TravelHunters Database</td>
+<td>Cleaned and structured data</td>
+<td><code>database/travelhunters.db</code></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="details-processed-dataset-1" class="level3">
-<h3 class="anchored" data-anchor-id="details-processed-dataset-1">Details Processed Dataset 1</h3>
+<section id="details-merged-travel-data" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="details-merged-travel-data"><span class="header-section-number">1.2.2</span> Details Merged Travel Data</h3>
 <ul>
-<li>Description of what information the dataset contains</li>
-<li>Details and reasons for the processing steps -&gt; Traceability and ensuring reproducibility</li>
-<li>How can the data be accessed? Description, scripts, tools, …</li>
-<li>…</li>
+<li><strong>Description</strong>: Consolidated and cleaned data from all sources in uniform format</li>
+<li><strong>Processing Steps</strong>:
+<ul>
+<li>Data loading from JSON files</li>
+<li>Validation and cleaning (URL validation, duplicate removal)</li>
+<li>Data format normalization</li>
+<li>Consolidation into SQLite database</li>
+</ul></li>
+<li><strong>Access</strong>: Via <code>data_cleaning_and_db_integration.py</code> script</li>
+<li><strong>Statistics</strong>:
+<ul>
+<li><blockquote class="blockquote">
+<p>2,000 hotels from Booking.com</p>
+</blockquote></li>
+<li>~90 activities from GetYourGuide</li>
+<li>~671 destinations</li>
+<li>Total: &gt;2,700 records</li>
+</ul></li>
 </ul>
-<section id="data-catalogue-1" class="level4">
-<h4 class="anchored" data-anchor-id="data-catalogue-1">Data Catalogue</h4>
+<section id="data-catalogue" class="level4" data-number="1.2.2.1">
+<h4 data-number="1.2.2.1" class="anchored" data-anchor-id="data-catalogue"><span class="header-section-number">1.2.2.1</span> Data Catalogue</h4>
 </section>
-<section id="if-applicable-entity-relationship-diagram-1" class="level4">
-<h4 class="anchored" data-anchor-id="if-applicable-entity-relationship-diagram-1">If applicable: Entity Relationship Diagram</h4>
+<section id="if-applicable-entity-relationship-diagram" class="level4" data-number="1.2.2.2">
+<h4 data-number="1.2.2.2" class="anchored" data-anchor-id="if-applicable-entity-relationship-diagram"><span class="header-section-number">1.2.2.2</span> If applicable: Entity Relationship Diagram</h4>
 </section>
 </section>
-<section id="details-processed-dataset-2" class="level3">
-<h3 class="anchored" data-anchor-id="details-processed-dataset-2">Details Processed Dataset 2</h3>
+<section id="details-processed-dataset-2" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="details-processed-dataset-2"><span class="header-section-number">1.2.3</span> Details Processed Dataset 2</h3>
 <p>…</p>
 
+
+<!-- -->
 
 </section>
 </section>
@@ -394,9 +618,60 @@ ul.task-list li input[type="checkbox"] {
       });
       clipboardModal.on('success', onCopySuccess);
     }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/daai25\.github\.io\/TravelHunters\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -722,7 +997,95 @@ ul.task-list li input[type="checkbox"] {
       }
     }
   });
-  </script>
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data Report - TravelHunters Project</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>This document describes all data used in the TravelHunters project and ensures traceability and reproducibility of results.</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>The TravelHunters project collects and processes travel data from various sources to create a comprehensive dataset for hotels, activities, and destinations. Data is collected through web scraping, cleaned, and stored in a structured database.</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Raw Data</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">### Overview of Raw Datasets</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Name <span class="pp">|</span> Source <span class="pp">|</span> Storage Location <span class="pp">|</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------------|-----------------------------------------|--------------------------------------------------------------------------|</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Booking.com Hotels <span class="pp">|</span> Booking.com via Scrapy Spider <span class="pp">|</span> <span class="in">`data_acquisition/json_backup/booking_worldwide.json`</span> <span class="pp">|</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Activities Data <span class="pp">|</span> GetYourGuide via Scrapy Spider <span class="pp">|</span> <span class="in">`data_acquisition/json_backup/activities_worldwide.json`</span> <span class="pp">|</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Destinations Data <span class="pp">|</span> Tourism Websites via Scrapy Spider <span class="pp">|</span> <span class="in">`data_acquisition/json_backup/destinations_worldwide.json`</span> <span class="pp">|</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Accommodations Data <span class="pp">|</span> Various Sources (Hostelworld, Airbnb) <span class="pp">|</span> <span class="in">`data_acquisition/json_backup/hotels.json`</span> <span class="pp">|</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">### Details Booking.com Hotels Dataset</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Description**: Hotel data from Booking.com including names, ratings, prices, locations and image URLs</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Source**: Booking.com website via Scrapy Spider (<span class="in">`scraping_data_files/spiders/booking.py`</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Acquisition**: Automated web scraping with pagination for worldwide coverage</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Legal Aspects**: Publicly available data, respecting robots.txt</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Classification**: Public business data</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Variables**: Hotel name, rating, price, location, image URLs, description</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Data Catalogue - Hotels</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column Index <span class="pp">|</span> Column Name <span class="pp">|</span> Datatype <span class="pp">|</span> Values <span class="pp">|</span> Description <span class="pp">|</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|---|</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> name <span class="pp">|</span> TEXT <span class="pp">|</span> String <span class="pp">|</span> Hotel name <span class="pp">|</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> rating <span class="pp">|</span> REAL <span class="pp">|</span> 0.0-10.0 <span class="pp">|</span> Hotel rating <span class="pp">|</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> price <span class="pp">|</span> TEXT <span class="pp">|</span> String/NULL <span class="pp">|</span> Price information <span class="pp">|</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> location <span class="pp">|</span> TEXT <span class="pp">|</span> String <span class="pp">|</span> Hotel location <span class="pp">|</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 5 <span class="pp">|</span> image_urls <span class="pp">|</span> TEXT <span class="pp">|</span> JSON Array <span class="pp">|</span> Hotel image URLs <span class="pp">|</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 6 <span class="pp">|</span> description <span class="pp">|</span> TEXT <span class="pp">|</span> String/NULL <span class="pp">|</span> Hotel description <span class="pp">|</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 7 <span class="pp">|</span> source <span class="pp">|</span> TEXT <span class="pp">|</span> String <span class="pp">|</span> Data source (booking.com) <span class="pp">|</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">### Details Activities Dataset</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Description**: Activities and tours from GetYourGuide with prices, ratings and locations</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Source**: GetYourGuide website via Scrapy Spider (<span class="in">`scraping_data_files/spiders/activities.py`</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Acquisition**: Web scraping with pagination for various destinations</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Classification**: Public business data</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Data Catalogue - Activities</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column Index <span class="pp">|</span> Column Name <span class="pp">|</span> Datatype <span class="pp">|</span> Values <span class="pp">|</span> Description <span class="pp">|</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|---|</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> title <span class="pp">|</span> TEXT <span class="pp">|</span> String <span class="pp">|</span> Activity title <span class="pp">|</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> price <span class="pp">|</span> TEXT <span class="pp">|</span> String/NULL <span class="pp">|</span> Price information <span class="pp">|</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> rating <span class="pp">|</span> REAL <span class="pp">|</span> 0.0-5.0 <span class="pp">|</span> Activity rating <span class="pp">|</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> location <span class="pp">|</span> TEXT <span class="pp">|</span> String <span class="pp">|</span> Activity location <span class="pp">|</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 5 <span class="pp">|</span> image_urls <span class="pp">|</span> TEXT <span class="pp">|</span> JSON Array <span class="pp">|</span> Activity image URLs <span class="pp">|</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 6 <span class="pp">|</span> source <span class="pp">|</span> TEXT <span class="pp">|</span> String <span class="pp">|</span> Data source (getyourguide.com) <span class="pp">|</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### Entity Relationship Diagram</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>The ER diagram is located at <span class="in">`docs/er_diagramm/er_diagramm-ER.svg`</span> and shows the relationships between Hotels, Activities and Destinations.</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="fu">### Data Quality</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Completeness**: &gt;95% of hotels have names and locations, ~80% have ratings</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Consistency**: Uniform data formats through validation and cleaning</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Currency**: Data regularly updated through re-scraping</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Accuracy**: Automatic validation of URLs and data formats</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Processed Data</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">### Overview of Processed Datasets</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Name <span class="pp">|</span> Source <span class="pp">|</span> Storage Location <span class="pp">|</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------------|-----------------------------------------|--------------------------------------------------------------------------|</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Merged Travel Data <span class="pp">|</span> Consolidation of all raw data <span class="pp">|</span> <span class="in">`data_acquisition/merged_travel_data.json`</span> <span class="pp">|</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> TravelHunters Database <span class="pp">|</span> Cleaned and structured data <span class="pp">|</span> <span class="in">`database/travelhunters.db`</span> <span class="pp">|</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="fu">### Details Merged Travel Data</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Description**: Consolidated and cleaned data from all sources in uniform format</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Processing Steps**: </span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Data loading from JSON files</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Validation and cleaning (URL validation, duplicate removal)</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Data format normalization</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Consolidation into SQLite database</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Access**: Via <span class="in">`data_cleaning_and_db_integration.py`</span> script</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Statistics**: </span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>&gt;2,000 hotels from Booking.com</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>~90 activities from GetYourGuide</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>~671 destinations</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Total: &gt;2,700 records</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Data Catalogue</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="fu">#### If applicable: Entity Relationship Diagram</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### Details Processed Dataset 2</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>...</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 

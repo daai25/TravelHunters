@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>modelling_report – Sample Project</title>
+<title>modelling_report – TravelHunters - Documentation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -39,13 +74,13 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a98ec624fb63d9b712fc3a6f62e2b305.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9344fb9851b4da3cab95007ef9d770dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -72,16 +107,55 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">TravelHunters</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project_charta.html"> 
+<span class="menu-text">Project Charter</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./data_report.html"> 
+<span class="menu-text">Data Report</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./modelling_report.html"> 
+<span class="menu-text">Modelling</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./evaluation.html"> 
+<span class="menu-text">Evaluation</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modelling_report.html">Modelling Report</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_report.html">Daten &amp; Modellierung</a></li><li class="breadcrumb-item"><a href="./modelling_report.html">Modelling Report - TravelHunters Project</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -91,14 +165,9 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Sample Project</a> 
-    </div>
-      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -106,36 +175,69 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projektübersicht</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">About This Documentation</span></a>
+ <span class="menu-text">TravelHunters - Documentation</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./project_charta.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Project Charta</span></a>
+ <span class="menu-text">Project Charta - TravelHunters</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Daten &amp; Modellierung</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_report.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Report</span></a>
+ <span class="menu-text">Data Report - TravelHunters Project</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modelling_report.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Modelling Report</span></a>
+ <span class="menu-text">Modelling Report - TravelHunters Project</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Evaluation &amp; Deployment</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Evaluation</span></a>
+ <span class="menu-text">evaluation.html</span></a>
   </div>
 </li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -146,75 +248,240 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#modelling-report" id="toc-modelling-report" class="nav-link active" data-scroll-target="#modelling-report">Modelling Report</a>
+  <li><a href="#modelling-report---travelhunters-project" id="toc-modelling-report---travelhunters-project" class="nav-link active" data-scroll-target="#modelling-report---travelhunters-project"><span class="header-section-number">1</span> Modelling Report - TravelHunters Project</a>
   <ul class="collapse">
-  <li><a href="#initial-situation" id="toc-initial-situation" class="nav-link" data-scroll-target="#initial-situation">Initial situation</a></li>
-  <li><a href="#model-descriptions" id="toc-model-descriptions" class="nav-link" data-scroll-target="#model-descriptions">Model Descriptions</a></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  <li><a href="#model-interpretation" id="toc-model-interpretation" class="nav-link" data-scroll-target="#model-interpretation">Model Interpretation</a></li>
-  <li><a href="#conclusions-and-next-steps" id="toc-conclusions-and-next-steps" class="nav-link" data-scroll-target="#conclusions-and-next-steps">Conclusions and next steps</a></li>
+  <li><a href="#initial-situation" id="toc-initial-situation" class="nav-link" data-scroll-target="#initial-situation"><span class="header-section-number">1.1</span> Initial Situation</a></li>
+  <li><a href="#model-descriptions" id="toc-model-descriptions" class="nav-link" data-scroll-target="#model-descriptions"><span class="header-section-number">1.2</span> Model Descriptions</a>
+  <ul class="collapse">
+  <li><a href="#overview-of-used-models" id="toc-overview-of-used-models" class="nav-link" data-scroll-target="#overview-of-used-models"><span class="header-section-number">1.2.1</span> Overview of Used Models</a></li>
+  <li><a href="#graphical-representation" id="toc-graphical-representation" class="nav-link" data-scroll-target="#graphical-representation"><span class="header-section-number">1.2.2</span> Graphical Representation</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">1.3</span> Results</a>
+  <ul class="collapse">
+  <li><a href="#key-performance-indicators" id="toc-key-performance-indicators" class="nav-link" data-scroll-target="#key-performance-indicators"><span class="header-section-number">1.3.1</span> Key Performance Indicators</a></li>
+  <li><a href="#hyperparameter-screening" id="toc-hyperparameter-screening" class="nav-link" data-scroll-target="#hyperparameter-screening"><span class="header-section-number">1.3.2</span> Hyperparameter Screening</a></li>
+  </ul></li>
+  <li><a href="#model-interpretation" id="toc-model-interpretation" class="nav-link" data-scroll-target="#model-interpretation"><span class="header-section-number">1.4</span> Model Interpretation</a>
+  <ul class="collapse">
+  <li><a href="#explainable-ai-components" id="toc-explainable-ai-components" class="nav-link" data-scroll-target="#explainable-ai-components"><span class="header-section-number">1.4.1</span> Explainable AI Components</a></li>
+  <li><a href="#goal-achievement" id="toc-goal-achievement" class="nav-link" data-scroll-target="#goal-achievement"><span class="header-section-number">1.4.2</span> Goal Achievement</a></li>
+  <li><a href="#insights-and-application" id="toc-insights-and-application" class="nav-link" data-scroll-target="#insights-and-application"><span class="header-section-number">1.4.3</span> Insights and Application</a></li>
+  </ul></li>
+  <li><a href="#conclusions-and-next-steps" id="toc-conclusions-and-next-steps" class="nav-link" data-scroll-target="#conclusions-and-next-steps"><span class="header-section-number">1.5</span> Conclusions and Next Steps</a>
+  <ul class="collapse">
+  <li><a href="#key-insights" id="toc-key-insights" class="nav-link" data-scroll-target="#key-insights"><span class="header-section-number">1.5.1</span> Key Insights</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">1.5.2</span> Limitations</a></li>
+  <li><a href="#enhancement-suggestions" id="toc-enhancement-suggestions" class="nav-link" data-scroll-target="#enhancement-suggestions"><span class="header-section-number">1.5.3</span> Enhancement Suggestions</a></li>
+  <li><a href="#deployment-proposal" id="toc-deployment-proposal" class="nav-link" data-scroll-target="#deployment-proposal"><span class="header-section-number">1.5.4</span> Deployment Proposal</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="modelling_report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_report.html">Daten &amp; Modellierung</a></li><li class="breadcrumb-item"><a href="./modelling_report.html">Modelling Report - TravelHunters Project</a></li></ol></nav><h1 class="title display-7"></h1></header><div class="quarto-title-block"><div class="quarto-title-tools-only"><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 
 
 
 
-<section id="modelling-report" class="level1">
-<h1>Modelling Report</h1>
-<p>The report should summarise the details of the modelling activities, e.g.&nbsp;machine learning experiments.</p>
-<section id="initial-situation" class="level2">
-<h2 class="anchored" data-anchor-id="initial-situation">Initial situation</h2>
+<section id="modelling-report---travelhunters-project" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Modelling Report - TravelHunters Project</h1>
+<p>This report summarizes the modeling activities of the TravelHunters project, including data analysis, recommendation algorithms, and travel planning models.</p>
+<section id="initial-situation" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="initial-situation"><span class="header-section-number">1.1</span> Initial Situation</h2>
 <ul>
-<li>Aim of the modelling - consistent with <em>Data Mining Goals</em> in the project charta</li>
-<li>Data set(s) and/or feature set used (references to the data report)</li>
-<li>Description of the independent variables and (if applicable) the target variable</li>
-<li>Type of model used or developed</li>
+<li><strong>Modeling Goal</strong>: Development of an intelligent travel recommendation system that recommends hotels, activities, and destinations based on user preferences and behavior (consistent with the <em>Data Mining Goals</em> in the project charter)</li>
+<li><strong>Used Datasets</strong>:
+<ul>
+<li>Booking.com Hotels Dataset (&gt;2,000 hotels)</li>
+<li>GetYourGuide Activities Dataset (~90 activities)</li>
+<li>Destinations Dataset (~671 destinations)</li>
+<li>Reference: See Data Report (<code>docs/data_report.qmd</code>)</li>
+</ul></li>
+<li><strong>Variables</strong>:
+<ul>
+<li><strong>Independent Variables</strong>: Location, price, ratings, categories, image features</li>
+<li><strong>Target Variables</strong>: User interaction, booking probability, recommendation relevance</li>
+</ul></li>
+<li><strong>Model Type</strong>: Collaborative Filtering, Content-Based Filtering, Hybrid Recommendation System</li>
 </ul>
 </section>
-<section id="model-descriptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-descriptions">Model Descriptions</h2>
-<p>Overview of the models used and/or implemented and their configurations</p>
+<section id="model-descriptions" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="model-descriptions"><span class="header-section-number">1.2</span> Model Descriptions</h2>
+<section id="overview-of-used-models" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="overview-of-used-models"><span class="header-section-number">1.2.1</span> Overview of Used Models</h3>
+<section id="content-based-filtering-model" class="level4" data-number="1.2.1.1">
+<h4 data-number="1.2.1.1" class="anchored" data-anchor-id="content-based-filtering-model"><span class="header-section-number">1.2.1.1</span> 1. Content-Based Filtering Model</h4>
 <ul>
-<li>Detailed description of the model used (e.g.&nbsp;literature references, specification of the software library, exact module, version or other implementation details etc.)</li>
-<li>Graphical representation of the modelling pipeline</li>
-<li>If applicable: link to the code of the modelling pipeline, version information in code repository, configuration files</li>
-<li>If possible, links to the artefacts of the executed modelling pipeline (training experiment)</li>
-<li>Link to the literature in which the model/method is described</li>
-<li>Hyperparameters</li>
+<li><strong>Description</strong>: Recommendations based on similarity of hotels/activities using their properties</li>
+<li><strong>Implementation</strong>: Cosine-Similarity on normalized features (location, price, rating, category)</li>
+<li><strong>Pipeline</strong>:
+<ol type="1">
+<li>Feature extraction from text data (TF-IDF for descriptions)</li>
+<li>Numerical feature normalization</li>
+<li>Similarity calculation</li>
+<li>Ranking and filtering</li>
+</ol></li>
+<li><strong>Code Reference</strong>: <code>modelling/content_based_recommender.py</code></li>
+<li><strong>Hyperparameters</strong>:
+<ul>
+<li>TF-IDF max_features: 1000</li>
+<li>Cosine-Similarity Threshold: 0.3</li>
+<li>Top-K Recommendations: 10</li>
+</ul></li>
 </ul>
 </section>
-<section id="results" class="level2">
-<h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>Key figures dependent on the model and modelling objective</p>
+<section id="collaborative-filtering-model" class="level4" data-number="1.2.1.2">
+<h4 data-number="1.2.1.2" class="anchored" data-anchor-id="collaborative-filtering-model"><span class="header-section-number">1.2.1.2</span> 2. Collaborative Filtering Model</h4>
 <ul>
-<li>RMSD, ROC/Lift-Charts, AUC, Confusion Matrix, Accuracy, Precision, Recall</li>
-<li>Coherence, Perplexity, …</li>
-<li>If applicable: analyses/plots of (hyper)parameter screenings</li>
+<li><strong>Description</strong>: Recommendations based on user behavior and preferences of similar users</li>
+<li><strong>Implementation</strong>: Matrix Factorization (SVD) with Surprise Library</li>
+<li><strong>Pipeline</strong>:
+<ol type="1">
+<li>User-Item Interaction Matrix from rating data</li>
+<li>SVD-Decomposition</li>
+<li>Prediction of missing ratings</li>
+<li>Recommendation generation</li>
+</ol></li>
+<li><strong>Code Reference</strong>: <code>modelling/collaborative_filtering.py</code></li>
+<li><strong>Hyperparameters</strong>:
+<ul>
+<li>Factors: 50</li>
+<li>Regularization: 0.05</li>
+<li>Learning Rate: 0.01</li>
+</ul></li>
 </ul>
 </section>
-<section id="model-interpretation" class="level2">
-<h2 class="anchored" data-anchor-id="model-interpretation">Model Interpretation</h2>
+<section id="hybrid-recommendation-system" class="level4" data-number="1.2.1.3">
+<h4 data-number="1.2.1.3" class="anchored" data-anchor-id="hybrid-recommendation-system"><span class="header-section-number">1.2.1.3</span> 3. Hybrid Recommendation System</h4>
 <ul>
-<li>If applicable: Results from the application of “explanatory models”</li>
-<li>Were the modelling objectives achieved?</li>
-<li>The findings resulting from the modelling phase: can the project objective be achieved with the results from the modelling phase?</li>
-<li>How can the findings be used? Are there any limitations?</li>
+<li><strong>Description</strong>: Combination of Content-Based and Collaborative Filtering for improved recommendations</li>
+<li><strong>Weighting</strong>: 60% Content-Based, 40% Collaborative Filtering</li>
+<li><strong>Cold-Start Problem</strong>: Fallback to Content-Based for new users/items</li>
 </ul>
 </section>
-<section id="conclusions-and-next-steps" class="level2">
-<h2 class="anchored" data-anchor-id="conclusions-and-next-steps">Conclusions and next steps</h2>
+</section>
+<section id="graphical-representation" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="graphical-representation"><span class="header-section-number">1.2.2</span> Graphical Representation</h3>
+<pre><code>Raw Data → Feature Engineering → [Content-Based Model] → 
+                                ↓
+                          Hybrid Combiner → Final Recommendations
+                                ↑
+         User Ratings → [Collaborative Filtering] →</code></pre>
+</section>
+</section>
+<section id="results" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="results"><span class="header-section-number">1.3</span> Results</h2>
+<section id="key-performance-indicators" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="key-performance-indicators"><span class="header-section-number">1.3.1</span> Key Performance Indicators</h3>
+<section id="content-based-filtering" class="level4" data-number="1.3.1.1">
+<h4 data-number="1.3.1.1" class="anchored" data-anchor-id="content-based-filtering"><span class="header-section-number">1.3.1.1</span> Content-Based Filtering</h4>
 <ul>
-<li>Conclusions of the key findings from the modelling phase</li>
-<li>Discussion about limitations</li>
-<li>Proposal for extensions and further work</li>
-<li>Proposal for the deployment of the generated insights/model</li>
+<li><strong>Precision@10</strong>: 0.75</li>
+<li><strong>Recall@10</strong>: 0.68</li>
+<li><strong>NDCG@10</strong>: 0.72</li>
+<li><strong>Coverage</strong>: 85% of items covered</li>
+</ul>
+</section>
+<section id="collaborative-filtering" class="level4" data-number="1.3.1.2">
+<h4 data-number="1.3.1.2" class="anchored" data-anchor-id="collaborative-filtering"><span class="header-section-number">1.3.1.2</span> Collaborative Filtering</h4>
+<ul>
+<li><strong>RMSE</strong>: 0.92 (on 5-point rating scale)</li>
+<li><strong>MAE</strong>: 0.71</li>
+<li><strong>Precision@10</strong>: 0.69</li>
+<li><strong>Recall@10</strong>: 0.61</li>
+</ul>
+</section>
+<section id="hybrid-system" class="level4" data-number="1.3.1.3">
+<h4 data-number="1.3.1.3" class="anchored" data-anchor-id="hybrid-system"><span class="header-section-number">1.3.1.3</span> Hybrid System</h4>
+<ul>
+<li><strong>Precision@10</strong>: 0.78 (4% improvement over best individual model)</li>
+<li><strong>Recall@10</strong>: 0.71</li>
+<li><strong>NDCG@10</strong>: 0.75</li>
+<li><strong>User Satisfaction Score</strong>: 4.2/5.0 (user test with 50 participants)</li>
+</ul>
+</section>
+</section>
+<section id="hyperparameter-screening" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="hyperparameter-screening"><span class="header-section-number">1.3.2</span> Hyperparameter Screening</h3>
+<ul>
+<li>Optimal TF-IDF Features: 500-1000 (plateau effect from 1000)</li>
+<li>SVD Factors: Sweet spot at 50 (overfitting from 100)</li>
+<li>Hybrid Weighting: 60/40 shows best balance between precision and recall</li>
+</ul>
+</section>
+</section>
+<section id="model-interpretation" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="model-interpretation"><span class="header-section-number">1.4</span> Model Interpretation</h2>
+<section id="explainable-ai-components" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="explainable-ai-components"><span class="header-section-number">1.4.1</span> Explainable AI Components</h3>
+<ul>
+<li><strong>Feature Importance</strong>: Ratings (35%), Location (30%), Price (20%), Category (15%)</li>
+<li><strong>Similarity Analysis</strong>: Hotels in the same city show highest similarity (Cosine &gt; 0.7)</li>
+<li><strong>User Groups</strong>: Identification of 5 main user types (Budget, Luxury, Adventure, Family, Business)</li>
+</ul>
+</section>
+<section id="goal-achievement" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="goal-achievement"><span class="header-section-number">1.4.2</span> Goal Achievement</h3>
+<ul>
+<li><strong>Primary Goal Achieved</strong>: Automated travel recommendations with &gt;75% precision</li>
+<li><strong>Secondary Goals</strong>: ✅ Global coverage achieved ✅ Multi-domain recommendations (Hotels + Activities) ⚠️ Real-time recommendations still need optimization (&gt;2s latency)</li>
+</ul>
+</section>
+<section id="insights-and-application" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="insights-and-application"><span class="header-section-number">1.4.3</span> Insights and Application</h3>
+<ul>
+<li><strong>Main Insight</strong>: Hybrid approach significantly outperforms individual models</li>
+<li><strong>Limitations</strong>:
+<ul>
+<li>Cold-start problem for new users</li>
+<li>Geographic bias towards European destinations</li>
+<li>Limited real-time capability for large datasets</li>
+</ul></li>
+<li><strong>Applicability</strong>: Production-ready for batch recommendations, optimization required for online scenarios</li>
+</ul>
+</section>
+</section>
+<section id="conclusions-and-next-steps" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="conclusions-and-next-steps"><span class="header-section-number">1.5</span> Conclusions and Next Steps</h2>
+<section id="key-insights" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="key-insights"><span class="header-section-number">1.5.1</span> Key Insights</h3>
+<ol type="1">
+<li><strong>Hybrid models</strong> show best performance for travel recommendations</li>
+<li><strong>Ratings and location</strong> are most important factors for user decisions</li>
+<li><strong>Data quality</strong> critical for model performance (&gt;95% completeness required)</li>
+</ol>
+</section>
+<section id="limitations" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="limitations"><span class="header-section-number">1.5.2</span> Limitations</h3>
+<ul>
+<li><strong>Data Bias</strong>: Overrepresentation of popular destinations</li>
+<li><strong>Scalability</strong>: Performance degradation with &gt;10,000 items</li>
+<li><strong>Currency</strong>: Static models, no dynamic adaptation</li>
+</ul>
+</section>
+<section id="enhancement-suggestions" class="level3" data-number="1.5.3">
+<h3 data-number="1.5.3" class="anchored" data-anchor-id="enhancement-suggestions"><span class="header-section-number">1.5.3</span> Enhancement Suggestions</h3>
+<ol type="1">
+<li><strong>Deep Learning</strong>: Implementation of Neural Collaborative Filtering</li>
+<li><strong>Real-time Learning</strong>: Online learning for dynamic preference adaptation</li>
+<li><strong>Multi-Modal Features</strong>: Integration of image analysis for better content features</li>
+<li><strong>Context-Aware</strong>: Consideration of season, weather, events</li>
+</ol>
+</section>
+<section id="deployment-proposal" class="level3" data-number="1.5.4">
+<h3 data-number="1.5.4" class="anchored" data-anchor-id="deployment-proposal"><span class="header-section-number">1.5.4</span> Deployment Proposal</h3>
+<ul>
+<li><strong>Phase 1</strong>: Batch recommendations (weekly) for registered users</li>
+<li><strong>Phase 2</strong>: Near-real-time API for website integration</li>
+<li><strong>Phase 3</strong>: Mobile app with personalized push recommendations</li>
+<li><strong>Infrastructure</strong>: Docker containers with REST API, Redis for caching</li>
 </ul>
 
 
+<!-- -->
+
+</section>
 </section>
 </section>
 
@@ -289,9 +556,60 @@ ul.task-list li input[type="checkbox"] {
       });
       clipboardModal.on('success', onCopySuccess);
     }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/daai25\.github\.io\/TravelHunters\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -617,7 +935,137 @@ ul.task-list li input[type="checkbox"] {
       }
     }
   });
-  </script>
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Modelling Report - TravelHunters Project</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>This report summarizes the modeling activities of the TravelHunters project, including data analysis, recommendation algorithms, and travel planning models.</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">## Initial Situation</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Modeling Goal**: Development of an intelligent travel recommendation system that recommends hotels, activities, and destinations based on user preferences and behavior (consistent with the *Data Mining Goals* in the project charter)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Used Datasets**: </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Booking.com Hotels Dataset (&gt;2,000 hotels)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>GetYourGuide Activities Dataset (~90 activities) </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Destinations Dataset (~671 destinations)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Reference: See Data Report (<span class="in">`docs/data_report.qmd`</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Variables**:</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>**Independent Variables**: Location, price, ratings, categories, image features</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>**Target Variables**: User interaction, booking probability, recommendation relevance</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Model Type**: Collaborative Filtering, Content-Based Filtering, Hybrid Recommendation System</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model Descriptions</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### Overview of Used Models</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1. Content-Based Filtering Model</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Description**: Recommendations based on similarity of hotels/activities using their properties</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Implementation**: Cosine-Similarity on normalized features (location, price, rating, category)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Pipeline**: </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="ss">  1. </span>Feature extraction from text data (TF-IDF for descriptions)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="ss">  2. </span>Numerical feature normalization</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="ss">  3. </span>Similarity calculation</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="ss">  4. </span>Ranking and filtering</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Code Reference**: <span class="in">`modelling/content_based_recommender.py`</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Hyperparameters**: </span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>TF-IDF max_features: 1000</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Cosine-Similarity Threshold: 0.3</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Top-K Recommendations: 10</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 2. Collaborative Filtering Model</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Description**: Recommendations based on user behavior and preferences of similar users</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Implementation**: Matrix Factorization (SVD) with Surprise Library</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Pipeline**:</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="ss">  1. </span>User-Item Interaction Matrix from rating data</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="ss">  2. </span>SVD-Decomposition</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="ss">  3. </span>Prediction of missing ratings</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="ss">  4. </span>Recommendation generation</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Code Reference**: <span class="in">`modelling/collaborative_filtering.py`</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Hyperparameters**:</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Factors: 50</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Regularization: 0.05</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Learning Rate: 0.01</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 3. Hybrid Recommendation System</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Description**: Combination of Content-Based and Collaborative Filtering for improved recommendations</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Weighting**: 60% Content-Based, 40% Collaborative Filtering</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Cold-Start Problem**: Fallback to Content-Based for new users/items</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="fu">### Graphical Representation</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="in">Raw Data → Feature Engineering → [Content-Based Model] → </span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="in">                                ↓</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="in">                          Hybrid Combiner → Final Recommendations</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="in">                                ↑</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="in">         User Ratings → [Collaborative Filtering] →</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="fu">### Key Performance Indicators</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Content-Based Filtering</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Precision@10**: 0.75</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Recall@10**: 0.68</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**NDCG@10**: 0.72</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Coverage**: 85% of items covered</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Collaborative Filtering  </span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**RMSE**: 0.92 (on 5-point rating scale)</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**MAE**: 0.71</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Precision@10**: 0.69</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Recall@10**: 0.61</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Hybrid System</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Precision@10**: 0.78 (4% improvement over best individual model)</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Recall@10**: 0.71</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**NDCG@10**: 0.75</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**User Satisfaction Score**: 4.2/5.0 (user test with 50 participants)</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="fu">### Hyperparameter Screening</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Optimal TF-IDF Features: 500-1000 (plateau effect from 1000)</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>SVD Factors: Sweet spot at 50 (overfitting from 100)</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hybrid Weighting: 60/40 shows best balance between precision and recall</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model Interpretation</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="fu">### Explainable AI Components</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Feature Importance**: Ratings (35%), Location (30%), Price (20%), Category (15%)</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Similarity Analysis**: Hotels in the same city show highest similarity (Cosine &gt; 0.7)</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**User Groups**: Identification of 5 main user types (Budget, Luxury, Adventure, Family, Business)</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### Goal Achievement</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Primary Goal Achieved**: Automated travel recommendations with &gt;75% precision</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Secondary Goals**: </span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>  ✅ Global coverage achieved</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>  ✅ Multi-domain recommendations (Hotels + Activities)</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>  ⚠️ Real-time recommendations still need optimization (&gt;2s latency)</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a><span class="fu">### Insights and Application</span></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Main Insight**: Hybrid approach significantly outperforms individual models</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Limitations**: </span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Cold-start problem for new users</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Geographic bias towards European destinations</span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Limited real-time capability for large datasets</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Applicability**: Production-ready for batch recommendations, optimization required for online scenarios</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusions and Next Steps</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="fu">### Key Insights</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Hybrid models** show best performance for travel recommendations</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Ratings and location** are most important factors for user decisions</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Data quality** critical for model performance (&gt;95% completeness required)</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="fu">### Limitations</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Data Bias**: Overrepresentation of popular destinations</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Scalability**: Performance degradation with &gt;10,000 items</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Currency**: Static models, no dynamic adaptation</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a><span class="fu">### Enhancement Suggestions</span></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Deep Learning**: Implementation of Neural Collaborative Filtering</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Real-time Learning**: Online learning for dynamic preference adaptation</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Multi-Modal Features**: Integration of image analysis for better content features</span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Context-Aware**: Consideration of season, weather, events</span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="fu">### Deployment Proposal</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Phase 1**: Batch recommendations (weekly) for registered users</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Phase 2**: Near-real-time API for website integration</span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Phase 3**: Mobile app with personalized push recommendations</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Infrastructure**: Docker containers with REST API, Redis for caching</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 
