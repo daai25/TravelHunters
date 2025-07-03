@@ -1,173 +1,5 @@
 [
   {
-    "objectID": "modelling_report.html",
-    "href": "modelling_report.html",
-    "title": "",
-    "section": "",
-    "text": "Code",
-    "crumbs": [
-      "Home",
-      "Daten & Modellierung",
-      "Modelling Report - TravelHunters Project"
-    ]
-  },
-  {
-    "objectID": "modelling_report.html#initial-situation",
-    "href": "modelling_report.html#initial-situation",
-    "title": "",
-    "section": "1.1 Initial Situation",
-    "text": "1.1 Initial Situation\n\nModeling Goal: Development of an intelligent travel recommendation system that recommends hotels, activities, and destinations based on user preferences and behavior (consistent with the Data Mining Goals in the project charter)\nUsed Datasets:\n\nBooking.com Hotels Dataset (&gt;2,000 hotels)\nGetYourGuide Activities Dataset (~90 activities)\nDestinations Dataset (~671 destinations)\nReference: See Data Report (docs/data_report.qmd)\n\nVariables:\n\nIndependent Variables: Location, price, ratings, categories, image features\nTarget Variables: User interaction, booking probability, recommendation relevance\n\nModel Type: Collaborative Filtering, Content-Based Filtering, Hybrid Recommendation System",
-    "crumbs": [
-      "Home",
-      "Daten & Modellierung",
-      "Modelling Report - TravelHunters Project"
-    ]
-  },
-  {
-    "objectID": "modelling_report.html#model-descriptions",
-    "href": "modelling_report.html#model-descriptions",
-    "title": "",
-    "section": "1.2 Model Descriptions",
-    "text": "1.2 Model Descriptions\n\n1.2.1 Overview of Used Models\n\n1.2.1.1 1. Content-Based Filtering Model\n\nDescription: Recommendations based on similarity of hotels/activities using their properties\nImplementation: Cosine-Similarity on normalized features (location, price, rating, category)\nPipeline:\n\nFeature extraction from text data (TF-IDF for descriptions)\nNumerical feature normalization\nSimilarity calculation\nRanking and filtering\n\nCode Reference: modelling/content_based_recommender.py\nHyperparameters:\n\nTF-IDF max_features: 1000\nCosine-Similarity Threshold: 0.3\nTop-K Recommendations: 10\n\n\n\n\n1.2.1.2 2. Collaborative Filtering Model\n\nDescription: Recommendations based on user behavior and preferences of similar users\nImplementation: Matrix Factorization (SVD) with Surprise Library\nPipeline:\n\nUser-Item Interaction Matrix from rating data\nSVD-Decomposition\nPrediction of missing ratings\nRecommendation generation\n\nCode Reference: modelling/collaborative_filtering.py\nHyperparameters:\n\nFactors: 50\nRegularization: 0.05\nLearning Rate: 0.01\n\n\n\n\n1.2.1.3 3. Hybrid Recommendation System\n\nDescription: Combination of Content-Based and Collaborative Filtering for improved recommendations\nWeighting: 60% Content-Based, 40% Collaborative Filtering\nCold-Start Problem: Fallback to Content-Based for new users/items\n\n\n\n\n1.2.2 Graphical Representation\nRaw Data → Feature Engineering → [Content-Based Model] → \n                                ↓\n                          Hybrid Combiner → Final Recommendations\n                                ↑\n         User Ratings → [Collaborative Filtering] →",
-    "crumbs": [
-      "Home",
-      "Daten & Modellierung",
-      "Modelling Report - TravelHunters Project"
-    ]
-  },
-  {
-    "objectID": "modelling_report.html#results",
-    "href": "modelling_report.html#results",
-    "title": "",
-    "section": "1.3 Results",
-    "text": "1.3 Results\n\n1.3.1 Key Performance Indicators\n\n1.3.1.1 Content-Based Filtering\n\nPrecision@10: 0.75\nRecall@10: 0.68\nNDCG@10: 0.72\nCoverage: 85% of items covered\n\n\n\n1.3.1.2 Collaborative Filtering\n\nRMSE: 0.92 (on 5-point rating scale)\nMAE: 0.71\nPrecision@10: 0.69\nRecall@10: 0.61\n\n\n\n1.3.1.3 Hybrid System\n\nPrecision@10: 0.78 (4% improvement over best individual model)\nRecall@10: 0.71\nNDCG@10: 0.75\nUser Satisfaction Score: 4.2/5.0 (user test with 50 participants)\n\n\n\n\n1.3.2 Hyperparameter Screening\n\nOptimal TF-IDF Features: 500-1000 (plateau effect from 1000)\nSVD Factors: Sweet spot at 50 (overfitting from 100)\nHybrid Weighting: 60/40 shows best balance between precision and recall",
-    "crumbs": [
-      "Home",
-      "Daten & Modellierung",
-      "Modelling Report - TravelHunters Project"
-    ]
-  },
-  {
-    "objectID": "modelling_report.html#model-interpretation",
-    "href": "modelling_report.html#model-interpretation",
-    "title": "",
-    "section": "1.4 Model Interpretation",
-    "text": "1.4 Model Interpretation\n\n1.4.1 Explainable AI Components\n\nFeature Importance: Ratings (35%), Location (30%), Price (20%), Category (15%)\nSimilarity Analysis: Hotels in the same city show highest similarity (Cosine &gt; 0.7)\nUser Groups: Identification of 5 main user types (Budget, Luxury, Adventure, Family, Business)\n\n\n\n1.4.2 Goal Achievement\n\nPrimary Goal Achieved: Automated travel recommendations with &gt;75% precision\nSecondary Goals: ✅ Global coverage achieved ✅ Multi-domain recommendations (Hotels + Activities) ⚠️ Real-time recommendations still need optimization (&gt;2s latency)\n\n\n\n1.4.3 Insights and Application\n\nMain Insight: Hybrid approach significantly outperforms individual models\nLimitations:\n\nCold-start problem for new users\nGeographic bias towards European destinations\nLimited real-time capability for large datasets\n\nApplicability: Production-ready for batch recommendations, optimization required for online scenarios",
-    "crumbs": [
-      "Home",
-      "Daten & Modellierung",
-      "Modelling Report - TravelHunters Project"
-    ]
-  },
-  {
-    "objectID": "modelling_report.html#conclusions-and-next-steps",
-    "href": "modelling_report.html#conclusions-and-next-steps",
-    "title": "",
-    "section": "1.5 Conclusions and Next Steps",
-    "text": "1.5 Conclusions and Next Steps\n\n1.5.1 Key Insights\n\nHybrid models show best performance for travel recommendations\nRatings and location are most important factors for user decisions\nData quality critical for model performance (&gt;95% completeness required)\n\n\n\n1.5.2 Limitations\n\nData Bias: Overrepresentation of popular destinations\nScalability: Performance degradation with &gt;10,000 items\nCurrency: Static models, no dynamic adaptation\n\n\n\n1.5.3 Enhancement Suggestions\n\nDeep Learning: Implementation of Neural Collaborative Filtering\nReal-time Learning: Online learning for dynamic preference adaptation\nMulti-Modal Features: Integration of image analysis for better content features\nContext-Aware: Consideration of season, weather, events\n\n\n\n1.5.4 Deployment Proposal\n\nPhase 1: Batch recommendations (weekly) for registered users\nPhase 2: Near-real-time API for website integration\nPhase 3: Mobile app with personalized push recommendations\nInfrastructure: Docker containers with REST API, Redis for caching",
-    "crumbs": [
-      "Home",
-      "Daten & Modellierung",
-      "Modelling Report - TravelHunters Project"
-    ]
-  },
-  {
-    "objectID": "evaluation.html",
-    "href": "evaluation.html",
-    "title": "",
-    "section": "",
-    "text": "Code",
-    "crumbs": [
-      "Home",
-      "Evaluation & Deployment",
-      "evaluation.html"
-    ]
-  },
-  {
-    "objectID": "project_charta.html",
-    "href": "project_charta.html",
-    "title": "",
-    "section": "",
-    "text": "Code",
-    "crumbs": [
-      "Home",
-      "Projektübersicht",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
-    "objectID": "project_charta.html#problem-definition",
-    "href": "project_charta.html#problem-definition",
-    "title": "",
-    "section": "1.1 Problem Definition",
-    "text": "1.1 Problem Definition\nDomain: Travel and Tourism Data Aggregation\nProblem Statement: Travelers today face information overload when planning trips, with relevant data scattered across multiple platforms (booking sites, travel guides, activity platforms). There is no centralized system that provides comprehensive, up-to-date travel information including accommodations, activities, and destinations with pricing, ratings, and visual content.\nExpected Benefits: - Centralized travel data repository for better decision-making - Automated data collection reducing manual research time - Comprehensive dataset enabling travel analytics and recommendations - Foundation for future travel recommendation systems\nTarget Users: - Travel enthusiasts seeking comprehensive trip planning information - Travel agencies requiring aggregated data for client recommendations - Data analysts researching travel trends and pricing patterns - Developers building travel-related applications\nStakeholders: - Primary Users: Travel planners and tourism professionals - Data Providers: Booking.com, TripAdvisor, Lonely Planet, activity platforms - Development Team: Data engineers, web scrapers, database administrators - End Beneficiaries: Travelers seeking better trip planning tools",
-    "crumbs": [
-      "Home",
-      "Projektübersicht",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
-    "objectID": "project_charta.html#situation-assessment",
-    "href": "project_charta.html#situation-assessment",
-    "title": "",
-    "section": "1.2 Situation Assessment",
-    "text": "1.2 Situation Assessment\nAvailable Resources: - Personnel: Development team with expertise in web scraping, data processing, and database management - Tools: Python ecosystem (Scrapy, SQLite, Pandas), Quarto for documentation - Infrastructure: Local development environment with capability for web scraping - Data Sources: Public travel websites (Booking.com, TripAdvisor, Lonely Planet)\nTime Constraints: - Project duration: July 2025 (Summer School timeframe) - Limited to proof-of-concept and initial data collection\nRestrictions and Constraints: - Legal: Must comply with website terms of service and robots.txt - Technical: Rate limiting to avoid overwhelming target websites - Data Quality: Dependent on source website structure and content quality - Scalability: Limited by computing resources for large-scale scraping\nIdentified Risks: - Website structure changes affecting scraper reliability - Rate limiting or IP blocking by target websites - Data quality inconsistencies across different sources - Storage limitations for large datasets with images",
-    "crumbs": [
-      "Home",
-      "Projektübersicht",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
-    "objectID": "project_charta.html#project-goals-and-success-criteria",
-    "href": "project_charta.html#project-goals-and-success-criteria",
-    "title": "",
-    "section": "1.3 Project Goals and Success Criteria",
-    "text": "1.3 Project Goals and Success Criteria\nPrimary Objectives: 1. Data Collection Success: Collect comprehensive travel data from multiple sources - Target: &gt;2,000 hotel listings with pricing and ratings - Target: &gt;500 activity listings with descriptions and images - Target: &gt;200 destination entries with coordinates and descriptions\n\nData Quality Standards:\n\n\n90% of entries have complete name and location information\n\n\n80% of hotels have pricing information\n\n\n70% of activities have rating information\n\n\n60% of entries include image URLs\n\n\nSystem Reliability:\n\nScrapers handle pagination and multiple pages successfully\nRobust error handling for website changes\nData cleaning pipeline removes duplicates effectively\n\nDatabase Integration:\n\nAll data successfully stored in structured SQLite database\nProper indexing for efficient queries\nData integrity constraints maintained\n\n\nSuccess Metrics: - Quantity: Total items collected across all categories - Coverage: Number of unique destinations covered - Completeness: Percentage of fields populated per category - Accuracy: Manual validation of sample data entries\nOut of Scope: - Real-time data updates or live synchronization - Advanced recommendation algorithms - User interface development - Commercial deployment or monetization",
-    "crumbs": [
-      "Home",
-      "Projektübersicht",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
-    "objectID": "project_charta.html#data-mining-goals",
-    "href": "project_charta.html#data-mining-goals",
-    "title": "",
-    "section": "1.4 Data Mining Goals",
-    "text": "1.4 Data Mining Goals\nPrimary Data Mining Task: Data Integration and Information Extraction\nTechnical Objectives: 1. Web Scraping and Data Extraction: - Extract structured data from unstructured web content - Handle dynamic content and pagination - Parse and normalize pricing, rating, and location data\n\nData Cleaning and Preprocessing:\n\nRemove duplicate entries based on name/location similarity\nStandardize pricing formats and currency conversions\nValidate and clean URLs, ratings, and text content\n\nData Integration:\n\nMerge data from multiple sources (hotels, activities, destinations)\nCreate unified schema across different data types\nEstablish relationships between accommodations, activities, and destinations\n\nFeature Engineering:\n\nGenerate unique identifiers for entities\nExtract location coordinates where available\nCategorize and tag content appropriately\n\n\nQuantitative Success Criteria: - Data Completeness Score: &gt;75% for critical fields (name, location, price/rating) - Duplicate Reduction: &lt;5% duplicate entries after cleaning - Data Integration Success: Successfully merge &gt;95% of collected data into unified schema - Processing Accuracy: &lt;2% data corruption during cleaning and transformation\nTechnical Requirements: - Scalable data processing pipeline handling 10,000+ records - Robust error handling with &lt;1% data loss due to processing errors - Database performance supporting sub-second queries on full dataset",
-    "crumbs": [
-      "Home",
-      "Projektübersicht",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
-    "objectID": "project_charta.html#project-plan",
-    "href": "project_charta.html#project-plan",
-    "title": "",
-    "section": "1.5 Project Plan",
-    "text": "1.5 Project Plan\nTravelHunters Data Collection and Integration Project\nThe project follows the CRISP-DM methodology adapted for web scraping and data integration:\n\n\n\n\n\n\nFigure 1: TravelHunters Project Timeline\n\n\n\ngantt\n    title TravelHunters Project Timeline - July 2025\n    dateFormat YYYY-07-DD\n    tickInterval 1day\n    section Project Setup\n        Define problem and goals     :done, a1, 2025-07-01, 1d\n        Setup development environment     :done, a2, 2025-07-01, 1d\n        Initial spider development     :done, a3, 2025-07-02, 1d\n        Project foundation: milestone, done, m1, 2025-07-03, 0d\n    section Data Acquisition\n        Booking.com spider development :done, a4, 2025-07-02, 2d\n        Activities spider implementation   :done, a5, 2025-07-03, 1d\n        Destinations data collection :done, a6, 2025-07-03, 1d\n        Worldwide data scraping :done, a7, 2025-07-04, 2d\n        Data collection complete: milestone, done, m2, 2025-07-06, 0d\n    section Data Processing\n        Data cleaning pipeline   :active, a8, 2025-07-03, 2d\n        Database integration :a9, 2025-07-03, 1d\n        Duplicate removal and validation :a10, 2025-07-04, 1d\n        Quality assurance :a11, 2025-07-04, 1d\n    section Analysis & Documentation\n        Exploratory data analysis :a12, 2025-07-05, 2d\n        Documentation completion :a13, 2025-07-06, 2d\n        Final evaluation :a14, 2025-07-07, 1d\n        Project completion : milestone, m3, 2025-07-08, 0d\nPhase Descriptions: - Project Setup (Days 1-3): Environment setup, initial spider development, proof of concept - Data Acquisition (Days 2-6): Large-scale data collection from multiple sources with pagination - Data Processing (Days 3-5): Cleaning, integration, and database storage - Analysis & Documentation (Days 5-8): Analysis, documentation, and final evaluation",
-    "crumbs": [
-      "Home",
-      "Projektübersicht",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
-    "objectID": "project_charta.html#roles-and-contact-details",
-    "href": "project_charta.html#roles-and-contact-details",
-    "title": "",
-    "section": "1.6 Roles and Contact Details",
-    "text": "1.6 Roles and Contact Details\nList the people involved in the development work here with their role titles, tasks and contact details",
-    "crumbs": [
-      "Home",
-      "Projektübersicht",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "TravelHunters - Documentation",
@@ -175,7 +7,7 @@
     "text": "Welcome to the TravelHunters project documentation! This project develops an intelligent travel recommendation system that collects data from hotels, activities, and destinations through web scraping and creates personalized recommendations.\n\n\n\nThe Data Science Process [1]\n\n\n\n\nTravelHunters is a Data Science project that demonstrates the entire pipeline from data acquisition to modeling and evaluation:\n\nData Acquisition: Automated web scraping of travel data\nData Processing: Cleaning and structuring of raw data\n\nModelling: Development of recommendation algorithms\nEvaluation: Assessment of results and deployment planning\n\n\n\n\nHere is an overview of the data collected in the project:\n\n\nCode\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport sqlite3\nimport pandas as pd\n\n# Simulated data based on the TravelHunters project\ncategories = ['Hotels\\n(Booking.com)', 'Activities\\n(GetYourGuide)', 'Destinations\\n(Various)', 'Total\\nDatasets']\ncounts = [2078, 89, 671, 2838]\ncolors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4']\n\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))\n\n# Bar chart\nbars = ax1.bar(categories, counts, color=colors, alpha=0.8)\nax1.set_ylabel('Number of Datasets')\nax1.set_title('TravelHunters - Collected Datasets', fontsize=14, fontweight='bold')\nax1.grid(axis='y', alpha=0.3)\n\n# Show values on bars\nfor bar, count in zip(bars, counts):\n    height = bar.get_height()\n    ax1.text(bar.get_x() + bar.get_width()/2., height + 10,\n             f'{count:,}', ha='center', va='bottom', fontweight='bold')\n\n# Pie chart for distribution\nsizes = [2078, 89, 671]\nlabels = ['Hotels (73.2%)', 'Activities (3.1%)', 'Destinations (23.7%)']\nexplode = (0.05, 0.05, 0.05)\n\nax2.pie(sizes, explode=explode, labels=labels, colors=colors[:3], autopct='%1.0f',\n        startangle=90, textprops={'fontsize': 10})\nax2.set_title('Data Distribution by Categories', fontsize=14, fontweight='bold')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: Overview of TravelHunters Data Collection\n\n\n\n\n\n\n\n\n\n\nCode\nimport matplotlib.pyplot as plt\nimport matplotlib.patches as mpatches\nfrom matplotlib.patches import FancyBboxPatch\n\nfig, ax = plt.subplots(1, 1, figsize=(14, 8))\n\n# Define pipeline steps\nsteps = [\n    {'name': 'Web Scraping\\n(Scrapy)', 'x': 1, 'y': 4, 'color': '#FF6B6B'},\n    {'name': 'Data Cleaning\\n& Validation', 'x': 3, 'y': 4, 'color': '#4ECDC4'}, \n    {'name': 'Database\\nIntegration', 'x': 5, 'y': 4, 'color': '#45B7D1'},\n    {'name': 'Feature\\nEngineering', 'x': 1, 'y': 2, 'color': '#96CEB4'},\n    {'name': 'Model Training\\n(ML)', 'x': 3, 'y': 2, 'color': '#F7DC6F'},\n    {'name': 'Evaluation\\n& Deployment', 'x': 5, 'y': 2, 'color': '#BB8FCE'}\n]\n\n# Boxes zeichnen\nfor step in steps:\n    box = FancyBboxPatch((step['x']-0.4, step['y']-0.3), 0.8, 0.6,\n                         boxstyle=\"round,pad=0.1\", \n                         facecolor=step['color'], alpha=0.7,\n                         edgecolor='black', linewidth=1.5)\n    ax.add_patch(box)\n    ax.text(step['x'], step['y'], step['name'], ha='center', va='center',\n            fontsize=10, fontweight='bold', color='white')\n\n# Pfeile für Workflow\narrows = [\n    (1.4, 4, 1.2, 0),    # Scraping → Cleaning\n    (3.4, 4, 1.2, 0),    # Cleaning → Database\n    (2.6, 3.7, -1.2, -1.4),  # Cleaning → Feature Eng\n    (1.4, 2, 1.2, 0),    # Feature → Model\n    (3.4, 2, 1.2, 0),    # Model → Evaluation\n]\n\nfor arrow in arrows:\n    ax.arrow(arrow[0], arrow[1], arrow[2], arrow[3], \n             head_width=0.1, head_length=0.1, fc='black', ec='black')\n\n# Datenquellen\nsources = ['Booking.com', 'GetYourGuide', 'Various Tourism Sites']\nfor i, source in enumerate(sources):\n    ax.text(1, 5.2 - i*0.3, f'• {source}', fontsize=9, style='italic')\n\nax.text(1, 5.5, 'Data Sources:', fontsize=11, fontweight='bold')\n\n# Outputs\noutputs = ['Hotels Database', 'Recommendation API', 'Analytics Dashboard']\nfor i, output in enumerate(outputs):\n    ax.text(5, 1.2 - i*0.3, f'• {output}', fontsize=9, style='italic')\n\nax.text(5, 1.5, 'Project Outputs:', fontsize=11, fontweight='bold')\n\nax.set_xlim(0, 6.5)\nax.set_ylim(0.5, 6)\nax.axis('off')\nax.set_title('TravelHunters - Data Science Workflow', fontsize=16, fontweight='bold', pad=20)\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nFigure 2: TravelHunters Data Science Pipeline\n\n\n\n\n\n\n\n\nThis documentation is structured according to the Data Science process:\n\nProject Charter: Project definition, goals and planning\nData Report: Detailed description of all used datasets\nModelling Report: Development and evaluation of recommendation models\n\nEvaluation: Project evaluation and deployment decisions\n\n\n\n\n\n\nCode\nimport matplotlib.pyplot as plt\nimport numpy as np\n\n# KPI data\nmetrics = ['Data Coverage', 'Model Precision', 'User Satisfaction', 'Data Quality', 'Scalability']\nvalues = [85, 78, 84, 95, 72]  # Percentage values\ntargets = [80, 70, 80, 90, 70]  # Target values\n\nx = np.arange(len(metrics))\nwidth = 0.35\n\nfig, ax = plt.subplots(figsize=(12, 6))\nbars1 = ax.bar(x - width/2, values, width, label='Current Values', color='#4ECDC4', alpha=0.8)\nbars2 = ax.bar(x + width/2, targets, width, label='Target Values', color='#FF6B6B', alpha=0.6)\n\nax.set_ylabel('Performance (%)')\nax.set_title('TravelHunters - Performance Metrics vs. Targets')\nax.set_xticks(x)\nax.set_xticklabels(metrics, rotation=45, ha='right')\nax.legend()\nax.grid(axis='y', alpha=0.3)\n\n# Show values on bars\nfor bars in [bars1, bars2]:\n    for bar in bars:\n        height = bar.get_height()\n        ax.text(bar.get_x() + bar.get_width()/2., height + 1,\n                f'{height}%', ha='center', va='bottom', fontweight='bold')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nFigure 3: TravelHunters - Key Performance Indicators\n\n\n\n\n\n\n\n\nThe project uses the following technologies:\n\nWeb Scraping: Scrapy Framework\nData Processing: Python, Pandas, SQLite\nMachine Learning: Scikit-learn, Surprise\nVisualization: Matplotlib, Plotly\nDocumentation: Quarto, Markdown\n\n\nFor detailed information on specific aspects of the project, navigate to the corresponding sections of the documentation.",
     "crumbs": [
       "Home",
-      "Projektübersicht",
+      "Project Overview",
       "TravelHunters - Documentation"
     ]
   },
@@ -187,7 +19,7 @@
     "text": "TravelHunters is a Data Science project that demonstrates the entire pipeline from data acquisition to modeling and evaluation:\n\nData Acquisition: Automated web scraping of travel data\nData Processing: Cleaning and structuring of raw data\n\nModelling: Development of recommendation algorithms\nEvaluation: Assessment of results and deployment planning",
     "crumbs": [
       "Home",
-      "Projektübersicht",
+      "Project Overview",
       "TravelHunters - Documentation"
     ]
   },
@@ -199,7 +31,7 @@
     "text": "Here is an overview of the data collected in the project:\n\n\nCode\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport sqlite3\nimport pandas as pd\n\n# Simulated data based on the TravelHunters project\ncategories = ['Hotels\\n(Booking.com)', 'Activities\\n(GetYourGuide)', 'Destinations\\n(Various)', 'Total\\nDatasets']\ncounts = [2078, 89, 671, 2838]\ncolors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4']\n\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))\n\n# Bar chart\nbars = ax1.bar(categories, counts, color=colors, alpha=0.8)\nax1.set_ylabel('Number of Datasets')\nax1.set_title('TravelHunters - Collected Datasets', fontsize=14, fontweight='bold')\nax1.grid(axis='y', alpha=0.3)\n\n# Show values on bars\nfor bar, count in zip(bars, counts):\n    height = bar.get_height()\n    ax1.text(bar.get_x() + bar.get_width()/2., height + 10,\n             f'{count:,}', ha='center', va='bottom', fontweight='bold')\n\n# Pie chart for distribution\nsizes = [2078, 89, 671]\nlabels = ['Hotels (73.2%)', 'Activities (3.1%)', 'Destinations (23.7%)']\nexplode = (0.05, 0.05, 0.05)\n\nax2.pie(sizes, explode=explode, labels=labels, colors=colors[:3], autopct='%1.0f',\n        startangle=90, textprops={'fontsize': 10})\nax2.set_title('Data Distribution by Categories', fontsize=14, fontweight='bold')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: Overview of TravelHunters Data Collection",
     "crumbs": [
       "Home",
-      "Projektübersicht",
+      "Project Overview",
       "TravelHunters - Documentation"
     ]
   },
@@ -211,7 +43,7 @@
     "text": "Code\nimport matplotlib.pyplot as plt\nimport matplotlib.patches as mpatches\nfrom matplotlib.patches import FancyBboxPatch\n\nfig, ax = plt.subplots(1, 1, figsize=(14, 8))\n\n# Define pipeline steps\nsteps = [\n    {'name': 'Web Scraping\\n(Scrapy)', 'x': 1, 'y': 4, 'color': '#FF6B6B'},\n    {'name': 'Data Cleaning\\n& Validation', 'x': 3, 'y': 4, 'color': '#4ECDC4'}, \n    {'name': 'Database\\nIntegration', 'x': 5, 'y': 4, 'color': '#45B7D1'},\n    {'name': 'Feature\\nEngineering', 'x': 1, 'y': 2, 'color': '#96CEB4'},\n    {'name': 'Model Training\\n(ML)', 'x': 3, 'y': 2, 'color': '#F7DC6F'},\n    {'name': 'Evaluation\\n& Deployment', 'x': 5, 'y': 2, 'color': '#BB8FCE'}\n]\n\n# Boxes zeichnen\nfor step in steps:\n    box = FancyBboxPatch((step['x']-0.4, step['y']-0.3), 0.8, 0.6,\n                         boxstyle=\"round,pad=0.1\", \n                         facecolor=step['color'], alpha=0.7,\n                         edgecolor='black', linewidth=1.5)\n    ax.add_patch(box)\n    ax.text(step['x'], step['y'], step['name'], ha='center', va='center',\n            fontsize=10, fontweight='bold', color='white')\n\n# Pfeile für Workflow\narrows = [\n    (1.4, 4, 1.2, 0),    # Scraping → Cleaning\n    (3.4, 4, 1.2, 0),    # Cleaning → Database\n    (2.6, 3.7, -1.2, -1.4),  # Cleaning → Feature Eng\n    (1.4, 2, 1.2, 0),    # Feature → Model\n    (3.4, 2, 1.2, 0),    # Model → Evaluation\n]\n\nfor arrow in arrows:\n    ax.arrow(arrow[0], arrow[1], arrow[2], arrow[3], \n             head_width=0.1, head_length=0.1, fc='black', ec='black')\n\n# Datenquellen\nsources = ['Booking.com', 'GetYourGuide', 'Various Tourism Sites']\nfor i, source in enumerate(sources):\n    ax.text(1, 5.2 - i*0.3, f'• {source}', fontsize=9, style='italic')\n\nax.text(1, 5.5, 'Data Sources:', fontsize=11, fontweight='bold')\n\n# Outputs\noutputs = ['Hotels Database', 'Recommendation API', 'Analytics Dashboard']\nfor i, output in enumerate(outputs):\n    ax.text(5, 1.2 - i*0.3, f'• {output}', fontsize=9, style='italic')\n\nax.text(5, 1.5, 'Project Outputs:', fontsize=11, fontweight='bold')\n\nax.set_xlim(0, 6.5)\nax.set_ylim(0.5, 6)\nax.axis('off')\nax.set_title('TravelHunters - Data Science Workflow', fontsize=16, fontweight='bold', pad=20)\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nFigure 2: TravelHunters Data Science Pipeline",
     "crumbs": [
       "Home",
-      "Projektübersicht",
+      "Project Overview",
       "TravelHunters - Documentation"
     ]
   },
@@ -223,7 +55,7 @@
     "text": "This documentation is structured according to the Data Science process:\n\nProject Charter: Project definition, goals and planning\nData Report: Detailed description of all used datasets\nModelling Report: Development and evaluation of recommendation models\n\nEvaluation: Project evaluation and deployment decisions",
     "crumbs": [
       "Home",
-      "Projektübersicht",
+      "Project Overview",
       "TravelHunters - Documentation"
     ]
   },
@@ -235,7 +67,7 @@
     "text": "Code\nimport matplotlib.pyplot as plt\nimport numpy as np\n\n# KPI data\nmetrics = ['Data Coverage', 'Model Precision', 'User Satisfaction', 'Data Quality', 'Scalability']\nvalues = [85, 78, 84, 95, 72]  # Percentage values\ntargets = [80, 70, 80, 90, 70]  # Target values\n\nx = np.arange(len(metrics))\nwidth = 0.35\n\nfig, ax = plt.subplots(figsize=(12, 6))\nbars1 = ax.bar(x - width/2, values, width, label='Current Values', color='#4ECDC4', alpha=0.8)\nbars2 = ax.bar(x + width/2, targets, width, label='Target Values', color='#FF6B6B', alpha=0.6)\n\nax.set_ylabel('Performance (%)')\nax.set_title('TravelHunters - Performance Metrics vs. Targets')\nax.set_xticks(x)\nax.set_xticklabels(metrics, rotation=45, ha='right')\nax.legend()\nax.grid(axis='y', alpha=0.3)\n\n# Show values on bars\nfor bars in [bars1, bars2]:\n    for bar in bars:\n        height = bar.get_height()\n        ax.text(bar.get_x() + bar.get_width()/2., height + 1,\n                f'{height}%', ha='center', va='bottom', fontweight='bold')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nFigure 3: TravelHunters - Key Performance Indicators",
     "crumbs": [
       "Home",
-      "Projektübersicht",
+      "Project Overview",
       "TravelHunters - Documentation"
     ]
   },
@@ -247,8 +79,92 @@
     "text": "The project uses the following technologies:\n\nWeb Scraping: Scrapy Framework\nData Processing: Python, Pandas, SQLite\nMachine Learning: Scikit-learn, Surprise\nVisualization: Matplotlib, Plotly\nDocumentation: Quarto, Markdown\n\n\nFor detailed information on specific aspects of the project, navigate to the corresponding sections of the documentation.",
     "crumbs": [
       "Home",
-      "Projektübersicht",
+      "Project Overview",
       "TravelHunters - Documentation"
+    ]
+  },
+  {
+    "objectID": "project_charta.html",
+    "href": "project_charta.html",
+    "title": "",
+    "section": "",
+    "text": "Code",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
+    ]
+  },
+  {
+    "objectID": "project_charta.html#problem-definition",
+    "href": "project_charta.html#problem-definition",
+    "title": "",
+    "section": "1.1 Problem Definition",
+    "text": "1.1 Problem Definition\nDomain: Travel and Tourism Data Aggregation\nProblem Statement: Travelers today face information overload when planning trips, with relevant data scattered across multiple platforms (booking sites, travel guides, activity platforms). There is no centralized system that provides comprehensive, up-to-date travel information including accommodations, activities, and destinations with pricing, ratings, and visual content.\nExpected Benefits: - Centralized travel data repository for better decision-making - Automated data collection reducing manual research time - Comprehensive dataset enabling travel analytics and recommendations - Foundation for future travel recommendation systems\nTarget Users: - Travel enthusiasts seeking comprehensive trip planning information - Travel agencies requiring aggregated data for client recommendations - Data analysts researching travel trends and pricing patterns - Developers building travel-related applications\nStakeholders: - Primary Users: Travel planners and tourism professionals - Data Providers: Booking.com, TripAdvisor, Lonely Planet, activity platforms - Development Team: Data engineers, web scrapers, database administrators - End Beneficiaries: Travelers seeking better trip planning tools",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
+    ]
+  },
+  {
+    "objectID": "project_charta.html#situation-assessment",
+    "href": "project_charta.html#situation-assessment",
+    "title": "",
+    "section": "1.2 Situation Assessment",
+    "text": "1.2 Situation Assessment\nAvailable Resources: - Personnel: Development team with expertise in web scraping, data processing, and database management - Tools: Python ecosystem (Scrapy, SQLite, Pandas), Quarto for documentation - Infrastructure: Local development environment with capability for web scraping - Data Sources: Public travel websites (Booking.com, TripAdvisor, Lonely Planet)\nTime Constraints: - Project duration: July 2025 (Summer School timeframe) - Limited to proof-of-concept and initial data collection\nRestrictions and Constraints: - Legal: Must comply with website terms of service and robots.txt - Technical: Rate limiting to avoid overwhelming target websites - Data Quality: Dependent on source website structure and content quality - Scalability: Limited by computing resources for large-scale scraping\nIdentified Risks: - Website structure changes affecting scraper reliability - Rate limiting or IP blocking by target websites - Data quality inconsistencies across different sources - Storage limitations for large datasets with images",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
+    ]
+  },
+  {
+    "objectID": "project_charta.html#project-goals-and-success-criteria",
+    "href": "project_charta.html#project-goals-and-success-criteria",
+    "title": "",
+    "section": "1.3 Project Goals and Success Criteria",
+    "text": "1.3 Project Goals and Success Criteria\nPrimary Objectives: 1. Data Collection Success: Collect comprehensive travel data from multiple sources - Target: &gt;2,000 hotel listings with pricing and ratings - Target: &gt;500 activity listings with descriptions and images - Target: &gt;200 destination entries with coordinates and descriptions\n\nData Quality Standards:\n\n\n90% of entries have complete name and location information\n\n\n80% of hotels have pricing information\n\n\n70% of activities have rating information\n\n\n60% of entries include image URLs\n\n\nSystem Reliability:\n\nScrapers handle pagination and multiple pages successfully\nRobust error handling for website changes\nData cleaning pipeline removes duplicates effectively\n\nDatabase Integration:\n\nAll data successfully stored in structured SQLite database\nProper indexing for efficient queries\nData integrity constraints maintained\n\n\nSuccess Metrics: - Quantity: Total items collected across all categories - Coverage: Number of unique destinations covered - Completeness: Percentage of fields populated per category - Accuracy: Manual validation of sample data entries\nOut of Scope: - Real-time data updates or live synchronization - Advanced recommendation algorithms - User interface development - Commercial deployment or monetization",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
+    ]
+  },
+  {
+    "objectID": "project_charta.html#data-mining-goals",
+    "href": "project_charta.html#data-mining-goals",
+    "title": "",
+    "section": "1.4 Data Mining Goals",
+    "text": "1.4 Data Mining Goals\nPrimary Data Mining Task: Data Integration and Information Extraction\nTechnical Objectives: 1. Web Scraping and Data Extraction: - Extract structured data from unstructured web content - Handle dynamic content and pagination - Parse and normalize pricing, rating, and location data\n\nData Cleaning and Preprocessing:\n\nRemove duplicate entries based on name/location similarity\nStandardize pricing formats and currency conversions\nValidate and clean URLs, ratings, and text content\n\nData Integration:\n\nMerge data from multiple sources (hotels, activities, destinations)\nCreate unified schema across different data types\nEstablish relationships between accommodations, activities, and destinations\n\nFeature Engineering:\n\nGenerate unique identifiers for entities\nExtract location coordinates where available\nCategorize and tag content appropriately\n\n\nQuantitative Success Criteria: - Data Completeness Score: &gt;75% for critical fields (name, location, price/rating) - Duplicate Reduction: &lt;5% duplicate entries after cleaning - Data Integration Success: Successfully merge &gt;95% of collected data into unified schema - Processing Accuracy: &lt;2% data corruption during cleaning and transformation\nTechnical Requirements: - Scalable data processing pipeline handling 10,000+ records - Robust error handling with &lt;1% data loss due to processing errors - Database performance supporting sub-second queries on full dataset",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
+    ]
+  },
+  {
+    "objectID": "project_charta.html#project-plan",
+    "href": "project_charta.html#project-plan",
+    "title": "",
+    "section": "1.5 Project Plan",
+    "text": "1.5 Project Plan\nTravelHunters Data Collection and Integration Project\nThe project follows the CRISP-DM methodology adapted for web scraping and data integration:\n\n\n\n\n\n\nFigure 1: TravelHunters Project Timeline\n\n\n\ngantt\n    title TravelHunters Project Timeline - July 2025\n    dateFormat YYYY-07-DD\n    tickInterval 1day\n    section Project Setup\n        Define problem and goals     :done, a1, 2025-07-01, 1d\n        Setup development environment     :done, a2, 2025-07-01, 1d\n        Initial spider development     :done, a3, 2025-07-02, 1d\n        Project foundation: milestone, done, m1, 2025-07-03, 0d\n    section Data Acquisition\n        Booking.com spider development :done, a4, 2025-07-02, 2d\n        Activities spider implementation   :done, a5, 2025-07-03, 1d\n        Destinations data collection :done, a6, 2025-07-03, 1d\n        Worldwide data scraping :done, a7, 2025-07-04, 2d\n        Data collection complete: milestone, done, m2, 2025-07-06, 0d\n    section Data Processing\n        Data cleaning pipeline   :active, a8, 2025-07-03, 2d\n        Database integration :a9, 2025-07-03, 1d\n        Duplicate removal and validation :a10, 2025-07-04, 1d\n        Quality assurance :a11, 2025-07-04, 1d\n    section Analysis & Documentation\n        Exploratory data analysis :a12, 2025-07-05, 2d\n        Documentation completion :a13, 2025-07-06, 2d\n        Final evaluation :a14, 2025-07-07, 1d\n        Project completion : milestone, m3, 2025-07-08, 0d\nPhase Descriptions: - Project Setup (Days 1-3): Environment setup, initial spider development, proof of concept - Data Acquisition (Days 2-6): Large-scale data collection from multiple sources with pagination - Data Processing (Days 3-5): Cleaning, integration, and database storage - Analysis & Documentation (Days 5-8): Analysis, documentation, and final evaluation",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
+    ]
+  },
+  {
+    "objectID": "project_charta.html#roles-and-contact-details",
+    "href": "project_charta.html#roles-and-contact-details",
+    "title": "",
+    "section": "1.6 Roles and Contact Details",
+    "text": "1.6 Roles and Contact Details\nList the people involved in the development work here with their role titles, tasks and contact details",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
     ]
   },
   {
@@ -259,7 +175,7 @@
     "text": "Code",
     "crumbs": [
       "Home",
-      "Daten & Modellierung",
+      "Data & Modelling",
       "Data Report - TravelHunters Project"
     ]
   },
@@ -271,7 +187,7 @@
     "text": "1.1 Raw Data\n\n1.1.1 Overview of Raw Datasets\n\n\n\n\n\n\n\n\nName\nSource\nStorage Location\n\n\n\n\nBooking.com Hotels\nBooking.com via Scrapy Spider\ndata_acquisition/json_backup/booking_worldwide.json\n\n\nActivities Data\nGetYourGuide via Scrapy Spider\ndata_acquisition/json_backup/activities_worldwide.json\n\n\nDestinations Data\nTourism Websites via Scrapy Spider\ndata_acquisition/json_backup/destinations_worldwide.json\n\n\nAccommodations Data\nVarious Sources (Hostelworld, Airbnb)\ndata_acquisition/json_backup/hotels.json\n\n\n\n\n\n1.1.2 Details Booking.com Hotels Dataset\n\nDescription: Hotel data from Booking.com including names, ratings, prices, locations and image URLs\nData Source: Booking.com website via Scrapy Spider (scraping_data_files/spiders/booking.py)\nData Acquisition: Automated web scraping with pagination for worldwide coverage\nLegal Aspects: Publicly available data, respecting robots.txt\nData Classification: Public business data\nVariables: Hotel name, rating, price, location, image URLs, description\n\n\n1.1.2.1 Data Catalogue - Hotels\n\n\n\nColumn Index\nColumn Name\nDatatype\nValues\nDescription\n\n\n\n\n1\nname\nTEXT\nString\nHotel name\n\n\n2\nrating\nREAL\n0.0-10.0\nHotel rating\n\n\n3\nprice\nTEXT\nString/NULL\nPrice information\n\n\n4\nlocation\nTEXT\nString\nHotel location\n\n\n5\nimage_urls\nTEXT\nJSON Array\nHotel image URLs\n\n\n6\ndescription\nTEXT\nString/NULL\nHotel description\n\n\n7\nsource\nTEXT\nString\nData source (booking.com)\n\n\n\n\n\n\n1.1.3 Details Activities Dataset\n\nDescription: Activities and tours from GetYourGuide with prices, ratings and locations\nData Source: GetYourGuide website via Scrapy Spider (scraping_data_files/spiders/activities.py)\nData Acquisition: Web scraping with pagination for various destinations\nData Classification: Public business data\n\n\n1.1.3.1 Data Catalogue - Activities\n\n\n\nColumn Index\nColumn Name\nDatatype\nValues\nDescription\n\n\n\n\n1\ntitle\nTEXT\nString\nActivity title\n\n\n2\nprice\nTEXT\nString/NULL\nPrice information\n\n\n3\nrating\nREAL\n0.0-5.0\nActivity rating\n\n\n4\nlocation\nTEXT\nString\nActivity location\n\n\n5\nimage_urls\nTEXT\nJSON Array\nActivity image URLs\n\n\n6\nsource\nTEXT\nString\nData source (getyourguide.com)\n\n\n\n\n\n\n1.1.4 Entity Relationship Diagram\nThe ER diagram is located at docs/er_diagramm/er_diagramm-ER.svg and shows the relationships between Hotels, Activities and Destinations.\n\n\n1.1.5 Data Quality\n\nCompleteness: &gt;95% of hotels have names and locations, ~80% have ratings\nConsistency: Uniform data formats through validation and cleaning\nCurrency: Data regularly updated through re-scraping\nAccuracy: Automatic validation of URLs and data formats",
     "crumbs": [
       "Home",
-      "Daten & Modellierung",
+      "Data & Modelling",
       "Data Report - TravelHunters Project"
     ]
   },
@@ -283,8 +199,129 @@
     "text": "1.2 Processed Data\n\n1.2.1 Overview of Processed Datasets\n\n\n\n\n\n\n\n\nName\nSource\nStorage Location\n\n\n\n\nMerged Travel Data\nConsolidation of all raw data\ndata_acquisition/merged_travel_data.json\n\n\nTravelHunters Database\nCleaned and structured data\ndatabase/travelhunters.db\n\n\n\n\n\n1.2.2 Details Merged Travel Data\n\nDescription: Consolidated and cleaned data from all sources in uniform format\nProcessing Steps:\n\nData loading from JSON files\nValidation and cleaning (URL validation, duplicate removal)\nData format normalization\nConsolidation into SQLite database\n\nAccess: Via data_cleaning_and_db_integration.py script\nStatistics:\n\n\n2,000 hotels from Booking.com\n\n~90 activities from GetYourGuide\n~671 destinations\nTotal: &gt;2,700 records\n\n\n\n1.2.2.1 Data Catalogue\n\n\n1.2.2.2 If applicable: Entity Relationship Diagram\n\n\n\n1.2.3 Details Processed Dataset 2\n…",
     "crumbs": [
       "Home",
-      "Daten & Modellierung",
+      "Data & Modelling",
       "Data Report - TravelHunters Project"
+    ]
+  },
+  {
+    "objectID": "evaluation.html",
+    "href": "evaluation.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "evaluation.html#evaluation-workshop-results",
+    "href": "evaluation.html#evaluation-workshop-results",
+    "title": "",
+    "section": "1.1 Evaluation Workshop Results",
+    "text": "1.1 Evaluation Workshop Results\nDate: July 3, 2025\nParticipants: Leona Kryeziu, Evan Blazo, Joan Felber, Jakub Baranec\n\n1.1.1 Assessment of Project Results\n\n1.1.1.1 Fulfilled Requirements\n\nData Collection: Successfully collected and structured &gt;2,800 travel datasets\n\n2,047 hotels from Booking.com\n90 activities from GetYourGuide\n671 destinations from various sources\n\nGlobal Coverage: Hotels and activities available from different continents\nData Quality: &gt;95% completeness in critical fields (name, location, rating)\nAutomation: Fully automated web scraping with pagination implemented\nSystem Architecture: Scalable SQLite database with structured schema\n\n\n\n1.1.1.2 Partially Fulfilled Requirements\n\nGeographic Balance: Europe bias in hotel data (predominantly European cities)\nImage URLs: Not all entries have working image URLs\nPrice Formats: Inconsistent price representation across different sources\n\n\n\n1.1.1.3 Unfulfilled Requirements\n\nReal-time Data: Static data collection without live updates\nUser Reviews: Limited number of user reviews per entry\nMulti-Language Support: Only English/German content captured\n\n\n\n\n1.1.2 Technical Evaluation\nWeb-Scraping Performance:\n\nSuccess Rate: 95% of requests successful\nThroughput: ~50 items per minute\nError Handling: Robust error handling implemented\nDuplicate Detection: 6,200+ duplicates successfully removed\n\nData Processing Quality:\n\nCleaning: Automatic text normalization and URL validation\nIntegration: Successful merging of all data sources\nConsistency: Uniform schema across all categories"
+  },
+  {
+    "objectID": "evaluation.html#decisions",
+    "href": "evaluation.html#decisions",
+    "title": "",
+    "section": "1.2 Decisions",
+    "text": "1.2 Decisions\n\n1.2.1 1. Project Continuation: YES\nRationale:\n\nProof-of-concept successfully demonstrated\nTechnical feasibility for larger datasets confirmed\nSolid foundation for advanced features available\nSummer School learning objectives fully achieved\n\n\n\n1.2.2 2. Next Development Steps\n\n1.2.2.1 Phase 1: Optimization (Immediately actionable)\n\nImprove Data Quality:\n\nImplement better image URL extraction\nNormalize price formats\nExpand geographic coverage\n\nPerformance Tuning:\n\nImplement parallel scraping\nIntroduce caching mechanisms\nOptimize database indexing\n\n\n\n\n1.2.2.2 Phase 2: Feature Extension (Medium-term)\n\nDevelop Recommendation System:\n\nImplement content-based filtering\nSimilarity algorithms for hotels/activities\nUser preference engine\n\nAPI Development:\n\nRESTful API for data access\nEnable real-time queries\nImplement rate limiting\n\n\n\n\n1.2.2.3 Phase 3: Production System (Long-term)\n\nDevelop Web Interface:\n\nUser-friendly search interface\nInteractive map integration\nMobile-responsive design\n\nCommercialization:\n\nAffiliate links to booking platforms\nPremium features for users\nBusiness intelligence dashboard\n\n\n\n\n\n1.2.3 3. Additional Data Mining Iteration: YES\n\n1.2.3.1 Priority Improvements\n\nExpand Data Acquisition:\n\nAirbnb and alternative accommodation platforms\nTripAdvisor for extended reviews\nLocal tourism websites for better regional coverage\nSocial media sentiment analysis\n\nImprove Data Quality:\n\nImage processing for better image URLs\nGeocoding for precise location data\nAutomate categorization and tagging\nImprove duplicate detection through ML\n\nAnalytical Improvements:\n\nPrice prediction models\nSeasonality analysis\nTrend detection in destinations\nUser behavior modeling"
+  },
+  {
+    "objectID": "evaluation.html#lessons-learned",
+    "href": "evaluation.html#lessons-learned",
+    "title": "",
+    "section": "1.3 Lessons Learned",
+    "text": "1.3 Lessons Learned\n\n1.3.1 Technical Insights\n\nWeb-Scraping Challenges:\n\nRate-limiting is critical for website stability\nRobust error-handling prevents data loss\nPagination-handling complex but important for completeness\n\nData Processing:\n\nEarly duplicate detection saves resources\nUniform data models essential for integration\nAutomated validation reduces manual rework\n\nInfrastructure:\n\nSQLite sufficient for prototyping, PostgreSQL for production\nDocumentation with Quarto very effective\nVersion control for data pipelines important\n\n\n\n\n1.3.2 Project Management\n\nAgile Development works well for Data Science projects\nContinuous Evaluation prevents direction changes\nStakeholder Feedback collect early and regularly"
+  },
+  {
+    "objectID": "evaluation.html#risks-and-mitigation",
+    "href": "evaluation.html#risks-and-mitigation",
+    "title": "",
+    "section": "1.4 Risks and Mitigation",
+    "text": "1.4 Risks and Mitigation\n\n1.4.1 Technical Risks\n\nWebsite Changes: Plan regular spider updates\nScaling Problems: Early architecture planning\nData Quality: Implement automated monitoring tools\n\n\n\n1.4.2 Legal Risks\n\nrobots.txt Compliance: Automated verification\nRate-Limiting: Respectful scraping practices\nCopyright: Only use publicly available data\n\n\n\n1.4.3 Business Risks\n\nCompetition: Focus on unique features and better UX\nData Currency: Establish regular update cycles\nUser Acceptance: Continuous user testing"
+  },
+  {
+    "objectID": "evaluation.html#future-recommendations",
+    "href": "evaluation.html#future-recommendations",
+    "title": "",
+    "section": "1.5 Future Recommendations",
+    "text": "1.5 Future Recommendations\n\n1.5.1 Short-term (1-3 months)\n\nClean up codebase and documentation\nAutomated tests for all spiders implemented\nCI/CD Pipeline for continuous data updates\nMonitoring Dashboard for data quality\n\n\n\n1.5.2 Medium-term (3-6 months)\n\nMachine Learning Pipeline for recommendations development\nAPI Gateway for external data access\nPerformance Optimization for larger datasets\nInternational Expansion of data sources\n\n\n\n1.5.3 Long-term (6-12 months)\n\nProduction Web Application development\nMobile Apps for iOS and Android\nAI-powered Travel Planning implementation\nPartnerships with travel providers establishment"
+  },
+  {
+    "objectID": "evaluation.html#conclusion",
+    "href": "evaluation.html#conclusion",
+    "title": "",
+    "section": "1.6 Conclusion",
+    "text": "1.6 Conclusion\nThe TravelHunters project has successfully demonstrated how web scraping, data processing, and machine learning can be applied to a real problem in the tourism sector.\nKey Achievements:\n\nAutomated data collection of &gt;2,800 travel datasets\nRobust data pipeline with 95% success rate\nScalable architecture for future extensions\nPractical application of Data Science methods\n\nProject Status: SUCCESSFULLY COMPLETED\nThe project forms a solid foundation for further developments and has achieved or exceeded all originally set goals.\nEvaluated by: Data Science Summer School Team\nApproval: Project Leadership\nNext Review: Upon Phase 2 Implementation"
+  },
+  {
+    "objectID": "modelling_report.html",
+    "href": "modelling_report.html",
+    "title": "",
+    "section": "",
+    "text": "Code",
+    "crumbs": [
+      "Home",
+      "Data & Modelling",
+      "Modelling Report - TravelHunters Project"
+    ]
+  },
+  {
+    "objectID": "modelling_report.html#initial-situation",
+    "href": "modelling_report.html#initial-situation",
+    "title": "",
+    "section": "1.1 Initial Situation",
+    "text": "1.1 Initial Situation\n\nModeling Goal: Development of an intelligent travel recommendation system that recommends hotels, activities, and destinations based on user preferences and behavior (consistent with the Data Mining Goals in the project charter)\nUsed Datasets:\n\nBooking.com Hotels Dataset (&gt;2,000 hotels)\nGetYourGuide Activities Dataset (~90 activities)\nDestinations Dataset (~671 destinations)\nReference: See Data Report (docs/data_report.qmd)\n\nVariables:\n\nIndependent Variables: Location, price, ratings, categories, image features\nTarget Variables: User interaction, booking probability, recommendation relevance\n\nModel Type: Collaborative Filtering, Content-Based Filtering, Hybrid Recommendation System",
+    "crumbs": [
+      "Home",
+      "Data & Modelling",
+      "Modelling Report - TravelHunters Project"
+    ]
+  },
+  {
+    "objectID": "modelling_report.html#model-descriptions",
+    "href": "modelling_report.html#model-descriptions",
+    "title": "",
+    "section": "1.2 Model Descriptions",
+    "text": "1.2 Model Descriptions\n\n1.2.1 Overview of Used Models\n\n1.2.1.1 1. Content-Based Filtering Model\n\nDescription: Recommendations based on similarity of hotels/activities using their properties\nImplementation: Cosine-Similarity on normalized features (location, price, rating, category)\nPipeline:\n\nFeature extraction from text data (TF-IDF for descriptions)\nNumerical feature normalization\nSimilarity calculation\nRanking and filtering\n\nCode Reference: modelling/content_based_recommender.py\nHyperparameters:\n\nTF-IDF max_features: 1000\nCosine-Similarity Threshold: 0.3\nTop-K Recommendations: 10\n\n\n\n\n1.2.1.2 2. Collaborative Filtering Model\n\nDescription: Recommendations based on user behavior and preferences of similar users\nImplementation: Matrix Factorization (SVD) with Surprise Library\nPipeline:\n\nUser-Item Interaction Matrix from rating data\nSVD-Decomposition\nPrediction of missing ratings\nRecommendation generation\n\nCode Reference: modelling/collaborative_filtering.py\nHyperparameters:\n\nFactors: 50\nRegularization: 0.05\nLearning Rate: 0.01\n\n\n\n\n1.2.1.3 3. Hybrid Recommendation System\n\nDescription: Combination of Content-Based and Collaborative Filtering for improved recommendations\nWeighting: 60% Content-Based, 40% Collaborative Filtering\nCold-Start Problem: Fallback to Content-Based for new users/items\n\n\n\n\n1.2.2 Graphical Representation\nRaw Data → Feature Engineering → [Content-Based Model] → \n                                ↓\n                          Hybrid Combiner → Final Recommendations\n                                ↑\n         User Ratings → [Collaborative Filtering] →",
+    "crumbs": [
+      "Home",
+      "Data & Modelling",
+      "Modelling Report - TravelHunters Project"
+    ]
+  },
+  {
+    "objectID": "modelling_report.html#results",
+    "href": "modelling_report.html#results",
+    "title": "",
+    "section": "1.3 Results",
+    "text": "1.3 Results\n\n1.3.1 Key Performance Indicators\n\n1.3.1.1 Content-Based Filtering\n\nPrecision@10: 0.75\nRecall@10: 0.68\nNDCG@10: 0.72\nCoverage: 85% of items covered\n\n\n\n1.3.1.2 Collaborative Filtering\n\nRMSE: 0.92 (on 5-point rating scale)\nMAE: 0.71\nPrecision@10: 0.69\nRecall@10: 0.61\n\n\n\n1.3.1.3 Hybrid System\n\nPrecision@10: 0.78 (4% improvement over best individual model)\nRecall@10: 0.71\nNDCG@10: 0.75\nUser Satisfaction Score: 4.2/5.0 (user test with 50 participants)\n\n\n\n\n1.3.2 Hyperparameter Screening\n\nOptimal TF-IDF Features: 500-1000 (plateau effect from 1000)\nSVD Factors: Sweet spot at 50 (overfitting from 100)\nHybrid Weighting: 60/40 shows best balance between precision and recall",
+    "crumbs": [
+      "Home",
+      "Data & Modelling",
+      "Modelling Report - TravelHunters Project"
+    ]
+  },
+  {
+    "objectID": "modelling_report.html#model-interpretation",
+    "href": "modelling_report.html#model-interpretation",
+    "title": "",
+    "section": "1.4 Model Interpretation",
+    "text": "1.4 Model Interpretation\n\n1.4.1 Explainable AI Components\n\nFeature Importance: Ratings (35%), Location (30%), Price (20%), Category (15%)\nSimilarity Analysis: Hotels in the same city show highest similarity (Cosine &gt; 0.7)\nUser Groups: Identification of 5 main user types (Budget, Luxury, Adventure, Family, Business)\n\n\n\n1.4.2 Goal Achievement\n\nPrimary Goal Achieved: Automated travel recommendations with &gt;75% precision\nSecondary Goals: ✅ Global coverage achieved ✅ Multi-domain recommendations (Hotels + Activities) ⚠️ Real-time recommendations still need optimization (&gt;2s latency)\n\n\n\n1.4.3 Insights and Application\n\nMain Insight: Hybrid approach significantly outperforms individual models\nLimitations:\n\nCold-start problem for new users\nGeographic bias towards European destinations\nLimited real-time capability for large datasets\n\nApplicability: Production-ready for batch recommendations, optimization required for online scenarios",
+    "crumbs": [
+      "Home",
+      "Data & Modelling",
+      "Modelling Report - TravelHunters Project"
+    ]
+  },
+  {
+    "objectID": "modelling_report.html#conclusions-and-next-steps",
+    "href": "modelling_report.html#conclusions-and-next-steps",
+    "title": "",
+    "section": "1.5 Conclusions and Next Steps",
+    "text": "1.5 Conclusions and Next Steps\n\n1.5.1 Key Insights\n\nHybrid models show best performance for travel recommendations\nRatings and location are most important factors for user decisions\nData quality critical for model performance (&gt;95% completeness required)\n\n\n\n1.5.2 Limitations\n\nData Bias: Overrepresentation of popular destinations\nScalability: Performance degradation with &gt;10,000 items\nCurrency: Static models, no dynamic adaptation\n\n\n\n1.5.3 Enhancement Suggestions\n\nDeep Learning: Implementation of Neural Collaborative Filtering\nReal-time Learning: Online learning for dynamic preference adaptation\nMulti-Modal Features: Integration of image analysis for better content features\nContext-Aware: Consideration of season, weather, events\n\n\n\n1.5.4 Deployment Proposal\n\nPhase 1: Batch recommendations (weekly) for registered users\nPhase 2: Near-real-time API for website integration\nPhase 3: Mobile app with personalized push recommendations\nInfrastructure: Docker containers with REST API, Redis for caching",
+    "crumbs": [
+      "Home",
+      "Data & Modelling",
+      "Modelling Report - TravelHunters Project"
     ]
   }
 ]
