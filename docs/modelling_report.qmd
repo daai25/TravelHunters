@@ -1,57 +1,57 @@
 # Modelling Report - TravelHunters Project
-Dieser Bericht fasst die Modellierungsaktivitäten des TravelHunters-Projekts zusammen, einschließlich Datenanalyse, Empfehlungsalgorithmen und Reiseplanungsmodelle.
+This report summarizes the modeling activities of the TravelHunters project, including data analysis, recommendation algorithms, and travel planning models.
 
-## Ausgangssituation
-- **Ziel der Modellierung**: Entwicklung eines intelligenten Reiseempfehlungssystems, das Hotels, Aktivitäten und Destinationen basierend auf Nutzerpräferenzen und -verhalten empfiehlt (konsistent mit den *Data Mining Goals* in der Projektcharta)
-- **Verwendete Datensätze**: 
-  - Booking.com Hotels Dataset (>2.000 Hotels)
-  - GetYourGuide Activities Dataset (~90 Aktivitäten) 
-  - Destinations Dataset (~671 Reiseziele)
-  - Referenz: Siehe Data Report (`docs/data_report.qmd`)
-- **Variablen**:
-  - **Unabhängige Variablen**: Standort, Preis, Bewertungen, Kategorien, Bild-Features
-  - **Zielvariablen**: Nutzerinteraktion, Buchungswahrscheinlichkeit, Empfehlungsrelevanz
-- **Modelltyp**: Kollaboratives Filtering, Content-Based Filtering, Hybrid-Empfehlungssystem
+## Initial Situation
+- **Modeling Goal**: Development of an intelligent travel recommendation system that recommends hotels, activities, and destinations based on user preferences and behavior (consistent with the *Data Mining Goals* in the project charter)
+- **Used Datasets**: 
+  - Booking.com Hotels Dataset (>2,000 hotels)
+  - GetYourGuide Activities Dataset (~90 activities) 
+  - Destinations Dataset (~671 destinations)
+  - Reference: See Data Report (`docs/data_report.qmd`)
+- **Variables**:
+  - **Independent Variables**: Location, price, ratings, categories, image features
+  - **Target Variables**: User interaction, booking probability, recommendation relevance
+- **Model Type**: Collaborative Filtering, Content-Based Filtering, Hybrid Recommendation System
 
 ## Model Descriptions
-### Übersicht der verwendeten Modelle
+### Overview of Used Models
 
 #### 1. Content-Based Filtering Model
-- **Beschreibung**: Empfehlungen basierend auf Ähnlichkeit von Hotels/Aktivitäten anhand ihrer Eigenschaften
-- **Implementation**: Cosine-Similarity auf normalisierten Features (Standort, Preis, Bewertung, Kategorie)
+- **Description**: Recommendations based on similarity of hotels/activities using their properties
+- **Implementation**: Cosine-Similarity on normalized features (location, price, rating, category)
 - **Pipeline**: 
-  1. Feature-Extraktion aus Textdaten (TF-IDF für Beschreibungen)
-  2. Numerische Feature-Normalisierung
-  3. Ähnlichkeitsberechnung
-  4. Ranking und Filterung
-- **Code-Referenz**: `modelling/content_based_recommender.py`
-- **Hyperparameter**: 
+  1. Feature extraction from text data (TF-IDF for descriptions)
+  2. Numerical feature normalization
+  3. Similarity calculation
+  4. Ranking and filtering
+- **Code Reference**: `modelling/content_based_recommender.py`
+- **Hyperparameters**: 
   - TF-IDF max_features: 1000
   - Cosine-Similarity Threshold: 0.3
-  - Top-K Empfehlungen: 10
+  - Top-K Recommendations: 10
 
 #### 2. Collaborative Filtering Model
-- **Beschreibung**: Empfehlungen basierend auf Nutzerverhalten und -präferenzen ähnlicher Nutzer
-- **Implementation**: Matrix Factorization (SVD) mit Surprise Library
+- **Description**: Recommendations based on user behavior and preferences of similar users
+- **Implementation**: Matrix Factorization (SVD) with Surprise Library
 - **Pipeline**:
-  1. User-Item Interaction Matrix aus Bewertungsdaten
+  1. User-Item Interaction Matrix from rating data
   2. SVD-Decomposition
-  3. Vorhersage fehlender Bewertungen
-  4. Empfehlungsgenerierung
-- **Code-Referenz**: `modelling/collaborative_filtering.py`
-- **Hyperparameter**:
-  - Faktoren: 50
-  - Regularisierung: 0.05
+  3. Prediction of missing ratings
+  4. Recommendation generation
+- **Code Reference**: `modelling/collaborative_filtering.py`
+- **Hyperparameters**:
+  - Factors: 50
+  - Regularization: 0.05
   - Learning Rate: 0.01
 
 #### 3. Hybrid Recommendation System
-- **Beschreibung**: Kombination aus Content-Based und Collaborative Filtering für verbesserte Empfehlungen
-- **Gewichtung**: 60% Content-Based, 40% Collaborative Filtering
-- **Cold-Start Problem**: Fallback auf Content-Based für neue Nutzer/Items
+- **Description**: Combination of Content-Based and Collaborative Filtering for improved recommendations
+- **Weighting**: 60% Content-Based, 40% Collaborative Filtering
+- **Cold-Start Problem**: Fallback to Content-Based for new users/items
 
-### Graphische Darstellung
+### Graphical Representation
 ```
-Rohdaten → Feature Engineering → [Content-Based Model] → 
+Raw Data → Feature Engineering → [Content-Based Model] → 
                                 ↓
                           Hybrid Combiner → Final Recommendations
                                 ↑
@@ -65,65 +65,65 @@ Rohdaten → Feature Engineering → [Content-Based Model] →
 - **Precision@10**: 0.75
 - **Recall@10**: 0.68
 - **NDCG@10**: 0.72
-- **Coverage**: 85% der Items abgedeckt
+- **Coverage**: 85% of items covered
 
 #### Collaborative Filtering  
-- **RMSE**: 0.92 (auf 5-Punkte Bewertungsskala)
+- **RMSE**: 0.92 (on 5-point rating scale)
 - **MAE**: 0.71
 - **Precision@10**: 0.69
 - **Recall@10**: 0.61
 
 #### Hybrid System
-- **Precision@10**: 0.78 (Verbesserung um 4% gegenüber bestem Einzelmodell)
+- **Precision@10**: 0.78 (4% improvement over best individual model)
 - **Recall@10**: 0.71
 - **NDCG@10**: 0.75
-- **User Satisfaction Score**: 4.2/5.0 (Benutzertest mit 50 Teilnehmern)
+- **User Satisfaction Score**: 4.2/5.0 (user test with 50 participants)
 
-### Hyperparameter-Screening
-- Optimale TF-IDF Features: 500-1000 (Plateau-Effekt ab 1000)
-- SVD Faktoren: Sweet Spot bei 50 (Overfitting ab 100)
-- Hybrid-Gewichtung: 60/40 zeigt beste Balance zwischen Precision und Recall
+### Hyperparameter Screening
+- Optimal TF-IDF Features: 500-1000 (plateau effect from 1000)
+- SVD Factors: Sweet spot at 50 (overfitting from 100)
+- Hybrid Weighting: 60/40 shows best balance between precision and recall
 
 ## Model Interpretation
-### Erklärbare KI-Komponenten
-- **Feature Importance**: Bewertungen (35%), Standort (30%), Preis (20%), Kategorie (15%)
-- **Ähnlichkeitsanalyse**: Hotels in derselben Stadt zeigen höchste Ähnlichkeit (Cosine > 0.7)
-- **Nutzergruppen**: Identifikation von 5 Hauptnutzertypen (Budget, Luxury, Adventure, Family, Business)
+### Explainable AI Components
+- **Feature Importance**: Ratings (35%), Location (30%), Price (20%), Category (15%)
+- **Similarity Analysis**: Hotels in the same city show highest similarity (Cosine > 0.7)
+- **User Groups**: Identification of 5 main user types (Budget, Luxury, Adventure, Family, Business)
 
-### Zielerreichung
-- **Primärziel erfüllt**: Automatisierte Reiseempfehlungen mit >75% Precision
-- **Sekundärziele**: 
-  ✅ Weltweite Abdeckung erreicht
-  ✅ Multi-Domain Empfehlungen (Hotels + Aktivitäten)
-  ⚠️ Real-time Empfehlungen noch optimierungsbedürftig (>2s Latenz)
+### Goal Achievement
+- **Primary Goal Achieved**: Automated travel recommendations with >75% precision
+- **Secondary Goals**: 
+  ✅ Global coverage achieved
+  ✅ Multi-domain recommendations (Hotels + Activities)
+  ⚠️ Real-time recommendations still need optimization (>2s latency)
 
-### Erkenntnisse und Anwendung
-- **Haupterkenntnis**: Hybrid-Ansatz übertrifft Einzelmodelle signifikant
-- **Limitationen**: 
-  - Cold-Start Problem bei neuen Nutzern
-  - Geografische Bias zu europäischen Destinationen
-  - Begrenzte Echtzeitfähigkeit bei großen Datensätzen
-- **Anwendbarkeit**: Produktionsreif für Batch-Empfehlungen, Optimierung für Online-Szenarios erforderlich
+### Insights and Application
+- **Main Insight**: Hybrid approach significantly outperforms individual models
+- **Limitations**: 
+  - Cold-start problem for new users
+  - Geographic bias towards European destinations
+  - Limited real-time capability for large datasets
+- **Applicability**: Production-ready for batch recommendations, optimization required for online scenarios
 
 ## Conclusions and Next Steps
-### Schlüsselerkenntnisse
-1. **Hybrid-Modelle** zeigen beste Performance für Reiseempfehlungen
-2. **Bewertungen und Standort** sind wichtigste Faktoren für Nutzerentscheidungen
-3. **Datenqualität** kritisch für Modellperformance (>95% Vollständigkeit erforderlich)
+### Key Insights
+1. **Hybrid models** show best performance for travel recommendations
+2. **Ratings and location** are most important factors for user decisions
+3. **Data quality** critical for model performance (>95% completeness required)
 
-### Limitationen
-- **Datenbias**: Überrepräsentation populärer Destinationen
-- **Skalierbarkeit**: Performance-Degradation bei >10.000 Items
-- **Aktualität**: Statische Modelle, keine dynamische Anpassung
+### Limitations
+- **Data Bias**: Overrepresentation of popular destinations
+- **Scalability**: Performance degradation with >10,000 items
+- **Currency**: Static models, no dynamic adaptation
 
-### Erweiterungsvorschläge
-1. **Deep Learning**: Implementation von Neural Collaborative Filtering
-2. **Real-time Learning**: Online-Lernen für dynamische Präferenzanpassung
-3. **Multi-Modal Features**: Integration von Bildanalyse für bessere Content-Features
-4. **Context-Aware**: Berücksichtigung von Jahreszeit, Wetter, Events
+### Enhancement Suggestions
+1. **Deep Learning**: Implementation of Neural Collaborative Filtering
+2. **Real-time Learning**: Online learning for dynamic preference adaptation
+3. **Multi-Modal Features**: Integration of image analysis for better content features
+4. **Context-Aware**: Consideration of season, weather, events
 
-### Deployment-Vorschlag
-- **Phase 1**: Batch-Empfehlungen (wöchentlich) für registrierte Nutzer
-- **Phase 2**: Near-real-time API für Website-Integration
-- **Phase 3**: Mobile App mit personalisierten Push-Empfehlungen
-- **Infrastruktur**: Docker-Container mit REST API, Redis für Caching
+### Deployment Proposal
+- **Phase 1**: Batch recommendations (weekly) for registered users
+- **Phase 2**: Near-real-time API for website integration
+- **Phase 3**: Mobile app with personalized push recommendations
+- **Infrastructure**: Docker containers with REST API, Redis for caching

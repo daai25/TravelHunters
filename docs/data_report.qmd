@@ -1,81 +1,81 @@
 # Data Report - TravelHunters Project
-Dieses Dokument beschreibt alle im TravelHunters-Projekt verwendeten Daten und gewährleistet die Nachvollziehbarkeit und Reproduzierbarkeit der Ergebnisse.
+This document describes all data used in the TravelHunters project and ensures traceability and reproducibility of results.
 
-Das TravelHunters-Projekt sammelt und verarbeitet Reisedaten von verschiedenen Quellen, um ein umfassendes Dataset für Hotels, Aktivitäten und Reiseziele zu erstellen. Die Daten werden durch Web-Scraping gesammelt, bereinigt und in einer strukturierten Datenbank gespeichert.
+The TravelHunters project collects and processes travel data from various sources to create a comprehensive dataset for hotels, activities, and destinations. Data is collected through web scraping, cleaned, and stored in a structured database.
 
 ## Raw Data
-### Übersicht der Rohdatensets
-| Name | Quelle | Speicherort |
+### Overview of Raw Datasets
+| Name | Source | Storage Location |
 |----------------|-----------------------------------------|--------------------------------------------------------------------------|
 | Booking.com Hotels | Booking.com via Scrapy Spider | `data_acquisition/json_backup/booking_worldwide.json` |
 | Activities Data | GetYourGuide via Scrapy Spider | `data_acquisition/json_backup/activities_worldwide.json` |
 | Destinations Data | Tourism Websites via Scrapy Spider | `data_acquisition/json_backup/destinations_worldwide.json` |
-| Accommodations Data | Verschiedene Quellen (Hostelworld, Airbnb) | `data_acquisition/json_backup/hotels.json` |
+| Accommodations Data | Various Sources (Hostelworld, Airbnb) | `data_acquisition/json_backup/hotels.json` |
 
 ### Details Booking.com Hotels Dataset
-- **Beschreibung**: Hoteldaten von Booking.com inklusive Namen, Bewertungen, Preise, Standorte und BildURLs
-- **Datenquelle**: Booking.com Website über Scrapy Spider (`scraping_data_files/spiders/booking.py`)
-- **Datenbeschaffung**: Automatisiertes Web-Scraping mit Pagination für weltweite Abdeckung
-- **Rechtliche Aspekte**: Öffentlich zugängliche Daten, Beachtung der robots.txt
-- **Datenkategorisierung**: Öffentliche Geschäftsdaten
-- **Variablen**: Hotel-Name, Bewertung, Preis, Standort, Bild-URLs, Beschreibung
+- **Description**: Hotel data from Booking.com including names, ratings, prices, locations and image URLs
+- **Data Source**: Booking.com website via Scrapy Spider (`scraping_data_files/spiders/booking.py`)
+- **Data Acquisition**: Automated web scraping with pagination for worldwide coverage
+- **Legal Aspects**: Publicly available data, respecting robots.txt
+- **Data Classification**: Public business data
+- **Variables**: Hotel name, rating, price, location, image URLs, description
 
 #### Data Catalogue - Hotels
-| Column Index | Column Name | Datatype | Values | Beschreibung |
+| Column Index | Column Name | Datatype | Values | Description |
 |---|---|---|---|---|
-| 1 | name | TEXT | String | Name des Hotels |
-| 2 | rating | REAL | 0.0-10.0 | Hotelbewertung |
-| 3 | price | TEXT | String/NULL | Preisinformation |
-| 4 | location | TEXT | String | Standort des Hotels |
-| 5 | image_urls | TEXT | JSON Array | URLs der Hotelbilder |
-| 6 | description | TEXT | String/NULL | Hotelbeschreibung |
-| 7 | source | TEXT | String | Datenquelle (booking.com) |
+| 1 | name | TEXT | String | Hotel name |
+| 2 | rating | REAL | 0.0-10.0 | Hotel rating |
+| 3 | price | TEXT | String/NULL | Price information |
+| 4 | location | TEXT | String | Hotel location |
+| 5 | image_urls | TEXT | JSON Array | Hotel image URLs |
+| 6 | description | TEXT | String/NULL | Hotel description |
+| 7 | source | TEXT | String | Data source (booking.com) |
 
 ### Details Activities Dataset
-- **Beschreibung**: Aktivitäten und Touren von GetYourGuide mit Preisen, Bewertungen und Standorten
-- **Datenquelle**: GetYourGuide Website über Scrapy Spider (`scraping_data_files/spiders/activities.py`)
-- **Datenbeschaffung**: Web-Scraping mit Pagination für verschiedene Destinationen
-- **Datenkategorisierung**: Öffentliche Geschäftsdaten
+- **Description**: Activities and tours from GetYourGuide with prices, ratings and locations
+- **Data Source**: GetYourGuide website via Scrapy Spider (`scraping_data_files/spiders/activities.py`)
+- **Data Acquisition**: Web scraping with pagination for various destinations
+- **Data Classification**: Public business data
 
 #### Data Catalogue - Activities
-| Column Index | Column Name | Datatype | Values | Beschreibung |
+| Column Index | Column Name | Datatype | Values | Description |
 |---|---|---|---|---|
-| 1 | title | TEXT | String | Titel der Aktivität |
-| 2 | price | TEXT | String/NULL | Preisinformation |
-| 3 | rating | REAL | 0.0-5.0 | Aktivitätsbewertung |
-| 4 | location | TEXT | String | Standort der Aktivität |
-| 5 | image_urls | TEXT | JSON Array | URLs der Aktivitätsbilder |
-| 6 | source | TEXT | String | Datenquelle (getyourguide.com) |
+| 1 | title | TEXT | String | Activity title |
+| 2 | price | TEXT | String/NULL | Price information |
+| 3 | rating | REAL | 0.0-5.0 | Activity rating |
+| 4 | location | TEXT | String | Activity location |
+| 5 | image_urls | TEXT | JSON Array | Activity image URLs |
+| 6 | source | TEXT | String | Data source (getyourguide.com) |
 
 ### Entity Relationship Diagram
-Das ER-Diagramm befindet sich unter `docs/er_diagramm/er_diagramm-ER.svg` und zeigt die Beziehungen zwischen Hotels, Activities und Destinations.
+The ER diagram is located at `docs/er_diagramm/er_diagramm-ER.svg` and shows the relationships between Hotels, Activities and Destinations.
 
 ### Data Quality
-- **Vollständigkeit**: >95% der Hotels haben Namen und Standorte, ~80% haben Bewertungen
-- **Konsistenz**: Einheitliche Datenformate durch Validierung und Bereinigung
-- **Aktualität**: Daten werden regelmäßig durch Re-Scraping aktualisiert
-- **Genauigkeit**: Automatische Validierung von URLs und Datenformaten
+- **Completeness**: >95% of hotels have names and locations, ~80% have ratings
+- **Consistency**: Uniform data formats through validation and cleaning
+- **Currency**: Data regularly updated through re-scraping
+- **Accuracy**: Automatic validation of URLs and data formats
 
 ## Processed Data
-### Übersicht der verarbeiteten Datasets
-| Name | Quelle | Speicherort |
+### Overview of Processed Datasets
+| Name | Source | Storage Location |
 |----------------|-----------------------------------------|--------------------------------------------------------------------------|
-| Merged Travel Data | Zusammenführung aller Rohdaten | `data_acquisition/merged_travel_data.json` |
-| TravelHunters Database | Bereinigte und strukturierte Daten | `database/travelhunters.db` |
+| Merged Travel Data | Consolidation of all raw data | `data_acquisition/merged_travel_data.json` |
+| TravelHunters Database | Cleaned and structured data | `database/travelhunters.db` |
 
 ### Details Merged Travel Data
-- **Beschreibung**: Zusammengeführte und bereinigte Daten aller Quellen in einheitlichem Format
-- **Verarbeitungsschritte**: 
-  - Datenladeung aus JSON-Dateien
-  - Validierung und Bereinigung (URL-Validierung, Duplikatentfernung)
-  - Normalisierung der Datenformate
-  - Zusammenführung in SQLite-Datenbank
-- **Zugriff**: Über `data_cleaning_and_db_integration.py` Script
-- **Statistiken**: 
-  - >2.000 Hotels aus Booking.com
-  - ~90 Aktivitäten aus GetYourGuide
-  - ~671 Reiseziele
-  - Gesamt: >2.700 Datensätze
+- **Description**: Consolidated and cleaned data from all sources in uniform format
+- **Processing Steps**: 
+  - Data loading from JSON files
+  - Validation and cleaning (URL validation, duplicate removal)
+  - Data format normalization
+  - Consolidation into SQLite database
+- **Access**: Via `data_cleaning_and_db_integration.py` script
+- **Statistics**: 
+  - >2,000 hotels from Booking.com
+  - ~90 activities from GetYourGuide
+  - ~671 destinations
+  - Total: >2,700 records
 
 #### Data Catalogue
 
