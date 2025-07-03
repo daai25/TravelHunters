@@ -208,49 +208,84 @@
     "href": "evaluation.html",
     "title": "",
     "section": "",
-    "text": "Code"
+    "text": "Code",
+    "crumbs": [
+      "Home",
+      "Evaluation & Deployment",
+      "Evaluation - TravelHunters Project"
+    ]
   },
   {
     "objectID": "evaluation.html#evaluation-workshop-results",
     "href": "evaluation.html#evaluation-workshop-results",
     "title": "",
     "section": "1.1 Evaluation Workshop Results",
-    "text": "1.1 Evaluation Workshop Results\nDate: July 3, 2025\nParticipants: Leona Kryeziu, Evan Blazo, Joan Felber, Jakub Baranec\n\n1.1.1 Assessment of Project Results\n\n1.1.1.1 Fulfilled Requirements\n\nData Collection: Successfully collected and structured &gt;2,800 travel datasets\n\n2,047 hotels from Booking.com\n90 activities from GetYourGuide\n671 destinations from various sources\n\nGlobal Coverage: Hotels and activities available from different continents\nData Quality: &gt;95% completeness in critical fields (name, location, rating)\nAutomation: Fully automated web scraping with pagination implemented\nSystem Architecture: Scalable SQLite database with structured schema\n\n\n\n1.1.1.2 Partially Fulfilled Requirements\n\nGeographic Balance: Europe bias in hotel data (predominantly European cities)\nImage URLs: Not all entries have working image URLs\nPrice Formats: Inconsistent price representation across different sources\n\n\n\n1.1.1.3 Unfulfilled Requirements\n\nReal-time Data: Static data collection without live updates\nUser Reviews: Limited number of user reviews per entry\nMulti-Language Support: Only English/German content captured\n\n\n\n\n1.1.2 Technical Evaluation\nWeb-Scraping Performance:\n\nSuccess Rate: 95% of requests successful\nThroughput: ~50 items per minute\nError Handling: Robust error handling implemented\nDuplicate Detection: 6,200+ duplicates successfully removed\n\nData Processing Quality:\n\nCleaning: Automatic text normalization and URL validation\nIntegration: Successful merging of all data sources\nConsistency: Uniform schema across all categories"
+    "text": "1.1 Evaluation Workshop Results\nDate: July 3, 2025\nParticipants: Leona Kryeziu, Evan Blazo, Joan Felber, Jakub Baranec\n\n1.1.1 Assessment of Project Results\n\n1.1.1.1 Fulfilled Requirements\n\nData Collection: Successfully collected and structured &gt;2,800 travel datasets\n\n2,047 hotels from Booking.com\n90 activities from GetYourGuide\n671 destinations from various sources\n\nGlobal Coverage: Hotels and activities available from different continents\nData Quality: &gt;95% completeness in critical fields (name, location, rating)\nAutomation: Fully automated web scraping with pagination implemented\nSystem Architecture: Scalable SQLite database with structured schema\n\n\n\n1.1.1.2 Partially Fulfilled Requirements\n\nGeographic Balance: Europe bias in hotel data (predominantly European cities)\nImage URLs: Not all entries have working image URLs\nPrice Formats: Inconsistent price representation across different sources\n\n\n\n1.1.1.3 Unfulfilled Requirements\n\nReal-time Data: Static data collection without live updates\nUser Reviews: Limited number of user reviews per entry\nMulti-Language Support: Only English/German content captured\n\n\n\n\n1.1.2 Technical Evaluation\nWeb-Scraping Performance:\n\nSuccess Rate: 95% of requests successful\nThroughput: ~50 items per minute\nError Handling: Robust error handling implemented\nDuplicate Detection: 6,200+ duplicates successfully removed\n\nData Processing Quality:\n\nCleaning: Automatic text normalization and URL validation\nIntegration: Successful merging of all data sources\nConsistency: Uniform schema across all categories",
+    "crumbs": [
+      "Home",
+      "Evaluation & Deployment",
+      "Evaluation - TravelHunters Project"
+    ]
   },
   {
     "objectID": "evaluation.html#decisions",
     "href": "evaluation.html#decisions",
     "title": "",
     "section": "1.2 Decisions",
-    "text": "1.2 Decisions\n\n1.2.1 1. Project Continuation: YES\nRationale:\n\nProof-of-concept successfully demonstrated\nTechnical feasibility for larger datasets confirmed\nSolid foundation for advanced features available\nSummer School learning objectives fully achieved\n\n\n\n1.2.2 2. Next Development Steps\n\n1.2.2.1 Phase 1: Optimization (Immediately actionable)\n\nImprove Data Quality:\n\nImplement better image URL extraction\nNormalize price formats\nExpand geographic coverage\n\nPerformance Tuning:\n\nImplement parallel scraping\nIntroduce caching mechanisms\nOptimize database indexing\n\n\n\n\n1.2.2.2 Phase 2: Feature Extension (Medium-term)\n\nDevelop Recommendation System:\n\nImplement content-based filtering\nSimilarity algorithms for hotels/activities\nUser preference engine\n\nAPI Development:\n\nRESTful API for data access\nEnable real-time queries\nImplement rate limiting\n\n\n\n\n1.2.2.3 Phase 3: Production System (Long-term)\n\nDevelop Web Interface:\n\nUser-friendly search interface\nInteractive map integration\nMobile-responsive design\n\nCommercialization:\n\nAffiliate links to booking platforms\nPremium features for users\nBusiness intelligence dashboard\n\n\n\n\n\n1.2.3 3. Additional Data Mining Iteration: YES\n\n1.2.3.1 Priority Improvements\n\nExpand Data Acquisition:\n\nAirbnb and alternative accommodation platforms\nTripAdvisor for extended reviews\nLocal tourism websites for better regional coverage\nSocial media sentiment analysis\n\nImprove Data Quality:\n\nImage processing for better image URLs\nGeocoding for precise location data\nAutomate categorization and tagging\nImprove duplicate detection through ML\n\nAnalytical Improvements:\n\nPrice prediction models\nSeasonality analysis\nTrend detection in destinations\nUser behavior modeling"
+    "text": "1.2 Decisions\n\n1.2.1 1. Project Continuation: YES\nRationale:\n\nProof-of-concept successfully demonstrated\nTechnical feasibility for larger datasets confirmed\nSolid foundation for advanced features available\nSummer School learning objectives fully achieved\n\n\n\n1.2.2 2. Next Development Steps\n\n1.2.2.1 Phase 1: Optimization (Immediately actionable)\n\nImprove Data Quality:\n\nImplement better image URL extraction\nNormalize price formats\nExpand geographic coverage\n\nPerformance Tuning:\n\nImplement parallel scraping\nIntroduce caching mechanisms\nOptimize database indexing\n\n\n\n\n1.2.2.2 Phase 2: Feature Extension (Medium-term)\n\nDevelop Recommendation System:\n\nImplement content-based filtering\nSimilarity algorithms for hotels/activities\nUser preference engine\n\nAPI Development:\n\nRESTful API for data access\nEnable real-time queries\nImplement rate limiting\n\n\n\n\n1.2.2.3 Phase 3: Production System (Long-term)\n\nDevelop Web Interface:\n\nUser-friendly search interface\nInteractive map integration\nMobile-responsive design\n\nCommercialization:\n\nAffiliate links to booking platforms\nPremium features for users\nBusiness intelligence dashboard\n\n\n\n\n\n1.2.3 3. Additional Data Mining Iteration: YES\n\n1.2.3.1 Priority Improvements\n\nExpand Data Acquisition:\n\nAirbnb and alternative accommodation platforms\nTripAdvisor for extended reviews\nLocal tourism websites for better regional coverage\nSocial media sentiment analysis\n\nImprove Data Quality:\n\nImage processing for better image URLs\nGeocoding for precise location data\nAutomate categorization and tagging\nImprove duplicate detection through ML\n\nAnalytical Improvements:\n\nPrice prediction models\nSeasonality analysis\nTrend detection in destinations\nUser behavior modeling",
+    "crumbs": [
+      "Home",
+      "Evaluation & Deployment",
+      "Evaluation - TravelHunters Project"
+    ]
   },
   {
     "objectID": "evaluation.html#lessons-learned",
     "href": "evaluation.html#lessons-learned",
     "title": "",
     "section": "1.3 Lessons Learned",
-    "text": "1.3 Lessons Learned\n\n1.3.1 Technical Insights\n\nWeb-Scraping Challenges:\n\nRate-limiting is critical for website stability\nRobust error-handling prevents data loss\nPagination-handling complex but important for completeness\n\nData Processing:\n\nEarly duplicate detection saves resources\nUniform data models essential for integration\nAutomated validation reduces manual rework\n\nInfrastructure:\n\nSQLite sufficient for prototyping, PostgreSQL for production\nDocumentation with Quarto very effective\nVersion control for data pipelines important\n\n\n\n\n1.3.2 Project Management\n\nAgile Development works well for Data Science projects\nContinuous Evaluation prevents direction changes\nStakeholder Feedback collect early and regularly"
+    "text": "1.3 Lessons Learned\n\n1.3.1 Technical Insights\n\nWeb-Scraping Challenges:\n\nRate-limiting is critical for website stability\nRobust error-handling prevents data loss\nPagination-handling complex but important for completeness\n\nData Processing:\n\nEarly duplicate detection saves resources\nUniform data models essential for integration\nAutomated validation reduces manual rework\n\nInfrastructure:\n\nSQLite sufficient for prototyping, PostgreSQL for production\nDocumentation with Quarto very effective\nVersion control for data pipelines important\n\n\n\n\n1.3.2 Project Management\n\nAgile Development works well for Data Science projects\nContinuous Evaluation prevents direction changes\nStakeholder Feedback collect early and regularly",
+    "crumbs": [
+      "Home",
+      "Evaluation & Deployment",
+      "Evaluation - TravelHunters Project"
+    ]
   },
   {
     "objectID": "evaluation.html#risks-and-mitigation",
     "href": "evaluation.html#risks-and-mitigation",
     "title": "",
     "section": "1.4 Risks and Mitigation",
-    "text": "1.4 Risks and Mitigation\n\n1.4.1 Technical Risks\n\nWebsite Changes: Plan regular spider updates\nScaling Problems: Early architecture planning\nData Quality: Implement automated monitoring tools\n\n\n\n1.4.2 Legal Risks\n\nrobots.txt Compliance: Automated verification\nRate-Limiting: Respectful scraping practices\nCopyright: Only use publicly available data\n\n\n\n1.4.3 Business Risks\n\nCompetition: Focus on unique features and better UX\nData Currency: Establish regular update cycles\nUser Acceptance: Continuous user testing"
+    "text": "1.4 Risks and Mitigation\n\n1.4.1 Technical Risks\n\nWebsite Changes: Plan regular spider updates\nScaling Problems: Early architecture planning\nData Quality: Implement automated monitoring tools\n\n\n\n1.4.2 Legal Risks\n\nrobots.txt Compliance: Automated verification\nRate-Limiting: Respectful scraping practices\nCopyright: Only use publicly available data\n\n\n\n1.4.3 Business Risks\n\nCompetition: Focus on unique features and better UX\nData Currency: Establish regular update cycles\nUser Acceptance: Continuous user testing",
+    "crumbs": [
+      "Home",
+      "Evaluation & Deployment",
+      "Evaluation - TravelHunters Project"
+    ]
   },
   {
     "objectID": "evaluation.html#future-recommendations",
     "href": "evaluation.html#future-recommendations",
     "title": "",
     "section": "1.5 Future Recommendations",
-    "text": "1.5 Future Recommendations\n\n1.5.1 Short-term (1-3 months)\n\nClean up codebase and documentation\nAutomated tests for all spiders implemented\nCI/CD Pipeline for continuous data updates\nMonitoring Dashboard for data quality\n\n\n\n1.5.2 Medium-term (3-6 months)\n\nMachine Learning Pipeline for recommendations development\nAPI Gateway for external data access\nPerformance Optimization for larger datasets\nInternational Expansion of data sources\n\n\n\n1.5.3 Long-term (6-12 months)\n\nProduction Web Application development\nMobile Apps for iOS and Android\nAI-powered Travel Planning implementation\nPartnerships with travel providers establishment"
+    "text": "1.5 Future Recommendations\n\n1.5.1 Short-term (1-3 months)\n\nClean up codebase and documentation\nAutomated tests for all spiders implemented\nCI/CD Pipeline for continuous data updates\nMonitoring Dashboard for data quality\n\n\n\n1.5.2 Medium-term (3-6 months)\n\nMachine Learning Pipeline for recommendations development\nAPI Gateway for external data access\nPerformance Optimization for larger datasets\nInternational Expansion of data sources\n\n\n\n1.5.3 Long-term (6-12 months)\n\nProduction Web Application development\nMobile Apps for iOS and Android\nAI-powered Travel Planning implementation\nPartnerships with travel providers establishment",
+    "crumbs": [
+      "Home",
+      "Evaluation & Deployment",
+      "Evaluation - TravelHunters Project"
+    ]
   },
   {
     "objectID": "evaluation.html#conclusion",
     "href": "evaluation.html#conclusion",
     "title": "",
     "section": "1.6 Conclusion",
-    "text": "1.6 Conclusion\nThe TravelHunters project has successfully demonstrated how web scraping, data processing, and machine learning can be applied to a real problem in the tourism sector.\nKey Achievements:\n\nAutomated data collection of &gt;2,800 travel datasets\nRobust data pipeline with 95% success rate\nScalable architecture for future extensions\nPractical application of Data Science methods\n\nProject Status: SUCCESSFULLY COMPLETED\nThe project forms a solid foundation for further developments and has achieved or exceeded all originally set goals.\nEvaluated by: Data Science Summer School Team\nApproval: Project Leadership\nNext Review: Upon Phase 2 Implementation"
+    "text": "1.6 Conclusion\nThe TravelHunters project has successfully demonstrated how web scraping, data processing, and machine learning can be applied to a real problem in the tourism sector.\nKey Achievements:\n\nAutomated data collection of &gt;2,800 travel datasets\nRobust data pipeline with 95% success rate\nScalable architecture for future extensions\nPractical application of Data Science methods\n\nProject Status: SUCCESSFULLY COMPLETED\nThe project forms a solid foundation for further developments and has achieved or exceeded all originally set goals.\nEvaluated by: Data Science Summer School Team\nApproval: Project Leadership\nNext Review: Upon Phase 2 Implementation",
+    "crumbs": [
+      "Home",
+      "Evaluation & Deployment",
+      "Evaluation - TravelHunters Project"
+    ]
   },
   {
     "objectID": "modelling_report.html",
