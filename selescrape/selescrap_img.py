@@ -1,114 +1,94 @@
-import os
-import time
-import requests
-from PIL import Image
-from io import BytesIO
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-OUTPUT_DIR = os.path.expanduser("~/Desktop/travelhunters/selescrape/BYG_images")
+import time
+import re
 
 def init_driver():
     options = Options()
-    options.add_argument("--headless=new")
-    options.add_argument("--disable-gpu")
+    options.add_argument("--headless=new")  # Use headless mode for speed
     options.add_argument("--no-sandbox")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--log-level=3")
     options.add_argument("--window-size=1920,1080")
-    options.add_argument("user-agent=Mozilla/5.0")
-    return webdriver.Chrome(service=Service(), options=options)
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
+    service = Service()
+    return webdriver.Chrome(service=service, options=options)
 
-def get_insider_guide_links(driver, explorer_url, limit=5):
+def scroll_and_collect_guide_links(driver, explorer_url):
     driver.get(explorer_url)
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, 'a.article'))
-    )
-    seen = set()
-    links = []
-    for a in driver.find_elements(By.CSS_SELECTOR, 'a.article'):
-        href = a.get_attribute('href')
-        if href and '/explorer/' in href and href not in seen:
-            seen.add(href)
-            links.append(href)
-            if len(links) >= limit:
-                break
-    return links
-
-import re
-
-def extract_city_country(url):
-    slug = url.split('/explorer/')[-1].strip('/')
-    parts = slug.split('-')
+    wait = WebDriverWait(driver, 8)
+    wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a.article')))
     
-    # Remove invalid characters and sanitize
-    def clean(text):
-        text = re.sub(r'[\\/:"*?<>|]+', '', text)  # remove invalid filename chars
-        text = text.replace(',', '')               # remove commas
-        text = re.sub(r'\s+', ' ', text).strip()   # normalize spaces
-        return text.title()
+    seen = set()
+    guide_links = []
+    last_height = driver.execute_script("return document.body.scrollHeight")
 
-    if '-' in slug:
-        if '/' in slug:
-            # E.g., travel-inspiration/best-places-for-cheese
-            parts = slug.split('/')
-            city = clean(parts[-1].replace('-', ' '))
-            country = clean(parts[0].replace('-', ' '))
-        else:
-            city = clean(' '.join(parts[:-1]))
-            country = clean(parts[-1])
-    else:
-        city = clean(slug.replace('-', ' '))
-        country = ''
+    while True:
+        articles = driver.find_elements(By.CSS_SELECTOR, 'a.article')
+        new_found = 0
+        for a in articles:
+            href = a.get_attribute('href')
+            if href and '/explorer/' in href and href not in seen:
+                seen.add(href)
+                guide_links.append(href)
+                new_found += 1
 
-    return f"{city}, {country}".strip(', ')
+        driver.execute_script("window.scrollBy(0, window.innerHeight);")
+        time.sleep(0.6)  # Lowered delay
 
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        if new_height == last_height and new_found == 0:
+            break
+        last_height = new_height
 
-def get_first_image(driver, url):
-    driver.get(url)
+    return guide_links
+
+def extract_city_country_from_url(url):
+    slug = url.split("/explorer/")[-1].strip("/")
+    if not slug:
+        return "Unknown"
+
+    parts = slug.replace('-', ' ').split('/')
+    city_part = parts[-1].title()
+    country_part = parts[0].title() if len(parts) > 1 else ""
+    city_country = f"{city_part}, {country_part}".strip(", ")
+    return re.sub(r'[\\/:*?"<>|]', '', city_country)
+
+def scrape_single_image_url(driver, url):
     try:
-        WebDriverWait(driver, 5).until(
+        driver.get(url)
+        WebDriverWait(driver, 6).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, 'img'))
         )
         for img in driver.find_elements(By.CSS_SELECTOR, 'img'):
             src = img.get_attribute('src')
-            if src and src.startswith('http') and 'svg' not in src:
+            if src and src.startswith("http") and 'svg' not in src:
                 return src
     except:
-        return None
+        pass
     return None
 
-def download_and_convert_image(url, filename):
-    try:
-        r = requests.get(url, timeout=10)
-        img = Image.open(BytesIO(r.content)).convert("RGB")
-        img.save(filename, "JPEG", quality=85)
-        return True
-    except Exception as e:
-        print(f"[!] Failed to save {filename}: {e}")
-        return False
-
 def main():
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    explorer_url = "https://www.getyourguide.com/explorer/"
     driver = init_driver()
 
     try:
-        guide_links = get_insider_guide_links(driver, "https://www.getyourguide.com/explorer/", limit=10)
-        for i, url in enumerate(guide_links):
-            print(f"[{i+1}] {url}")
-            city_name = extract_city_country(url)
-            img_url = get_first_image(driver, url)
+        guide_links = scroll_and_collect_guide_links(driver, explorer_url)
+        print(f"\n✅ Found {len(guide_links)} guide pages.\n")
+
+        for i, guide_url in enumerate(guide_links, 1):
+            city_country = extract_city_country_from_url(guide_url)
+            print(f"[{i}] {city_country}: {guide_url}")
+            img_url = scrape_single_image_url(driver, guide_url)
             if img_url:
-                out_path = os.path.join(OUTPUT_DIR, f"{city_name}.jpg")
-                if download_and_convert_image(img_url, out_path):
-                    print(f"✅ Saved: {out_path}")
-                else:
-                    print(f"[!] Error downloading {city_name}")
+                print(f"    ↳ Image: {img_url}")
             else:
-                print(f"[!] No image found for {city_name}")
+                print("    ↳ No image found.")
     finally:
         driver.quit()
 
