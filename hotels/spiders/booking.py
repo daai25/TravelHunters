@@ -58,8 +58,18 @@ class BookingSpider(Spider):
             # Extrahiere auch alle Texte, die wie Hotelnamen aussehen
             potential_names = response.css('h1::text, h2::text, h3::text, h4::text').getall()
             
+            # Extrahiere verfügbare Bilder von der Seite
+            all_images = response.css('img::attr(src), img::attr(data-src)').getall()
+            quality_images = []
+            for img_url in all_images:
+                if img_url and any(ext in img_url.lower() for ext in ['.jpg', '.jpeg', '.png', '.webp']):
+                    if not any(skip in img_url.lower() for skip in ['icon', 'logo', 'sprite', 'pixel', 'svg']):
+                        quality_images.append(response.urljoin(img_url))
+            
             for i, link in enumerate(hotel_links[:15]):  # Limitiere auf erste 15
                 name = potential_names[i] if i < len(potential_names) else f"Hotel {i+1}"
+                # Verteile Bilder auf Hotels
+                hotel_images = quality_images[i*2:(i+1)*2] if i*2 < len(quality_images) else []
                 yield {
                     "source": "Booking.com",
                     "name": name.strip() if name else None,
@@ -67,11 +77,21 @@ class BookingSpider(Spider):
                     "rating": None,
                     "price": None,
                     "location": None,
-                    "description": "Extracted from general page content"
+                    "description": "Extracted from general page content",
+                    "images": hotel_images,
+                    "image_count": len(hotel_images)
                 }
             
             # Wenn immer noch nichts gefunden, gib wenigstens die URL-Info zurück
             if not hotel_links:
+                # Sammle trotzdem verfügbare Bilder
+                page_images = response.css('img::attr(src), img::attr(data-src)').getall()
+                sample_images = []
+                for img_url in page_images[:5]:
+                    if img_url and any(ext in img_url.lower() for ext in ['.jpg', '.jpeg', '.png', '.webp']):
+                        if not any(skip in img_url.lower() for skip in ['icon', 'logo', 'sprite']):
+                            sample_images.append(response.urljoin(img_url))
+                
                 yield {
                     "source": "Booking.com",
                     "name": "Page accessed successfully",
@@ -79,7 +99,9 @@ class BookingSpider(Spider):
                     "rating": None,
                     "price": None,
                     "location": None,
-                    "description": f"Page loaded with status {response.status}, check debug_booking_response.html for content"
+                    "description": f"Page loaded with status {response.status}, check debug_booking_response.html for content",
+                    "images": sample_images,
+                    "image_count": len(sample_images)
                 }
             return
         
@@ -172,10 +194,38 @@ class BookingSpider(Spider):
                     location = location_text.strip()
                     break
             
+            # Extrahiere Bild-URLs
+            image_selectors = [
+                'img::attr(src)',
+                'img::attr(data-src)',
+                '[data-testid="property-card-image"] img::attr(src)',
+                '.sr-card__image img::attr(src)',
+                '.bui-card__image img::attr(src)',
+                '.hotel_image img::attr(src)',
+                'picture img::attr(src)',
+                'img[alt*="hotel" i]::attr(src)',
+                'img[alt*="property" i]::attr(src)'
+            ]
+            images = []
+            for img_sel in image_selectors:
+                img_urls = hotel.css(img_sel).getall()
+                for img_url in img_urls:
+                    if img_url and any(ext in img_url.lower() for ext in ['.jpg', '.jpeg', '.png', '.webp']):
+                        # Vollständige URL erstellen
+                        full_img_url = response.urljoin(img_url)
+                        # Nur hochwertige Bilder (nicht Icons/Logos)
+                        if not any(skip in img_url.lower() for skip in ['icon', 'logo', 'sprite', 'pixel']):
+                            images.append(full_img_url)
+                if images:
+                    break
+            
+            # Limitiere auf die ersten 3 Bilder
+            images = images[:3] if images else []
+            
             # Beschreibung aus allem Text extrahieren
             description = ' '.join(hotel.css('::text').getall()).strip()[:200]
             
-            print(f"Hotel: {name}, Price: {price}, Rating: {rating}, Location: {location}")
+            print(f"Hotel: {name}, Price: {price}, Rating: {rating}, Location: {location}, Images: {len(images)}")
             
             if name or link or description:  # Ausgeben wenn irgendetwas gefunden wurde
                 yield {
@@ -185,5 +235,7 @@ class BookingSpider(Spider):
                     "rating": rating,
                     "price": price,
                     "location": location,
-                    "description": description if description else None
+                    "description": description if description else None,
+                    "images": images,
+                    "image_count": len(images)
                 }
