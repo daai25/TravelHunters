@@ -274,12 +274,15 @@ class WikipediaDestinationsScraper:
             return None
     
     def save_data(self):
-        """Speichert die gesammelten Daten als JSON"""
+        """Speichert die gesammelten Daten als JSON (Booking-Format: eine Zeile pro Objekt)"""
         output_file = os.path.join(self.output_dir, 'wikipedia_destinations.json')
         
         try:
             with open(output_file, 'w', encoding='utf-8') as f:
-                json.dump(self.destinations, f, ensure_ascii=False, indent=2)
+                for destination in self.destinations:
+                    # Jedes Objekt in einer separaten Zeile, kompakt formatiert (wie booking.json)
+                    json.dump(destination, f, ensure_ascii=False, separators=(',', ':'))
+                    f.write('\n')
             
             self.logger.info(f"Daten gespeichert: {output_file}")
             self.logger.info(f"Anzahl Destinationen: {len(self.destinations)}")
