@@ -166,13 +166,13 @@ def get_destination_urls():
     return wikipedia_destination_urls
 
 def get_extended_destination_urls():
-    """Gibt die erweiterte Liste zurück - jetzt mit 1000+ Destinationen"""
+    """Gibt die erweiterte Liste zurück - jetzt mit 2000+ Destinationen"""
     # Starte mit der manuellen erweiterten Liste
     base_list = list(wikipedia_destination_urls_extended)
     
-    # Füge automatisch generierte massive Links hinzu um 1000+ zu erreichen
-    print("🚀 Erweitere Liste auf 1000+ Destinationen...")
-    needed_additional = 1200 - len(base_list)  # Erhöht auf 1200 um sicher 1000+ zu haben
+    # Füge automatisch generierte massive Links hinzu um 2000+ zu erreichen
+    print("🚀 Erweitere Liste auf 2000+ Destinationen...")
+    needed_additional = 2500 - len(base_list)  # Erhöht auf 2500 um sicher 2000+ zu haben
     
     if needed_additional > 0:
         massive_links = get_massive_destination_urls(max_destinations=needed_additional)
@@ -183,8 +183,8 @@ def get_extended_destination_urls():
     else:
         return base_list
 
-def get_massive_destination_urls(max_destinations=1500):
-    """Gibt eine massive Liste von 1000+ Destinationen zurück (automatisch generiert)"""
+def get_massive_destination_urls(max_destinations=2500):
+    """Gibt eine massive Liste von 2000+ Destinationen zurück (automatisch generiert)"""
     return generate_and_get_massive_links(max_destinations)
 
 # Statistiken
@@ -279,15 +279,15 @@ class MassiveLinkGenerator:
             
         return False
     
-    def generate_massive_links(self, max_destinations=1500):
-        """Generiert eine massive Liste von 1000+ Destination-Links"""
+    def generate_massive_links(self, max_destinations=2500):
+        """Generiert eine massive Liste von 2000+ Destination-Links"""
         print("🚀 Starte massive Link-Generierung...")
         print(f"🎯 Ziel: {max_destinations} Destinationen")
         print("=" * 60)
         
-        # Verschiedene Wikipedia-Kategorien für Destinationen
+        # Erweiterte Wikipedia-Kategorien für deutlich mehr Destinationen
         categories = [
-            # Städte nach Kontinent (korrigierte URLs)
+            # Städte nach Kontinent
             'https://en.wikipedia.org/wiki/Category:Cities_in_Europe',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Asia',
             'https://en.wikipedia.org/wiki/Category:Cities_in_North_America',
@@ -295,65 +295,131 @@ class MassiveLinkGenerator:
             'https://en.wikipedia.org/wiki/Category:Cities_in_Africa',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Oceania',
             
-            # Hauptstädte (korrigierte URLs)
-            'https://en.wikipedia.org/wiki/Category:Capital_cities',
-            'https://en.wikipedia.org/wiki/Category:National_capitals',
+            # Hauptstädte
             'https://en.wikipedia.org/wiki/Category:Capitals_in_Europe',
             'https://en.wikipedia.org/wiki/Category:Capitals_in_Asia',
             'https://en.wikipedia.org/wiki/Category:Capitals_in_Africa',
             'https://en.wikipedia.org/wiki/Category:Capitals_in_North_America',
+            'https://en.wikipedia.org/wiki/Category:Capitals_in_South_America',
             
-            # Touristische Destinationen und Orte
+            # Touristische Destinationen
             'https://en.wikipedia.org/wiki/Category:World_Heritage_Sites',
             'https://en.wikipedia.org/wiki/Category:Populated_places_by_continent',
             'https://en.wikipedia.org/wiki/Category:Municipalities',
+            'https://en.wikipedia.org/wiki/Category:Tourist_attractions',
             
-            # Spezifische Länder-Kategorien (bekannt funktionierende)
+            # Europa - alle großen Länder
             'https://en.wikipedia.org/wiki/Category:Cities_in_Germany',
             'https://en.wikipedia.org/wiki/Category:Cities_in_France',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Italy',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Spain',
             'https://en.wikipedia.org/wiki/Category:Cities_in_the_United_Kingdom',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_the_United_States',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Japan',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_China',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_India',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Australia',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Brazil',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Canada',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Mexico',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Russia',
-            
-            # Weitere spezifische Länder-Kategorien für mehr Links
             'https://en.wikipedia.org/wiki/Category:Cities_in_Poland',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Turkey',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Greece',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Netherlands',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Belgium',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Portugal',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Austria',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Switzerland',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Sweden',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Norway',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Denmark',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Finland',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Czech_Republic',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Hungary',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Romania',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Croatia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Serbia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Bulgaria',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Slovenia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Slovakia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Estonia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Latvia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Lithuania',
+            
+            # Asien - alle großen Länder
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Japan',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_China',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_India',
             'https://en.wikipedia.org/wiki/Category:Cities_in_South_Korea',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Thailand',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Vietnam',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Malaysia',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Indonesia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Malaysia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Singapore',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Philippines',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_South_Africa',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Egypt',
-            'https://en.wikipedia.org/wiki/Category:Cities_in_Nigeria',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Iran',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Iraq',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Israel',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Saudi_Arabia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Pakistan',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Bangladesh',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Sri_Lanka',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Myanmar',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Cambodia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Laos',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Mongolia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Kazakhstan',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Uzbekistan',
+            
+            # Amerika - Nord, Mittel und Süd
+            'https://en.wikipedia.org/wiki/Category:Cities_in_the_United_States',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Canada',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Mexico',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Brazil',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Argentina',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Chile',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Peru',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Colombia',
             'https://en.wikipedia.org/wiki/Category:Cities_in_Venezuela',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Ecuador',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Bolivia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Uruguay',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Paraguay',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Guatemala',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Costa_Rica',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Panama',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Nicaragua',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Honduras',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_El_Salvador',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Cuba',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Dominican_Republic',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Jamaica',
+            
+            # Afrika - alle großen Länder
+            'https://en.wikipedia.org/wiki/Category:Cities_in_South_Africa',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Egypt',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Nigeria',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Kenya',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Ethiopia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Tanzania',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Uganda',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Ghana',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Morocco',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Algeria',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Tunisia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Libya',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Sudan',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Cameroon',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Ivory_Coast',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Senegal',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Mali',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Burkina_Faso',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Niger',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Chad',
+            
+            # Ozeanien
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Australia',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_New_Zealand',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Papua_New_Guinea',
+            'https://en.wikipedia.org/wiki/Category:Cities_in_Fiji',
+            
+            # Zusätzliche spezielle Kategorien
+            'https://en.wikipedia.org/wiki/Category:Provincial_capitals',
+            'https://en.wikipedia.org/wiki/Category:State_capitals',
+            'https://en.wikipedia.org/wiki/Category:Port_cities',
+            'https://en.wikipedia.org/wiki/Category:Historic_cities',
+            'https://en.wikipedia.org/wiki/Category:Cultural_centers',
+            'https://en.wikipedia.org/wiki/Category:Religious_centers',
+            'https://en.wikipedia.org/wiki/Category:Coastal_cities',
+            'https://en.wikipedia.org/wiki/Category:Mountain_cities',
+            'https://en.wikipedia.org/wiki/Category:Island_cities',
         ]
         
         all_links = set()
@@ -364,7 +430,7 @@ class MassiveLinkGenerator:
                 break
                 
             print(f"\n📂 Kategorie {i}/{len(categories)}")
-            links = self.get_links_from_category(category, max_links=150)
+            links = self.get_links_from_category(category, max_links=300)
             all_links.update(links)
             
             print(f"📊 Zwischenstand: {len(all_links)} einzigartige Links")
@@ -385,7 +451,7 @@ class MassiveLinkGenerator:
 # Variable für massive Links (wird bei Bedarf generiert)
 wikipedia_destination_urls_massive = None
 
-def generate_and_get_massive_links(max_destinations=1500):
+def generate_and_get_massive_links(max_destinations=2500):
     """Generiert und gibt massive Link-Liste zurück"""
     global wikipedia_destination_urls_massive
     

@@ -12,7 +12,7 @@ import time
 import re
 from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
-from wikipedia_destination_links import get_destination_urls
+from wikipedia_destination_links import get_extended_destination_urls
 
 def clean_text(text):
     """Bereinigt Text von Wikipedia-spezifischen Elementen"""
@@ -378,7 +378,7 @@ def main():
     # Lade Destination-Links
     print("📥 Lade Destination-Links...")
     try:
-        destination_links = get_destination_urls()
+        destination_links = get_extended_destination_urls()
         print(f"✅ {len(destination_links)} Destination-Links geladen")
     except Exception as e:
         print(f"❌ Fehler beim Laden der Links: {e}")
@@ -387,41 +387,59 @@ def main():
     # Ausgabedatei
     output_file = os.path.join(output_dir, "wikipedia_destinations.json")
     
-    # Teste mit wenigen Destinationen oder verwende alle
-    destination_links = destination_links[:25]  # Für Tests: ersten 25 Destinationen
-    # Für Vollbetrieb: alle Links verwenden
+    # Vollbetrieb: ALLE Links verwenden (2000+ Destinationen)
+    # destination_links = destination_links[:100]  # Für Tests auskommentiert
+    print(f"🎯 Starte VOLLSTÄNDIGES Scraping von {len(destination_links)} Destinationen...")
+    print(f"⚠️  Das kann mehrere Stunden dauern bei {len(destination_links)} Destinationen!")
     
     print(f"🎯 Starte Scraping von {len(destination_links)} Destinationen...")
     print(f"💾 Streaming-Ausgabe nach: {output_file}")
     
+    # Lock-Datei zum Verhindern mehrerer Instanzen
+    lock_file = output_file + ".lock"
+    if os.path.exists(lock_file):
+        print(f"⚠️  Scraper läuft bereits (Lock-Datei gefunden: {lock_file})")
+        print("❌ Beende, um Konflikte zu vermeiden.")
+        return
+    
+    # Lock-Datei erstellen
+    with open(lock_file, 'w') as lf:
+        lf.write(f"Started at: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+    
     successful_count = 0
     error_count = 0
     
-    # Öffne Ausgabedatei für Streaming (append mode)
-    with open(output_file, 'w', encoding='utf-8') as f:
-        for i, url in enumerate(destination_links, 1):
-            print(f"\n--- Destination {i}/{len(destination_links)} ---")
-            
-            result = scrape_destination(url, images_dir)
-            
-            if result:
-                # Schreibe sofort in Datei (streaming)
-                json.dump(result, f, ensure_ascii=False, separators=(',', ':'))
-                f.write('\n')
-                f.flush()  # Stelle sicher, dass es sofort geschrieben wird
-                successful_count += 1
-            else:
-                error_count += 1
-            
-            # Fortschrittsbericht alle 50 Destinationen
-            if i % 50 == 0:
-                print(f"\n📊 ZWISCHENBERICHT:")
-                print(f"✅ Erfolgreich: {successful_count}")
-                print(f"❌ Fehler: {error_count}")
-                print(f"📈 Fortschritt: {i}/{len(destination_links)} ({(i/len(destination_links)*100):.1f}%)")
-            
-            # Pause zwischen Requests (höflich gegenüber Wikipedia)
-            time.sleep(1)  # 1 Sekunde Pause
+    try:
+        # Öffne Ausgabedatei für Streaming (append mode)
+        with open(output_file, 'a', encoding='utf-8') as f:
+            for i, url in enumerate(destination_links, 1):
+                print(f"\n--- Destination {i}/{len(destination_links)} ---")
+                
+                result = scrape_destination(url, images_dir)
+                
+                if result:
+                    # Schreibe sofort in Datei (streaming)
+                    json.dump(result, f, ensure_ascii=False, separators=(',', ':'))
+                    f.write('\n')
+                    f.flush()  # Stelle sicher, dass es sofort geschrieben wird
+                    successful_count += 1
+                else:
+                    error_count += 1
+                
+                # Fortschrittsbericht alle 50 Destinationen
+                if i % 50 == 0:
+                    print(f"\n📊 ZWISCHENBERICHT:")
+                    print(f"✅ Erfolgreich: {successful_count}")
+                    print(f"❌ Fehler: {error_count}")
+                    print(f"📈 Fortschritt: {i}/{len(destination_links)} ({(i/len(destination_links)*100):.1f}%)")
+                
+                # Pause zwischen Requests (höflich gegenüber Wikipedia)
+                time.sleep(1)  # 1 Sekunde Pause
+    
+    finally:
+        # Lock-Datei entfernen
+        if os.path.exists(lock_file):
+            os.remove(lock_file)
     
     print(f"\n🎯 ENDERGEBNIS:")
     print(f"✅ Erfolgreich gescrapt: {successful_count}/{len(destination_links)} Destinationen")
