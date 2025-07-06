@@ -15,7 +15,30 @@ from bs4 import BeautifulSoup
 import logging
 
 # Import der Destination URLs aus separatem Modul
-from wikipedia_destination_links import wikipedia_destination_urls_extended as wikipedia_destination_urls
+from wikipedia_destination_links import get_massive_destination_urls, get_extended_destination_urls
+
+# Lade die URL-Liste - starte mit der erweiterten Liste und erweitere bei Bedarf
+print("🚀 Wikipedia Scraper startet...")
+print("📋 Lade Destination-URLs...")
+
+# Nutze erst die bewährte erweiterte Liste (106 Destinationen)
+wikipedia_destination_urls = get_extended_destination_urls()
+print(f"✅ Basis-Liste geladen: {len(wikipedia_destination_urls)} Destinationen")
+
+# Falls mehr als 200 Destinationen gewünscht sind, erweitere mit automatischer Generierung
+TARGET_DESTINATIONS = 200  # ✅ ECHTES SCRAPING: Erweiterte Liste für Produktion
+
+if TARGET_DESTINATIONS > len(wikipedia_destination_urls):
+    print(f"🔧 Erweitere auf {TARGET_DESTINATIONS} Destinationen...")
+    additional_needed = TARGET_DESTINATIONS - len(wikipedia_destination_urls)
+    massive_urls = get_massive_destination_urls(max_destinations=additional_needed)
+    
+    # Kombiniere beide Listen und entferne Duplikate
+    combined_urls = list(set(wikipedia_destination_urls + massive_urls))
+    wikipedia_destination_urls = combined_urls[:TARGET_DESTINATIONS]
+    print(f"✅ Finale Liste: {len(wikipedia_destination_urls)} Destinationen")
+else:
+    print(f"✅ Verwende Basis-Liste: {len(wikipedia_destination_urls)} Destinationen")
 
 
 class WikipediaDestinationsScraper:
@@ -57,16 +80,26 @@ class WikipediaDestinationsScraper:
         self.logger = logging.getLogger(__name__)
         
     def clean_text(self, text):
-        """Bereinigt Text von Wikipedia-spezifischen Elementen"""
+        """Bereinigt Text von Wikipedia-spezifischen Elementen - VERBESSERTE VERSION"""
         if not text:
             return ""
         
-        # Entferne Referenzen in eckigen Klammern
+        # Entferne Referenzen in eckigen Klammern [1], [citation needed], etc.
         text = re.sub(r'\[[^\]]*\]', '', text)
-        # Entferne mehrfache Leerzeichen
+        
+        # Entferne Wikipedia-spezifische Elemente
+        text = re.sub(r'\(listen\)', '', text)  # (listen) Audio-Links
+        text = re.sub(r'\(help·info\)', '', text)  # (help·info) Links
+        text = re.sub(r'pronunciation:', '', text, flags=re.IGNORECASE)
+        
+        # Entferne mehrfache Leerzeichen und Zeilenumbrüche
         text = re.sub(r'\s+', ' ', text)
+        
         # Entferne führende/nachfolgende Leerzeichen
         text = text.strip()
+        
+        # Entferne leere Klammern
+        text = re.sub(r'\(\s*\)', '', text)
         
         return text
     
@@ -247,17 +280,79 @@ class WikipediaDestinationsScraper:
             title_element = soup.find('h1', class_='firstHeading')
             title = title_element.get_text().strip() if title_element else "Unknown"
             
-            # Erste Absätze für Beschreibung
-            description_paragraphs = []
-            content_div = soup.find('div', class_='mw-parser-output')
-            if content_div:
-                paragraphs = content_div.find_all('p', limit=3)
-                for p in paragraphs:
-                    text = self.clean_text(p.get_text())
-                    if text and len(text) > 50:  # Nur substantielle Absätze
-                        description_paragraphs.append(text)
+            # OPTIMIERTE Beschreibungsextraktion für Wikipedia
+            description = None
             
-            description = ' '.join(description_paragraphs[:2])  # Erste 2 Absätze
+            # Hauptstrategie: Finde das mw-parser-output div und verwende den ersten substantiellen Absatz
+            content_text_div = soup.find('div', id='mw-content-text')
+            if content_text_div:
+                parser_output = content_text_div.find('div', class_='mw-parser-output')
+                if parser_output:
+                    # Hole alle Absätze - der erste ist oft leer, der zweite enthält die Hauptbeschreibung
+                    paragraphs = parser_output.find_all('p', recursive=False)
+                    
+                    substantial_paragraphs = []
+                    for p in paragraphs:
+                        text = self.clean_text(p.get_text())
+                        
+                        # Überspringe leere oder sehr kurze Absätze
+                        if len(text) < 50:
+                            continue
+                            
+                        # Überspringe reine Koordinaten- oder Pronunciations-Zeilen
+                        if ('coordinates:' in text.lower() or 
+                            (len(text) < 150 and ('pronunciation' in text.lower() or 'ⓘ' in text))):
+                            continue
+                        
+                        # Überspringe Absätze die nur aus Markierungen bestehen
+                        words = text.split()
+                        if len(words) < 15:  # Zu wenige Wörter
+                            continue
+                            
+                        # Das ist ein guter substantieller Absatz
+                        substantial_paragraphs.append(text)
+                        
+                        # Stoppe nach 2 guten Absätzen
+                        if len(substantial_paragraphs) >= 2:
+                            break
+                    
+                    # Erstelle Beschreibung aus den ersten 1-2 substantiellen Absätzen
+                    if substantial_paragraphs:
+                        if len(substantial_paragraphs) == 1:
+                            description = substantial_paragraphs[0]
+                        else:
+                            # Kombiniere zwei Absätze, aber begrenze die Gesamtlänge
+                            combined = substantial_paragraphs[0] + ' ' + substantial_paragraphs[1]
+                            if len(combined) > 800:
+                                description = substantial_paragraphs[0]  # Nur der erste wenn zu lang
+                            else:
+                                description = combined
+                        
+                        # Begrenze auf maximale Länge und ende bei einem Satzende
+                        if len(description) > 600:
+                            sentences = description.split('. ')
+                            truncated = ''
+                            for sentence in sentences:
+                                if len(truncated + sentence + '. ') > 600:
+                                    break
+                                truncated += sentence + '. '
+                            description = truncated.rstrip() if truncated else description[:600] + '...'
+            
+            # Fallback falls die Hauptstrategie nicht funktioniert
+            if not description:
+                # Suche in allen Absätzen nach dem ersten substantiellen
+                all_paragraphs = soup.find_all('p')
+                for p in all_paragraphs:
+                    text = self.clean_text(p.get_text())
+                    if (len(text) > 100 and 
+                        len(text.split()) > 20 and 
+                        'coordinates:' not in text.lower()):
+                        description = text[:500] + ('...' if len(text) > 500 else '')
+                        break
+            
+            # Letzter Fallback
+            if not description:
+                description = f"Wikipedia-Artikel über {title}"
             
             # Hauptbild extrahieren und herunterladen
             main_image_url = self.extract_main_image(soup, url)
@@ -342,20 +437,16 @@ def main():
     """Hauptfunktion zum Ausführen des Scrapers"""
     scraper = WikipediaDestinationsScraper()
     
-    # Für Tests: nur erste 5 Destinationen
-    # successful_count = scraper.run(max_destinations=5)
+    # Vollständiges Scraping aller Destinationen
+    print("🚀 VOLLSTÄNDIGES WIKIPEDIA SCRAPING")
+    print(f"📋 Verarbeite {len(wikipedia_destination_urls)} Destinationen...")
     
-    # Für vollständigen Scraping-Lauf: alle Destinationen
-    successful_count = scraper.run()
+    # Führe vollständiges Scraping aus
+    successful = scraper.run()
     
-    print(f"\n{'='*50}")
-    print(f"SCRAPING ABGESCHLOSSEN")
-    print(f"{'='*50}")
-    print(f"Erfolgreich verarbeitete Destinationen: {successful_count}")
-    print(f"Output-Datei: {scraper.output_file}")
-    print(f"Live-Streaming: Jede Destination wurde sofort gespeichert!")
-    print(f"Format: Eine JSON-Zeile pro Destination (wie booking.json)")
-
-
-if __name__ == "__main__":
-    main()
+    print(f"\n🎯 SCRAPING ABGESCHLOSSEN!")
+    print(f"✅ Erfolgreich verarbeitet: {successful} Destinationen")
+    print(f"� Output-Datei: {scraper.output_file}")
+    print(f"�️  Bilder-Verzeichnis: {scraper.images_dir}")
+    
+    return successful
