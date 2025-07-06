@@ -27,6 +27,9 @@ class WikipediaDestinationsScraper:
         os.makedirs(self.images_dir, exist_ok=True)
         os.makedirs(self.output_dir, exist_ok=True)
         
+        # JSON Output-Datei
+        self.output_file = os.path.join(self.output_dir, 'wikipedia_destinations.json')
+        
         # Session für Requests
         self.session = requests.Session()
         self.session.headers.update({
@@ -38,8 +41,8 @@ class WikipediaDestinationsScraper:
         })
         
         # Daten
-        self.destinations = []
         self.processed_destinations = set()
+        self.destinations_count = 0
         
         # Logging Setup
         log_file = "/Users/leonakryeziu/PycharmProjects/SummerSchool/TravelHunters/wikipedia_scraping.log"
@@ -201,7 +204,29 @@ class WikipediaDestinationsScraper:
         except Exception as e:
             self.logger.warning(f"Fehler beim Extrahieren der Basis-Infos: {e}")
         
-        return info
+    def append_destination_to_file(self, destination):
+        """Fügt eine Destination sofort zur JSON-Datei hinzu (streaming/live output)"""
+        try:
+            with open(self.output_file, 'a', encoding='utf-8') as f:
+                # Jedes Objekt in einer separaten Zeile, kompakt formatiert (wie booking.json)
+                json.dump(destination, f, ensure_ascii=False, separators=(',', ':'))
+                f.write('\n')
+            
+            self.destinations_count += 1
+            self.logger.info(f"✓ Destination zur Datei hinzugefügt: {destination['name']} (#{self.destinations_count})")
+            
+        except Exception as e:
+            self.logger.error(f"Fehler beim Speichern der Destination: {e}")
+
+    def initialize_output_file(self):
+        """Initialisiert die Output-Datei (leert sie falls sie existiert)"""
+        try:
+            # Erstelle/leere die Datei
+            with open(self.output_file, 'w', encoding='utf-8') as f:
+                pass  # Leere Datei erstellen
+            self.logger.info(f"Output-Datei initialisiert: {self.output_file}")
+        except Exception as e:
+            self.logger.error(f"Fehler beim Initialisieren der Output-Datei: {e}")
     
     def scrape_destination(self, url):
         """Scrapt eine einzelne Destination von Wikipedia"""
@@ -259,7 +284,8 @@ class WikipediaDestinationsScraper:
                 'source': 'wikipedia'
             }
             
-            self.destinations.append(destination)
+            # Destination SOFORT zur Datei hinzufügen (streaming/live output)
+            self.append_destination_to_file(destination)
             self.processed_destinations.add(url)
             
             self.logger.info(f"✓ Destination verarbeitet: {title}")
@@ -274,26 +300,17 @@ class WikipediaDestinationsScraper:
             return None
     
     def save_data(self):
-        """Speichert die gesammelten Daten als JSON (Booking-Format: eine Zeile pro Objekt)"""
-        output_file = os.path.join(self.output_dir, 'wikipedia_destinations.json')
-        
-        try:
-            with open(output_file, 'w', encoding='utf-8') as f:
-                for destination in self.destinations:
-                    # Jedes Objekt in einer separaten Zeile, kompakt formatiert (wie booking.json)
-                    json.dump(destination, f, ensure_ascii=False, separators=(',', ':'))
-                    f.write('\n')
-            
-            self.logger.info(f"Daten gespeichert: {output_file}")
-            self.logger.info(f"Anzahl Destinationen: {len(self.destinations)}")
-            
-        except Exception as e:
-            self.logger.error(f"Fehler beim Speichern: {e}")
-    
+        """Legacy-Methode für Kompatibilität - wird nicht mehr benötigt da live geschrieben wird"""
+        self.logger.info(f"Live-Streaming aktiv - Daten bereits gespeichert in: {self.output_file}")
+        self.logger.info(f"Anzahl verarbeiteter Destinationen: {self.destinations_count}")
+
     def run(self, max_destinations=None):
         """Führt den Scraping-Prozess aus"""
         self.logger.info("Wikipedia Destinations Scraper gestartet")
         self.logger.info(f"Zu verarbeitende URLs: {len(wikipedia_destination_urls)}")
+        
+        # Initialisiere die Output-Datei (leere sie)
+        self.initialize_output_file()
         
         if max_destinations:
             urls_to_process = wikipedia_destination_urls[:max_destinations]
@@ -312,20 +329,13 @@ class WikipediaDestinationsScraper:
                 successful += 1
             else:
                 failed += 1
-            
-            # Speichere zwischendurch (alle 10 Destinationen)
-            if i % 10 == 0:
-                self.save_data()
-                self.logger.info(f"Zwischenspeicherung nach {i} Destinationen")
-        
-        # Finale Speicherung
-        self.save_data()
         
         self.logger.info("Scraping abgeschlossen!")
         self.logger.info(f"Erfolgreich: {successful}")
         self.logger.info(f"Fehlgeschlagen: {failed}")
+        self.logger.info(f"Output-Datei: {self.output_file}")
         
-        return self.destinations
+        return successful  # Rückgabe der Anzahl erfolgreicher Destinationen
 
 
 def main():
@@ -333,17 +343,18 @@ def main():
     scraper = WikipediaDestinationsScraper()
     
     # Für Tests: nur erste 5 Destinationen
-    # destinations = scraper.run(max_destinations=5)
+    # successful_count = scraper.run(max_destinations=5)
     
     # Für vollständigen Scraping-Lauf: alle Destinationen
-    destinations = scraper.run()
+    successful_count = scraper.run()
     
     print(f"\n{'='*50}")
     print(f"SCRAPING ABGESCHLOSSEN")
     print(f"{'='*50}")
-    print(f"Destinationen verarbeitet: {len(destinations)}")
-    print(f"Bilder heruntergeladen: {len([d for d in destinations if d.get('image_file')])}")
-    print(f"Mit Koordinaten: {len([d for d in destinations if d.get('coordinates')])}")
+    print(f"Erfolgreich verarbeitete Destinationen: {successful_count}")
+    print(f"Output-Datei: {scraper.output_file}")
+    print(f"Live-Streaming: Jede Destination wurde sofort gespeichert!")
+    print(f"Format: Eine JSON-Zeile pro Destination (wie booking.json)")
 
 
 if __name__ == "__main__":
