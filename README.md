@@ -1,175 +1,182 @@
-# Sample Project
-This is a template for a Data Science project using Python, conda for environment management and Quarto for documentation.
+# TravelHunters 🌍✈️
 
-To adapt to your individual project change `sample` to the respective project name in
+An intelligent travel recommendation system that suggests hotels based on user preferences. The project uses web scraping from Booking.com to collect comprehensive hotel data and generate personalized recommendations using machine learning.
 
-* filename of .yml file
-* environment name in .yml-file
-* in the commands below
+## Project Overview
 
-Adapt the `LICENSE` as required.
+TravelHunters combines multiple data sources:
 
-Provide a brief description of the project here.
+- **Hotels**: Over 8,000 hotels from Booking.com with images and ratings
+- **Destinations**: Comprehensive destination information with Wikipedia integration
 
-## Project Organisation
-According to [Is It Ops That Make Data Science Scientific? Archives of Data Science, Series A, vol 8, p. 12, 2022.](https://publikationen.bibliothek.kit.edu/1000150238/152958955)
+The system provides personalized recommendations through:
 
-![The Data Science Process](docs/pics/dsprocess.png)
+- Content-Based Filtering based on hotel attributes
+- Collaborative Filtering for user behavior patterns
+- Hybrid approaches for optimal recommendation quality
 
-Code and configurations used in the different project phases are stored in the subfolders
+## Features
 
-* `data_acquisition`
-* `eda`
-* `modelling`
-* `deployment`
+### Data Acquisition
 
-Templates for the documentation artefacts from the different project phases are provided in the subfolder `docs` in the form of a Quarto project:
+- **Web Scraping**: Automated scraping of hotel data from Booking.com
+- **Image Download**: Bulk download and processing of hotel images
+- **Wikipedia Integration**: Destination information and images from Wikipedia
+- **Data Validation**: Quality checks and data cleaning pipelines
 
-* Project charta
-* Data report
-* Modelling report
-* Evaluation decision log
+### Machine Learning Models
+- **Content-Based Filtering**: Recommendations based on item features
+- **Collaborative Filtering**: User behavior-based recommendations
+- **Hybrid Models**: Combined approaches for enhanced accuracy
+- **Evaluation Metrics**: Comprehensive model performance assessment
 
-See section `Quarto Setup and Usage` for instructions on how to build and serve the documentation website from the indvidual reports using Quarto.
+### Database & Storage
 
-## Python Environment Setup and Management
-**Install** conda environment:
-```sh
-$ conda env create -f conda.yml
-```
-**Update** the environment with new packages/versions:
-1. modify template.yml
-2. run `conda env update`:
-```sh
-$ conda env update --name sample --file conda.yml --prune
-```
-`prune` uninstalls dependencies which were removed from sample.yml
+- **SQLite Database**: Structured storage for hotels and destinations
+- **Image Management**: Organized storage with automated naming conventions
+- **Data Versioning**: Backup and versioning of scraped data
 
-**Use** environment:
-before working on the project always make sure you have the environment activated:
-```sh
-$ conda activate sample
-```
+## Project Structure
 
-**Check the version** of a specific package (e.g. `html5lib`) in the environment:
-```sh
-$ conda list html5lib
-```
+TravelHunters follows the Data Science project structure with these main directories:
 
-**Export** an environment file across platforms:
-Include only the packages that were specifically installed. Dependencies will be resolved upon installation
-```sh
-$ conda env export --from-history > conda.yml
-```
+- `data_acquisition/` - Web scraping scripts and data collection tools
+- `database/` - SQLite database and schema definitions
+- `eda/` - Exploratory Data Analysis notebooks and reports
+- `modelling/` - Machine Learning models and evaluation scripts
+- `evaluation/` - Model performance analysis and metrics
+- `docs/` - Project documentation and reports
 
-**List** all installed environments:
-From the base environment run
-```sh
-$ conda info --envs
-```
+### Key Files
 
-**Remove** environment:
-```sh
-$ conda env remove -n sample
-```
+- `scraping_data_files/` - Scrapy spiders for data collection
+- `data_acquisition/download_json_images.py` - Image download automation
+- `database/travelhunters.db` - Main SQLite database
+- `conda.yml` - Python environment configuration
 
-See the complete documentation on [managing conda-environments](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+## Getting Started
 
-## Runtime Configuration with Environment Variables
-The environment variables are specified in a .env-File, which is never commited into version control, as it may contain secrets. The repo just contains the file `.env.template` to demonstrate how environment variables are specified.
+### Prerequisites
 
-You have to create a local copy of `.env.template` in the project root folder and the easiest is to just rename it to `.env`.
+- Python 3.8+
+- Conda package manager
+- Git
 
-The content of the .env-file is then read by the pypi-dependency: `python-dotenv`. Usage:
-```python
-import os
-from dotenv import load_dotenv
-```
+### Installation
 
-`load_dotenv` reads the .env-file and sets the environment variables:
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd TravelHunters
+   ```
 
-```python
-load_dotenv()
-```
+2. **Create conda environment**:
+   ```bash
+   conda env create -f conda.yml
+   conda activate travelhunters
+   ```
 
-which can then be accessed (assuming the file contains a line `SAMPLE_VAR=<some value>`):
+3. **Set up environment variables**:
+   ```bash
+   cp .env.template .env
+   # Edit .env with your API keys and configurations
+   ```
 
-```python
-os.environ['SAMPLE_VAR']
-```
+### Usage
 
-## Quarto Setup and Usage
-If Quarto is used to build a documentation website as described in the Project Organisation section, you need to 
+#### Data Collection
 
-1. [Install Quarto](https://quarto.org/docs/get-started/)
-2. Optional: [quarto-extension for VS Code](https://marketplace.visualstudio.com/items?itemName=quarto.quarto)
-3. Adapt the configuration file `docs/_quarto.yml` as needed.
-4. Build the website by running `quarto render` from the `docs` subfolder. This will push all files into the `docs/build` subfolder.
-5. The you can check the website locally by opening `docs/build/index.html` in a browser
+1. **Scrape hotel data from Booking.com**:
+   ```bash
+   cd scraping_data_files
+   scrapy crawl booking_spider
+   ```
 
-If you would like to use github pages to serve the documentation website, and at the same time avoid pushing the rendered files into the repo (makes very ugly diffs) but executing embedded code blocks only locally, the initial setup (only needed once) of the github action is according to https://quarto.org/docs/publishing/github-pages.html#github-action as follows: 
+2. **Download images**:
+   ```bash
+   cd data_acquisition
+   python download_json_images.py
+   ```
 
-1. Add 
-    ```yaml
-        execute:
-            freeze: auto
-    ```
-    to the `_quarto.yml` file
-2. execute `quarto render` from the `docs` folder
-3. run `quarto publish gh-pages` (generates and pushes a branch called `gh-pages`)
-4. make sure that github pages is configured to serve the root of the `gh-pages` branch
-4. add the definition of the github action workflow `.github/workflows/publish.yml` (see below)
-5. check all of the newly created files (including the `_freeze` directory) into the `main` branch of the repository 
-6. `docs/build` is excluded by the `.gitignore`
-7. then push to `main`
+3. **Merge and process data**:
+   ```bash
+   cd mergingjson
+   python merging_json_booking.py
+   python merging_json_activity.py
+   ```
 
-Github action workflow configuration file to add in `.github/workflows/publish.yml`:
-```yaml
-on:
-  workflow_dispatch:
-  push:
-    branches: main
+#### Model Training and Evaluation
 
-name: Quarto Publish
+1. **Run EDA**:
+   ```bash
+   cd eda
+   python generate-data-profile.py
+   ```
 
-jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-    
-      - name: Install librsvg
-        run: sudo apt-get install librsvg2-bin
+2. **Train models**:
+   ```bash
+   cd modelling
+   # Run your model training scripts
+   ```
 
-      - name: Set up Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          tinytex: true
+3. **Evaluate performance**:
+   ```bash
+   cd evaluation
+   # Run evaluation scripts
+   ```
 
-      - name: Render and Publish
-        uses: quarto-dev/quarto-actions/publish@v2
-        with:
-          target: gh-pages
-          path: docs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+## Data Sources
+
+### Hotels (Booking.com)
+- **Volume**: 8,000+ hotels
+- **Attributes**: Name, location, rating, price, amenities, images
+- **Coverage**: Major tourist destinations worldwide
+
+
+### Destinations
+- **Source**: Wikipedia integration
+- **Content**: Destination descriptions, images, geographical data
+- **Coverage**: Comprehensive location information
+
+## Documentation
+
+The project includes comprehensive documentation built with Quarto:
+
+- **Project Charter**: Initial project scope and objectives
+- **Data Report**: Data collection and quality analysis  
+- **Modeling Report**: ML model development and selection
+- **Evaluation Report**: Performance metrics and results
+
+Build documentation:
+```bash
+cd docs
+quarto render
 ```
 
-From now on, every update just needs:
+## Contributing
 
-1. Build the website by running `quarto render` from the `docs` subfolder. This will push the rendered files into `docs/build` (not checked into the repository via .gitignore) and computations in the `docs/_freeze` (checked in so that github action runners to not need python) subfolder.
-2. Check the website locally by opening the  `docs/build/index.html`
-3. Push all updated files into the `main` branch. This will trigger a github action that
-    - pushes an update to the `github-pages` branch
-    - renders and publishes the site to https://<your user handle>.github.io/sample/
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-Additional notes:
-* Rendering `svg`-files requires the `librsvg` package. The github action (Linux Ubuntu) installs it via `sudo apt-get install librsvg2-bin`. To render locally, you need to install it on your system as well. On macOS, this can be done via `brew install librsvg`. On Windows you can use chocholatey to install it: `choco install rsvg-convet` (https://community.chocolatey.org/packages?&tags=librsvg).
+## License
 
-## Further Information
-* "About Readmes" on Github
-https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
-* [Python Dev Guide](refs/python_dev_guide.md)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Team
+
+**Data Science Summer School 2025 - ZHAW School of Engineering**
+
+- Leona Kryeziu
+- Evan Blazo
+- Joan Felber
+- Jakub Baranec
+
+## References
+
+- [Python Development Guide](refs/python_dev_guide.md)
+- Booking.com API Documentation
+- Scrapy Documentation
+- Scikit-learn Documentation
