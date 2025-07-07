@@ -1,6 +1,16 @@
 # Mac Stuff
 .DS_Store
 
+# Große Dateien - Bilder und Scraping-Daten
+data_acquisition/destination_images/
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.svg
+*.webp
+*.log
+
 # Quarto in docs
 docs/.quarto/
 
