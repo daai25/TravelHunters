@@ -333,7 +333,7 @@ class TravelHuntersDemo:
             print(f"\n{i}. {name}")
             print(f"   📍 {location}")
             print(f"   💰 ${price:.0f}/night")
-            print(f"   ⭐ {rating:.1f}/5.0")
+            print(f"   ⭐ {rating:.1f}/10.0")
             print(f"   🎯 Score: {score:.3f}")
             
             # Show description if available

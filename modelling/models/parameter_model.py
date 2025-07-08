@@ -209,10 +209,21 @@ class ParameterBasedRecommender:
         weighted_df = self._apply_preference_weighting(filtered_df, user_preferences)
         
         # Sort by final score and return top-k
-        recommendations = weighted_df.sort_values('final_score', ascending=False).head(top_k)
+        recommendations = weighted_df.sort_values('final_score', ascending=False)
+        
+        # Remove duplicates by hotel name (keep highest score)
+        if 'name' in recommendations.columns:
+            # Add hotel_name column for consistency with other models
+            recommendations['hotel_name'] = recommendations['name']
+            recommendations = recommendations.drop_duplicates(subset=['hotel_name'], keep='first')
+        
+        # Return top-k after deduplication
+        recommendations = recommendations.head(top_k)
         
         # Return with available columns
         available_columns = ['hotel_id', 'predicted_score', 'final_score']
+        if 'hotel_name' in recommendations.columns:
+            available_columns.append('hotel_name')
         if 'name' in recommendations.columns:
             available_columns.append('name')
         if 'price' in recommendations.columns:
@@ -282,8 +293,8 @@ class ParameterBasedRecommender:
             else:
                 weighted_df['price_score'] = 1.0
             
-            # Rating score (normalized to 0-1)
-            weighted_df['rating_score'] = weighted_df['rating'] / 5.0
+            # Rating score (normalized to 0-1) - using 10-point scale
+            weighted_df['rating_score'] = weighted_df['rating'] / 10.0
             
             # Model score (normalized to 0-1)
             max_pred = weighted_df['predicted_score'].max()
@@ -294,7 +305,7 @@ class ParameterBasedRecommender:
                 weighted_df['model_score'] = 0.5
         else:
             weighted_df['price_score'] = 1.0
-            weighted_df['rating_score'] = weighted_df['rating'] / 5.0
+            weighted_df['rating_score'] = weighted_df['rating'] / 10.0
             weighted_df['model_score'] = 0.5
         
         # Calculate final weighted score

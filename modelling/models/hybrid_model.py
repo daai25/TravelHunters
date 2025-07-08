@@ -344,8 +344,8 @@ class HybridRecommender:
                 'score': param_score,
                 'reasons': [
                     f"Price: ${hotel_info['price']:.0f} (fits budget: {hotel_info['price'] <= user_preferences.get('max_price', 1000)})",
-                    f"Rating: {hotel_info['rating']:.1f}/5.0 (meets minimum: {hotel_info['rating'] >= user_preferences.get('min_rating', 0)})",
-                    f"Predicted satisfaction: {param_score:.2f}/5.0"
+                    f"Rating: {hotel_info['rating']:.1f}/10.0 (meets minimum: {hotel_info['rating'] >= user_preferences.get('min_rating', 0)})",
+                    f"Predicted satisfaction: {param_score:.2f}/10.0"
                 ]
             })
         
