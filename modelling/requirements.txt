@@ -1,0 +1,33 @@
+# TravelHunters ML Requirements
+# Core ML and Data Science Libraries
+pandas>=1.5.0
+numpy>=1.21.0
+scikit-learn>=1.1.0
+scipy>=1.9.0
+
+# Text Processing and NLP
+nltk>=3.7
+spacy>=3.4.0
+
+# Visualization
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# Model Persistence
+joblib>=1.1.0
+
+# Optional: Advanced Recommender Systems
+# surprise>=1.1.1
+
+# Data Storage
+sqlite3  # Part of Python standard library
+
+# Jupyter Support (for development)
+notebook>=6.4.0
+jupyterlab>=3.4.0
+
+# Testing
+pytest>=7.0.0
+
+# For reproducible environments
+pip-tools>=6.8.0
