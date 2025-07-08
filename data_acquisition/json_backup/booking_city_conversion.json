@@ -1,0 +1,2322 @@
+[
+  {
+    "location": "01. Budavár, Budapest",
+    "city": "Budapest"
+  },
+  {
+    "location": "01. Innere Stadt, Vienna",
+    "city": "Vienna"
+  },
+  {
+    "location": "02. Leopoldstadt, Vienna",
+    "city": "Vienna"
+  },
+  {
+    "location": "03. Landstraße, Vienna",
+    "city": "Vienna"
+  },
+  {
+    "location": "05. Belváros - Lipótváros, Budapest",
+    "city": "Budapest"
+  },
+  {
+    "location": "06. Mariahilf, Vienna",
+    "city": "Vienna"
+  },
+  {
+    "location": "06. Terézváros, Budapest",
+    "city": "Budapest"
+  },
+  {
+    "location": "07. Erzsébetváros, Budapest",
+    "city": "Budapest"
+  },
+  {
+    "location": "07. Neubau, Vienna",
+    "city": "Vienna"
+  },
+  {
+    "location": "08. Josefstadt, Vienna",
+    "city": "Vienna"
+  },
+  {
+    "location": "08. Józsefváros, Budapest",
+    "city": "Budapest"
+  },
+  {
+    "location": "10. Favoriten, Vienna",
+    "city": "Vienna"
+  },
+  {
+    "location": "10th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "11th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "12. Hegyvidék, Budapest",
+    "city": "Budapest"
+  },
+  {
+    "location": "12th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "14th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "15. Rudolfsheim-Fünfhaus, Vienna",
+    "city": "Vienna"
+  },
+  {
+    "location": "15th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "16th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "17th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "18th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "19. Kispest, Budapest",
+    "city": "Budapest"
+  },
+  {
+    "location": "19th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "20. Brigittenau, Vienna",
+    "city": "Vienna"
+  },
+  {
+    "location": "2nd arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "4th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "6th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "7th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "8th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "9th arr., Paris",
+    "city": "Paris"
+  },
+  {
+    "location": "Aerocity, New Delhi (Aerocity)",
+    "city": "New Delhi"
+  },
+  {
+    "location": "Agios Ioannis Mykonos",
+    "city": "Agios Ioannis Mykonos"
+  },
+  {
+    "location": "Agios Sostis Mykonos",
+    "city": "Agios Sostis Mykonos"
+  },
+  {
+    "location": "Agios Stefanos",
+    "city": "Agios Stefanos"
+  },
+  {
+    "location": "Agrari",
+    "city": "Agrari"
+  },
+  {
+    "location": "Akrotiri",
+    "city": "Akrotiri"
+  },
+  {
+    "location": "Al Sufouh, Dubai (Beach & Coast)",
+    "city": "Dubai"
+  },
+  {
+    "location": "Amager Vest, Copenhagen",
+    "city": "Copenhagen"
+  },
+  {
+    "location": "Amed",
+    "city": "Amed"
+  },
+  {
+    "location": "Amsterdam City Centre, Amsterdam",
+    "city": "Amsterdam"
+  },
+  {
+    "location": "Amsterdam Noord, Amsterdam",
+    "city": "Amsterdam"
+  },
+  {
+    "location": "Anfa, Casablanca",
+    "city": "Casablanca"
+  },
+  {
+    "location": "Anfa, Casablanca (Ain Diab)",
+    "city": "Casablanca"
+  },
+  {
+    "location": "Ano Mera",
+    "city": "Ano Mera"
+  },
+  {
+    "location": "Arroios, Lisbon",
+    "city": "Lisbon"
+  },
+  {
+    "location": "Auckland",
+    "city": "Auckland"
+  },
+  {
+    "location": "Auckland Central Business District, Auckland",
+    "city": "Auckland"
+  },
+  {
+    "location": "Auckland Central Business District, Auckland (Britomart)",
+    "city": "Auckland"
+  },
+  {
+    "location": "Auckland Central Business District, Auckland (Queen Street)",
+    "city": "Auckland"
+  },
+  {
+    "location": "Auckland Central Business District, Auckland (Viaduct Harbour)",
+    "city": "Auckland"
+  },
+  {
+    "location": "Aussersihl, Zürich",
+    "city": "Zürich"
+  },
+  {
+    "location": "Avenidas Novas, Lisbon",
+    "city": "Lisbon"
+  },
+  {
+    "location": "Baa Atoll",
+    "city": "Baa Atoll"
+  },
+  {
+    "location": "Bandra, Mumbai (Western Suburbs)",
+    "city": "Mumbai"
+  },
+  {
+    "location": "Bang Kho Laem, Bangkok (Rama III)",
+    "city": "Bangkok"
+  },
+  {
+    "location": "Bang Rak, Bangkok",
+    "city": "Bangkok"
+  },
+  {
+    "location": "Bang Rak, Bangkok (Embassy District)",
+    "city": "Bangkok"
+  },
+  {
+    "location": "Bang Rak, Bangkok (Riverside)",
+    "city": "Bangkok"
+  },
+  {
+    "location": "Bangsar South, Kuala Lumpur (Bangsar South)",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "location": "Bantry Bay, Cape Town",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Barra da Tijuca, Rio de Janeiro",
+    "city": "Rio de Janeiro"
+  },
+  {
+    "location": "Barranco, Lima (Costa Verde)",
+    "city": "Lima"
+  },
+  {
+    "location": "Beach & Coast, Dubai (Beach & Coast)",
+    "city": "Dubai"
+  },
+  {
+    "location": "Beach & Coast, Dubai (Bluewaters Island)",
+    "city": "Dubai"
+  },
+  {
+    "location": "Bedfordview, Johannesburg",
+    "city": "Johannesburg"
+  },
+  {
+    "location": "Beijing",
+    "city": "Beijing"
+  },
+  {
+    "location": "Bel Air , Los Angeles",
+    "city": "Los Angeles"
+  },
+  {
+    "location": "Bela Vista, Sao Paulo",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Bela Vista, Sao Paulo (Avenida Paulista)",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Berawa, Canggu",
+    "city": "Canggu"
+  },
+  {
+    "location": "Beverly Hills, Los Angeles",
+    "city": "Los Angeles"
+  },
+  {
+    "location": "Bloor-Yorkville, Toronto",
+    "city": "Toronto"
+  },
+  {
+    "location": "Bloor-Yorkville, Toronto (Bloor-Yorkville)",
+    "city": "Toronto"
+  },
+  {
+    "location": "Bloor-Yorkville, Toronto (The Annex)",
+    "city": "Toronto"
+  },
+  {
+    "location": "Bondi, Sydney (Sydney Eastern Suburbs)",
+    "city": "Sydney"
+  },
+  {
+    "location": "Botafogo, Rio de Janeiro",
+    "city": "Rio de Janeiro"
+  },
+  {
+    "location": "Bowen Hills, Brisbane",
+    "city": "Brisbane"
+  },
+  {
+    "location": "Brickfields, Kuala Lumpur (Mid Valley)",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "location": "Brisbane",
+    "city": "Brisbane"
+  },
+  {
+    "location": "Brisbane CBD, Brisbane",
+    "city": "Brisbane"
+  },
+  {
+    "location": "Buenos Aires City Centre, Buenos Aires",
+    "city": "Buenos Aires"
+  },
+  {
+    "location": "Bugis, Singapore",
+    "city": "Singapore"
+  },
+  {
+    "location": "Bukit Bintang, Kuala Lumpur (Bukit Bintang)",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "location": "Bur Dubai, Dubai (Bur Dubai)",
+    "city": "Dubai"
+  },
+  {
+    "location": "Business Bay, Dubai",
+    "city": "Dubai"
+  },
+  {
+    "location": "Business Bay, Dubai (Sheikh Zayed Road)",
+    "city": "Dubai"
+  },
+  {
+    "location": "Cairo",
+    "city": "Cairo"
+  },
+  {
+    "location": "Cala Llenya",
+    "city": "Cala Llenya"
+  },
+  {
+    "location": "Camden, London",
+    "city": "London"
+  },
+  {
+    "location": "Camps Bay, Cape Town",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Camps Bay, Cape Town (Bakoven)",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Campuhan, Ubud (Campuhan)",
+    "city": "Ubud"
+  },
+  {
+    "location": "Cancún",
+    "city": "Cancún"
+  },
+  {
+    "location": "Candelaria - Centro Historico, Bogotá",
+    "city": "Bogotá"
+  },
+  {
+    "location": "Cape Town",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Cape Town CBD, Cape Town",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Cape Town CBD, Cape Town (Foreshore)",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Carlton, Melbourne (Lygon Street)",
+    "city": "Melbourne"
+  },
+  {
+    "location": "Central Delhi, New Delhi",
+    "city": "New Delhi"
+  },
+  {
+    "location": "Central Station, Rome",
+    "city": "Rome"
+  },
+  {
+    "location": "Central Suburbs, Mumbai (Vikhroli)",
+    "city": "Mumbai"
+  },
+  {
+    "location": "Centro Internacional, Bogotá",
+    "city": "Bogotá"
+  },
+  {
+    "location": "Centro, Madrid",
+    "city": "Madrid"
+  },
+  {
+    "location": "Centro, Playa del Carmen",
+    "city": "Playa del Carmen"
+  },
+  {
+    "location": "Centro, Playa del Carmen (5th Avenue)",
+    "city": "Playa del Carmen"
+  },
+  {
+    "location": "Centro, Rio de Janeiro (Lapa)",
+    "city": "Rio de Janeiro"
+  },
+  {
+    "location": "Chamberi, Madrid",
+    "city": "Madrid"
+  },
+  {
+    "location": "Chanakyapuri, New Delhi",
+    "city": "New Delhi"
+  },
+  {
+    "location": "Chaoyang, Beijing",
+    "city": "Beijing"
+  },
+  {
+    "location": "Chaoyang, Beijing (Beijing CBD)",
+    "city": "Beijing"
+  },
+  {
+    "location": "Chaoyang, Beijing (Yansha)",
+    "city": "Beijing"
+  },
+  {
+    "location": "Chapinero, Bogotá",
+    "city": "Bogotá"
+  },
+  {
+    "location": "Chapinero, Bogotá (Chicó)",
+    "city": "Bogotá"
+  },
+  {
+    "location": "Chapinero, Bogotá (Financial District)",
+    "city": "Bogotá"
+  },
+  {
+    "location": "Chapinero, Bogotá (Zona Rosa)",
+    "city": "Bogotá"
+  },
+  {
+    "location": "Charlottenburg-Wilmersdorf, Berlin",
+    "city": "Berlin"
+  },
+  {
+    "location": "Chatuchak, Bangkok",
+    "city": "Bangkok"
+  },
+  {
+    "location": "Chelsea, New York",
+    "city": "New York"
+  },
+  {
+    "location": "Chicago",
+    "city": "Chicago"
+  },
+  {
+    "location": "Chicago Loop, Chicago",
+    "city": "Chicago"
+  },
+  {
+    "location": "Chinatown, Singapore",
+    "city": "Singapore"
+  },
+  {
+    "location": "Chinatown, Singapore (Shenton Way)",
+    "city": "Singapore"
+  },
+  {
+    "location": "Chiyoda, Tokyo (Akihabara)",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Chow Kit, Kuala Lumpur (Golden Triangle)",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "location": "Christianshavn, Copenhagen",
+    "city": "Copenhagen"
+  },
+  {
+    "location": "Chuo Ward, Osaka (Dotonbori)",
+    "city": "Osaka"
+  },
+  {
+    "location": "Chuo Ward, Osaka (Namba)",
+    "city": "Osaka"
+  },
+  {
+    "location": "Chuo Ward, Osaka (Osaka Station, Umeda, Yodoyabashi, Hommachi)",
+    "city": "Osaka"
+  },
+  {
+    "location": "Chuo Ward, Osaka (Shinsaibashi)",
+    "city": "Osaka"
+  },
+  {
+    "location": "Chuo Ward, Osaka (Shinsaibashi, Namba, Yotsubashi)",
+    "city": "Osaka"
+  },
+  {
+    "location": "Chuo Ward, Tokyo (Ginza)",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Chuo Ward, Tokyo (Nihonbashi)",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Churchgate, Mumbai (Mumbai Historical And Heritage)",
+    "city": "Mumbai"
+  },
+  {
+    "location": "City Bowl, Cape Town (Foreshore)",
+    "city": "Cape Town"
+  },
+  {
+    "location": "City Centre, Zürich",
+    "city": "Zürich"
+  },
+  {
+    "location": "City Hall, Singapore",
+    "city": "Singapore"
+  },
+  {
+    "location": "City of London, London",
+    "city": "London"
+  },
+  {
+    "location": "City-Centre, Santiago de Compostela",
+    "city": "Santiago de Compostela"
+  },
+  {
+    "location": "Ciutat Vella, Barcelona",
+    "city": "Barcelona"
+  },
+  {
+    "location": "Clarke Quay, Singapore",
+    "city": "Singapore"
+  },
+  {
+    "location": "Colaba, Mumbai (Mumbai Historical And Heritage)",
+    "city": "Mumbai"
+  },
+  {
+    "location": "Connaught Place, New Delhi",
+    "city": "New Delhi"
+  },
+  {
+    "location": "Consolação, Sao Paulo",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Consolação, Sao Paulo (Avenida Paulista)",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Consolação, Sao Paulo (Higienopolis)",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Copacabana, Rio de Janeiro",
+    "city": "Rio de Janeiro"
+  },
+  {
+    "location": "Copenhagen City Centre, Copenhagen",
+    "city": "Copenhagen"
+  },
+  {
+    "location": "Costa Mujeres, Cancún (Costa Mujeres)",
+    "city": "Cancún"
+  },
+  {
+    "location": "Dal",
+    "city": "Dal"
+  },
+  {
+    "location": "De Pijp, Amsterdam",
+    "city": "Amsterdam"
+  },
+  {
+    "location": "Deira, Dubai (Deira)",
+    "city": "Dubai"
+  },
+  {
+    "location": "Dhangethi",
+    "city": "Dhangethi"
+  },
+  {
+    "location": "Dhidhdhoo",
+    "city": "Dhidhdhoo"
+  },
+  {
+    "location": "Dhiffushi",
+    "city": "Dhiffushi"
+  },
+  {
+    "location": "Dhigurah",
+    "city": "Dhigurah"
+  },
+  {
+    "location": "Docklands, Melbourne",
+    "city": "Melbourne"
+  },
+  {
+    "location": "Dongcheng, Beijing",
+    "city": "Beijing"
+  },
+  {
+    "location": "Dongcheng, Beijing (Houhai)",
+    "city": "Beijing"
+  },
+  {
+    "location": "Dongcheng, Beijing (Qianmen)",
+    "city": "Beijing"
+  },
+  {
+    "location": "Dongcheng, Beijing (Sanlitun)",
+    "city": "Beijing"
+  },
+  {
+    "location": "Dongcheng, Beijing (Wangfujing Shopping Area)",
+    "city": "Beijing"
+  },
+  {
+    "location": "Downtown Cairo, Cairo",
+    "city": "Cairo"
+  },
+  {
+    "location": "Downtown Cancun, Cancún",
+    "city": "Cancún"
+  },
+  {
+    "location": "Downtown Dubai, Dubai",
+    "city": "Dubai"
+  },
+  {
+    "location": "Downtown Kuta, Kuta",
+    "city": "Kuta"
+  },
+  {
+    "location": "Downtown Los Angeles, Los Angeles",
+    "city": "Los Angeles"
+  },
+  {
+    "location": "Downtown Montreal, Montréal",
+    "city": "Montréal"
+  },
+  {
+    "location": "Downtown Montreal, Montréal (Gay Village)",
+    "city": "Montréal"
+  },
+  {
+    "location": "Downtown Montreal, Montréal (Golden Square Mile)",
+    "city": "Montréal"
+  },
+  {
+    "location": "Downtown Montreal, Montréal (Quartier des Spectacles)",
+    "city": "Montréal"
+  },
+  {
+    "location": "Downtown Montreal, Montréal (The Underground City)",
+    "city": "Montréal"
+  },
+  {
+    "location": "Downtown San Francisco, San Francisco",
+    "city": "San Francisco"
+  },
+  {
+    "location": "Downtown Toronto, Toronto",
+    "city": "Toronto"
+  },
+  {
+    "location": "Downtown Toronto, Toronto (Entertainment District)",
+    "city": "Toronto"
+  },
+  {
+    "location": "Downtown Toronto, Toronto (Fashion District)",
+    "city": "Toronto"
+  },
+  {
+    "location": "Downtown Toronto, Toronto (Kensington Market)",
+    "city": "Toronto"
+  },
+  {
+    "location": "Downtown Toronto, Toronto (Queen West)",
+    "city": "Toronto"
+  },
+  {
+    "location": "Downtown Toronto, Toronto (Yonge - Dundas)",
+    "city": "Toronto"
+  },
+  {
+    "location": "Downtown Vancouver, Vancouver",
+    "city": "Vancouver"
+  },
+  {
+    "location": "Downtown Vancouver, Vancouver (Coal Harbour)",
+    "city": "Vancouver"
+  },
+  {
+    "location": "Downtown and Cultural Centre, Bogotá (Downtown and Cultural Centre)",
+    "city": "Bogotá"
+  },
+  {
+    "location": "Downtown, Geneva",
+    "city": "Geneva"
+  },
+  {
+    "location": "Dubai Marina, Dubai (Beach & Coast)",
+    "city": "Dubai"
+  },
+  {
+    "location": "Dubai Marina, Dubai (Sheikh Zayed Road)",
+    "city": "Dubai"
+  },
+  {
+    "location": "Dubai Production City , Dubai",
+    "city": "Dubai"
+  },
+  {
+    "location": "Dyanapura, Seminyak (Dyanapura)",
+    "city": "Seminyak"
+  },
+  {
+    "location": "East Melbourne, Melbourne",
+    "city": "Melbourne"
+  },
+  {
+    "location": "East Perth, Perth",
+    "city": "Perth"
+  },
+  {
+    "location": "East of the Las Vegas Strip, Las Vegas",
+    "city": "Las Vegas"
+  },
+  {
+    "location": "Eidsvoll",
+    "city": "Eidsvoll"
+  },
+  {
+    "location": "Eixample, Barcelona",
+    "city": "Barcelona"
+  },
+  {
+    "location": "Elia",
+    "city": "Elia"
+  },
+  {
+    "location": "Enge, Zürich",
+    "city": "Zürich"
+  },
+  {
+    "location": "Es Cana",
+    "city": "Es Cana"
+  },
+  {
+    "location": "Escher Wyss, Zürich",
+    "city": "Zürich"
+  },
+  {
+    "location": "Etobicoke, Toronto",
+    "city": "Toronto"
+  },
+  {
+    "location": "Fenfushi",
+    "city": "Fenfushi"
+  },
+  {
+    "location": "Financial District, San Francisco",
+    "city": "San Francisco"
+  },
+  {
+    "location": "Financial District, Toronto",
+    "city": "Toronto"
+  },
+  {
+    "location": "Financial District, Toronto (Entertainment District)",
+    "city": "Toronto"
+  },
+  {
+    "location": "Financial District, Toronto (Financial District)",
+    "city": "Toronto"
+  },
+  {
+    "location": "Fira City Centre, Fira",
+    "city": "Fira"
+  },
+  {
+    "location": "Fisherman's Wharf, San Francisco",
+    "city": "San Francisco"
+  },
+  {
+    "location": "Fitzroy, Melbourne",
+    "city": "Melbourne"
+  },
+  {
+    "location": "Fortitude Valley, Brisbane",
+    "city": "Brisbane"
+  },
+  {
+    "location": "Friedrichshain-Kreuzberg, Berlin",
+    "city": "Berlin"
+  },
+  {
+    "location": "Frogner, Oslo",
+    "city": "Oslo"
+  },
+  {
+    "location": "Fulidhoo",
+    "city": "Fulidhoo"
+  },
+  {
+    "location": "Gaafu Alifu Atoll",
+    "city": "Gaafu Alifu Atoll"
+  },
+  {
+    "location": "Gallo Manor, Johannesburg",
+    "city": "Johannesburg"
+  },
+  {
+    "location": "Gamle Oslo, Oslo",
+    "city": "Oslo"
+  },
+  {
+    "location": "Gangnam-Gu, Seoul",
+    "city": "Seoul"
+  },
+  {
+    "location": "Garden City, Cairo",
+    "city": "Cairo"
+  },
+  {
+    "location": "Gardens, Cape Town",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Gardermoen",
+    "city": "Gardermoen"
+  },
+  {
+    "location": "Garhoud, Dubai",
+    "city": "Dubai"
+  },
+  {
+    "location": "Geneva",
+    "city": "Geneva"
+  },
+  {
+    "location": "Geylang, Singapore (Red Light District)",
+    "city": "Singapore"
+  },
+  {
+    "location": "Giza, Cairo",
+    "city": "Cairo"
+  },
+  {
+    "location": "Gjerdrum",
+    "city": "Gjerdrum"
+  },
+  {
+    "location": "Glebe, Sydney",
+    "city": "Sydney"
+  },
+  {
+    "location": "Green Point, Cape Town",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Greenwich Village, New York",
+    "city": "New York"
+  },
+  {
+    "location": "Grey Lynn, Auckland",
+    "city": "Auckland"
+  },
+  {
+    "location": "Grunerlokka, Oslo",
+    "city": "Oslo"
+  },
+  {
+    "location": "Gystad",
+    "city": "Gystad"
+  },
+  {
+    "location": "Hackney, London",
+    "city": "London"
+  },
+  {
+    "location": "Hangnaameedhoo",
+    "city": "Hangnaameedhoo"
+  },
+  {
+    "location": "Hay Hassani, Casablanca",
+    "city": "Casablanca"
+  },
+  {
+    "location": "Hell's Kitchen, New York",
+    "city": "New York"
+  },
+  {
+    "location": "Henderson, Las Vegas",
+    "city": "Las Vegas"
+  },
+  {
+    "location": "Hivernage, Marrakech",
+    "city": "Marrakech"
+  },
+  {
+    "location": "Hochelaga-Maisonneuve, Montréal",
+    "city": "Montréal"
+  },
+  {
+    "location": "Hollywood, Los Angeles",
+    "city": "Los Angeles"
+  },
+  {
+    "location": "Hong Kong Island, Hong Kong (Hong Kong Island)",
+    "city": "Hong Kong"
+  },
+  {
+    "location": "Hongkou, Shanghai (The Bund)",
+    "city": "Shanghai"
+  },
+  {
+    "location": "Houghton, Johannesburg",
+    "city": "Johannesburg"
+  },
+  {
+    "location": "Huangpu, Shanghai",
+    "city": "Shanghai"
+  },
+  {
+    "location": "Huangpu, Shanghai (People's Square Area)",
+    "city": "Shanghai"
+  },
+  {
+    "location": "Huangpu, Shanghai (The Bund)",
+    "city": "Shanghai"
+  },
+  {
+    "location": "Ibiza City Centre, Ibiza Town",
+    "city": "Ibiza Town"
+  },
+  {
+    "location": "Illinois Medical District, Chicago",
+    "city": "Chicago"
+  },
+  {
+    "location": "Imerovigli",
+    "city": "Imerovigli"
+  },
+  {
+    "location": "Ipanema, Rio de Janeiro",
+    "city": "Rio de Janeiro"
+  },
+  {
+    "location": "Islington, London",
+    "city": "London"
+  },
+  {
+    "location": "Itaim Bibi District, Sao Paulo",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Itaim Bibi District, Sao Paulo (Berrini)",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Jardim Paulista, Sao Paulo (Avenida Paulista)",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Jardim Paulista, Sao Paulo (Jardins)",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Jessheim",
+    "city": "Jessheim"
+  },
+  {
+    "location": "Jing'an, Shanghai",
+    "city": "Shanghai"
+  },
+  {
+    "location": "Johannesburg",
+    "city": "Johannesburg"
+  },
+  {
+    "location": "Jonction, Geneva",
+    "city": "Geneva"
+  },
+  {
+    "location": "Jongno-Gu, Seoul",
+    "city": "Seoul"
+  },
+  {
+    "location": "Juhu, Mumbai (Western Suburbs)",
+    "city": "Mumbai"
+  },
+  {
+    "location": "Jumeirah Beach Residence, Dubai (Beach & Coast)",
+    "city": "Dubai"
+  },
+  {
+    "location": "Jung-Gu, Seoul",
+    "city": "Seoul"
+  },
+  {
+    "location": "Jätkäsaari, Helsinki",
+    "city": "Helsinki"
+  },
+  {
+    "location": "KL Sentral Train Station, Kuala Lumpur",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "location": "Kaartinkaupunki, Helsinki",
+    "city": "Helsinki"
+  },
+  {
+    "location": "Kallio, Helsinki",
+    "city": "Helsinki"
+  },
+  {
+    "location": "Kampong Glam, Singapore",
+    "city": "Singapore"
+  },
+  {
+    "location": "Kamppi, Helsinki",
+    "city": "Helsinki"
+  },
+  {
+    "location": "Kangaroo Point, Brisbane",
+    "city": "Brisbane"
+  },
+  {
+    "location": "Kartika Plaza, Kuta (Kartika Plaza)",
+    "city": "Kuta"
+  },
+  {
+    "location": "Kasbah, Marrakech",
+    "city": "Marrakech"
+  },
+  {
+    "location": "Katajanokka, Helsinki",
+    "city": "Helsinki"
+  },
+  {
+    "location": "Khar, Mumbai (Western Suburbs)",
+    "city": "Mumbai"
+  },
+  {
+    "location": "Khlong San, Bangkok (Riverside)",
+    "city": "Bangkok"
+  },
+  {
+    "location": "Khlong Toei, Bangkok (Sukhumvit)",
+    "city": "Bangkok"
+  },
+  {
+    "location": "Kintamani",
+    "city": "Kintamani"
+  },
+  {
+    "location": "Kista, Stockholm",
+    "city": "Stockholm"
+  },
+  {
+    "location": "Kita, Osaka (Osaka Station, Umeda, Yodoyabashi, Hommachi)",
+    "city": "Osaka"
+  },
+  {
+    "location": "Klofta",
+    "city": "Klofta"
+  },
+  {
+    "location": "Klouvas",
+    "city": "Klouvas"
+  },
+  {
+    "location": "Kluuvi, Helsinki",
+    "city": "Helsinki"
+  },
+  {
+    "location": "Koreatown, Los Angeles",
+    "city": "Los Angeles"
+  },
+  {
+    "location": "Kowloon City District, Hong Kong (Kowloon)",
+    "city": "Hong Kong"
+  },
+  {
+    "location": "Kuala Lumpur City-Centre, Kuala Lumpur",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "location": "Kungsholmen, Stockholm",
+    "city": "Stockholm"
+  },
+  {
+    "location": "LAX Area, Los Angeles",
+    "city": "Los Angeles"
+  },
+  {
+    "location": "La Veleta, Tulum (La Veleta)",
+    "city": "Tulum"
+  },
+  {
+    "location": "Las Vegas Strip, Las Vegas",
+    "city": "Las Vegas"
+  },
+  {
+    "location": "Leme, Rio de Janeiro",
+    "city": "Rio de Janeiro"
+  },
+  {
+    "location": "Les Corts, Barcelona",
+    "city": "Barcelona"
+  },
+  {
+    "location": "Lima",
+    "city": "Lima"
+  },
+  {
+    "location": "Lima Historic Centre, Lima",
+    "city": "Lima"
+  },
+  {
+    "location": "Little India, Singapore",
+    "city": "Singapore"
+  },
+  {
+    "location": "Los Angeles",
+    "city": "Los Angeles"
+  },
+  {
+    "location": "Lower East Side, New York",
+    "city": "New York"
+  },
+  {
+    "location": "Lujiazui, Shanghai (Lujiazui)",
+    "city": "Shanghai"
+  },
+  {
+    "location": "Maarif, Casablanca",
+    "city": "Casablanca"
+  },
+  {
+    "location": "Magnificent Mile, Chicago",
+    "city": "Chicago"
+  },
+  {
+    "location": "Mahipalpur, New Delhi",
+    "city": "New Delhi"
+  },
+  {
+    "location": "Makunudhoo",
+    "city": "Makunudhoo"
+  },
+  {
+    "location": "Male City",
+    "city": "Male City"
+  },
+  {
+    "location": "Mandhoo",
+    "city": "Mandhoo"
+  },
+  {
+    "location": "Manhattan, New York",
+    "city": "New York"
+  },
+  {
+    "location": "Manly, Sydney",
+    "city": "Sydney"
+  },
+  {
+    "location": "Mapo-Gu, Seoul",
+    "city": "Seoul"
+  },
+  {
+    "location": "Mapo-Gu, Seoul (Hongdae)",
+    "city": "Seoul"
+  },
+  {
+    "location": "Marina Bay, Singapore",
+    "city": "Singapore"
+  },
+  {
+    "location": "Marina Bay, Singapore (Shenton Way)",
+    "city": "Singapore"
+  },
+  {
+    "location": "Marrakech",
+    "city": "Marrakech"
+  },
+  {
+    "location": "Medina, Marrakech",
+    "city": "Marrakech"
+  },
+  {
+    "location": "Meedhoo",
+    "city": "Meedhoo"
+  },
+  {
+    "location": "Meemu Atoll",
+    "city": "Meemu Atoll"
+  },
+  {
+    "location": "Megalokhori",
+    "city": "Megalokhori"
+  },
+  {
+    "location": "Melbourne",
+    "city": "Melbourne"
+  },
+  {
+    "location": "Melbourne CBD, Melbourne",
+    "city": "Melbourne"
+  },
+  {
+    "location": "Melbourne CBD, Melbourne (Chinatown)",
+    "city": "Melbourne"
+  },
+  {
+    "location": "Melbourne CBD, Melbourne (Collins Street)",
+    "city": "Melbourne"
+  },
+  {
+    "location": "Melrose, Johannesburg (Melrose)",
+    "city": "Johannesburg"
+  },
+  {
+    "location": "Microcentro, Buenos Aires (Microcentro)",
+    "city": "Buenos Aires"
+  },
+  {
+    "location": "Mid-Beach, Miami Beach",
+    "city": "Miami Beach"
+  },
+  {
+    "location": "Midtown East, New York",
+    "city": "New York"
+  },
+  {
+    "location": "Milnerton, Cape Town (Milnerton)",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Minato, Tokyo (Akasaka)",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Minato, Tokyo (Ginza)",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Minato, Tokyo (Roppongi)",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Minato, Tokyo (Shiba)",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Minato, Tokyo (Shiodome)",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Miraflores, Lima",
+    "city": "Lima"
+  },
+  {
+    "location": "Miraflores, Lima (Costa Verde)",
+    "city": "Lima"
+  },
+  {
+    "location": "Misericordia, Lisbon",
+    "city": "Lisbon"
+  },
+  {
+    "location": "Mitte, Berlin",
+    "city": "Berlin"
+  },
+  {
+    "location": "Moema, Sao Paulo",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Moema, Sao Paulo (Vila Nova Conceicao)",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Moncloa-Aravaca, Madrid",
+    "city": "Madrid"
+  },
+  {
+    "location": "Monserrat, Buenos Aires (Mayo Avenue)",
+    "city": "Buenos Aires"
+  },
+  {
+    "location": "Monserrat, Buenos Aires (Microcentro)",
+    "city": "Buenos Aires"
+  },
+  {
+    "location": "Mouille Point, Cape Town",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Murray Hill, New York",
+    "city": "New York"
+  },
+  {
+    "location": "Mushimasgali",
+    "city": "Mushimasgali"
+  },
+  {
+    "location": "Mykonos City Centre, Mýkonos City",
+    "city": "Mýkonos City"
+  },
+  {
+    "location": "Mýkonos City",
+    "city": "Mýkonos City"
+  },
+  {
+    "location": "Namba, Osaka (Namba)",
+    "city": "Osaka"
+  },
+  {
+    "location": "Nannestad",
+    "city": "Nannestad"
+  },
+  {
+    "location": "Navona, Rome",
+    "city": "Rome"
+  },
+  {
+    "location": "Near North Side, Chicago",
+    "city": "Chicago"
+  },
+  {
+    "location": "New Cairo City, Cairo",
+    "city": "Cairo"
+  },
+  {
+    "location": "New Delhi",
+    "city": "New Delhi"
+  },
+  {
+    "location": "New Territories, Hong Kong (Lantau)",
+    "city": "Hong Kong"
+  },
+  {
+    "location": "Newham, London",
+    "city": "London"
+  },
+  {
+    "location": "Newlands, Cape Town",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Nika Island",
+    "city": "Nika Island"
+  },
+  {
+    "location": "Nishi Ward, Osaka (Shinsaibashi)",
+    "city": "Osaka"
+  },
+  {
+    "location": "Nishinari Ward, Osaka (Minami)",
+    "city": "Osaka"
+  },
+  {
+    "location": "NoMad, New York",
+    "city": "New York"
+  },
+  {
+    "location": "Nob Hill, San Francisco",
+    "city": "San Francisco"
+  },
+  {
+    "location": "Noonu",
+    "city": "Noonu"
+  },
+  {
+    "location": "Norrmalm, Stockholm",
+    "city": "Stockholm"
+  },
+  {
+    "location": "North Male Atoll",
+    "city": "North Male Atoll"
+  },
+  {
+    "location": "North Melbourne, Melbourne",
+    "city": "Melbourne"
+  },
+  {
+    "location": "North Sydney, Sydney",
+    "city": "Sydney"
+  },
+  {
+    "location": "Northbridge, Perth",
+    "city": "Perth"
+  },
+  {
+    "location": "Notre-Dame-de-Grace, Montréal",
+    "city": "Montréal"
+  },
+  {
+    "location": "Nusa Dua",
+    "city": "Nusa Dua"
+  },
+  {
+    "location": "Oia",
+    "city": "Oia"
+  },
+  {
+    "location": "Oia Caldera, Oia",
+    "city": "Oia"
+  },
+  {
+    "location": "Old Montreal, Montréal (Old Montreal)",
+    "city": "Montréal"
+  },
+  {
+    "location": "Old Town Toronto, Toronto",
+    "city": "Toronto"
+  },
+  {
+    "location": "Old Town Toronto, Toronto (Old Town Toronto)",
+    "city": "Toronto"
+  },
+  {
+    "location": "Old Town, Phuket Town (Old Town)",
+    "city": "Phuket Town"
+  },
+  {
+    "location": "Oost, Amsterdam",
+    "city": "Amsterdam"
+  },
+  {
+    "location": "Orchard, Singapore",
+    "city": "Singapore"
+  },
+  {
+    "location": "Orchard, Singapore (Tanglin)",
+    "city": "Singapore"
+  },
+  {
+    "location": "Osaka Bay, Osaka (Osaka Bay)",
+    "city": "Osaka"
+  },
+  {
+    "location": "Oslo",
+    "city": "Oslo"
+  },
+  {
+    "location": "Oslo City Centre, Oslo",
+    "city": "Oslo"
+  },
+  {
+    "location": "Ota Ward, Tokyo (Kamata)",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Oud Zuid, Amsterdam",
+    "city": "Amsterdam"
+  },
+  {
+    "location": "Oud-West, Amsterdam",
+    "city": "Amsterdam"
+  },
+  {
+    "location": "Paharganj, New Delhi (Chandni Chowk)",
+    "city": "New Delhi"
+  },
+  {
+    "location": "Palermo, Buenos Aires",
+    "city": "Buenos Aires"
+  },
+  {
+    "location": "Palermo, Buenos Aires (Palermo Hollywood)",
+    "city": "Buenos Aires"
+  },
+  {
+    "location": "Palermo, Buenos Aires (Palermo Soho)",
+    "city": "Buenos Aires"
+  },
+  {
+    "location": "Palm Jumeirah, Dubai (Beach & Coast)",
+    "city": "Dubai"
+  },
+  {
+    "location": "Pankow, Berlin",
+    "city": "Berlin"
+  },
+  {
+    "location": "Pantheon, Rome",
+    "city": "Rome"
+  },
+  {
+    "location": "Paquis, Geneva",
+    "city": "Geneva"
+  },
+  {
+    "location": "Pathumwan, Bangkok (Ploenchit)",
+    "city": "Bangkok"
+  },
+  {
+    "location": "Payangan",
+    "city": "Payangan"
+  },
+  {
+    "location": "Pecatu, Uluwatu",
+    "city": "Uluwatu"
+  },
+  {
+    "location": "Pengosekan, Ubud (Pengosekan)",
+    "city": "Ubud"
+  },
+  {
+    "location": "Perdizes, Sao Paulo",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Perdizes, Sao Paulo (Pompeia)",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Perivolos Beach, Perivolos",
+    "city": "Perivolos"
+  },
+  {
+    "location": "Perth",
+    "city": "Perth"
+  },
+  {
+    "location": "Perth CBD, Perth",
+    "city": "Perth"
+  },
+  {
+    "location": "Petit-Saconnex / Servette, Geneva",
+    "city": "Geneva"
+  },
+  {
+    "location": "Petitenget, Seminyak (Petitenget)",
+    "city": "Seminyak"
+  },
+  {
+    "location": "Phra Nakhon, Bangkok (Khaosan)",
+    "city": "Bangkok"
+  },
+  {
+    "location": "Phra Nakhon, Bangkok (Riverside)",
+    "city": "Bangkok"
+  },
+  {
+    "location": "Phuket Town",
+    "city": "Phuket Town"
+  },
+  {
+    "location": "Pinheiros, Sao Paulo",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Platis Yialos Mykonos",
+    "city": "Platis Yialos Mykonos"
+  },
+  {
+    "location": "Playa d'en Bossa",
+    "city": "Playa d'en Bossa"
+  },
+  {
+    "location": "Playa del Carmen",
+    "city": "Playa del Carmen"
+  },
+  {
+    "location": "Playacar Fase II, Playa del Carmen (Playacar Fase II)",
+    "city": "Playa del Carmen"
+  },
+  {
+    "location": "Plintri",
+    "city": "Plintri"
+  },
+  {
+    "location": "Pom Prap Sattru Phai, Bangkok (Chinatown)",
+    "city": "Bangkok"
+  },
+  {
+    "location": "Portinatx",
+    "city": "Portinatx"
+  },
+  {
+    "location": "Prague 1, Prague",
+    "city": "Prague"
+  },
+  {
+    "location": "Prague 2, Prague",
+    "city": "Prague"
+  },
+  {
+    "location": "Prague 5, Prague",
+    "city": "Prague"
+  },
+  {
+    "location": "Prague 6, Prague",
+    "city": "Prague"
+  },
+  {
+    "location": "Prague 7, Prague",
+    "city": "Prague"
+  },
+  {
+    "location": "Prague 8, Prague",
+    "city": "Prague"
+  },
+  {
+    "location": "Pudong, Shanghai (Lujiazui)",
+    "city": "Shanghai"
+  },
+  {
+    "location": "Pudu, Kuala Lumpur (Pudu)",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "location": "Puerto Madero, Buenos Aires",
+    "city": "Buenos Aires"
+  },
+  {
+    "location": "Puerto de San Miguel",
+    "city": "Puerto de San Miguel"
+  },
+  {
+    "location": "Pyrmont, Sydney (Darling Harbour)",
+    "city": "Sydney"
+  },
+  {
+    "location": "Raa Atoll",
+    "city": "Raa Atoll"
+  },
+  {
+    "location": "Randburg, Johannesburg",
+    "city": "Johannesburg"
+  },
+  {
+    "location": "Ratchathewi, Bangkok",
+    "city": "Bangkok"
+  },
+  {
+    "location": "Recoleta, Buenos Aires (Barrio Norte)",
+    "city": "Buenos Aires"
+  },
+  {
+    "location": "Recreio dos Bandeirantes, Rio de Janeiro",
+    "city": "Rio de Janeiro"
+  },
+  {
+    "location": "República, Sao Paulo",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Retiro, Buenos Aires",
+    "city": "Buenos Aires"
+  },
+  {
+    "location": "Retiro, Buenos Aires (Barrio Norte)",
+    "city": "Buenos Aires"
+  },
+  {
+    "location": "Rione Monti, Rome",
+    "city": "Rome"
+  },
+  {
+    "location": "River North, Chicago",
+    "city": "Chicago"
+  },
+  {
+    "location": "Robertson Quay, Singapore",
+    "city": "Singapore"
+  },
+  {
+    "location": "Roches Noires, Casablanca",
+    "city": "Casablanca"
+  },
+  {
+    "location": "Rome",
+    "city": "Rome"
+  },
+  {
+    "location": "Rosebank, Johannesburg (Rosebank)",
+    "city": "Johannesburg"
+  },
+  {
+    "location": "Ruoholahti, Helsinki",
+    "city": "Helsinki"
+  },
+  {
+    "location": "Saint-Gervais / des Grottes, Geneva",
+    "city": "Geneva"
+  },
+  {
+    "location": "Saint-Jean and Charmilles, Geneva",
+    "city": "Geneva"
+  },
+  {
+    "location": "Salamanca, Madrid",
+    "city": "Madrid"
+  },
+  {
+    "location": "Samphanthawong, Bangkok (Chinatown)",
+    "city": "Bangkok"
+  },
+  {
+    "location": "San Antonio",
+    "city": "San Antonio"
+  },
+  {
+    "location": "San Antonio Bay",
+    "city": "San Antonio Bay"
+  },
+  {
+    "location": "San Giovanni, Rome",
+    "city": "Rome"
+  },
+  {
+    "location": "San Isidro, Lima",
+    "city": "Lima"
+  },
+  {
+    "location": "San Telmo, Buenos Aires",
+    "city": "Buenos Aires"
+  },
+  {
+    "location": "Sandton, Johannesburg",
+    "city": "Johannesburg"
+  },
+  {
+    "location": "Sanlitun, Beijing (Sanlitun)",
+    "city": "Beijing"
+  },
+  {
+    "location": "Sant Joan de Labritja",
+    "city": "Sant Joan de Labritja"
+  },
+  {
+    "location": "Sant Martí, Barcelona",
+    "city": "Barcelona"
+  },
+  {
+    "location": "Santa Agnès de Corona",
+    "city": "Santa Agnès de Corona"
+  },
+  {
+    "location": "Santa Eularia des Riu",
+    "city": "Santa Eularia des Riu"
+  },
+  {
+    "location": "Santa Maria Maior, Lisbon",
+    "city": "Lisbon"
+  },
+  {
+    "location": "Santa Monica, Los Angeles",
+    "city": "Los Angeles"
+  },
+  {
+    "location": "Santa Teresa, Rio de Janeiro",
+    "city": "Rio de Janeiro"
+  },
+  {
+    "location": "Santiago de Compostela",
+    "city": "Santiago de Compostela"
+  },
+  {
+    "location": "Santo Antonio, Lisbon",
+    "city": "Lisbon"
+  },
+  {
+    "location": "Sants-Montjuïc, Barcelona",
+    "city": "Barcelona"
+  },
+  {
+    "location": "Sao Vicente, Lisbon",
+    "city": "Lisbon"
+  },
+  {
+    "location": "Sathorn, Bangkok (Embassy District)",
+    "city": "Bangkok"
+  },
+  {
+    "location": "Saude, Sao Paulo (Vila Clementino)",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Saxonwold, Johannesburg",
+    "city": "Johannesburg"
+  },
+  {
+    "location": "Sayan, Ubud (Campuhan)",
+    "city": "Ubud"
+  },
+  {
+    "location": "Sayan, Ubud (Penestanan)",
+    "city": "Ubud"
+  },
+  {
+    "location": "Scarborough, Perth",
+    "city": "Perth"
+  },
+  {
+    "location": "Sea Point, Cape Town",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Seebach, Zürich",
+    "city": "Zürich"
+  },
+  {
+    "location": "Seefeld, Zürich",
+    "city": "Zürich"
+  },
+  {
+    "location": "Selemadeg",
+    "city": "Selemadeg"
+  },
+  {
+    "location": "Seocho-Gu, Seoul",
+    "city": "Seoul"
+  },
+  {
+    "location": "Seodaemun-Gu, Seoul",
+    "city": "Seoul"
+  },
+  {
+    "location": "Shanghai",
+    "city": "Shanghai"
+  },
+  {
+    "location": "Shaviyani Atoll",
+    "city": "Shaviyani Atoll"
+  },
+  {
+    "location": "Shenton Way, Singapore (Shenton Way)",
+    "city": "Singapore"
+  },
+  {
+    "location": "Shibuya Ward, Tokyo (Shinjuku Area)",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Shinagawa Ward, Tokyo (Shinagawa Area)",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Shinjuku Ward, Tokyo",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Shinjuku Ward, Tokyo (Shinjuku Area)",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Sidi Belyout, Casablanca",
+    "city": "Casablanca"
+  },
+  {
+    "location": "Sidi Belyout, Casablanca (Gauthier)",
+    "city": "Casablanca"
+  },
+  {
+    "location": "Sidi Belyout, Casablanca (Old Medina)",
+    "city": "Casablanca"
+  },
+  {
+    "location": "Singapore City Centre, Singapore",
+    "city": "Singapore"
+  },
+  {
+    "location": "SoHo, New York",
+    "city": "New York"
+  },
+  {
+    "location": "South Beach, Miami Beach",
+    "city": "Miami Beach"
+  },
+  {
+    "location": "South Brisbane, Brisbane",
+    "city": "Brisbane"
+  },
+  {
+    "location": "South Loop, Chicago",
+    "city": "Chicago"
+  },
+  {
+    "location": "South Male Atoll",
+    "city": "South Male Atoll"
+  },
+  {
+    "location": "South Mumbai, Mumbai (Central)",
+    "city": "Mumbai"
+  },
+  {
+    "location": "South Mumbai, Mumbai (Mumbai Historical And Heritage)",
+    "city": "Mumbai"
+  },
+  {
+    "location": "South Mumbai, Mumbai (Nariman Point)",
+    "city": "Mumbai"
+  },
+  {
+    "location": "South of Market (SOMA), San Francisco",
+    "city": "San Francisco"
+  },
+  {
+    "location": "South of the Las Vegas Strip, Las Vegas",
+    "city": "Las Vegas"
+  },
+  {
+    "location": "Southbank, Melbourne",
+    "city": "Melbourne"
+  },
+  {
+    "location": "Southwark, London",
+    "city": "London"
+  },
+  {
+    "location": "Spagna, Rome",
+    "city": "Rome"
+  },
+  {
+    "location": "Spring Hill, Brisbane",
+    "city": "Brisbane"
+  },
+  {
+    "location": "St. Hanshaugen, Oslo",
+    "city": "Oslo"
+  },
+  {
+    "location": "Stockholm",
+    "city": "Stockholm"
+  },
+  {
+    "location": "Streeterville, Chicago",
+    "city": "Chicago"
+  },
+  {
+    "location": "Subiaco, Perth",
+    "city": "Perth"
+  },
+  {
+    "location": "Sumida Ward, Tokyo",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Super Paradise Beach",
+    "city": "Super Paradise Beach"
+  },
+  {
+    "location": "Surry Hills, Sydney",
+    "city": "Sydney"
+  },
+  {
+    "location": "Sydhavnen, Copenhagen",
+    "city": "Copenhagen"
+  },
+  {
+    "location": "Sydney CBD, Sydney",
+    "city": "Sydney"
+  },
+  {
+    "location": "Sydney CBD, Sydney (Darling Harbour)",
+    "city": "Sydney"
+  },
+  {
+    "location": "Sydney Olympic Park, Sydney",
+    "city": "Sydney"
+  },
+  {
+    "location": "Södermalm, Stockholm",
+    "city": "Stockholm"
+  },
+  {
+    "location": "Sörnäinen, Helsinki",
+    "city": "Helsinki"
+  },
+  {
+    "location": "Tabanan",
+    "city": "Tabanan"
+  },
+  {
+    "location": "Taito, Tokyo (Asakusa)",
+    "city": "Tokyo"
+  },
+  {
+    "location": "Taka-Töölö, Helsinki",
+    "city": "Helsinki"
+  },
+  {
+    "location": "Talamanca",
+    "city": "Talamanca"
+  },
+  {
+    "location": "Tankah Bay, Tulum (Tankah Bay)",
+    "city": "Tulum"
+  },
+  {
+    "location": "Tempelhof-Schöneberg, Berlin",
+    "city": "Berlin"
+  },
+  {
+    "location": "Tennoji Ward, Osaka (Minami)",
+    "city": "Osaka"
+  },
+  {
+    "location": "Tetuan, Madrid",
+    "city": "Madrid"
+  },
+  {
+    "location": "Teusaquillo, Bogotá (Calle 26)",
+    "city": "Bogotá"
+  },
+  {
+    "location": "Teusaquillo, Bogotá (Corferias)",
+    "city": "Bogotá"
+  },
+  {
+    "location": "The Harbourfront, Toronto",
+    "city": "Toronto"
+  },
+  {
+    "location": "The Harbourfront, Toronto (Entertainment District)",
+    "city": "Toronto"
+  },
+  {
+    "location": "The Harbourfront, Toronto (The Harbourfront)",
+    "city": "Toronto"
+  },
+  {
+    "location": "The Village, Toronto",
+    "city": "Toronto"
+  },
+  {
+    "location": "The Village, Toronto (The Village)",
+    "city": "Toronto"
+  },
+  {
+    "location": "Thundufushi",
+    "city": "Thundufushi"
+  },
+  {
+    "location": "Toronto",
+    "city": "Toronto"
+  },
+  {
+    "location": "Tourlos",
+    "city": "Tourlos"
+  },
+  {
+    "location": "Tower Hamlets, London",
+    "city": "London"
+  },
+  {
+    "location": "Trade Centre, Dubai (Sheikh Zayed Road)",
+    "city": "Dubai"
+  },
+  {
+    "location": "Trastevere, Rome",
+    "city": "Rome"
+  },
+  {
+    "location": "Trevi, Rome",
+    "city": "Rome"
+  },
+  {
+    "location": "Tribeca, New York",
+    "city": "New York"
+  },
+  {
+    "location": "Trionfale, Rome",
+    "city": "Rome"
+  },
+  {
+    "location": "Tulum",
+    "city": "Tulum"
+  },
+  {
+    "location": "Tulum City Centre, Tulum",
+    "city": "Tulum"
+  },
+  {
+    "location": "UBC - University of British Columbia, Vancouver (UBC - University of British Columbia)",
+    "city": "Vancouver"
+  },
+  {
+    "location": "Ubud",
+    "city": "Ubud"
+  },
+  {
+    "location": "Ubud City-Centre, Ubud",
+    "city": "Ubud"
+  },
+  {
+    "location": "Umeda, Osaka (Umeda)",
+    "city": "Osaka"
+  },
+  {
+    "location": "Umm Suqeim, Dubai (Beach & Coast)",
+    "city": "Dubai"
+  },
+  {
+    "location": "Union Square, San Francisco",
+    "city": "San Francisco"
+  },
+  {
+    "location": "Universal City, Los Angeles",
+    "city": "Los Angeles"
+  },
+  {
+    "location": "Unterstrass, Zürich",
+    "city": "Zürich"
+  },
+  {
+    "location": "Upper West Side, New York",
+    "city": "New York"
+  },
+  {
+    "location": "Usaquen, Bogotá",
+    "city": "Bogotá"
+  },
+  {
+    "location": "Vasastan, Stockholm",
+    "city": "Stockholm"
+  },
+  {
+    "location": "Vaticano Prati, Rome",
+    "city": "Rome"
+  },
+  {
+    "location": "Vesterbro, Copenhagen",
+    "city": "Copenhagen"
+  },
+  {
+    "location": "Via Veneto, Rome",
+    "city": "Rome"
+  },
+  {
+    "location": "Vila Mariana, Sao Paulo (Avenida Paulista)",
+    "city": "Sao Paulo"
+  },
+  {
+    "location": "Waterfront, Cape Town",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Waterfront, Cape Town (Silo District)",
+    "city": "Cape Town"
+  },
+  {
+    "location": "Wattana, Bangkok (Sukhumvit)",
+    "city": "Bangkok"
+  },
+  {
+    "location": "West End, Vancouver",
+    "city": "Vancouver"
+  },
+  {
+    "location": "West Hollywood, Los Angeles",
+    "city": "Los Angeles"
+  },
+  {
+    "location": "West Loop, Chicago",
+    "city": "Chicago"
+  },
+  {
+    "location": "West Los Angeles, Los Angeles",
+    "city": "Los Angeles"
+  },
+  {
+    "location": "West of the Las Vegas Strip, Las Vegas",
+    "city": "Las Vegas"
+  },
+  {
+    "location": "Western Suburbs, Mumbai (Andheri)",
+    "city": "Mumbai"
+  },
+  {
+    "location": "Western Suburbs, Mumbai (Western Suburbs)",
+    "city": "Mumbai"
+  },
+  {
+    "location": "Westerpark, Amsterdam",
+    "city": "Amsterdam"
+  },
+  {
+    "location": "Westminster Borough, London",
+    "city": "London"
+  },
+  {
+    "location": "Westwood, Los Angeles",
+    "city": "Los Angeles"
+  },
+  {
+    "location": "Wiedikon, Zürich",
+    "city": "Zürich"
+  },
+  {
+    "location": "Woolloomooloo, Sydney",
+    "city": "Sydney"
+  },
+  {
+    "location": "Worli, Mumbai",
+    "city": "Mumbai"
+  },
+  {
+    "location": "Worli, Mumbai (Central)",
+    "city": "Mumbai"
+  },
+  {
+    "location": "Xicheng, Beijing",
+    "city": "Beijing"
+  },
+  {
+    "location": "Xicheng, Beijing (Financial Street)",
+    "city": "Beijing"
+  },
+  {
+    "location": "Xicheng, Beijing (Xidan)",
+    "city": "Beijing"
+  },
+  {
+    "location": "Xuhui, Shanghai (Huaihai Road Commercial Area)",
+    "city": "Shanghai"
+  },
+  {
+    "location": "Yaletown, Vancouver",
+    "city": "Vancouver"
+  },
+  {
+    "location": "Yau Tsim Mong District, Hong Kong (Kowloon)",
+    "city": "Hong Kong"
+  },
+  {
+    "location": "Yau Tsim Mong District, Hong Kong (Tsim Sha Tsui)",
+    "city": "Hong Kong"
+  },
+  {
+    "location": "Yongsan-Gu, Seoul",
+    "city": "Seoul"
+  },
+  {
+    "location": "Zabeel, Dubai (Bur Dubai)",
+    "city": "Dubai"
+  },
+  {
+    "location": "Zama, Tulum",
+    "city": "Tulum"
+  },
+  {
+    "location": "Zamalek, Cairo (Gezira)",
+    "city": "Cairo"
+  },
+  {
+    "location": "Zeeburg, Amsterdam",
+    "city": "Amsterdam"
+  },
+  {
+    "location": "Zona Hotelera, Cancún (Zona Hotelera)",
+    "city": "Cancún"
+  },
+  {
+    "location": "Zona Hotelera, Tulum (Zona Hotelera)",
+    "city": "Tulum"
+  },
+  {
+    "location": "Zuideramstel, Amsterdam",
+    "city": "Amsterdam"
+  },
+  {
+    "location": "Zuidoost, Amsterdam",
+    "city": "Amsterdam"
+  },
+  {
+    "location": "Zürich",
+    "city": "Zürich"
+  },
+  {
+    "location": "Zürichberg, Zürich",
+    "city": "Zürich"
+  },
+  {
+    "location": "Östermalm, Stockholm",
+    "city": "Stockholm"
+  },
+  {
+    "location": "Østerbro, Copenhagen",
+    "city": "Copenhagen"
+  }
+]
