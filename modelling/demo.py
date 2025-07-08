@@ -96,7 +96,7 @@ class TravelHuntersDemo:
         print("=" * 40)
         print(f"🏨 Total Hotels: {summary['n_hotels']}")
         print(f"👥 Synthetic Users: {summary['n_users']}")
-        print(f"⭐ Average Rating: {summary['avg_rating']:.1f}/5.0")
+        print(f"⭐ Average Rating: {summary['avg_rating']:.1f}/10.0")
         print(f"💰 Price Range: ${summary['price_range']['min']:.0f} - ${summary['price_range']['max']:.0f}")
         print(f"📍 Sample Locations:")
         
@@ -145,7 +145,7 @@ class TravelHuntersDemo:
         try:
             # Get user preferences
             max_price = float(input("Maximum price per night ($): ") or "200")
-            min_rating = float(input("Minimum rating (1-5): ") or "4.0")
+            min_rating = float(input("Minimum rating (1-10): ") or "7.0")
             
             print("\nWhich amenities are important to you? (y/n)")
             amenities = []
@@ -186,7 +186,7 @@ class TravelHuntersDemo:
         
         try:
             max_price = float(input("Maximum price per night ($, optional): ") or "1000")
-            min_rating = float(input("Minimum rating (1-5, optional): ") or "0")
+            min_rating = float(input("Minimum rating (1-10, optional): ") or "0")
             
             user_prefs = {
                 'max_price': max_price,
@@ -221,7 +221,7 @@ class TravelHuntersDemo:
         
         try:
             max_price = float(input("Maximum price per night ($): ") or "200")
-            min_rating = float(input("Minimum rating (1-5): ") or "4.0")
+            min_rating = float(input("Minimum rating (1-10): ") or "4.0")
             
             # Get weight preferences
             print("\nHow important are these factors? (1-10)")

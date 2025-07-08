@@ -25,7 +25,17 @@ class HotelDataLoader:
     def load_hotels(self) -> pd.DataFrame:
         """Load hotel data from JSON files or database, fallback to mock data"""
         try:
-            # First try to load from JSON files (real booking.com data)
+            # First try to load from SQLite database
+            print("✅ Loading hotel data from SQLite database...")
+            hotels_df = self._load_from_database()
+            if not hotels_df.empty:
+                print(f"✅ Loaded {len(hotels_df)} hotels from database")
+                return hotels_df
+        except Exception as e:
+            print(f"❌ Error loading from database: {e}")
+
+        try:
+            # Fallback to JSON files (real booking.com data)
             json_paths = [
                 self.project_root / "data_acquisition" / "json_final" / "booking_worldwide_enriched.json",
                 self.project_root / "data_acquisition" / "json_final" / "booking_worldwide.json"
@@ -43,7 +53,7 @@ class HotelDataLoader:
                         print(f"✅ Loaded {len(df)} hotels from JSON file")
                         return df
             
-            # Fallback to database
+            # Fallback to old database structure
             conn = sqlite3.connect(self.db_path)
             query = """
             SELECT 
@@ -57,7 +67,7 @@ class HotelDataLoader:
             conn.close()
             
             if not df.empty:
-                print(f"✅ Loaded {len(df)} hotels from database")
+                print(f"✅ Loaded {len(df)} hotels from old database structure")
                 return self._enrich_hotel_data(df)
             
         except Exception as e:
@@ -66,6 +76,62 @@ class HotelDataLoader:
         # Final fallback to mock data
         print("🔄 Creating mock data for demonstration...")
         return self._create_mock_hotel_data()
+    
+    def _load_from_database(self) -> pd.DataFrame:
+        """Load hotel data from the booking_worldwide table in SQLite database"""
+        # Correct path to database
+        db_path = self.project_root / "data_acquisition" / "database" / "travelhunters.db"
+        
+        if not db_path.exists():
+            raise FileNotFoundError(f"Database file not found: {db_path}")
+        
+        conn = sqlite3.connect(db_path)
+        
+        # Query the booking_worldwide table
+        query = """
+        SELECT 
+            id,
+            name,
+            link,
+            rating,
+            price,
+            location,
+            description,
+            image_url,
+            latitude,
+            longitude
+        FROM booking_worldwide
+        WHERE name IS NOT NULL AND price IS NOT NULL
+        """
+        
+        try:
+            df = pd.read_sql_query(query, conn)
+            conn.close()
+            
+            if df.empty:
+                return pd.DataFrame()
+            
+            # Convert data types
+            df['rating'] = pd.to_numeric(df['rating'], errors='coerce').fillna(3.5)
+            df['price'] = pd.to_numeric(df['price'], errors='coerce').fillna(100)
+            df['latitude'] = pd.to_numeric(df['latitude'], errors='coerce').fillna(0)
+            df['longitude'] = pd.to_numeric(df['longitude'], errors='coerce').fillna(0)
+            
+            # Generate missing fields for ML compatibility
+            df['review_count'] = np.random.randint(10, 2000, len(df))
+            df['distance_to_center'] = np.random.uniform(0.5, 15.0, len(df))
+            
+            # Extract amenities from description
+            df['amenities'] = df['description'].apply(self._extract_amenities_from_text)
+            
+            # Convert amenities to JSON string format for consistency
+            df['amenities'] = df['amenities'].apply(lambda x: json.dumps(x) if isinstance(x, list) else '[]')
+            
+            return df
+            
+        except Exception as e:
+            conn.close()
+            raise e
     
     def _convert_json_to_dataframe(self, hotel_data: List[Dict]) -> pd.DataFrame:
         """Convert JSON hotel data to standardized DataFrame"""

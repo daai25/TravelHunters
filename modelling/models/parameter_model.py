@@ -56,6 +56,14 @@ class ParameterBasedRecommender:
             y: Target ratings
         """
         # Merge hotels with interactions
+        # Ensure compatible data types for merging
+        if 'hotel_id' in interactions_df.columns and 'id' in hotels_df.columns:
+            # Convert both to string to ensure compatibility
+            interactions_df = interactions_df.copy()
+            hotels_df = hotels_df.copy()
+            interactions_df['hotel_id'] = interactions_df['hotel_id'].astype(str)
+            hotels_df['id'] = hotels_df['id'].astype(str)
+        
         merged_df = interactions_df.merge(hotels_df, left_on='hotel_id', right_on='id', how='inner')
         
         # Use interaction ratings as target (not hotel ratings from the hotel data)
@@ -63,7 +71,7 @@ class ParameterBasedRecommender:
         
         # Select feature columns (excluding non-feature columns)
         exclude_cols = [
-            'id', 'name', 'location', 'image_url', 'description', 
+            'id', 'name', 'location', 'image_url', 'description', 'link',
             'amenities', 'latitude', 'longitude', 'user_id', 
             'hotel_id', 'rating', 'rating_x', 'rating_y', 'interaction_type', 
             'price_category', 'rating_category'
@@ -79,18 +87,31 @@ class ParameterBasedRecommender:
         
         return X, y
     
-    def train(self, X: np.ndarray, y: np.ndarray, validation_split: float = 0.2) -> Dict:
+    def train(self, X, y, validation_split: float = 0.2) -> Dict:
         """
         Train the parameter-based model
         
         Args:
-            X: Feature matrix
-            y: Target ratings
+            X: Feature matrix (DataFrame or numpy array)
+            y: Target ratings (Series or numpy array)
             validation_split: Fraction of data for validation
             
         Returns:
             Training metrics
         """
+        # Handle DataFrame input - select only numeric columns
+        if isinstance(X, pd.DataFrame):
+            # Select only numeric columns for training
+            numeric_columns = X.select_dtypes(include=[np.number]).columns
+            X_numeric = X[numeric_columns].fillna(0)
+            self.feature_columns = list(numeric_columns)
+            X = X_numeric.values
+            print(f"ℹ️  Using {len(self.feature_columns)} numeric features for training")
+        
+        # Handle Series input for y
+        if isinstance(y, pd.Series):
+            y = y.values
+        
         # Split data
         X_train, X_val, y_train, y_val = train_test_split(
             X, y, test_size=validation_split, random_state=42
@@ -131,7 +152,7 @@ class ParameterBasedRecommender:
         Predict scores for all hotels
         
         Args:
-            hotels_df: Hotels with engineered features
+            hotels_df: Hotels DataFrame (original or with engineered features)
             
         Returns:
             DataFrame with hotel IDs and predicted scores
@@ -139,8 +160,21 @@ class ParameterBasedRecommender:
         if not self.is_trained:
             raise ValueError("Model must be trained before making predictions")
         
+        # Check if we have the required feature columns
+        available_columns = list(hotels_df.columns)
+        missing_features = [col for col in self.feature_columns if col not in available_columns]
+        
+        if missing_features:
+            # If features are missing, use feature engineering to create them
+            print(f"ℹ️  Creating missing features: {missing_features[:5]}...")
+            from data_preparation.feature_engineering import HotelFeatureEngineer
+            engineer = HotelFeatureEngineer()
+            hotels_with_features = engineer.engineer_numerical_features(hotels_df)
+        else:
+            hotels_with_features = hotels_df
+        
         # Prepare features
-        X = hotels_df[self.feature_columns].fillna(0).values
+        X = hotels_with_features[self.feature_columns].fillna(0).values
         
         # Predict scores
         scores = self.model.predict(X)
@@ -148,11 +182,7 @@ class ParameterBasedRecommender:
         # Create results dataframe
         results_df = pd.DataFrame({
             'hotel_id': hotels_df['id'],
-            'predicted_score': scores,
-            'hotel_name': hotels_df['name'],
-            'price': hotels_df['price'],
-            'rating': hotels_df['rating'],
-            'location': hotels_df['location']
+            'predicted_score': scores
         })
         
         return results_df
@@ -181,13 +211,27 @@ class ParameterBasedRecommender:
         # Sort by final score and return top-k
         recommendations = weighted_df.sort_values('final_score', ascending=False).head(top_k)
         
-        return recommendations[['hotel_id', 'hotel_name', 'final_score', 'predicted_score', 
-                               'price', 'rating', 'location']]
+        # Return with available columns
+        available_columns = ['hotel_id', 'predicted_score', 'final_score']
+        if 'name' in recommendations.columns:
+            available_columns.append('name')
+        if 'price' in recommendations.columns:
+            available_columns.append('price')
+        if 'rating' in recommendations.columns:
+            available_columns.append('rating')
+        if 'location' in recommendations.columns:
+            available_columns.append('location')
+        
+        return recommendations[available_columns]
     
-    def _apply_user_filters(self, predictions_df: pd.DataFrame, hotels_df: pd.DataFrame, 
+    def _apply_user_filters(self, predictions_df: pd.DataFrame, hotels_df: pd.DataFrame,
                            preferences: Dict) -> pd.DataFrame:
         """Apply hard filters based on user preferences"""
-        filtered_df = predictions_df.copy()
+        # Join predictions with hotel data for filtering
+        filtered_df = predictions_df.merge(
+            hotels_df[['id', 'name', 'price', 'rating', 'location', 'amenities']],
+            left_on='hotel_id', right_on='id', how='left'
+        )
         
         # Price filter
         if 'max_price' in preferences:

@@ -7,11 +7,19 @@ import pandas as pd
 import numpy as np
 from typing import Dict, List, Tuple, Optional
 import sys
-sys.path.append('../models')
-sys.path.append('../data_preparation')
+import os
 
-from parameter_model import ParameterBasedRecommender
-from text_similarity_model import TextBasedRecommender
+# Add current directory and parent directories to path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(current_dir)
+sys.path.append(os.path.dirname(current_dir))
+
+try:
+    from .parameter_model import ParameterBasedRecommender
+    from .text_similarity_model import TextBasedRecommender
+except ImportError:
+    from parameter_model import ParameterBasedRecommender
+    from text_similarity_model import TextBasedRecommender
 
 class HybridRecommender:
     """Hybrid recommender combining parameter-based and text-based approaches"""
@@ -171,9 +179,12 @@ class HybridRecommender:
         
         # Convert to DataFrame and sort
         hybrid_df = pd.DataFrame(hybrid_scores)
-        hybrid_df = hybrid_df.sort_values('hybrid_score', ascending=False).head(top_k)
+        hybrid_df = hybrid_df.sort_values('hybrid_score', ascending=False)
         
-        return hybrid_df
+        # Remove duplicates by hotel name (keep highest score)
+        hybrid_df = hybrid_df.drop_duplicates(subset=['hotel_name'], keep='first')
+        
+        return hybrid_df.head(top_k)
     
     def _rank_fusion_combination(self, param_recs: pd.DataFrame, text_recs: pd.DataFrame, 
                                 top_k: int) -> pd.DataFrame:
@@ -223,9 +234,12 @@ class HybridRecommender:
         
         # Convert to DataFrame and sort
         hybrid_df = pd.DataFrame(rrr_scores)
-        hybrid_df = hybrid_df.sort_values('rrr_score', ascending=False).head(top_k)
+        hybrid_df = hybrid_df.sort_values('rrr_score', ascending=False)
         
-        return hybrid_df
+        # Remove duplicates by hotel name (keep highest score)
+        hybrid_df = hybrid_df.drop_duplicates(subset=['hotel_name'], keep='first')
+        
+        return hybrid_df.head(top_k)
     
     def _cascade_combination(self, param_recs: pd.DataFrame, text_recs: pd.DataFrame,
                            user_preferences: Dict, top_k: int) -> pd.DataFrame:
@@ -269,12 +283,21 @@ class HybridRecommender:
             
             # Sort by cascade score
             cascade_df = pd.DataFrame(cascaded_recs)
-            cascade_df = cascade_df.sort_values('cascade_score', ascending=False).head(top_k)
+            cascade_df = cascade_df.sort_values('cascade_score', ascending=False)
+            
+            # Remove duplicates by hotel name (keep highest score)
+            cascade_df = cascade_df.drop_duplicates(subset=['hotel_name'], keep='first')
+            cascade_df = cascade_df.head(top_k)
             
         else:
             # Text is not important, just use parameter recommendations
             cascade_df = base_recs.head(top_k).copy()
             cascade_df['cascade_score'] = cascade_df['final_score']
+            
+            # Remove duplicates by hotel name even for parameter-only results
+            if 'hotel_name' not in cascade_df.columns and 'name' in cascade_df.columns:
+                cascade_df['hotel_name'] = cascade_df['name']
+            cascade_df = cascade_df.drop_duplicates(subset=['hotel_name'], keep='first')
         
         return cascade_df
     
@@ -367,8 +390,14 @@ class HybridRecommender:
 
 if __name__ == "__main__":
     # Test hybrid recommender
-    from load_data import HotelDataLoader
-    from feature_engineering import HotelFeatureEngineer
+    try:
+        from load_data import HotelDataLoader
+        from feature_engineering import HotelFeatureEngineer
+    except ImportError:
+        # Try relative imports
+        sys.path.append('../data_preparation')
+        from load_data import HotelDataLoader
+        from feature_engineering import HotelFeatureEngineer
     
     # Load data
     loader = HotelDataLoader()

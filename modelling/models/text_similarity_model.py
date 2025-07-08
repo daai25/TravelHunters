@@ -253,6 +253,9 @@ class TextBasedRecommender:
         results_df = results_df[results_df['similarity_score'] >= similarity_threshold]
         results_df = results_df.sort_values('similarity_score', ascending=False)
         
+        # Remove duplicates by hotel_id (keep highest score)
+        results_df = results_df.drop_duplicates(subset=['hotel_id'], keep='first')
+        
         return results_df.head(top_k)
     
     def recommend_hotels(self, query: str, hotels_df: pd.DataFrame, user_preferences: Dict = None, 
@@ -269,20 +272,52 @@ class TextBasedRecommender:
         Returns:
             DataFrame with detailed hotel recommendations
         """
-        # Get text-based similarities
-        text_results = self.search_hotels(query, top_k=top_k*2)  # Get more for filtering
+        # First apply user preference filters to hotels_df before text search
+        filtered_hotels_df = hotels_df.copy()
+        
+        if user_preferences:
+            # Apply price filter
+            if 'max_price' in user_preferences:
+                filtered_hotels_df = filtered_hotels_df[filtered_hotels_df['price'] <= user_preferences['max_price']]
+                print(f"🔍 Nach Preisfilter (≤{user_preferences['max_price']}): {len(filtered_hotels_df)} Hotels")
+            
+            # Apply rating filter
+            if 'min_rating' in user_preferences:
+                filtered_hotels_df = filtered_hotels_df[filtered_hotels_df['rating'] >= user_preferences['min_rating']]
+                print(f"🔍 Nach Bewertungsfilter (≥{user_preferences['min_rating']}): {len(filtered_hotels_df)} Hotels")
+            
+            # Apply amenities filter
+            if 'required_amenities' in user_preferences and user_preferences['required_amenities']:
+                for amenity in user_preferences['required_amenities']:
+                    mask = filtered_hotels_df['amenities'].str.contains(amenity, case=False, na=False)
+                    filtered_hotels_df = filtered_hotels_df[mask]
+                print(f"🔍 Nach Ausstattungsfilter: {len(filtered_hotels_df)} Hotels")
+        
+        if filtered_hotels_df.empty:
+            print("❌ Keine Hotels entsprechen den Filterkriterien")
+            return pd.DataFrame()
+        
+        # Create a temporary mapping for filtered hotels
+        filtered_hotel_ids = set(filtered_hotels_df['id'].tolist())
+        
+        # Get text-based similarities only for filtered hotels
+        text_results = self.search_hotels(query, top_k=min(len(filtered_hotels_df), top_k*3), similarity_threshold=0.05)
+        
+        # Filter text results to only include hotels that passed preference filters
+        text_results = text_results[text_results['hotel_id'].isin(filtered_hotel_ids)]
         
         # Merge with hotel details
         detailed_results = text_results.merge(
-            hotels_df[['id', 'name', 'location', 'price', 'rating', 'description']], 
+            filtered_hotels_df[['id', 'name', 'location', 'price', 'rating', 'description']], 
             left_on='hotel_id', 
             right_on='id', 
             how='inner'
         )
         
-        # Apply user preference filters if provided
-        if user_preferences:
-            detailed_results = self._apply_text_filters(detailed_results, user_preferences)
+        # Remove duplicates by hotel name (same hotel with different IDs)
+        detailed_results = detailed_results.drop_duplicates(subset=['name'], keep='first')
+        
+        print(f"🔍 Nach Duplikatentfernung: {len(detailed_results)} einzigartige Hotels")
         
         # Apply preference weighting
         if user_preferences:
@@ -292,6 +327,8 @@ class TextBasedRecommender:
         
         # Sort and return top-k
         final_results = detailed_results.sort_values('final_score', ascending=False).head(top_k)
+        
+        print(f"✅ {len(final_results)} Empfehlungen für '{query}' mit Ihren Filtern")
         
         return final_results[['hotel_id', 'name', 'final_score', 'similarity_score', 
                              'price', 'rating', 'location', 'description']]
@@ -332,12 +369,12 @@ class TextBasedRecommender:
             else:
                 weighted_df['price_score'] = 1.0
             
-            # Rating score
-            weighted_df['rating_score'] = weighted_df['rating'] / 5.0
+            # Rating score (10-point scale)
+            weighted_df['rating_score'] = weighted_df['rating'] / 10.0
         else:
             weighted_df['text_score'] = weighted_df['similarity_score']
             weighted_df['price_score'] = 1.0
-            weighted_df['rating_score'] = weighted_df['rating'] / 5.0
+            weighted_df['rating_score'] = weighted_df['rating'] / 10.0
         
         # Calculate final weighted score
         weighted_df['final_score'] = (
@@ -407,29 +444,26 @@ class TextBasedRecommender:
 if __name__ == "__main__":
     # Test the text-based recommender
     import sys
-    sys.path.append('../data_preparation')
-    from load_data import HotelDataLoader
-    from feature_engineering import HotelFeatureEngineer
+    import os
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+    
+    from data_preparation.load_data import HotelDataLoader
     
     # Load data
     loader = HotelDataLoader()
     hotels_df = loader.load_hotels()
     
     if not hotels_df.empty:
-        # Engineer features for text processing
-        engineer = HotelFeatureEngineer()
-        features_df, _ = engineer.prepare_parameter_features(hotels_df)
-        
         # Create and fit text model
         text_recommender = TextBasedRecommender(max_features=500, use_lsa=True)
-        text_recommender.fit(features_df)
+        text_recommender.fit(hotels_df)
         
         # Test text search
         test_queries = [
+            "relaxing in luxury hotel",
             "cheap family friendly hotel with pool",
-            "luxury spa resort with breakfast",
-            "budget accommodation near city center",
-            "business hotel with wifi and gym"
+            "business hotel with wifi",
+            "spa resort with wellness"
         ]
         
         for query in test_queries:
@@ -437,22 +471,25 @@ if __name__ == "__main__":
             
             # Get keywords
             keywords = text_recommender.get_query_keywords(query, top_k=5)
-            print(f"Keywords: {keywords}")
+            print(f"📝 Keywords: {keywords}")
             
-            # Get recommendations
-            user_prefs = {
-                'max_price': 200,
-                'min_rating': 3.5,
-                'text_importance': 0.7,
-                'price_importance': 0.2,
-                'rating_importance': 0.1
-            }
+            # Test with different budgets
+            budgets = [200, 400, 600]
             
-            recommendations = text_recommender.recommend_hotels(
-                query, features_df, user_prefs, top_k=3
-            )
-            
-            print(f"Top 3 recommendations:")
-            for _, hotel in recommendations.iterrows():
-                print(f"  - {hotel['name']} (Score: {hotel['final_score']:.3f}, "
-                      f"Price: ${hotel['price']:.0f}, Rating: {hotel['rating']:.1f})")
+            for budget in budgets:
+                user_prefs = {'max_price': budget}
+                
+                recommendations = text_recommender.recommend_hotels(
+                    query, hotels_df, user_prefs, top_k=3
+                )
+                
+                print(f"\n💰 Budget €{budget}:")
+                if len(recommendations) > 0:
+                    for _, hotel in recommendations.iterrows():
+                        print(f"  - {hotel['name'][:50]:50} | €{hotel['price']:6.0f} | {hotel['rating']}/10⭐")
+                else:
+                    print("  ❌ Keine Hotels in dieser Preiskategorie gefunden")
+        
+        print(f"\n✅ Text-Modell erfolgreich getestet!")
+    else:
+        print("❌ Keine Hotel-Daten geladen")
