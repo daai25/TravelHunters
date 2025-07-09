@@ -28,11 +28,14 @@ except ImportError:
 class TravelHuntersDemo:
     """Interactive demo for the hotel recommendation system"""
     
-    def __init__(self):
+    def __init__(self, enable_data_augmentation: bool = True):
         self.loader = HotelDataLoader()
         self.engineer = HotelFeatureEngineer()
         self.evaluator = RecommenderEvaluator()
         self.matrix_builder = RecommendationMatrixBuilder() if RecommendationMatrixBuilder else None
+        
+        # Data augmentation settings
+        self.enable_data_augmentation = enable_data_augmentation
         
         # Models
         self.param_model = None
@@ -53,7 +56,19 @@ class TravelHuntersDemo:
         # Load data
         print("📊 Loading hotel data...")
         self.hotels_df = self.loader.load_hotels()
-        self.interactions_df = self.loader.load_user_interactions()
+        
+        # Apply data augmentation if enabled
+        if self.enable_data_augmentation:
+            print("🔄 Data augmentation enabled - generating more training data...")
+            
+            # Augment hotel data for more variety (optional)
+            # self.hotels_df = self.loader.augment_hotel_features(self.hotels_df, augmentation_factor=2)
+            
+            # Load interactions with data augmentation to increase training data
+            self.interactions_df = self.loader.load_user_interactions(augment_data=True, augmentation_factor=4)
+        else:
+            # Load standard interactions without augmentation
+            self.interactions_df = self.loader.load_user_interactions(augment_data=False)
         
         if self.hotels_df.empty:
             print("❌ No hotel data found. Please check the database.")
@@ -62,6 +77,10 @@ class TravelHuntersDemo:
         # Engineer features
         print("⚙️ Engineering features...")
         self.features_df, _ = self.engineer.prepare_parameter_features(self.hotels_df)
+        
+        # Apply feature noise for improved robustness if augmentation is enabled
+        if self.enable_data_augmentation:
+            self.features_df = self.engineer.add_feature_noise(self.features_df, noise_level=0.03)
         
         # Initialize models
         print("🤖 Training models...")
@@ -253,20 +272,22 @@ class TravelHuntersDemo:
             min_rating = float(input("Minimum rating (1-10): ") or "7.0")
             
             print("\nWhich amenities are important to you? (y/n)")
+            print("(These are preferences only and will improve recommendations, but are not required)")
             amenities = []
             for amenity in ['wifi', 'pool', 'gym', 'parking', 'breakfast', 'spa']:
                 answer = input(f"  {amenity.title()}: ").lower()
-                if answer in ['y', 'yes']:
+                if answer in ['y', 'yes', 'j', 'ja']:
                     amenities.append(amenity)
             
             # Create preferences
             user_prefs = {
                 'max_price': max_price,
                 'min_rating': min_rating,
-                'required_amenities': amenities,
-                'price_importance': 0.3,
-                'rating_importance': 0.3,
-                'model_importance': 0.4  # ML model gets significant weight
+                'preferred_amenities': amenities,
+                'price_importance': 0.25,
+                'rating_importance': 0.25,
+                'model_importance': 0.35,  # ML model gets significant weight
+                'amenity_importance': 0.15 if amenities else 0.0  # Only add weight if amenities are selected
             }
             
             # Get recommendations
@@ -649,10 +670,11 @@ class TravelHuntersDemo:
                 user_prefs = {
                     'max_price': 1000,  # Hohe Grenze, um die meisten Hotels einzuschließen
                     'min_rating': 0,    # Niedrige Grenze, um die meisten Hotels einzuschließen
-                    'required_amenities': [],
+                    'preferred_amenities': [],
                     'price_importance': 0.2,
                     'rating_importance': 0.3,
-                    'model_importance': 0.5  # ML model gets significant weight
+                    'model_importance': 0.5,  # ML model gets significant weight
+                    'amenity_importance': 0.0  # No amenity preferences in evaluation
                 }
                 
                 # Hole Empfehlungen von allen Modellen für diesen Benutzer
@@ -752,10 +774,12 @@ class TravelHuntersDemo:
             user_prefs = {
                 'max_price': filters.get('max_price', 1000),
                 'min_rating': filters.get('min_rating', 0),
+                'preferred_amenities': [],  # No amenities for category analysis
                 'price_importance': 0.2,
                 'rating_importance': 0.3,
                 'text_importance': 0.3,
-                'model_importance': 0.2
+                'model_importance': 0.2,
+                'amenity_importance': 0.0
             }
             
             # Abfrage für textbasierte Modelle
@@ -837,10 +861,12 @@ class TravelHuntersDemo:
 
 def main():
     """Main demo function"""
-    demo = TravelHuntersDemo()
+    # Enable data augmentation to increase training data size
+    demo = TravelHuntersDemo(enable_data_augmentation=True)
     
     print("🏨 Welcome to TravelHunters Recommendation Demo!")
-    print("=" * 50)
+    print("🔄 Enhanced with Data Augmentation for Better Performance")
+    print("=" * 60)
     
     if not demo.initialize():
         return

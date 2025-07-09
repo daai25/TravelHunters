@@ -491,16 +491,7 @@ class ParameterBasedRecommender:
             filtered_df = filtered_df[filtered_df['distance_km'] <= max_distance]
             print(f"🔍 Distance filter (≤{max_distance}km): {before_count} → {len(filtered_df)} hotels")
         
-        # Amenities filter
-        if 'required_amenities' in preferences:
-            required_amenities = preferences['required_amenities']
-            if required_amenities:
-                for amenity in required_amenities:
-                    amenity_col = f'has_{amenity}'
-                    if amenity_col in filtered_df.columns:
-                        before_count = len(filtered_df)
-                        filtered_df = filtered_df[filtered_df[amenity_col] == 1]
-                        print(f"🔍 Amenity filter ({amenity}): {before_count} → {len(filtered_df)} hotels")
+        # Note: Amenities are now handled as preferences in scoring, not as hard filters
         
         return filtered_df
     
@@ -512,6 +503,14 @@ class ParameterBasedRecommender:
         price_weight = preferences.get('price_importance', 0.3)
         rating_weight = preferences.get('rating_importance', 0.3)
         model_weight = preferences.get('model_importance', 0.4)  # ML model gets significant weight
+        amenity_weight = preferences.get('amenity_importance', 0.1)  # New amenity weight
+        
+        # Normalize weights if amenities are included
+        total_weight = price_weight + rating_weight + model_weight + amenity_weight
+        price_weight = price_weight / total_weight
+        rating_weight = rating_weight / total_weight
+        model_weight = model_weight / total_weight
+        amenity_weight = amenity_weight / total_weight
         
         # Calculate individual scores
         if len(weighted_df) > 1:
@@ -528,20 +527,26 @@ class ParameterBasedRecommender:
             # ML model score - use trained model predictions
             weighted_df['ml_score'] = self._get_ml_predictions(weighted_df)
             
-            # Final score - combining all three components
+            # Amenity score - bonus for preferred amenities
+            weighted_df['amenity_score'] = self._calculate_amenity_score(weighted_df, preferences)
+            
+            # Final score - combining all components
             weighted_df['final_score'] = (
                 price_weight * weighted_df['price_score'] +
                 rating_weight * weighted_df['rating_score'] +
-                model_weight * weighted_df['ml_score']
+                model_weight * weighted_df['ml_score'] +
+                amenity_weight * weighted_df['amenity_score']
             )
         else:
             weighted_df['price_score'] = 1.0
             weighted_df['rating_score'] = weighted_df['rating'] / 10.0
             weighted_df['ml_score'] = 0.5  # Default ML score
+            weighted_df['amenity_score'] = 0.5  # Default amenity score
             weighted_df['final_score'] = (
                 price_weight * weighted_df['price_score'] +
                 rating_weight * weighted_df['rating_score'] +
-                model_weight * weighted_df['ml_score']
+                model_weight * weighted_df['ml_score'] +
+                amenity_weight * weighted_df['amenity_score']
             )
         
         return weighted_df
@@ -580,6 +585,43 @@ class ParameterBasedRecommender:
         
         return pd.Series(normalized_preds, index=filtered_df.index)
     
+    def _calculate_amenity_score(self, filtered_df: pd.DataFrame, preferences: Dict) -> pd.Series:
+        """
+        Calculate amenity score based on preferred amenities
+        
+        Args:
+            filtered_df: Filtered hotels DataFrame
+            preferences: User preferences including preferred_amenities
+            
+        Returns:
+            Series of amenity scores (0-1 scale)
+        """
+        amenity_scores = pd.Series([0.5] * len(filtered_df), index=filtered_df.index)
+        
+        preferred_amenities = preferences.get('preferred_amenities', [])
+        if not preferred_amenities:
+            return amenity_scores
+        
+        # Calculate score based on how many preferred amenities the hotel has
+        for i, (idx, hotel) in enumerate(filtered_df.iterrows()):
+            matching_amenities = 0
+            total_amenities = len(preferred_amenities)
+            
+            for amenity in preferred_amenities:
+                amenity_col = f'has_{amenity}'
+                if amenity_col in hotel.index and hotel[amenity_col] == 1:
+                    matching_amenities += 1
+            
+            if total_amenities > 0:
+                # Score from 0.3 (no matches) to 1.0 (all matches)
+                base_score = 0.3
+                bonus = 0.7 * (matching_amenities / total_amenities)
+                amenity_scores.iloc[i] = base_score + bonus
+            else:
+                amenity_scores.iloc[i] = 0.5  # Neutral score if no preferences
+        
+        return amenity_scores
+
     def _balanced_price_score(self, price: float, max_budget: float) -> float:
         """
         Balanced price scoring that allows hotels across the full budget range
