@@ -586,19 +586,11 @@ class TextBasedRecommender:
                     strict_filter = False
                     print(f"🔄 Filter gelockert: Mindestbewertung auf {relaxed_min_rating} gesenkt: {len(filtered_hotels_df)} Hotels")
             
-            # Apply amenities filter
-            if 'required_amenities' in user_preferences and user_preferences['required_amenities']:
-                # Höchstens 3 Annehmlichkeiten filtern, um zu strenge Filter zu vermeiden
-                applied_amenities = user_preferences['required_amenities'][:3]
-                
-                for amenity in applied_amenities:
-                    if len(filtered_hotels_df) < min_hotels_after_filter * 2:
-                        # Bei wenigen Hotels Filter nicht weiter anwenden
-                        break
-                        
-                    mask = filtered_hotels_df['amenities'].str.contains(amenity, case=False, na=False)
-                    filtered_hotels_df = filtered_hotels_df[mask]
-                    print(f"🔍 Nach Filter für '{amenity}': {len(filtered_hotels_df)} Hotels")
+            # Apply amenities as preference-based scoring (not hard filtering)
+            # This is handled in the scoring phase, not as a filter
+            # if 'preferred_amenities' in user_preferences and user_preferences['preferred_amenities']:
+            #     # Amenities are now handled as preferences in scoring, not as hard filters
+            #     pass
         
         # Wenn keine Hotels mehr übrig sind, verwende Original-Dataframe mit Preis- und Rating-Filter
         if filtered_hotels_df.empty or len(filtered_hotels_df) < 5:
@@ -802,6 +794,22 @@ class TextBasedRecommender:
                 rating_weight * weighted_df['rating_score']
             )
             
+            # Amenity scoring - add bonus for preferred amenities
+            if 'preferred_amenities' in preferences and preferences['preferred_amenities']:
+                amenity_scores = self._calculate_amenity_score(weighted_df, preferences)
+                amenity_weight = preferences.get('amenity_importance', 0.1)
+                weighted_df['amenity_score'] = amenity_scores
+                weighted_df['final_score'] = (
+                    (text_weight * weighted_df['text_score'] +
+                     price_weight * weighted_df['price_score'] +
+                     rating_weight * weighted_df['rating_score']) * (1 - amenity_weight) +
+                    amenity_weight * weighted_df['amenity_score']
+                )
+                if debug:
+                    print(f"DEBUG: Amenity Scores - Min: {weighted_df['amenity_score'].min():.4f}, Max: {weighted_df['amenity_score'].max():.4f}")
+            else:
+                weighted_df['amenity_score'] = 0.5  # Neutral score when no amenities specified
+            
             # Boni für besondere Merkmale
             # 1. Bonus für Hotels mit sehr hoher Textähnlichkeit (falls vorhanden)
             high_similarity_mask = weighted_df['similarity_score'] > 0.1
@@ -826,9 +834,10 @@ class TextBasedRecommender:
                     print(f"DEBUG: Bonus für gutes Preis-Leistungs-Verhältnis angewendet auf {good_value_mask.sum()} Hotels")
             
             # Füge Erklärbarkeit hinzu
-            weighted_df['text_contribution'] = text_weight * weighted_df['text_score']
-            weighted_df['price_contribution'] = price_weight * weighted_df['price_score']
-            weighted_df['rating_contribution'] = rating_weight * weighted_df['rating_score']
+            weighted_df['text_contribution'] = text_weight * weighted_df['text_score'] * (1 - preferences.get('amenity_importance', 0.0))
+            weighted_df['price_contribution'] = price_weight * weighted_df['price_score'] * (1 - preferences.get('amenity_importance', 0.0))
+            weighted_df['rating_contribution'] = rating_weight * weighted_df['rating_score'] * (1 - preferences.get('amenity_importance', 0.0))
+            weighted_df['amenity_contribution'] = preferences.get('amenity_importance', 0.0) * weighted_df.get('amenity_score', 0.5)
             
             # Analysiere die endgültigen Punktzahlen
             if debug:
@@ -843,6 +852,7 @@ class TextBasedRecommender:
             weighted_df['text_contribution'] = weighted_df['similarity_score']
             weighted_df['price_contribution'] = 0
             weighted_df['rating_contribution'] = 0
+            weighted_df['amenity_contribution'] = 0
             return weighted_df
     
     def get_query_keywords(self, query: str, top_k: int = 10) -> List[str]:
@@ -1263,6 +1273,47 @@ class TextBasedRecommender:
             return "business-friendly " + " ".join(business_features)
         
         return ""
+    
+    def _calculate_amenity_score(self, hotels_df: pd.DataFrame, preferences: Dict) -> pd.Series:
+        """
+        Calculate amenity score based on preferred amenities
+        
+        Args:
+            hotels_df: Hotels DataFrame
+            preferences: User preferences including preferred_amenities
+            
+        Returns:
+            Series of amenity scores (0-1 scale)
+        """
+        amenity_scores = pd.Series([0.5] * len(hotels_df), index=hotels_df.index)
+        
+        preferred_amenities = preferences.get('preferred_amenities', [])
+        if not preferred_amenities:
+            return amenity_scores
+        
+        # Calculate score based on how many preferred amenities the hotel has
+        for i, (idx, hotel) in enumerate(hotels_df.iterrows()):
+            matching_amenities = 0
+            total_amenities = len(preferred_amenities)
+            
+            # Check amenities in the description/amenities field
+            amenities_text = str(hotel.get('amenities', '')) + ' ' + str(hotel.get('description', ''))
+            
+            for amenity in preferred_amenities:
+                if amenity.lower() in amenities_text.lower():
+                    matching_amenities += 1
+                # Also check specific amenity columns if they exist
+                amenity_col = f'has_{amenity}'
+                if amenity_col in hotel.index and hotel[amenity_col] == 1:
+                    matching_amenities += 1
+            
+            if total_amenities > 0:
+                # Score from 0.3 (no matches) to 1.0 (all matches)
+                base_score = 0.3
+                bonus = 0.7 * (matching_amenities / total_amenities)
+                amenity_scores.iloc[i] = base_score + bonus
+        
+        return amenity_scores
 
 if __name__ == "__main__":
     # Test the text-based recommender

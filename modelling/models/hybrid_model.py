@@ -369,7 +369,16 @@ class HybridRecommender:
         
         # Parameter-based explanation
         param_predictions = self.param_recommender.predict_hotel_scores(features_df)
-        hotel_param_score = param_predictions[param_predictions['hotel_id'] == hotel_id]
+        # Find the hotel in the predictions by index or by ID column
+        if 'id' in param_predictions.columns:
+            hotel_param_score = param_predictions[param_predictions['id'] == hotel_id]
+        else:
+            # If no ID column, find by index matching the hotel's position
+            hotel_index = hotel.index[0]
+            if hotel_index < len(param_predictions):
+                hotel_param_score = param_predictions.iloc[[hotel_index]]
+            else:
+                hotel_param_score = pd.DataFrame()
         
         if not hotel_param_score.empty:
             param_score = hotel_param_score.iloc[0]['predicted_score']
@@ -385,7 +394,18 @@ class HybridRecommender:
         
         # Text-based explanation
         text_results = self.text_recommender.search_hotels(query, top_k=50)
-        hotel_text_result = text_results[text_results['hotel_id'] == hotel_id]
+        # Find the hotel in the text results by ID or index
+        if 'hotel_id' in text_results.columns:
+            hotel_text_result = text_results[text_results['hotel_id'] == hotel_id]
+        elif 'id' in text_results.columns:
+            hotel_text_result = text_results[text_results['id'] == hotel_id]
+        else:
+            # If no ID column, find by index matching the hotel's position
+            hotel_index = hotel.index[0]
+            if hotel_index < len(text_results):
+                hotel_text_result = text_results.iloc[[hotel_index]]
+            else:
+                hotel_text_result = pd.DataFrame()
         
         if not hotel_text_result.empty:
             similarity_score = hotel_text_result.iloc[0]['similarity_score']
