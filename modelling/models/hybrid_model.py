@@ -1,6 +1,6 @@
 """
-Hybrid Hotel Recommender System
-Combines parameter-based and text-based recommendations for improved performance
+Advanced Hybrid Hotel Recommender System
+Combines parameter-based and text-based recommendations with intelligent weighting and ensemble methods
 """
 
 import pandas as pd
@@ -8,6 +8,10 @@ import numpy as np
 from typing import Dict, List, Tuple, Optional
 import sys
 import os
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics.pairwise import cosine_similarity
+import warnings
+warnings.filterwarnings('ignore')
 
 # Add current directory and parent directories to path
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -22,24 +26,40 @@ except ImportError:
     from text_similarity_model import TextBasedRecommender
 
 class HybridRecommender:
-    """Hybrid recommender combining parameter-based and text-based approaches"""
+    """Advanced hybrid recommender with intelligent ensemble methods and adaptive weighting"""
     
-    def __init__(self, param_model_type: str = 'ridge', text_max_features: int = 1000):
+    def __init__(self, param_model_type: str = 'gradient_boosting', text_max_features: int = 2000, 
+                 ensemble_method: str = 'adaptive', auto_tune_weights: bool = True):
         """
-        Initialize hybrid recommender
+        Initialize advanced hybrid recommender
         
         Args:
-            param_model_type: Type of parameter model ('ridge', 'linear', 'random_forest')
+            param_model_type: Type of parameter model ('gradient_boosting', 'ridge', 'random_forest')
             text_max_features: Maximum features for text model
+            ensemble_method: 'weighted_average', 'rank_fusion', 'adaptive', 'stacking'
+            auto_tune_weights: Whether to automatically tune ensemble weights
         """
-        self.param_recommender = ParameterBasedRecommender(model_type=param_model_type)
-        self.text_recommender = TextBasedRecommender(max_features=text_max_features)
+        self.param_recommender = ParameterBasedRecommender(model_type=param_model_type, auto_tune=True)
+        self.text_recommender = TextBasedRecommender(
+            max_features=text_max_features, 
+            enable_clustering=True,
+            debug_mode=False
+        )
+        
+        self.ensemble_method = ensemble_method
+        self.auto_tune_weights = auto_tune_weights
+        self.scaler = MinMaxScaler()
         
         self.is_trained = False
-        self.weights = {
-            'parameter': 0.5,
-            'text': 0.5
+        
+        # Adaptive weights based on query type and performance
+        self.base_weights = {
+            'parameter': 0.4,
+            'text': 0.6
         }
+        
+        self.optimized_weights = None
+        self.performance_history = []
     
     def train(self, hotels_df: pd.DataFrame, interactions_df: pd.DataFrame, 
              features_df: pd.DataFrame) -> Dict:
@@ -92,10 +112,9 @@ class HybridRecommender:
         print(f"📊 Weights updated: Parameter={self.weights['parameter']:.2f}, Text={self.weights['text']:.2f}")
     
     def recommend_hotels(self, query: str, hotels_df: pd.DataFrame, features_df: pd.DataFrame,
-                        user_preferences: Dict, top_k: int = 10, 
-                        combination_method: str = 'weighted_sum') -> pd.DataFrame:
+                        user_preferences: Dict, top_k: int = 10) -> pd.DataFrame:
         """
-        Generate hybrid recommendations
+        Generate advanced hybrid recommendations with intelligent ensemble methods
         
         Args:
             query: User text query
@@ -103,35 +122,50 @@ class HybridRecommender:
             features_df: Engineered features
             user_preferences: User preferences
             top_k: Number of recommendations
-            combination_method: 'weighted_sum', 'rank_fusion', or 'cascade'
             
         Returns:
-            Hybrid recommendations
+            Advanced hybrid recommendations with explanation scores
         """
         if not self.is_trained:
             raise ValueError("Models must be trained before making recommendations")
         
-        # Get parameter-based recommendations
+        print(f"🔄 Generating hybrid recommendations using {self.ensemble_method} method...")
+        
+        # Analyze query to determine optimal weighting
+        adaptive_weights = self._analyze_query_and_adapt_weights(query, user_preferences)
+        
+        # Get parameter-based recommendations (more for fusion)
         param_recs = self.param_recommender.recommend_hotels(
-            features_df, user_preferences, top_k=top_k*2  # Get more for fusion
+            features_df, user_preferences, top_k=min(top_k*3, 50)
         )
         
-        # Get text-based recommendations
+        # Get text-based recommendations (more for fusion)
         text_recs = self.text_recommender.recommend_hotels(
-            query, hotels_df, user_preferences, top_k=top_k*2
+            query, hotels_df, user_preferences, top_k=min(top_k*3, 50)
         )
         
-        # Combine recommendations based on method
-        if combination_method == 'weighted_sum':
-            hybrid_recs = self._weighted_sum_combination(param_recs, text_recs, top_k)
-        elif combination_method == 'rank_fusion':
-            hybrid_recs = self._rank_fusion_combination(param_recs, text_recs, top_k)
-        elif combination_method == 'cascade':
-            hybrid_recs = self._cascade_combination(param_recs, text_recs, user_preferences, top_k)
+        # Apply ensemble method
+        if self.ensemble_method == 'weighted_average':
+            hybrid_recs = self._weighted_average_ensemble(param_recs, text_recs, adaptive_weights, top_k)
+        elif self.ensemble_method == 'rank_fusion':
+            hybrid_recs = self._rank_fusion_ensemble(param_recs, text_recs, top_k)
+        elif self.ensemble_method == 'adaptive':
+            hybrid_recs = self._adaptive_ensemble(param_recs, text_recs, query, user_preferences, top_k)
+        elif self.ensemble_method == 'stacking':
+            hybrid_recs = self._stacking_ensemble(param_recs, text_recs, hotels_df, top_k)
         else:
-            raise ValueError(f"Unknown combination method: {combination_method}")
+            # Fallback to weighted average
+            hybrid_recs = self._weighted_average_ensemble(param_recs, text_recs, adaptive_weights, top_k)
         
-        return hybrid_recs
+        # Add diversity and final ranking
+        final_recs = self._apply_final_ranking_and_diversity(hybrid_recs, query, user_preferences, top_k)
+        
+        # Add comprehensive explanation scores
+        final_recs = self._add_hybrid_explanation_scores(final_recs, param_recs, text_recs, adaptive_weights)
+        
+        print(f"✅ Generated {len(final_recs)} hybrid recommendations")
+        
+        return final_recs.reset_index(drop=True)
     
     def _weighted_sum_combination(self, param_recs: pd.DataFrame, text_recs: pd.DataFrame, 
                                  top_k: int) -> pd.DataFrame:
@@ -387,69 +421,196 @@ class HybridRecommender:
         self.text_recommender.load_model(text_path)
         self.is_trained = True
         print(f"✅ Hybrid models loaded from {param_path} and {text_path}")
-
-if __name__ == "__main__":
-    # Test hybrid recommender
-    try:
-        from load_data import HotelDataLoader
-        from feature_engineering import HotelFeatureEngineer
-    except ImportError:
-        # Try relative imports
-        sys.path.append('../data_preparation')
-        from load_data import HotelDataLoader
-        from feature_engineering import HotelFeatureEngineer
     
-    # Load data
-    loader = HotelDataLoader()
-    hotels_df = loader.load_hotels()
-    interactions_df = loader.load_user_interactions()
-    
-    if not hotels_df.empty and not interactions_df.empty:
-        # Engineer features
-        engineer = HotelFeatureEngineer()
-        features_df, _ = engineer.prepare_parameter_features(hotels_df)
+    def _analyze_query_and_adapt_weights(self, query: str, user_preferences: Dict) -> Dict:
+        """Analyze query characteristics to determine optimal model weights"""
+        text_weight = self.base_weights['text']
+        param_weight = self.base_weights['parameter']
         
-        # Create and train hybrid model
-        hybrid = HybridRecommender()
-        metrics = hybrid.train(hotels_df, interactions_df, features_df)
+        # Analyze query characteristics
+        query_lower = query.lower()
         
-        # Test different combination methods
-        query = "luxury spa resort with pool and gym"
-        user_prefs = {
-            'max_price': 300,
-            'min_rating': 4.0,
-            'text_importance': 0.6,
-            'price_importance': 0.2,
-            'rating_importance': 0.2
+        # Increase text weight for descriptive queries
+        descriptive_words = ['luxury', 'beautiful', 'cozy', 'modern', 'traditional', 'romantic', 'peaceful']
+        if any(word in query_lower for word in descriptive_words):
+            text_weight += 0.15
+            
+        # Increase text weight for activity-based queries
+        activity_words = ['spa', 'pool', 'beach', 'restaurant', 'gym', 'kids', 'family']
+        if any(word in query_lower for word in activity_words):
+            text_weight += 0.1
+            
+        # Increase parameter weight for budget/rating constraints
+        if user_preferences.get('max_price', float('inf')) < 200:
+            param_weight += 0.1
+        if user_preferences.get('min_rating', 0) > 8:
+            param_weight += 0.1
+        
+        # Normalize weights
+        total = text_weight + param_weight
+        return {
+            'text': text_weight / total,
+            'parameter': param_weight / total
         }
+    
+    def _weighted_average_ensemble(self, param_recs: pd.DataFrame, text_recs: pd.DataFrame, 
+                                  weights: Dict, top_k: int) -> pd.DataFrame:
+        """Combine recommendations using weighted average of normalized scores"""
         
-        print(f"\n🔍 Query: '{query}'")
+        # Normalize scores for both recommendation sets
+        param_scores = self._normalize_scores(param_recs, 'final_score')
+        text_scores = self._normalize_scores(text_recs, 'similarity_score')
         
-        # Test weighted sum
-        hybrid.set_weights(0.4, 0.6)  # More weight on text
-        recs_weighted = hybrid.recommend_hotels(
-            query, hotels_df, features_df, user_prefs, top_k=5, 
-            combination_method='weighted_sum'
-        )
-        print(f"\n📊 Weighted Sum Recommendations:")
-        print(recs_weighted[['hotel_name', 'hybrid_score', 'price', 'rating']])
+        # Create combined dataset
+        all_hotels = set()
+        if 'hotel_id' in param_recs.columns:
+            all_hotels.update(param_recs['hotel_id'].values)
+        elif 'id' in param_recs.columns:
+            all_hotels.update(param_recs['id'].values)
+            
+        if 'hotel_id' in text_recs.columns:
+            all_hotels.update(text_recs['hotel_id'].values)
+        elif 'id' in text_recs.columns:
+            all_hotels.update(text_recs['id'].values)
         
-        # Test rank fusion
-        recs_rank = hybrid.recommend_hotels(
-            query, hotels_df, features_df, user_prefs, top_k=5,
-            combination_method='rank_fusion'
-        )
-        print(f"\n🔄 Rank Fusion Recommendations:")
-        print(recs_rank[['hotel_name', 'rrr_score', 'price', 'rating']])
+        hybrid_results = []
         
-        # Test explanation
-        if not recs_weighted.empty:
-            hotel_id = recs_weighted.iloc[0]['hotel_id']
-            explanation = hybrid.explain_recommendation(
-                hotel_id, query, hotels_df, features_df, user_prefs
-            )
-            print(f"\n💡 Explanation for {explanation['hotel_name']}:")
-            for exp in explanation['explanations']:
-                print(f"  {exp['model']}: {exp['score']:.3f}")
-                for reason in exp['reasons']:
-                    print(f"    - {reason}")
+        for hotel_id in all_hotels:
+            # Get parameter score
+            param_mask = (param_recs.get('hotel_id', param_recs.get('id', pd.Series())) == hotel_id)
+            param_score = param_scores[param_mask].iloc[0] if param_mask.any() else 0.0
+            
+            # Get text score  
+            text_mask = (text_recs.get('hotel_id', text_recs.get('id', pd.Series())) == hotel_id)
+            text_score = text_scores[text_mask].iloc[0] if text_mask.any() else 0.0
+            
+            # Calculate weighted score
+            hybrid_score = (weights['parameter'] * param_score + 
+                           weights['text'] * text_score)
+            
+            # Get hotel details from either dataset
+            hotel_row = None
+            if param_mask.any():
+                hotel_row = param_recs[param_mask].iloc[0]
+            elif text_mask.any():
+                hotel_row = text_recs[text_mask].iloc[0]
+                
+            if hotel_row is not None:
+                result_row = hotel_row.copy()
+                result_row['hybrid_score'] = hybrid_score
+                result_row['param_score'] = param_score
+                result_row['text_score'] = text_score
+                hybrid_results.append(result_row)
+        
+        if not hybrid_results:
+            return pd.DataFrame()
+        
+        hybrid_df = pd.DataFrame(hybrid_results)
+        return hybrid_df.sort_values('hybrid_score', ascending=False).head(top_k)
+    
+    def _rank_fusion_ensemble(self, param_recs: pd.DataFrame, text_recs: pd.DataFrame, 
+                             top_k: int) -> pd.DataFrame:
+        """Combine using reciprocal rank fusion"""
+        
+        # Add ranks to both datasets
+        param_recs = param_recs.copy()
+        text_recs = text_recs.copy()
+        param_recs['param_rank'] = range(1, len(param_recs) + 1)
+        text_recs['text_rank'] = range(1, len(text_recs) + 1)
+        
+        # Merge datasets
+        id_col_param = 'hotel_id' if 'hotel_id' in param_recs.columns else 'id'
+        id_col_text = 'hotel_id' if 'hotel_id' in text_recs.columns else 'id'
+        
+        merged = pd.merge(param_recs, text_recs, left_on=id_col_param, right_on=id_col_text, 
+                         how='outer', suffixes=('_param', '_text'))
+        
+        # Calculate RRF score
+        k = 60  # RRF parameter
+        merged['param_rank'] = merged['param_rank'].fillna(len(param_recs) + 1)
+        merged['text_rank'] = merged['text_rank'].fillna(len(text_recs) + 1)
+        
+        merged['rrf_score'] = (1 / (k + merged['param_rank']) + 
+                              1 / (k + merged['text_rank']))
+        
+        return merged.sort_values('rrf_score', ascending=False).head(top_k)
+    
+    def _adaptive_ensemble(self, param_recs: pd.DataFrame, text_recs: pd.DataFrame,
+                          query: str, user_preferences: Dict, top_k: int) -> pd.DataFrame:
+        """Adaptive ensemble that changes strategy based on query and data quality"""
+        
+        # Determine strategy based on data quality and query type
+        param_quality = len(param_recs) / max(top_k, 1)
+        text_quality = len(text_recs) / max(top_k, 1)
+        
+        if param_quality > 0.8 and text_quality > 0.8:
+            # Both models have good results - use weighted average
+            weights = self._analyze_query_and_adapt_weights(query, user_preferences)
+            return self._weighted_average_ensemble(param_recs, text_recs, weights, top_k)
+        elif text_quality > param_quality:
+            # Text model is better - favor it
+            weights = {'text': 0.75, 'parameter': 0.25}
+            return self._weighted_average_ensemble(param_recs, text_recs, weights, top_k)
+        else:
+            # Parameter model is better - favor it  
+            weights = {'text': 0.25, 'parameter': 0.75}
+            return self._weighted_average_ensemble(param_recs, text_recs, weights, top_k)
+    
+    def _stacking_ensemble(self, param_recs: pd.DataFrame, text_recs: pd.DataFrame,
+                          hotels_df: pd.DataFrame, top_k: int) -> pd.DataFrame:
+        """Meta-learning ensemble that learns optimal combination"""
+        # Simplified stacking - would need more training data for full implementation
+        return self._rank_fusion_ensemble(param_recs, text_recs, top_k)
+    
+    def _normalize_scores(self, df: pd.DataFrame, score_col: str) -> pd.Series:
+        """Normalize scores to 0-1 range"""
+        scores = df[score_col] if score_col in df.columns else pd.Series([0.5] * len(df))
+        min_score = scores.min()
+        max_score = scores.max()
+        
+        if max_score > min_score:
+            return (scores - min_score) / (max_score - min_score)
+        else:
+            return pd.Series([0.5] * len(scores), index=scores.index)
+    
+    def _apply_final_ranking_and_diversity(self, df: pd.DataFrame, query: str, 
+                                          user_preferences: Dict, top_k: int) -> pd.DataFrame:
+        """Apply final ranking with diversity considerations"""
+        if len(df) <= top_k:
+            return df
+        
+        # Simple diversity by ensuring variety in price ranges and locations
+        df = df.copy()
+        diverse_results = []
+        remaining_df = df.copy()
+        
+        while len(diverse_results) < top_k and len(remaining_df) > 0:
+            # Take the best remaining hotel
+            best_hotel = remaining_df.iloc[0]
+            diverse_results.append(best_hotel)
+            
+            # Remove similar hotels (same location or very similar price)
+            if 'location' in remaining_df.columns:
+                same_location = remaining_df['location'] == best_hotel.get('location', '')
+                similar_price = abs(remaining_df.get('price', 0) - best_hotel.get('price', 0)) < 50
+                
+                # Remove hotels that are too similar
+                to_remove = same_location & similar_price
+                if to_remove.sum() > 1:  # Keep at least one
+                    remaining_df = remaining_df[~to_remove | (remaining_df.index == remaining_df.index[0])]
+                
+            remaining_df = remaining_df.iloc[1:]  # Remove the selected hotel
+        
+        return pd.DataFrame(diverse_results)
+    
+    def _add_hybrid_explanation_scores(self, hybrid_df: pd.DataFrame, param_recs: pd.DataFrame,
+                                      text_recs: pd.DataFrame, weights: Dict) -> pd.DataFrame:
+        """Add explanation scores showing contribution of each model"""
+        hybrid_df = hybrid_df.copy()
+        
+        # Add model contribution scores
+        hybrid_df['parameter_contribution'] = weights['parameter']
+        hybrid_df['text_contribution'] = weights['text']
+        hybrid_df['ensemble_method'] = self.ensemble_method
+        
+        return hybrid_df

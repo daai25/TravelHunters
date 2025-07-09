@@ -1,6 +1,6 @@
 """
-Text-Based Hotel Recommender using NLP Similarity
-Recommends hotels based on text similarity to user queries
+Advanced Text-Based Hotel Recommender using Enhanced NLP and Similarity Matching
+Recommends hotels based on sophisticated text similarity analysis with multi-language support
 """
 
 import pandas as pd
@@ -8,67 +8,105 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.decomposition import TruncatedSVD
+from sklearn.cluster import KMeans
 import re
 from typing import List, Dict, Tuple, Optional
 import joblib
+import warnings
+warnings.filterwarnings('ignore')
 
 class TextBasedRecommender:
-    """Text-based hotel recommender using TF-IDF and cosine similarity"""
+    """Advanced text-based hotel recommender with enhanced NLP capabilities and semantic understanding"""
     
-    def __init__(self, max_features: int = 2000, use_lsa: bool = True, lsa_components: int = 150):
+    def __init__(self, max_features: int = 2000, use_lsa: bool = True, lsa_components: int = 150, 
+                 enable_clustering: bool = True, debug_mode: bool = False):
         """
-        Initialize the text-based recommender
+        Initialize the advanced text-based recommender
         
         Args:
             max_features: Maximum number of TF-IDF features
             use_lsa: Whether to use Latent Semantic Analysis (SVD)
             lsa_components: Number of LSA components
+            enable_clustering: Whether to enable hotel clustering for better recommendations
+            debug_mode: Whether to show debug information
         """
         self.max_features = max_features
         self.use_lsa = use_lsa
         self.lsa_components = lsa_components
+        self.enable_clustering = enable_clustering
+        self.debug_mode = debug_mode
         
-        # Benutzerdefinierte Tokenisierungsfunktion für verbesserte Verarbeitung
-        def custom_tokenizer(text):
-            # Zunächst standardmäßige Tokenisierung
-            tokens = text.lower().split()
+        # Enhanced tokenization function with better multilingual support
+        def enhanced_tokenizer(text):
+            # Normalize text and handle special characters
+            text = text.lower().strip()
+            
+            # Handle common abbreviations and special cases
+            text = re.sub(r'\b(dr|mr|mrs|ms)\b\.?', '', text)
+            text = re.sub(r'\b(hotel|resort|spa|suite)\b', r'\1 accommodation', text)
+            
+            # Split and clean tokens
+            tokens = text.split()
             result_tokens = []
             
-            # Füge jeden Token einzeln hinzu
             for token in tokens:
-                # Entferne Sonderzeichen und normalisiere
-                clean_token = re.sub(r'[^a-z0-9äöüßáéíóúñ]', '', token)
-                if clean_token and len(clean_token) > 1:  # Nur bedeutungsvolle Token behalten
+                # Enhanced cleaning for multilingual support
+                clean_token = re.sub(r'[^a-z0-9äöüßáéíóúñç]', '', token)
+                if clean_token and len(clean_token) > 1:
                     result_tokens.append(clean_token)
+                    
+                    # Add stemmed versions for common endings
+                    if clean_token.endswith('ing'):
+                        stem = clean_token[:-3]
+                        if len(stem) > 2:
+                            result_tokens.append(stem)
+                    elif clean_token.endswith('ed'):
+                        stem = clean_token[:-2]
+                        if len(stem) > 2:
+                            result_tokens.append(stem)
             
             return result_tokens
             
-        # Initialize TF-IDF vectorizer with improved settings
+        # Enhanced TF-IDF vectorizer with advanced settings
         self.tfidf_vectorizer = TfidfVectorizer(
             max_features=max_features,
             stop_words='english',
-            ngram_range=(1, 3),  # Verwende bis zu 3-Gramme für bessere Phrasenerfassung
-            min_df=1,  # Reduziere auf 1, um mehr Terme einzubeziehen
-            max_df=0.95,  # Erhöhe auf 0.95, um mehr gemeinsame Terme einzubeziehen
+            ngram_range=(1, 4),  # Extended to 4-grams for better phrase capturing
+            min_df=1,
+            max_df=0.95,
             lowercase=True,
             strip_accents='unicode',
             analyzer='word',
-            tokenizer=custom_tokenizer,  # Benutzerdefinierte Tokenisierung
+            tokenizer=enhanced_tokenizer,  # Enhanced tokenization
             norm='l2',
             use_idf=True,
             smooth_idf=True,
-            sublinear_tf=True  # Verwende logarithmische Skalierung für Term-Frequenzen
+            sublinear_tf=True
         )
         
-        # LSA für Dimensionsreduktion
-        self.lsa_model = TruncatedSVD(n_components=lsa_components, algorithm='randomized', random_state=42, n_iter=5) if use_lsa else None
+        # Enhanced LSA for better semantic understanding
+        self.lsa_model = TruncatedSVD(
+            n_components=lsa_components, 
+            algorithm='randomized', 
+            random_state=42, 
+            n_iter=10  # More iterations for better convergence
+        ) if use_lsa else None
         
-        # Speicher für verarbeitete Daten
+        # Hotel clustering for diversity
+        self.hotel_clusterer = KMeans(
+            n_clusters=min(20, max_features // 100), 
+            random_state=42, 
+            n_init=10
+        ) if enable_clustering else None
+        
+        # Storage for processed data and models
         self.hotel_texts = []
         self.hotel_ids = []
+        self.hotel_clusters = None
         self.tfidf_matrix = None
         self.lsa_matrix = None
         self.is_fitted = False
+        self.query_cache = {}  # Cache for frequently used queries
         
     def prepare_hotel_texts(self, hotels_df: pd.DataFrame) -> List[str]:
         """
@@ -313,7 +351,7 @@ class TextBasedRecommender:
             hotels_df: Hotels dataframe
         """
         # Debug-Informationen aktivieren
-        debug = True
+        debug = False  # Reduziere Debug-Ausgaben
         
         try:
             print(f"🔍 Bereite Hoteltexte vor...")
@@ -416,7 +454,7 @@ class TextBasedRecommender:
             raise ValueError("Model must be fitted before searching")
         
         # Debug-Ausgabe aktivieren
-        debug = True
+        debug = False  # Reduziere Debug-Ausgaben
         
         # Clean, enhance with synonyms, and vectorize query
         cleaned_query = self._clean_text(query)
@@ -480,8 +518,8 @@ class TextBasedRecommender:
                     print(f"DEBUG: Min similarity: {filtered_results['similarity_score'].min():.4f}")
                     print(f"DEBUG: Avg similarity: {filtered_results['similarity_score'].mean():.4f}")
             
-            # Entferne Duplikate (behalte höchste Bewertung)
-            results_df = filtered_results.drop_duplicates(subset=['hotel_id'], keep='first')
+            # Entferne Duplikate nach hotel_id (behalte höchste Bewertung)
+            results_df = filtered_results.sort_values('similarity_score', ascending=False).drop_duplicates(subset=['hotel_id'], keep='first')
             
             # Sortieren nach Ähnlichkeitswert
             results_df = results_df.sort_values('similarity_score', ascending=False)
@@ -609,8 +647,11 @@ class TextBasedRecommender:
             how='inner'
         )
         
-        # Duplikate nach Hotelnamen entfernen (das gleiche Hotel mit verschiedenen IDs)
-        detailed_results = detailed_results.drop_duplicates(subset=['name'], keep='first')
+        # Duplikate nach Hotelnamen und Standort entfernen (das gleiche Hotel mit verschiedenen IDs)
+        detailed_results = detailed_results.drop_duplicates(subset=['name', 'location'], keep='first')
+        
+        # Zusätzlich Duplikate nach Hotel-ID entfernen
+        detailed_results = detailed_results.drop_duplicates(subset=['hotel_id'], keep='first')
         
         print(f"🔍 Nach Duplikatentfernung: {len(detailed_results)} einzigartige Hotels")
         
@@ -629,6 +670,7 @@ class TextBasedRecommender:
             # Füge sie zu den Ergebnissen hinzu und entferne Duplikate
             detailed_results = pd.concat([detailed_results, backup_hotels])
             detailed_results = detailed_results.drop_duplicates(subset=['id'], keep='first')
+            detailed_results = detailed_results.drop_duplicates(subset=['name', 'location'], keep='first')
         
         # Präferenz-Gewichtung anwenden
         if user_preferences:
@@ -668,7 +710,7 @@ class TextBasedRecommender:
         weighted_df = results_df.copy()
         
         # Debug-Ausgabe aktivieren
-        debug = True
+        debug = False  # Reduziere Debug-Ausgaben
         
         try:
             # Default weights

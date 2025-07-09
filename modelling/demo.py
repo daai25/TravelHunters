@@ -9,26 +9,8 @@ import os
 from pathlib import Path
 
 # Add parent directories to path
-current_dir = Path(__file            
-            print("\n🔍 Searching for matching hotels...")
-            print(f"Processing query: '{query}'")
-            print("This may take a moment...")
-            
-            recommendations = self.text_model.recommend_hotels(
-                query, self.hotels_df, user_prefs, top_k=5
-            )
-            
-            print(f"\n🔍 Search query: '{query}'")
-            keywords = self.text_model.get_query_keywords(query, top_k=8)
-            print(f"📋 Recognized keywords: {', '.join(keywords)}")
-            
-            if recommendations.empty:
-                print("\n❌ Unfortunately, no hotels were found that match your criteria.")
-                print("Tips:")
-                print(" • Try a more general description")
-                print(" • Increase the maximum price or lower the minimum rating")
-                print(" • Use fewer specific requirements")
-                returnappend(str(current_dir / "models"))
+current_dir = Path(__file__).parent.absolute()
+sys.path.append(str(current_dir / "models"))
 sys.path.append(str(current_dir / "data_preparation"))
 sys.path.append(str(current_dir / "evaluation"))
 
@@ -38,7 +20,10 @@ from parameter_model import ParameterBasedRecommender
 from text_similarity_model import TextBasedRecommender
 from hybrid_model import HybridRecommender
 from metrics import RecommenderEvaluator
-from data_preparation.matrix_builder import RecommendationMatrixBuilder  # Neue Klasse importieren
+try:
+    from data_preparation.matrix_builder import RecommendationMatrixBuilder
+except ImportError:
+    RecommendationMatrixBuilder = None
 
 class TravelHuntersDemo:
     """Interactive demo for the hotel recommendation system"""
@@ -47,7 +32,7 @@ class TravelHuntersDemo:
         self.loader = HotelDataLoader()
         self.engineer = HotelFeatureEngineer()
         self.evaluator = RecommenderEvaluator()
-        self.matrix_builder = RecommendationMatrixBuilder()  # Neue Instanz hinzufügen
+        self.matrix_builder = RecommendationMatrixBuilder() if RecommendationMatrixBuilder else None
         
         # Models
         self.param_model = None
@@ -144,11 +129,85 @@ class TravelHuntersDemo:
         print(f"👥 Synthetic Users: {summary['n_users']}")
         print(f"⭐ Average Rating: {summary['avg_rating']:.1f}/10.0")
         print(f"💰 Price Range: ${summary['price_range']['min']:.0f} - ${summary['price_range']['max']:.0f}")
-        print(f"📍 Sample Locations:")
         
-        sample_locations = self.hotels_df['location'].value_counts().head(5)
-        for location, count in sample_locations.items():
-            print(f"    - {location}: {count} hotels")
+        # Enhanced global coverage analysis
+        print(f"\n🌍 Global Coverage Analysis:")
+        print("=" * 40)
+        
+        locations = self.hotels_df['location'].value_counts()
+        print(f"🗺️  Total Locations: {len(locations)}")
+        
+        # Analyze by continent/region
+        regions = {
+            '🇪🇺 Europe': ['madrid', 'berlin', 'prague', 'stockholm', 'copenhagen', 'barcelona', 'lisbon', 'helsinki', 'oslo', 'amsterdam', 'london', 'vienna', 'paris', 'rome', 'milan', 'florence', 'venice', 'budapest', 'warsaw', 'athens', 'dublin', 'zurich', 'brussels', 'munich', 'frankfurt', 'hamburg', 'cologne', 'lyon', 'marseille', 'nice', 'turin', 'bologna', 'naples', 'seville', 'valencia', 'bilbao', 'porto', 'malaga', 'palma', 'santorini', 'mykonos', 'crete', 'rhodes', 'reykjavik', 'tallinn', 'riga', 'vilnius', 'bucharest', 'sofia', 'belgrade', 'zagreb', 'ljubljana'],
+            '🌎 Americas': ['las vegas', 'miami', 'cancun', 'rio de janeiro', 'lima', 'vancouver', 'san francisco', 'new york', 'toronto', 'montreal', 'buenos aires', 'bogota', 'santiago', 'mexico city', 'chicago', 'los angeles', 'playa del carmen', 'tulum'],
+            '🌏 Asia': ['phuket', 'hong kong', 'kuala lumpur', 'new delhi', 'bangkok', 'tokyo', 'osaka', 'kyoto', 'seoul', 'singapore', 'manila', 'jakarta', 'mumbai', 'chennai', 'bangalore', 'beijing', 'shanghai', 'taipei', 'ho chi minh'],
+            '🌍 Africa': ['marrakech', 'cairo', 'casablanca', 'cape town', 'johannesburg', 'nairobi', 'tunis', 'algiers', 'addis ababa', 'dar es salaam', 'lagos', 'accra'],
+            '🇦🇺 Oceania': ['perth', 'melbourne', 'brisbane', 'auckland', 'sydney', 'adelaide', 'wellington', 'christchurch', 'gold coast', 'cairns']
+        }
+        
+        for region_name, keywords in regions.items():
+            region_locations = [loc for loc in locations.index 
+                              if any(keyword in loc.lower() for keyword in keywords)]
+            total_hotels = sum(locations[loc] for loc in region_locations)
+            print(f"{region_name}: {len(region_locations)} cities, {total_hotels} hotels")
+        
+        print(f"\n📍 Top Global Hotel Destinations:")
+        for i, (location, count) in enumerate(locations.head(10).items(), 1):
+            # Add flag emojis based on location
+            flag = ""
+            if any(x in location.lower() for x in ['madrid', 'barcelona', 'seville', 'valencia', 'santiago de compostela']):
+                flag = "🇪🇸"
+            elif any(x in location.lower() for x in ['berlin', 'munich', 'frankfurt', 'hamburg', 'cologne']):
+                flag = "🇩🇪"
+            elif any(x in location.lower() for x in ['prague']):
+                flag = "🇨🇿"
+            elif any(x in location.lower() for x in ['stockholm', 'gothenburg']):
+                flag = "🇸🇪"
+            elif any(x in location.lower() for x in ['copenhagen']):
+                flag = "🇩🇰"
+            elif any(x in location.lower() for x in ['lisbon', 'porto']):
+                flag = "🇵🇹"
+            elif any(x in location.lower() for x in ['helsinki']):
+                flag = "🇫🇮"
+            elif any(x in location.lower() for x in ['oslo']):
+                flag = "🇳🇴"
+            elif any(x in location.lower() for x in ['amsterdam']):
+                flag = "🇳🇱"
+            elif any(x in location.lower() for x in ['london']):
+                flag = "🇬🇧"
+            elif any(x in location.lower() for x in ['vienna']):
+                flag = "🇦🇹"
+            elif any(x in location.lower() for x in ['las vegas', 'miami', 'san francisco']):
+                flag = "🇺🇸"
+            elif any(x in location.lower() for x in ['phuket']):
+                flag = "🇹🇭"
+            elif any(x in location.lower() for x in ['cancun', 'playa del carmen', 'tulum']):
+                flag = "🇲🇽"
+            elif any(x in location.lower() for x in ['rio de janeiro']):
+                flag = "🇧🇷"
+            elif any(x in location.lower() for x in ['lima']):
+                flag = "🇵🇪"
+            elif any(x in location.lower() for x in ['perth', 'melbourne', 'brisbane']):
+                flag = "🇦🇺"
+            elif any(x in location.lower() for x in ['auckland']):
+                flag = "🇳🇿"
+            elif any(x in location.lower() for x in ['marrakech', 'casablanca']):
+                flag = "🇲🇦"
+            elif any(x in location.lower() for x in ['cairo']):
+                flag = "🇪🇬"
+            elif any(x in location.lower() for x in ['hong kong']):
+                flag = "🇭🇰"
+            elif any(x in location.lower() for x in ['kuala lumpur']):
+                flag = "🇲🇾"
+            elif any(x in location.lower() for x in ['new delhi']):
+                flag = "🇮🇳"
+            elif any(x in location.lower() for x in ['vancouver']):
+                flag = "🇨🇦"
+            elif any(x in location.lower() for x in ['mykonos', 'athens']):
+                flag = "🇬🇷"
+            
+            print(f"  {i:2d}. {flag} {location}: {count} hotels")
     
     def interactive_recommendation(self):
         """Interactive recommendation session"""
@@ -205,9 +264,9 @@ class TravelHuntersDemo:
                 'max_price': max_price,
                 'min_rating': min_rating,
                 'required_amenities': amenities,
-                'price_importance': 0.4,
-                'rating_importance': 0.4,
-                'model_importance': 0.2
+                'price_importance': 0.3,
+                'rating_importance': 0.3,
+                'model_importance': 0.4  # ML model gets significant weight
             }
             
             # Get recommendations
@@ -233,10 +292,17 @@ class TravelHuntersDemo:
         print(" • \"Modern business hotel with conference rooms and airport shuttle\"")
         print(" • \"Beach hotel with kids club and all-inclusive service\"")
         print(" • \"Luxury city center hotel with pool and fine dining\"")
+        print("\n🌍 Geographic search examples:")
+        print(" • \"Relaxing spa hotel in Europe\"")
+        print(" • \"Beach resort in Asia with family activities\"")
+        print(" • \"Business hotel in Madrid or Barcelona\"")
+        print(" • \"Budget hotel in Berlin city center\"")
+        print(" • \"Romantic hotel in Paris or Vienna\"")
         
         print("\nTips for better results:")
         print(" • Describe important features (location, amenities, atmosphere)")
         print(" • Specify the purpose of your stay (family, business, relaxation)")
+        print(" • Include geographic preferences (Europe, Asia, specific cities)")
         print(" • The more specific your query, the better the recommendations")
         print(" • Our system recognizes both English and German queries")
         print(" • Even with typos (e.g. \"luxory\" instead of \"luxury\") relevant hotels will be found")
@@ -246,6 +312,11 @@ class TravelHuntersDemo:
             print("❌ Please enter a description.")
             return
         
+        # Geographic filtering
+        print("\n🗺️ Geographic preferences (optional):")
+        region_filter = input("Preferred region (Europe/Asia/Americas/Africa/Oceania/All): ").strip().lower()
+        city_filter = input("Specific city/country (or leave empty): ").strip().lower()
+        
         try:
             print("\nFilter the results (optional):")
             max_price = float(input("Maximum price per night ($): ") or "1000")
@@ -254,28 +325,40 @@ class TravelHuntersDemo:
             # Ask for extended preferences
             print("\nHow important are the following factors to you? (1-10)")
             text_importance = float(input("  Match with your description: ") or "7") / 10
-            price_importance = float(input("  Price-value ratio: ") or "5") / 10
-            rating_importance = float(input("  Hotel ratings: ") or "6") / 10
+            price_importance = float(input("  Price-value ratio: ") or "3") / 10
+            rating_importance = float(input("  Hotel ratings: ") or "3") / 10
+            model_importance = float(input("  ML predictions: ") or "4") / 10
             
             # Normalize weights
-            total_weight = text_importance + price_importance + rating_importance
+            total_weight = text_importance + price_importance + rating_importance + model_importance
             user_prefs = {
                 'max_price': max_price,
                 'min_rating': min_rating,
                 'text_importance': text_importance / total_weight,
                 'price_importance': price_importance / total_weight,
-                'rating_importance': rating_importance / total_weight
+                'rating_importance': rating_importance / total_weight,
+                'model_importance': model_importance / total_weight
             }
+            
+            # Apply geographic filtering before recommendation
+            filtered_hotels = self._apply_geographic_filter(self.hotels_df, region_filter, city_filter)
+            
+            if filtered_hotels.empty:
+                print(f"\n❌ No hotels found in the specified region/city.")
+                print("Try a broader search or different location.")
+                return
+                
+            print(f"\n🌍 Geographic filter applied: {len(filtered_hotels)} hotels in selected region")
             
             print("\n🔍 Suche nach passenden Hotels...")
             print(f"Anfrage wird verarbeitet: '{query}'")
             print("Dies kann einen Moment dauern...")
             
             recommendations = self.text_model.recommend_hotels(
-                query, self.hotels_df, user_prefs, top_k=5
+                query, filtered_hotels, user_prefs, top_k=5
             )
             
-            print(f"\n� Suchanfrage: '{query}'")
+            print(f"\n🔍 Suchanfrage: '{query}'")
             keywords = self.text_model.get_query_keywords(query, top_k=8)
             print(f"📋 Erkannte Schlüsselwörter: {', '.join(keywords)}")
             
@@ -284,10 +367,11 @@ class TravelHuntersDemo:
                 print("Tipps:")
                 print(" • Versuchen Sie eine allgemeinere Beschreibung")
                 print(" • Erhöhen Sie den maximalen Preis oder senken Sie die Mindestbewertung")
+                print(" • Erweitern Sie die geografische Suche")
                 print(" • Verwenden Sie weniger spezifische Anforderungen")
                 return
             
-            self._display_recommendations(recommendations, "Text-Based")
+            self._display_recommendations(recommendations, f"Text-Based ({region_filter.title() if region_filter and region_filter != 'all' else 'Global'})")
             
             # Show extended explanation for the recommendations
             if not recommendations.empty:
@@ -300,101 +384,67 @@ class TravelHuntersDemo:
                 print(f"  • Hotels found: {len(recommendations)}")
                 print(f"  • Price range: {price_range}")
                 print(f"  • Rating range: {rating_range}/10.0")
+                if region_filter and region_filter != 'all':
+                    print(f"  • Region: {region_filter.title()}")
+                if city_filter:
+                    print(f"  • Location filter: {city_filter.title()}")
                 
-                # Explanations for the weighting factors
-                if 'text_contribution' in recommendations.columns:
-                    top_hotel = recommendations.iloc[0]
-                    hotel_name = top_hotel.get('name', 'Unknown')
-                    
-                    print(f"\n💡 Why we recommend \"{hotel_name}\":")
-                    text_match = top_hotel.get('text_contribution', 0)
-                    price_factor = top_hotel.get('price_contribution', 0)
-                    rating_factor = top_hotel.get('rating_contribution', 0)
-                    
-                    # Erklärungen mit Prozentangaben
-                    total_contribution = text_match + price_factor + rating_factor
-                    if total_contribution > 0:
-                        text_percent = (text_match / total_contribution) * 100
-                        price_percent = (price_factor / total_contribution) * 100
-                        rating_percent = (rating_factor / total_contribution) * 100
-                        
-                        # Erkannte Schlüsselwörter aus dem ersten Hotel extrahieren, falls verfügbar
-                        hotel_text = top_hotel.get('hotel_text', '')
-                        key_features = []
-                        
-                        # Wichtigste Merkmale extrahieren
-                        feature_checks = [
-                            ('pool', ['pool', 'swimming pool', 'schwimmbad']),
-                            ('strand/meer', ['beach', 'sea', 'ocean', 'strand', 'meer']),
-                            ('kinder/familie', ['family', 'children', 'kids', 'familie', 'kinder']),
-                            ('spa/wellness', ['spa', 'wellness', 'massage']),
-                            ('wifi/internet', ['wifi', 'wlan', 'internet']),
-                            ('frühstück', ['breakfast', 'frühstück', 'buffet']),
-                            ('zentrale lage', ['downtown', 'central', 'city centre', 'zentrum', 'innenstadt']),
-                            ('luxus', ['luxury', 'luxurious', 'luxus', 'premium']),
-                            ('günstig', ['affordable', 'budget', 'günstig', 'preiswert'])
-                        ]
-                        
-                        # Überprüfe, welche Features im Hoteltext vorhanden sind
-                        if hotel_text:
-                            hotel_text_lower = hotel_text.lower()
-                            for feature_name, terms in feature_checks:
-                                if any(term in hotel_text_lower for term in terms):
-                                    key_features.append(feature_name)
-                        
-                        print(f"  • Match with your description: {text_percent:.1f}%")
-                        print(f"  • Price-value ratio: {price_percent:.1f}%")
-                        print(f"  • Hotel rating: {rating_percent:.1f}%")
-                        
-                        # Show recognized features
-                        if key_features:
-                            print(f"  • Recognized features: {', '.join(key_features)}")
-                            
-                        # Price segment and quality category
-                        price_val = top_hotel.get('price', 0)
-                        if price_val < 100:
-                            price_category = "Budget/Affordable"
-                        elif price_val < 200:
-                            price_category = "Mid-range"
-                        elif price_val < 300:
-                            price_category = "Upscale"
-                        else:
-                            price_category = "Luxury"
-                            
-                        rating_val = top_hotel.get('rating', 0)
-                        if rating_val >= 9.0:
-                            quality_category = "Outstanding"
-                        elif rating_val >= 8.0:
-                            quality_category = "Very good"
-                        elif rating_val >= 7.0:
-                            quality_category = "Good"
-                        else:
-                            quality_category = "Average"
-                            
-                        print(f"  • Price category: {price_category} (${price_val:.0f})")
-                        print(f"  • Quality category: {quality_category} ({rating_val:.1f}/10.0)")
-                    
-                    # Explain specific recommendation factors
-                    location = top_hotel.get('location', '')
-                    price = top_hotel.get('price', 0)
-                    rating = top_hotel.get('rating', 0)
-                    
-                    print("\n🔍 Key factors:")
-                    if price <= max_price * 0.7:
-                        print(f"  • Great price: ${price:.0f} per night (below your budget of ${max_price:.0f})")
-                    if rating >= 8.5:
-                        print(f"  • Excellent rating: {rating:.1f}/10.0")
-                    if location and any(keyword.lower() in location.lower() for keyword in keywords):
-                        print(f"  • Perfect location: {location}")
-                        
-                    # Additional recommendations
-                    print("\n💬 For even better results:")
-                    print("  • Try more precise keywords like \"beach\", \"pool\", \"center\"")
-                    print("  • Specify if you're traveling with family, alone, or for business")
-                    print("  • Combine text search with parameter-based model for more precise filters")
-            
+                # Show geographic distribution
+                locations = recommendations['location'].value_counts()
+                print(f"  • Cities: {', '.join(locations.head(3).index)}")
+                
+                # ...existing code...
         except ValueError:
             print("❌ Invalid input. Please enter valid numbers.")
+            
+    def _apply_geographic_filter(self, hotels_df, region_filter, city_filter):
+        """Apply geographic filtering to hotels"""
+        filtered_df = hotels_df.copy()
+        
+        # Define regional keywords
+        region_keywords = {
+            'europe': ['madrid', 'berlin', 'prague', 'stockholm', 'copenhagen', 'barcelona', 'lisbon', 
+                      'helsinki', 'oslo', 'amsterdam', 'london', 'vienna', 'paris', 'rome', 'milan',
+                      'florence', 'venice', 'budapest', 'warsaw', 'athens', 'dublin', 'zurich', 
+                      'brussels', 'munich', 'frankfurt', 'hamburg', 'cologne', 'lyon', 'marseille',
+                      'nice', 'turin', 'bologna', 'naples', 'seville', 'valencia', 'bilbao', 'porto',
+                      'malaga', 'palma', 'santorini', 'mykonos', 'crete', 'rhodes', 'reykjavik',
+                      'tallinn', 'riga', 'vilnius', 'bucharest', 'sofia', 'belgrade', 'zagreb', 'ljubljana'],
+            'asia': ['phuket', 'hong kong', 'kuala lumpur', 'new delhi', 'bangkok', 'tokyo', 'osaka',
+                    'kyoto', 'seoul', 'singapore', 'manila', 'jakarta', 'mumbai', 'chennai', 'bangalore',
+                    'beijing', 'shanghai', 'taipei', 'ho chi minh', 'hanoi', 'phnom penh', 'yangon',
+                    'kathmandu', 'colombo', 'male', 'dhaka', 'karachi', 'islamabad', 'tehran', 'dubai',
+                    'abu dhabi', 'doha', 'kuwait', 'riyadh', 'jeddah', 'muscat', 'baku', 'tbilisi'],
+            'americas': ['las vegas', 'miami', 'cancun', 'rio de janeiro', 'lima', 'vancouver', 
+                        'san francisco', 'new york', 'toronto', 'montreal', 'buenos aires', 'bogota',
+                        'santiago', 'mexico city', 'chicago', 'los angeles', 'playa del carmen', 'tulum',
+                        'quebec', 'ottawa', 'calgary', 'edmonton', 'winnipeg', 'halifax', 'boston',
+                        'washington', 'philadelphia', 'atlanta', 'dallas', 'houston', 'phoenix',
+                        'denver', 'seattle', 'portland', 'sao paulo', 'brasilia', 'salvador',
+                        'recife', 'fortaleza', 'belo horizonte', 'curitiba', 'porto alegre'],
+            'africa': ['marrakech', 'cairo', 'casablanca', 'cape town', 'johannesburg', 'nairobi',
+                      'tunis', 'algiers', 'addis ababa', 'dar es salaam', 'lagos', 'accra', 'kampala',
+                      'kigali', 'lusaka', 'harare', 'maputo', 'windhoek', 'gaborone', 'maseru',
+                      'mbabane', 'antananarivo', 'port louis', 'victoria', 'moroni', 'djibouti',
+                      'asmara', 'khartoum', 'juba', 'ndjamena', 'bangui', 'libreville', 'malabo'],
+            'oceania': ['perth', 'melbourne', 'brisbane', 'auckland', 'sydney', 'adelaide', 'wellington',
+                       'christchurch', 'gold coast', 'cairns', 'darwin', 'hobart', 'canberra',
+                       'hamilton', 'tauranga', 'palmerston north', 'dunedin', 'invercargill',
+                       'rotorua', 'napier', 'nelson', 'queenstown', 'whangarei', 'gisborne']
+        }
+        
+        # Apply region filter
+        if region_filter and region_filter in region_keywords:
+            keywords = region_keywords[region_filter]
+            mask = filtered_df['location'].str.lower().str.contains('|'.join(keywords), na=False)
+            filtered_df = filtered_df[mask]
+        
+        # Apply city filter
+        if city_filter:
+            mask = filtered_df['location'].str.lower().str.contains(city_filter, na=False)
+            filtered_df = filtered_df[mask]
+        
+        return filtered_df
     
     def _hybrid_recommendation(self):
         """Hybrid recommendation interface"""
@@ -413,25 +463,26 @@ class TravelHuntersDemo:
             # Get weight preferences
             print("\nHow important are these factors? (1-10)")
             text_importance = float(input("  Description match: ") or "7") / 10
-            price_importance = float(input("  Price considerations: ") or "5") / 10
-            rating_importance = float(input("  Hotel ratings: ") or "8") / 10
+            price_importance = float(input("  Price considerations: ") or "3") / 10
+            rating_importance = float(input("  Hotel ratings: ") or "3") / 10
+            model_importance = float(input("  ML predictions: ") or "4") / 10
             
             # Normalize weights
-            total_weight = text_importance + price_importance + rating_importance
+            total_weight = text_importance + price_importance + rating_importance + model_importance
             user_prefs = {
                 'max_price': max_price,
                 'min_rating': min_rating,
                 'text_importance': text_importance / total_weight,
                 'price_importance': price_importance / total_weight,
-                'rating_importance': rating_importance / total_weight
+                'rating_importance': rating_importance / total_weight,
+                'model_importance': model_importance / total_weight
             }
             
             # Set hybrid weights
             self.hybrid_model.set_weights(0.4, 0.6)  # Slightly favor text
             
             recommendations = self.hybrid_model.recommend_hotels(
-                query, self.hotels_df, self.features_df, user_prefs, 
-                top_k=5, combination_method='weighted_sum'
+                query, self.hotels_df, self.features_df, user_prefs, top_k=5
             )
             
             print(f"\n🔍 Search Query: '{query}'")
@@ -461,9 +512,10 @@ class TravelHuntersDemo:
         user_prefs = {
             'max_price': 200,
             'min_rating': 4.0,
-            'text_importance': 0.6,
+            'text_importance': 0.5,
             'price_importance': 0.2,
-            'rating_importance': 0.2
+            'rating_importance': 0.2,
+            'model_importance': 0.1
         }
         
         print(f"\n🔍 Query: '{query}'")
@@ -507,10 +559,17 @@ class TravelHuntersDemo:
             print(f"\n❌ No recommendations found with your criteria.")
             return
         
-        print(f"\n🏨 Top {len(recommendations)} {model_name} Recommendations:")
+        # Entferne Duplikate vor der Anzeige
+        unique_recommendations = recommendations.drop_duplicates(subset=['name', 'location'], keep='first')
+        
+        # Wenn immer noch weniger als gewünscht, versuche nur nach Namen zu deduplizieren
+        if len(unique_recommendations) < len(recommendations) * 0.8:
+            unique_recommendations = recommendations.drop_duplicates(subset=['name'], keep='first')
+        
+        print(f"\n🏨 Top {len(unique_recommendations)} {model_name} Recommendations:")
         print("=" * 60)
         
-        for i, (_, hotel) in enumerate(recommendations.iterrows(), 1):
+        for i, (_, hotel) in enumerate(unique_recommendations.iterrows(), 1):
             name = hotel.get('hotel_name', hotel.get('name', 'Unknown Hotel'))
             score = hotel[score_col]
             price = hotel['price']
@@ -527,6 +586,9 @@ class TravelHuntersDemo:
             if 'description' in hotel and pd.notna(hotel['description']):
                 desc = str(hotel['description'])[:100] + "..." if len(str(hotel['description'])) > 100 else str(hotel['description'])
                 print(f"   📝 {desc}")
+                
+            if i >= 5:  # Beschränke auf maximal 5 Empfehlungen für bessere Übersicht
+                break
     
     def _display_explanation(self, explanation: dict):
         """Display recommendation explanation"""
@@ -588,9 +650,9 @@ class TravelHuntersDemo:
                     'max_price': 1000,  # Hohe Grenze, um die meisten Hotels einzuschließen
                     'min_rating': 0,    # Niedrige Grenze, um die meisten Hotels einzuschließen
                     'required_amenities': [],
-                    'price_importance': 0.3,
-                    'rating_importance': 0.5,
-                    'model_importance': 0.2
+                    'price_importance': 0.2,
+                    'rating_importance': 0.3,
+                    'model_importance': 0.5  # ML model gets significant weight
                 }
                 
                 # Hole Empfehlungen von allen Modellen für diesen Benutzer
@@ -690,9 +752,10 @@ class TravelHuntersDemo:
             user_prefs = {
                 'max_price': filters.get('max_price', 1000),
                 'min_rating': filters.get('min_rating', 0),
-                'price_importance': 0.3,
-                'rating_importance': 0.4,
-                'text_importance': 0.3
+                'price_importance': 0.2,
+                'rating_importance': 0.3,
+                'text_importance': 0.3,
+                'model_importance': 0.2
             }
             
             # Abfrage für textbasierte Modelle
