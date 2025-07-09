@@ -13,7 +13,7 @@ conn = sqlite3.connect(database_file)
 cursor = conn.cursor()
 
 # Fetch all images
-cursor.execute("SELECT filename, file FROM wikipedia_images")
+cursor.execute("SELECT filename, file FROM city_images")
 images = cursor.fetchall()
 
 print(f"Exporting {len(images)} images...")
