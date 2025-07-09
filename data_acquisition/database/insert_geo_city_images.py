@@ -4,7 +4,7 @@ from PIL import Image
 import io
 
 # === KONFIGURATION ===
-IMAGES_DIR = r"C:\Pfad\zum\GoogleMaps\Bilderordner"
+IMAGES_DIR = r""  # z.B. '/Users/deinname/OneDrive/CityImages'
 CITY_DB_PATH = "travelhunters.db"
 IMAGES_DB_PATH = "geo_city_images.db"
 TARGET_SIZE = (224, 224)
@@ -21,6 +21,21 @@ city_cursor = city_conn.cursor()
 # === Verbindung zur geo_city_images.db ===
 img_conn = sqlite3.connect(IMAGES_DB_PATH)
 img_cursor = img_conn.cursor()
+
+# === Tabelle erstellen, falls nicht vorhanden ===
+img_cursor.execute("""
+    CREATE TABLE IF NOT EXISTS city_images (
+        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        filename TEXT,
+        extension TEXT,
+        file BLOB,
+        bytes INTEGER,
+        width INTEGER,
+        height INTEGER,
+        city_id INTEGER,
+        FOREIGN KEY(city_id) REFERENCES city(id)
+    );
+""")
 
 # === Alle Städte aus travelhunters.db laden ===
 city_cursor.execute("SELECT id, name FROM city")
@@ -70,7 +85,7 @@ for root, _, files in os.walk(IMAGES_DIR):
                 size_in_bytes = len(img_bytes)
 
                 img_cursor.execute("""
-                    INSERT INTO geo_city_images (filename, extension, file, bytes, width, height, city_id)
+                    INSERT INTO city_images (filename, extension, file, bytes, width, height, city_id)
                     VALUES (?, ?, ?, ?, ?, ?, ?)
                 """, (file, 'jpg', img_bytes, size_in_bytes, width, height, found_city_id))
 
