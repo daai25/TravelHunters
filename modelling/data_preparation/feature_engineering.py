@@ -220,6 +220,60 @@ class HotelFeatureEngineer:
         
         return pref_vector
 
+    def add_feature_noise(self, features_df: pd.DataFrame, noise_level: float = 0.05) -> pd.DataFrame:
+        """
+        Add small amounts of noise to numerical features to increase training robustness
+        
+        Args:
+            features_df: DataFrame with engineered features
+            noise_level: Standard deviation of noise relative to feature values
+            
+        Returns:
+            DataFrame with noise added to numerical features
+        """
+        print(f"🔄 Adding feature noise for robustness (noise level: {noise_level})...")
+        
+        augmented_df = features_df.copy()
+        
+        # Numerical features to add noise to
+        numerical_features = [
+            'price', 'rating', 'review_count', 'distance_km',
+            'price_log', 'rating_normalized', 'review_count_log'
+        ]
+        
+        for feature in numerical_features:
+            if feature in augmented_df.columns:
+                # Calculate noise based on feature values
+                feature_values = augmented_df[feature]
+                noise_std = feature_values.std() * noise_level
+                
+                # Add gaussian noise
+                noise = np.random.normal(0, noise_std, len(augmented_df))
+                augmented_df[feature] = feature_values + noise
+                
+                # Ensure values stay within reasonable bounds
+                if feature == 'rating':
+                    augmented_df[feature] = np.clip(augmented_df[feature], 1.0, 10.0)
+                elif feature == 'rating_normalized':
+                    augmented_df[feature] = np.clip(augmented_df[feature], 0.0, 2.0)
+                elif feature == 'price':
+                    augmented_df[feature] = np.maximum(augmented_df[feature], 10.0)  # Minimum price
+                elif feature == 'review_count':
+                    augmented_df[feature] = np.maximum(augmented_df[feature], 1.0)   # Minimum reviews
+                elif feature == 'distance_km':
+                    augmented_df[feature] = np.maximum(augmented_df[feature], 0.0)   # Non-negative distance
+        
+        # Recalculate some derived features that might be affected
+        if 'rating_normalized' in augmented_df.columns:
+            augmented_df['rating_normalized'] = augmented_df['rating'] / 10.0  # Recalculate based on new rating
+        
+        if 'is_city_center' in augmented_df.columns and 'distance_km' in augmented_df.columns:
+            augmented_df['is_city_center'] = (augmented_df['distance_km'] <= 1.0).astype(int)
+        
+        print(f"✅ Feature noise added to {len(numerical_features)} numerical features")
+        
+        return augmented_df
+
 if __name__ == "__main__":
     # Test feature engineering
     from load_data import HotelDataLoader

@@ -425,8 +425,14 @@ class HotelDataLoader:
         # Add other missing fields similarly...
         return df
     
-    def load_user_interactions(self) -> pd.DataFrame:
-        """Load or create synthetic user-hotel interactions"""
+    def load_user_interactions(self, augment_data: bool = True, augmentation_factor: int = 3) -> pd.DataFrame:
+        """
+        Load or create synthetic user-hotel interactions with optional data augmentation
+        
+        Args:
+            augment_data: Whether to augment the data with noise
+            augmentation_factor: How many times to multiply the base data
+        """
         # For now, create synthetic data
         # Later, this could come from actual user behavior
         
@@ -454,10 +460,179 @@ class HotelDataLoader:
             })
         
         interactions_df = pd.DataFrame(interactions)
+        
+        # Apply data augmentation if requested
+        if augment_data:
+            interactions_df = self._augment_interactions(interactions_df, hotels_df, augmentation_factor)
+        
         print(f"✅ Generated {len(interactions_df)} synthetic user interactions")
         
         return interactions_df
     
+    def _augment_interactions(self, interactions_df: pd.DataFrame, hotels_df: pd.DataFrame, 
+                            augmentation_factor: int = 3) -> pd.DataFrame:
+        """
+        Augment interaction data by adding noise to existing interactions
+        
+        Args:
+            interactions_df: Original interactions DataFrame
+            hotels_df: Hotels DataFrame for reference
+            augmentation_factor: How many times to multiply the data
+            
+        Returns:
+            Augmented interactions DataFrame
+        """
+        print(f"🔄 Augmenting training data with noise (factor: {augmentation_factor}x)...")
+        
+        augmented_interactions = [interactions_df.copy()]
+        
+        for factor in range(1, augmentation_factor):
+            # Create a copy of the original data
+            augmented_df = interactions_df.copy()
+            
+            # Add noise to ratings (±0.5 with probability)
+            rating_noise = np.random.choice([-0.5, 0, 0.5], size=len(augmented_df), p=[0.2, 0.6, 0.2])
+            augmented_df['rating'] = np.clip(augmented_df['rating'] + rating_noise, 1, 5)
+            
+            # Slightly shift user IDs to create "similar" users
+            max_user_id = augmented_df['user_id'].max()
+            user_shift = factor * 1000  # Shift by 1000 per factor
+            augmented_df['user_id'] = augmented_df['user_id'] + user_shift
+            
+            # Add some random hotel substitutions (10% chance)
+            hotel_substitution_mask = np.random.random(len(augmented_df)) < 0.1
+            if hotel_substitution_mask.any():
+                # For hotels to be substituted, choose similar hotels (based on price range)
+                for idx in augmented_df[hotel_substitution_mask].index:
+                    original_hotel_id = augmented_df.loc[idx, 'hotel_id']
+                    original_hotel = hotels_df[hotels_df['id'] == original_hotel_id]
+                    
+                    if not original_hotel.empty:
+                        original_price = original_hotel.iloc[0]['price']
+                        # Find hotels in similar price range (±30%)
+                        price_range = original_price * 0.3
+                        similar_hotels = hotels_df[
+                            (hotels_df['price'] >= original_price - price_range) & 
+                            (hotels_df['price'] <= original_price + price_range)
+                        ]
+                        
+                        if len(similar_hotels) > 1:
+                            # Choose a different hotel from similar ones
+                            similar_hotels = similar_hotels[similar_hotels['id'] != original_hotel_id]
+                            if not similar_hotels.empty:
+                                new_hotel_id = np.random.choice(similar_hotels['id'].values)
+                                augmented_df.loc[idx, 'hotel_id'] = new_hotel_id
+            
+            # Add some completely random new interactions (20% of original size)
+            n_new_interactions = int(len(interactions_df) * 0.2)
+            new_interactions = []
+            
+            for _ in range(n_new_interactions):
+                user_id = np.random.choice(range(user_shift, user_shift + 500))  # New user range
+                hotel_id = np.random.choice(hotels_df['id'].values)
+                # Rating distribution slightly different for augmented data
+                rating = np.random.choice([2, 3, 4, 5], p=[0.1, 0.3, 0.4, 0.2])
+                new_interactions.append({
+                    'user_id': user_id,
+                    'hotel_id': hotel_id,
+                    'rating': rating,
+                    'interaction_type': 'rating'
+                })
+            
+            if new_interactions:
+                new_interactions_df = pd.DataFrame(new_interactions)
+                augmented_df = pd.concat([augmented_df, new_interactions_df], ignore_index=True)
+            
+            augmented_interactions.append(augmented_df)
+        
+        # Combine all augmented data
+        final_df = pd.concat(augmented_interactions, ignore_index=True)
+        
+        # Shuffle the data
+        final_df = final_df.sample(frac=1).reset_index(drop=True)
+        
+        print(f"✅ Data augmentation completed: {len(interactions_df)} → {len(final_df)} interactions")
+        
+        return final_df
+    
+    def augment_hotel_features(self, hotels_df: pd.DataFrame, augmentation_factor: int = 2) -> pd.DataFrame:
+        """
+        Augment hotel feature data by adding realistic noise variations
+        
+        Args:
+            hotels_df: Original hotels DataFrame
+            augmentation_factor: How many times to multiply the hotel data
+            
+        Returns:
+            Augmented hotels DataFrame with synthetic variations
+        """
+        if augmentation_factor <= 1:
+            return hotels_df
+        
+        print(f"🏨 Augmenting hotel data with realistic variations (factor: {augmentation_factor}x)...")
+        
+        augmented_hotels = [hotels_df.copy()]
+        base_max_id = hotels_df['id'].max()
+        
+        for factor in range(1, augmentation_factor):
+            # Create a copy of the original data
+            augmented_df = hotels_df.copy()
+            
+            # Shift hotel IDs to avoid conflicts
+            id_shift = factor * 10000
+            augmented_df['id'] = augmented_df['id'] + id_shift
+            
+            # Add realistic noise to numerical features
+            
+            # Price variations (±10%)
+            price_noise = np.random.normal(1.0, 0.1, len(augmented_df))
+            price_noise = np.clip(price_noise, 0.8, 1.2)  # Limit to ±20%
+            augmented_df['price'] = augmented_df['price'] * price_noise
+            augmented_df['price'] = np.round(augmented_df['price'], 2)
+            
+            # Rating variations (±0.3 points)
+            rating_noise = np.random.normal(0, 0.2, len(augmented_df))
+            rating_noise = np.clip(rating_noise, -0.5, 0.5)
+            augmented_df['rating'] = augmented_df['rating'] + rating_noise
+            augmented_df['rating'] = np.clip(augmented_df['rating'], 1.0, 10.0)
+            augmented_df['rating'] = np.round(augmented_df['rating'], 1)
+            
+            # Review count variations (±20%)
+            if 'review_count' in augmented_df.columns:
+                review_noise = np.random.normal(1.0, 0.2, len(augmented_df))
+                review_noise = np.clip(review_noise, 0.7, 1.4)
+                augmented_df['review_count'] = augmented_df['review_count'] * review_noise
+                augmented_df['review_count'] = np.round(augmented_df['review_count']).astype(int)
+                augmented_df['review_count'] = np.maximum(augmented_df['review_count'], 1)
+            
+            # Distance variations (±15%)
+            if 'distance_to_center' in augmented_df.columns:
+                distance_noise = np.random.normal(1.0, 0.15, len(augmented_df))
+                distance_noise = np.clip(distance_noise, 0.8, 1.3)
+                augmented_df['distance_to_center'] = augmented_df['distance_to_center'] * distance_noise
+                augmented_df['distance_to_center'] = np.round(augmented_df['distance_to_center'], 2)
+            
+            # Slightly modify hotel names to indicate variations
+            augmented_df['name'] = augmented_df['name'] + f' (Variant {factor})'
+            
+            # Add some random amenity variations (flip 10% of boolean amenities)
+            amenity_columns = [col for col in augmented_df.columns if col.startswith('has_')]
+            for col in amenity_columns:
+                flip_mask = np.random.random(len(augmented_df)) < 0.1
+                augmented_df.loc[flip_mask, col] = 1 - augmented_df.loc[flip_mask, col]
+            
+            augmented_hotels.append(augmented_df)
+        
+        # Combine all augmented data
+        final_df = pd.concat(augmented_hotels, ignore_index=True)
+        
+        # Shuffle the data
+        final_df = final_df.sample(frac=1).reset_index(drop=True)
+        
+        print(f"✅ Hotel data augmentation completed: {len(hotels_df)} → {len(final_df)} hotels")
+        
+        return final_df
+
     def get_data_summary(self) -> Dict:
         """Get summary statistics of the data"""
         hotels_df = self.load_hotels()
