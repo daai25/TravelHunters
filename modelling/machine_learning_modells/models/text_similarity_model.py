@@ -18,6 +18,39 @@ warnings.filterwarnings('ignore')
 class TextBasedRecommender:
     """Advanced text-based hotel recommender with enhanced NLP capabilities and semantic understanding"""
     
+    # Definiere die Tokenizer-Funktion außerhalb der __init__-Methode für bessere Serialisierbarkeit
+    @staticmethod
+    def enhanced_tokenizer(text):
+        """Enhanced tokenization function with better multilingual support"""
+        # Normalize text and handle special characters
+        text = text.lower().strip()
+        
+        # Handle common abbreviations and special cases
+        text = re.sub(r'\b(dr|mr|mrs|ms)\b\.?', '', text)
+        text = re.sub(r'\b(hotel|resort|spa|suite)\b', r'\1 accommodation', text)
+        
+        # Split and clean tokens
+        tokens = text.split()
+        result_tokens = []
+        
+        for token in tokens:
+            # Enhanced cleaning for multilingual support
+            clean_token = re.sub(r'[^a-z0-9äöüßáéíóúñç]', '', token)
+            if clean_token and len(clean_token) > 1:
+                result_tokens.append(clean_token)
+                
+                # Add stemmed versions for common endings
+                if clean_token.endswith('ing'):
+                    stem = clean_token[:-3]
+                    if len(stem) > 2:
+                        result_tokens.append(stem)
+                elif clean_token.endswith('ed'):
+                    stem = clean_token[:-2]
+                    if len(stem) > 2:
+                        result_tokens.append(stem)
+        
+        return result_tokens
+    
     def __init__(self, max_features: int = 2000, use_lsa: bool = True, lsa_components: int = 150, 
                  enable_clustering: bool = True, debug_mode: bool = False):
         """
@@ -35,37 +68,6 @@ class TextBasedRecommender:
         self.lsa_components = lsa_components
         self.enable_clustering = enable_clustering
         self.debug_mode = debug_mode
-        
-        # Enhanced tokenization function with better multilingual support
-        def enhanced_tokenizer(text):
-            # Normalize text and handle special characters
-            text = text.lower().strip()
-            
-            # Handle common abbreviations and special cases
-            text = re.sub(r'\b(dr|mr|mrs|ms)\b\.?', '', text)
-            text = re.sub(r'\b(hotel|resort|spa|suite)\b', r'\1 accommodation', text)
-            
-            # Split and clean tokens
-            tokens = text.split()
-            result_tokens = []
-            
-            for token in tokens:
-                # Enhanced cleaning for multilingual support
-                clean_token = re.sub(r'[^a-z0-9äöüßáéíóúñç]', '', token)
-                if clean_token and len(clean_token) > 1:
-                    result_tokens.append(clean_token)
-                    
-                    # Add stemmed versions for common endings
-                    if clean_token.endswith('ing'):
-                        stem = clean_token[:-3]
-                        if len(stem) > 2:
-                            result_tokens.append(stem)
-                    elif clean_token.endswith('ed'):
-                        stem = clean_token[:-2]
-                        if len(stem) > 2:
-                            result_tokens.append(stem)
-            
-            return result_tokens
             
         # Enhanced TF-IDF vectorizer with advanced settings
         self.tfidf_vectorizer = TfidfVectorizer(
@@ -77,7 +79,7 @@ class TextBasedRecommender:
             lowercase=True,
             strip_accents='unicode',
             analyzer='word',
-            tokenizer=enhanced_tokenizer,  # Enhanced tokenization
+            tokenizer=self.enhanced_tokenizer,  # Enhanced tokenization als statische Methode
             norm='l2',
             use_idf=True,
             smooth_idf=True,
@@ -879,37 +881,378 @@ class TextBasedRecommender:
         if not self.is_fitted:
             raise ValueError("Model must be fitted before saving")
         
-        model_data = {
-            'tfidf_vectorizer': self.tfidf_vectorizer,
-            'lsa_model': self.lsa_model,
-            'hotel_texts': self.hotel_texts,
-            'hotel_ids': self.hotel_ids,
-            'tfidf_matrix': self.tfidf_matrix,
-            'lsa_matrix': self.lsa_matrix,
-            'max_features': self.max_features,
-            'use_lsa': self.use_lsa,
-            'lsa_components': self.lsa_components
+        # Speichere grundlegende Vektorisierungsparameter (ohne nicht-serialisierbare Komponenten)
+        vectorizer_params = {
+            'max_features': self.tfidf_vectorizer.max_features,
+            'stop_words': self.tfidf_vectorizer.stop_words,
+            'ngram_range': self.tfidf_vectorizer.ngram_range,
+            'min_df': self.tfidf_vectorizer.min_df,
+            'max_df': self.tfidf_vectorizer.max_df,
+            'lowercase': self.tfidf_vectorizer.lowercase,
+            'strip_accents': self.tfidf_vectorizer.strip_accents,
+            'analyzer': self.tfidf_vectorizer.analyzer,
+            'norm': self.tfidf_vectorizer.norm,
+            'use_idf': self.tfidf_vectorizer.use_idf,
+            'smooth_idf': self.tfidf_vectorizer.smooth_idf,
+            'sublinear_tf': self.tfidf_vectorizer.sublinear_tf
         }
         
-        joblib.dump(model_data, filepath)
-        print(f"✅ Text model saved to {filepath}")
+        # Speichere Vokabular explizit als Dictionary für bessere Kompatibilität
+        if hasattr(self.tfidf_vectorizer, 'vocabulary_'):
+            vectorizer_params['vocabulary'] = dict(self.tfidf_vectorizer.vocabulary_)
+        
+        # Speichere IDF-Werte als Liste für bessere Serialisierbarkeit
+        if hasattr(self.tfidf_vectorizer, 'idf_'):
+            vectorizer_params['idf_values'] = self.tfidf_vectorizer.idf_.tolist()
+        
+        # Erstelle ein sauberes Model-Daten-Dictionary ohne problematische Objekte
+        model_data = {
+            'vectorizer_params': vectorizer_params,
+            'hotel_texts': self.hotel_texts,
+            'hotel_ids': self.hotel_ids,
+            'max_features': self.max_features,
+            'use_lsa': self.use_lsa,
+            'lsa_components': self.lsa_components,
+            'enable_clustering': self.enable_clustering,
+            'debug_mode': self.debug_mode,
+            'is_fitted': True
+        }
+        
+        # Füge LSA-Modell hinzu, falls vorhanden (aber ohne komplexe Matrix-Objekte)
+        if self.use_lsa and self.lsa_model is not None:
+            try:
+                # Speichere nur die LSA-Komponenten und Parameter
+                lsa_params = {
+                    'n_components': self.lsa_model.n_components,
+                    'algorithm': self.lsa_model.algorithm,
+                    'n_iter': self.lsa_model.n_iter,
+                    'random_state': self.lsa_model.random_state
+                }
+                
+                # Speichere die Komponenten als Listen für bessere Serialisierbarkeit
+                if hasattr(self.lsa_model, 'components_'):
+                    lsa_params['components'] = [comp.tolist() for comp in self.lsa_model.components_]
+                
+                if hasattr(self.lsa_model, 'explained_variance_ratio_'):
+                    lsa_params['explained_variance_ratio'] = self.lsa_model.explained_variance_ratio_.tolist()
+                
+                model_data['lsa_params'] = lsa_params
+            except Exception as lsa_err:
+                print(f"⚠️ LSA-Modellkomponenten konnten nicht gespeichert werden: {lsa_err}")
+                model_data['lsa_params'] = None
+        
+        try:
+            # Versuche das bereinigte Modell zu speichern
+            joblib.dump(model_data, filepath)
+            print(f"✅ Text model saved to {filepath}")
+            return True
+        except Exception as e:
+            print(f"⚠️ Fehler beim Speichern des Text-Modells: {e}")
+            print(f"Details: {str(type(e))}: {str(e)}")
+            
+            # Fallback: Versuche ein minimales Modell zu speichern
+            try:
+                minimal_data = {
+                    'hotel_texts': self.hotel_texts,
+                    'hotel_ids': self.hotel_ids,
+                    'max_features': self.max_features,
+                    'use_lsa': self.use_lsa,
+                    'lsa_components': self.lsa_components,
+                    'enable_clustering': self.enable_clustering,
+                    'debug_mode': self.debug_mode,
+                    'is_fitted': True
+                }
+                joblib.dump(minimal_data, filepath)
+                print(f"✅ Minimales Text-Modell gespeichert nach {filepath}")
+                return True
+            except Exception as e2:
+                print(f"❌ Konnte auch kein minimales Modell speichern: {e2}")
+                print(f"Details: {str(type(e2))}: {str(e2)}")
+                return False
     
     def load_model(self, filepath: str):
         """Load a fitted model"""
-        model_data = joblib.load(filepath)
+        try:
+            # Versuche das Modell zu laden und fange alle Fehler ab
+            try:
+                model_data = joblib.load(filepath)
+                print(f"📂 Modell-Datei erfolgreich geladen: {filepath}")
+            except Exception as load_error:
+                print(f"⚠️ Fehler beim Laden der Modell-Datei: {str(load_error)}")
+                print("⚠️ Initialisiere ein neues Text-Modell...")
+                self.is_fitted = False
+                return False
+            
+            # Lade grundlegende Konfigurationsparameter
+            self.max_features = model_data.get('max_features', self.max_features)
+            self.use_lsa = model_data.get('use_lsa', self.use_lsa)
+            self.lsa_components = model_data.get('lsa_components', self.lsa_components)
+            self.enable_clustering = model_data.get('enable_clustering', self.enable_clustering)
+            self.debug_mode = model_data.get('debug_mode', self.debug_mode)
+            
+            # Lade Daten
+            self.hotel_texts = model_data.get('hotel_texts', [])
+            self.hotel_ids = model_data.get('hotel_ids', [])
+            self.is_fitted = model_data.get('is_fitted', False)
+            
+            # Überprüfe, ob wir ein minimales oder vollständiges Modell haben
+            minimal_model = 'is_fitted' in model_data and 'vectorizer_params' not in model_data
+            if minimal_model:
+                print(f"📄 Minimales Text-Modell geladen von {filepath}")
+                
+                # Neu erstellen des TF-IDF Vektorisierers und Training
+                if self.hotel_texts and len(self.hotel_texts) > 0:
+                    print("🔄 Führe schnelles Neutraining des TF-IDF-Vektorisierers durch...")
+                    # Erstelle den Vectorizer mit den Standardparametern
+                    self.tfidf_vectorizer = TfidfVectorizer(
+                        max_features=self.max_features,
+                        stop_words='english',
+                        ngram_range=(1, 4),
+                        tokenizer=self.enhanced_tokenizer,  # Benutze die statische Methode
+                        min_df=1, max_df=0.95,
+                        lowercase=True,
+                        strip_accents='unicode',
+                        analyzer='word',
+                        norm='l2',
+                        use_idf=True,
+                        smooth_idf=True,
+                        sublinear_tf=True
+                    )
+                    # Training durchführen
+                    self._retrain_model_quick()
+                
+                return True
+            
+            # Vollständiges Modell laden
+            if 'vectorizer_params' in model_data:
+                print("📄 Vollständiges Text-Modell gefunden, rekonstruiere TF-IDF-Vektorisierer...")
+                # TfidfVectorizer mit denselben Parametern und Vokabular neu erstellen
+                params = model_data['vectorizer_params']
+                
+                try:
+                    # Wörterbuch aus gespeichertem Vokabular extrahieren
+                    vocabulary = None
+                    if 'vocabulary' in params:
+                        vocabulary = params['vocabulary']
+                    
+                    # Erstelle den TfidfVectorizer mit denselben Parametern
+                    self.tfidf_vectorizer = TfidfVectorizer(
+                        max_features=params.get('max_features', self.max_features),
+                        stop_words=params.get('stop_words', 'english'),
+                        ngram_range=params.get('ngram_range', (1, 4)),
+                        min_df=params.get('min_df', 1),
+                        max_df=params.get('max_df', 0.95),
+                        lowercase=params.get('lowercase', True),
+                        strip_accents=params.get('strip_accents', 'unicode'),
+                        analyzer=params.get('analyzer', 'word'),
+                        tokenizer=self.enhanced_tokenizer,  # Verwende die statische Tokenizer-Methode
+                        norm=params.get('norm', 'l2'),
+                        use_idf=params.get('use_idf', True),
+                        smooth_idf=params.get('smooth_idf', True),
+                        sublinear_tf=params.get('sublinear_tf', True),
+                        vocabulary=vocabulary
+                    )
+                    
+                    # IDF-Werte wiederherstellen, falls vorhanden
+                    if 'idf_values' in params:
+                        import numpy as np
+                        self.tfidf_vectorizer.idf_ = np.array(params['idf_values'])
+                except Exception as vec_error:
+                    print(f"⚠️ Fehler beim Rekonstruieren des Vektorisierers: {str(vec_error)}")
+                    print("⚠️ Erstelle neuen Vektorisierer...")
+                    self.tfidf_vectorizer = TfidfVectorizer(
+                        max_features=self.max_features,
+                        stop_words='english',
+                        ngram_range=(1, 4),
+                        tokenizer=self.enhanced_tokenizer,  # Statische Methode
+                        min_df=1, max_df=0.95,
+                        lowercase=True,
+                        strip_accents='unicode',
+                        analyzer='word',
+                        norm='l2',
+                        use_idf=True,
+                        smooth_idf=True,
+                        sublinear_tf=True
+                    )
+            else:
+                # Fallback, falls vectorizer_params nicht vorhanden sind
+                print("📄 Keine Vektorisierer-Parameter gefunden. Erstelle neu...")
+                self.tfidf_vectorizer = TfidfVectorizer(
+                    max_features=self.max_features,
+                    stop_words='english',
+                    ngram_range=(1, 4),
+                    tokenizer=self.enhanced_tokenizer,  # Statische Methode
+                    min_df=1, max_df=0.95,
+                    lowercase=True,
+                    strip_accents='unicode',
+                    analyzer='word',
+                    norm='l2',
+                    use_idf=True,
+                    smooth_idf=True,
+                    sublinear_tf=True
+                )
+            
+            # Rekonstruiere LSA-Modell, falls Parameter vorhanden sind
+            if 'lsa_params' in model_data and model_data['lsa_params'] and self.use_lsa:
+                try:
+                    lsa_params = model_data['lsa_params']
+                    from sklearn.decomposition import TruncatedSVD
+                    
+                    self.lsa_model = TruncatedSVD(
+                        n_components=lsa_params.get('n_components', self.lsa_components),
+                        algorithm=lsa_params.get('algorithm', 'randomized'),
+                        n_iter=lsa_params.get('n_iter', 10),
+                        random_state=lsa_params.get('random_state', 42)
+                    )
+                    
+                    # Wenn Komponenten vorhanden sind, setze sie
+                    if 'components' in lsa_params:
+                        import numpy as np
+                        self.lsa_model.components_ = np.array(lsa_params['components'])
+                    
+                    # Wenn Varianzerklärung vorhanden ist, setze sie
+                    if 'explained_variance_ratio' in lsa_params:
+                        self.lsa_model.explained_variance_ratio_ = np.array(lsa_params['explained_variance_ratio'])
+                    
+                    print("📄 LSA-Modell rekonstruiert")
+                except Exception as lsa_error:
+                    print(f"⚠️ Fehler beim Rekonstruieren des LSA-Modells: {str(lsa_error)}")
+                    self.lsa_model = None
+            else:
+                # Kein LSA-Modell in den Daten
+                self.lsa_model = None
+                if self.use_lsa:
+                    print("📄 LSA-Modellparameter nicht gefunden, aber use_lsa=True. LSA wird neu initialisiert.")
+            
+            # Matrix-Objekte müssen neu berechnet werden
+            self.tfidf_matrix = None
+            self.lsa_matrix = None
+            self.hotel_clusterer = None  # Cluster müssen neu berechnet werden
+            
+            # Wenn Texte vorhanden sind, berechne die Matrizen neu
+            if self.hotel_texts and len(self.hotel_texts) > 0:
+                print("🔄 Berechne TF-IDF und LSA-Matrizen neu...")
+                try:
+                    self._retrain_model_quick()
+                except Exception as train_error:
+                    print(f"⚠️ Fehler beim Neutraining: {str(train_error)}")
+                    print("⚠️ Modell ist möglicherweise nicht vollständig funktionsfähig.")
+            else:
+                print("⚠️ Keine Hotel-Texte gefunden. Das Modell ist noch nicht trainiert.")
+                self.is_fitted = False
+            
+            print(f"✅ Text-Modell erfolgreich geladen von {filepath}")
+            return True
+            
+        except Exception as e:
+            print(f"⚠️ Fehler beim Laden des Text-Modells: {str(e)}")
+            print(f"Details: {str(type(e))}: {str(e)}")
+            print("⚠️ Initialisiere ein neues Text-Modell...")
+            self.is_fitted = False
+            return False
+            
+    def _retrain_model_quick(self):
+        """Schnelles Neutraining des TF-IDF-Modells mit vorhandenen Texten"""
+        # Prüfe, ob Hotel-Texte verfügbar sind
+        if not self.hotel_texts or len(self.hotel_texts) == 0:
+            print("⚠️ Keine Hotel-Texte für schnelles Neutraining verfügbar!")
+            return False
         
-        self.tfidf_vectorizer = model_data['tfidf_vectorizer']
-        self.lsa_model = model_data['lsa_model']
-        self.hotel_texts = model_data['hotel_texts']
-        self.hotel_ids = model_data['hotel_ids']
-        self.tfidf_matrix = model_data['tfidf_matrix']
-        self.lsa_matrix = model_data['lsa_matrix']
-        self.max_features = model_data['max_features']
-        self.use_lsa = model_data['use_lsa']
-        self.lsa_components = model_data['lsa_components']
-        self.is_fitted = True
+        try:
+            # Prüfe, ob der TF-IDF-Vektorisierer existiert
+            if not hasattr(self, 'tfidf_vectorizer') or self.tfidf_vectorizer is None:
+                print("⚠️ TF-IDF-Vektorisierer nicht vorhanden, erstelle neu...")
+                self.tfidf_vectorizer = TfidfVectorizer(
+                    max_features=self.max_features,
+                    stop_words='english',
+                    ngram_range=(1, 4),
+                    tokenizer=self.enhanced_tokenizer,  # Verwende die statische Methode
+                    min_df=1, max_df=0.95,
+                    lowercase=True,
+                    strip_accents='unicode',
+                    analyzer='word',
+                    norm='l2',
+                    use_idf=True,
+                    smooth_idf=True,
+                    sublinear_tf=True
+                )
+            
+            print(f"🔄 Trainiere TF-IDF neu mit {len(self.hotel_texts)} Hotel-Texten...")
+            
+            # TF-IDF-Matrix berechnen
+            self.tfidf_matrix = self.tfidf_vectorizer.fit_transform(self.hotel_texts)
+            
+            # Ausgabe der Matrix-Dimensionen zur Überprüfung
+            print(f"📊 TF-IDF-Matrix erstellt: {self.tfidf_matrix.shape[0]} Hotels × {self.tfidf_matrix.shape[1]} Features")
+            
+            # LSA anwenden, wenn aktiviert
+            if self.use_lsa:
+                # Erstelle neues LSA-Modell, falls keines existiert
+                if not self.lsa_model:
+                    # Sichere Berechnung der Komponenten
+                    max_components = min(
+                        self.lsa_components,
+                        self.tfidf_matrix.shape[1] - 1 if self.tfidf_matrix.shape[1] > 1 else 1,
+                        self.tfidf_matrix.shape[0] - 1 if self.tfidf_matrix.shape[0] > 1 else 1,
+                        500  # Absolute Obergrenze
+                    )
+                    
+                    # Mindestens 2 Komponenten
+                    max_components = max(2, max_components)
+                    
+                    self.lsa_model = TruncatedSVD(
+                        n_components=max_components, 
+                        algorithm='randomized', 
+                        random_state=42,
+                        n_iter=10  # Mehr Iterationen für stabilere Ergebnisse
+                    )
+                
+                # LSA-Matrix berechnen
+                try:
+                    self.lsa_matrix = self.lsa_model.fit_transform(self.tfidf_matrix)
+                    print(f"📊 LSA-Transformation durchgeführt: {self.lsa_matrix.shape[1]} Komponenten")
+                except Exception as lsa_error:
+                    print(f"⚠️ Fehler bei LSA-Berechnung: {str(lsa_error)}")
+                    print("⚠️ Fortfahren ohne LSA...")
+                    self.lsa_matrix = None
+                    self.use_lsa = False
+            
+            # Hotel-Clustering, falls aktiviert
+            if self.enable_clustering and len(self.hotel_texts) >= 20:
+                try:
+                    import numpy as np
+                    
+                    # Benutze die passende Matrix für Clustering
+                    matrix_for_clustering = self.lsa_matrix if self.use_lsa and self.lsa_matrix is not None else self.tfidf_matrix
+                    
+                    # Erstelle neues Cluster-Modell, falls keines existiert
+                    if not self.hotel_clusterer:
+                        n_clusters = min(20, len(self.hotel_texts) // 10)  # Nicht mehr Cluster als 1/10 der Hotels
+                        n_clusters = max(2, n_clusters)  # Mindestens 2 Cluster
+                        self.hotel_clusterer = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
+                    
+                    # Clustering durchführen
+                    # Für KMeans mit sparsen Matrizen müssen wir zu einem dichten Array konvertieren
+                    if isinstance(matrix_for_clustering, np.ndarray):
+                        self.hotel_clusters = self.hotel_clusterer.fit_predict(matrix_for_clustering)
+                    else:
+                        self.hotel_clusters = self.hotel_clusterer.fit_predict(matrix_for_clustering.toarray())
+                    
+                    print(f"📊 Hotel-Clustering durchgeführt")
+                except Exception as cluster_error:
+                    print(f"⚠️ Fehler beim Hotel-Clustering: {str(cluster_error)}")
+                    self.hotel_clusters = None
+            
+            self.is_fitted = True
+            print("✅ Schnelles Neutraining erfolgreich abgeschlossen")
+            return True
         
-        print(f"✅ Text model loaded from {filepath}")
+        except Exception as e:
+            print(f"❌ Fehler beim schnellen Neutraining: {str(e)}")
+            self.tfidf_matrix = None
+            self.lsa_matrix = None
+            self.is_fitted = False
+            return False
     
     def _enhance_query(self, query: str) -> str:
         """
