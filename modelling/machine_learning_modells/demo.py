@@ -185,6 +185,22 @@ class TravelHuntersDemo:
                 
                 # Setze Trainingsstatus basierend auf geladenen Modellen
                 self.hybrid_model.is_trained = param_model_loaded and text_model_loaded
+                
+                # Initialisiere den Scaler mit den geladenen Daten
+                try:
+                    print("  🔄 Initialisiere den Scaler für das Hybrid-Modell...")
+                    if 'rating' in self.features_df.columns:
+                        sample_data = self.features_df[['rating']].values
+                        self.hybrid_model.scaler.fit(sample_data)
+                        print("  ✓ Hybrid-Modell Scaler mit realen Daten initialisiert")
+                    else:
+                        # Fallback mit Dummy-Daten
+                        import numpy as np
+                        self.hybrid_model.scaler.fit(np.array([[5.0], [10.0]]))
+                        print("  ✓ Hybrid-Modell Scaler mit Dummy-Daten initialisiert")
+                except Exception as e:
+                    print(f"  ⚠️ Warnung bei Scaler-Initialisierung: {e}")
+                
                 print("  ✓ Hybrid-Modell mit geladenen Komponenten initialisiert")
                 
                 # Rückgabe abhängig davon, ob beide Modelle geladen wurden
@@ -816,11 +832,27 @@ class TravelHuntersDemo:
                 for model_name, recs, score_col in models:
                     if i < len(recs):
                         hotel = recs.iloc[i]
-                        name = hotel.get('hotel_name', hotel.get('name', 'Unknown'))
-                        score = hotel[score_col]
-                        price = hotel['price']
-                        rating = hotel['rating']
-                        print(f"  {model_name:8}: {name[:25]:25} (Score: {score:.3f}, ${price:.0f}, {rating:.1f}⭐)")
+                        # Sichere Namenszuweisung mit Typprüfung
+                        if 'hotel_name' in hotel and isinstance(hotel['hotel_name'], str):
+                            name = hotel['hotel_name']
+                        elif 'name' in hotel and isinstance(hotel['name'], str):
+                            name = hotel['name']
+                        else:
+                            name = f"Hotel {hotel.get('hotel_id', i)}"
+                            
+                        # Sichere Wertextraktion mit Fallbacks
+                        try:
+                            score = float(hotel.get(score_col, 0.0))
+                            price = float(hotel.get('price', 0.0))
+                            rating = float(hotel.get('rating', 0.0))
+                        except (TypeError, ValueError):
+                            score = 0.0
+                            price = 0.0
+                            rating = 0.0
+                            
+                        # Formatiere Name für Ausgabe mit Längenprüfung
+                        display_name = name[:25] if isinstance(name, str) else str(name)
+                        print(f"  {model_name:8}: {display_name:25} (Score: {score:.3f}, ${price:.0f}, {rating:.1f}⭐)")
                     else:
                         print(f"  {model_name:8}: {'No recommendation':25}")
                         
@@ -871,17 +903,21 @@ class TravelHuntersDemo:
                 unique_recommendations['name'] = unique_recommendations['hotel_name']
             
             for i, (_, hotel) in enumerate(unique_recommendations.iterrows(), 1):
-                # Hole den Hotelnamen mit Fallbacks
-                if 'hotel_name' in hotel:
+                # Hole den Hotelnamen mit Fallbacks und Typüberprüfung
+                if 'hotel_name' in hotel and isinstance(hotel['hotel_name'], str):
                     name = hotel['hotel_name']
-                elif 'name' in hotel:
+                elif 'name' in hotel and isinstance(hotel['name'], str):
                     name = hotel['name']
                 else:
-                    name = f"Hotel #{i}"
+                    # Fallback für nicht-String-Werte oder fehlende Namen
+                    name = f"Hotel {hotel.get('hotel_id', i)}"
                 
                 # Hole den Score mit Fallbacks
                 if score_col in hotel:
-                    score = hotel[score_col]
+                    try:
+                        score = float(hotel[score_col])
+                    except (TypeError, ValueError):
+                        score = 0.0
                 else:
                     score = 0.0
                 
@@ -890,8 +926,12 @@ class TravelHuntersDemo:
                 rating = hotel.get('rating', 0)
                 location = hotel.get('location', 'Unknown Location')
                 
-                print(f"\n{i}. {name}")
-                print(f"   📍 {location}")
+                # Verwende abgesicherte String-Manipulation
+                display_name = name[:50] if isinstance(name, str) else str(name)
+                location_str = str(location) if pd.notna(location) else "Unknown Location"
+                
+                print(f"\n{i}. {display_name}")
+                print(f"   📍 {location_str}")
                 print(f"   💰 ${price:.0f}/night")
                 print(f"   ⭐ {rating:.1f}/10.0")
                 print(f"   🎯 Score: {score:.3f}")
@@ -927,8 +967,8 @@ class TravelHuntersDemo:
                 print("❌ Konnte Empfehlungen nicht anzeigen.")
     
     def _display_explanation(self, explanation: dict):
-        """Display recommendation explanation"""
-        if not explanation:
+        """Display recommendation explanation with improved error handling"""
+        if not explanation or not isinstance(explanation, dict):
             print("\n⚠️ Keine Erklärung für diese Empfehlung verfügbar.")
             return
         
@@ -938,34 +978,110 @@ class TravelHuntersDemo:
                 print(f"\n⚠️ Fehler bei der Erklärungsgenerierung: {explanation['error']}")
                 return
             
+            # Sichere Namensextraktion mit Typprüfung
             hotel_name = explanation.get('hotel_name', 'Dieses Hotel')
+            if not isinstance(hotel_name, str) or not hotel_name.strip():
+                hotel_name = f"Hotel {explanation.get('hotel_id', 'ID unbekannt')}"
+                
             print(f"\n💡 Why we recommended {hotel_name}:")
             print("-" * 50)
             
+            # Preise und Bewertungen anzeigen
+            try:
+                hotel_price = explanation.get('hotel_price', None)
+                if hotel_price is not None and isinstance(hotel_price, (int, float)):
+                    print(f"💰 Price: ${hotel_price:.0f}")
+                
+                hotel_rating = explanation.get('hotel_rating', None)
+                if hotel_rating is not None and isinstance(hotel_rating, (int, float)):
+                    print(f"⭐ Rating: {hotel_rating:.1f}/10.0")
+            except Exception:
+                # Fehler beim Anzeigen von Preis/Bewertung ignorieren
+                pass
+            
             if 'explanations' not in explanation or not explanation['explanations']:
                 print("Keine detaillierten Erklärungen verfügbar.")
+                print("Das Hotel wurde basierend auf Ihrer Anfrage ausgewählt, aber detaillierte Begründungen können nicht angezeigt werden.")
                 return
-                
+            
+            # Modellbeiträge anzeigen
+            if 'model_contributions' in explanation and isinstance(explanation['model_contributions'], dict):
+                print("\n📊 Relevanz der Modelle:")
+                try:
+                    param_pct = explanation['model_contributions'].get('parameter_model', 50.0)
+                    text_pct = explanation['model_contributions'].get('text_model', 50.0)
+                    
+                    if isinstance(param_pct, (int, float)) and isinstance(text_pct, (int, float)):
+                        print(f"  • Parameter-basiert: {param_pct:.1f}%")
+                        print(f"  • Text-basiert: {text_pct:.1f}%")
+                        
+                        if 'model_contributions_note' in explanation:
+                            print(f"  Hinweis: {explanation['model_contributions_note']}")
+                except Exception:
+                    print("  • Konnte prozentuale Verteilung nicht anzeigen.")
+            
+            # Einzelne Modell-Erklärungen
             for exp in explanation['explanations']:
-                model_type = exp.get('model', 'Unknown').title()
-                score = exp.get('score', 0.0)
+                if not isinstance(exp, dict):
+                    continue
+                    
+                model_type = exp.get('model', 'Unknown')
+                if isinstance(model_type, str):
+                    if model_type.lower() == 'parameter':
+                        model_emoji = '🔢'
+                        model_type = "Parameter"
+                    elif model_type.lower() == 'text':
+                        model_emoji = '📝'
+                        model_type = "Text"
+                    else:
+                        model_emoji = '🔍'
+                        model_type = model_type.title()
+                else:
+                    model_emoji = '🔍'
+                    model_type = "Unbekanntes Modell"
                 
-                print(f"\n🔍 {model_type} Model (Score: {score:.3f}):")
+                # Sichere Konvertierung des Scores
+                score_display = "N/A"
+                try:
+                    score = exp.get('score', None)
+                    if score is not None:
+                        score = float(score)
+                        # Für Text-Modell, das 0-1 Score hat
+                        if model_type.lower() == 'text' and score <= 1.0:
+                            score_display = f"{score:.3f}/1.0"
+                        # Für Parameter-Modell, das 0-10 Score hat
+                        else:
+                            score_display = f"{score:.2f}/10.0"
+                except (TypeError, ValueError):
+                    pass
+                
+                print(f"\n{model_emoji} {model_type} Model (Score: {score_display}):")
                 
                 reasons = exp.get('reasons', [])
-                if not reasons:
+                if not reasons or not isinstance(reasons, list):
                     print("    • Keine Details verfügbar")
                     continue
                     
                 for reason in reasons:
-                    print(f"    • {reason}")
+                    if isinstance(reason, str):
+                        print(f"    • {reason}")
+                    else:
+                        print(f"    • {str(reason)}")
             
+            # Sichere Zusammenfassung
             summary = explanation.get('summary', "Dieses Hotel entspricht am besten Ihren angegebenen Präferenzen.")
+            if not isinstance(summary, str) or not summary.strip():
+                summary = "Dieses Hotel wurde basierend auf der Kombination von Preis, Bewertung und Beschreibungsmatch ausgewählt."
+                
             print(f"\n📋 Summary: {summary}")
             
         except Exception as e:
             print(f"\n⚠️ Fehler bei der Anzeige der Erklärung: {e}")
             print("Detaillierte Erklärung konnte nicht angezeigt werden.")
+            # Fallback-Erklärung
+            print("\n💡 Allgemeine Erklärung:")
+            print("Dieses Hotel wurde ausgewählt, weil es Ihren Preis- und Bewertungskriterien entspricht")
+            print("und eine gute Übereinstimmung mit Ihrer Beschreibung aufweist.")
     
     def run_evaluation(self):
         """Run model evaluation"""
