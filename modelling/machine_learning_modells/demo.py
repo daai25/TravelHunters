@@ -28,11 +28,22 @@ except ImportError:
 class TravelHuntersDemo:
     """Interactive demo for the hotel recommendation system"""
     
-    def __init__(self, enable_data_augmentation: bool = True):
+    def __init__(self, enable_data_augmentation: bool = True, models_dir: str = None):
         self.loader = HotelDataLoader()
         self.engineer = HotelFeatureEngineer()
         self.evaluator = RecommenderEvaluator()
         self.matrix_builder = RecommendationMatrixBuilder() if RecommendationMatrixBuilder else None
+        
+        # Verzeichnis für gespeicherte Modelle
+        if models_dir is None:
+            self.models_dir = Path(current_dir) / "saved_models"
+        else:
+            self.models_dir = Path(models_dir)
+        
+        # Modell-Dateipfade
+        self.param_model_path = self.models_dir / "param_model.joblib"
+        self.text_model_path = self.models_dir / "text_model.joblib"
+        self.hybrid_model_path = self.models_dir / "hybrid_model.joblib"
         
         # Data augmentation settings
         self.enable_data_augmentation = enable_data_augmentation
@@ -82,13 +93,139 @@ class TravelHuntersDemo:
         if self.enable_data_augmentation:
             self.features_df = self.engineer.add_feature_noise(self.features_df, noise_level=0.03)
         
-        # Initialize models
-        print("🤖 Training models...")
-        self._train_models()
+        # Versuche gespeicherte Modelle zu laden oder trainiere neu
+        if not self._load_models():
+            print("🔄 Keine gespeicherten Modelle gefunden oder Laden fehlgeschlagen. Training beginnt...")
+            self._train_models()
+            self._save_models()
+        else:
+            print("✅ Gespeicherte Modelle erfolgreich geladen!")
         
         self.is_initialized = True
         print("✅ Demo initialized successfully!")
         return True
+    
+    def _ensure_model_dir_exists(self):
+        """Stelle sicher, dass das Modell-Verzeichnis existiert"""
+        if not self.models_dir.exists():
+            self.models_dir.mkdir(parents=True, exist_ok=True)
+            print(f"📁 Modell-Verzeichnis erstellt: {self.models_dir}")
+    
+    def _load_models(self):
+        """Lade gespeicherte Modelle wenn vorhanden"""
+        # Prüfe ob alle erforderlichen Modelldateien existieren
+        param_model_exists = self.param_model_path.exists()
+        text_model_exists = self.text_model_path.exists()
+        
+        if not param_model_exists or not text_model_exists:
+            print("⚠️ Nicht alle Modelle gefunden:")
+            if not param_model_exists:
+                print(f"  • Parameter-Modell nicht gefunden: {self.param_model_path}")
+            if not text_model_exists:
+                print(f"  • Text-Modell nicht gefunden: {self.text_model_path}")
+            return False
+        
+        print("📂 Lade gespeicherte Modelle...")
+        
+        # Erfolgs-Flag für das Laden
+        param_model_loaded = False
+        text_model_loaded = False
+        
+        # Parameter-Modell laden
+        try:
+            self.param_model = ParameterBasedRecommender()
+            self.param_model.load_model(str(self.param_model_path))
+            print("  ✓ Parameter-Modell geladen")
+            param_model_loaded = True
+        except Exception as e:
+            print(f"  ❌ Fehler beim Laden des Parameter-Modells: {e}")
+        
+        # Text-Modell laden
+        try:
+            self.text_model = TextBasedRecommender()
+            self.text_model.load_model(str(self.text_model_path))
+            print("  ✓ Text-Modell geladen")
+            text_model_loaded = True
+        except Exception as e:
+            print(f"  ❌ Fehler beim Laden des Text-Modells: {e}")
+            print("  🔄 Versuche ein neues Text-Modell zu initialisieren...")
+            self.text_model = TextBasedRecommender(max_features=500)
+        
+        # Wenn mindestens ein Modell geladen werden konnte, initialisiere das Hybrid-Modell
+        if param_model_loaded or text_model_loaded:
+            try:
+                # Hybrid-Modell initialisieren - wir initialisieren neu statt zu laden
+                self.hybrid_model = HybridRecommender()
+                
+                # Wenn Parameter-Modell geladen wurde, setze es im Hybrid-Modell
+                if param_model_loaded:
+                    self.hybrid_model.param_recommender = self.param_model
+                
+                # Wenn Text-Modell geladen wurde, setze es im Hybrid-Modell
+                if text_model_loaded:
+                    self.hybrid_model.text_recommender = self.text_model
+                
+                # Setze Trainingsstatus basierend auf geladenen Modellen
+                self.hybrid_model.is_trained = param_model_loaded and text_model_loaded
+                print("  ✓ Hybrid-Modell mit geladenen Komponenten initialisiert")
+                
+                # Rückgabe abhängig davon, ob beide Modelle geladen wurden
+                return param_model_loaded and text_model_loaded
+            
+            except Exception as e:
+                print(f"  ❌ Fehler beim Initialisieren des Hybrid-Modells: {e}")
+                return False
+        else:
+            print("  ❌ Keines der Modelle konnte geladen werden.")
+            return False
+    
+    def _save_models(self):
+        """Speichere trainierte Modelle"""
+        try:
+            self._ensure_model_dir_exists()
+            print("💾 Speichere trainierte Modelle...")
+            
+            # Parameter-Modell speichern
+            try:
+                self.param_model.save_model(str(self.param_model_path))
+                print(f"  ✓ Parameter-Modell gespeichert: {self.param_model_path}")
+            except Exception as e:
+                print(f"  ⚠️ Fehler beim Speichern des Parameter-Modells: {e}")
+            
+            # Text-Modell speichern
+            try:
+                success = self.text_model.save_model(str(self.text_model_path))
+                if success:
+                    print(f"  ✓ Text-Modell gespeichert: {self.text_model_path}")
+                else:
+                    print(f"  ⚠️ Text-Modell konnte nicht vollständig gespeichert werden")
+            except Exception as e:
+                print(f"  ⚠️ Fehler beim Speichern des Text-Modells: {e}")
+                print("  🔄 Versuche mit vereinfachter Methode zu speichern...")
+                try:
+                    # Speichere nur die wichtigsten Attribute als Fallback
+                    import joblib
+                    minimal_data = {
+                        'is_fitted': True,
+                        'max_features': self.text_model.max_features,
+                        'use_lsa': self.text_model.use_lsa,
+                        'lsa_components': self.text_model.lsa_components,
+                        'hotel_texts': self.text_model.hotel_texts if hasattr(self.text_model, 'hotel_texts') else [],
+                        'hotel_ids': self.text_model.hotel_ids if hasattr(self.text_model, 'hotel_ids') else []
+                    }
+                    joblib.dump(minimal_data, str(self.text_model_path))
+                    print(f"  ✓ Minimales Text-Modell gespeichert: {self.text_model_path}")
+                except Exception as e2:
+                    print(f"  ❌ Auch das minimale Speichern ist fehlgeschlagen: {e2}")
+            
+            # Hybrid-Modell wird nicht gespeichert, da es die anderen Modelle verwendet
+            print("  ℹ️ Hybrid-Modell verwendet die gespeicherten Basis-Modelle")
+            
+            return True
+        
+        except Exception as e:
+            print(f"❌ Fehler beim Speichern der Modelle: {e}")
+            return False
     
     def _train_models(self):
         """Train all recommendation models"""
@@ -348,7 +485,8 @@ class TravelHuntersDemo:
             text_importance = float(input("  Match with your description: ") or "7") / 10
             price_importance = float(input("  Price-value ratio: ") or "3") / 10
             rating_importance = float(input("  Hotel ratings: ") or "3") / 10
-            model_importance = float(input("  ML predictions: ") or "4") / 10
+            # ML predictions weight set automatically
+            model_importance = 0.4  # Default value of 0.4
             
             # Normalize weights
             total_weight = text_importance + price_importance + rating_importance + model_importance
@@ -486,7 +624,8 @@ class TravelHuntersDemo:
             text_importance = float(input("  Description match: ") or "7") / 10
             price_importance = float(input("  Price considerations: ") or "3") / 10
             rating_importance = float(input("  Hotel ratings: ") or "3") / 10
-            model_importance = float(input("  ML predictions: ") or "4") / 10
+            # ML predictions weight set automatically
+            model_importance = 0.4  # Default value of 0.4
             
             # Normalize weights
             total_weight = text_importance + price_importance + rating_importance + model_importance
@@ -869,31 +1008,59 @@ def main():
     print("=" * 60)
     
     if not demo.initialize():
+        print("❌ Fehler bei der Initialisierung der Demo. Beende Programm.")
         return
     
-    while True:
-        print("\nWhat would you like to do?")
-        print("1. View data summary")
-        print("2. Get hotel recommendations")
-        print("3. Run model evaluation")
-        print("4. Analyze model strengths & weaknesses")
-        print("5. Exit")
+    # Flag für neues Training während der Demo-Laufzeit
+    new_training_done = False
+    
+    try:
+        while True:
+            print("\nWhat would you like to do?")
+            print("1. View data summary")
+            print("2. Get hotel recommendations")
+            print("3. Run model evaluation")
+            print("4. Analyze model strengths & weaknesses")
+            print("5. Modelle neu trainieren und speichern")
+            print("6. Exit")
+            
+            choice = input("\nEnter your choice (1-6): ").strip()
+            
+            if choice == '1':
+                demo.show_data_summary()
+            elif choice == '2':
+                demo.interactive_recommendation()
+            elif choice == '3':
+                demo.run_evaluation()
+            elif choice == '4':
+                demo.analyze_models()
+            elif choice == '5':
+                print("\n🔄 Starte Neutraining der Modelle...")
+                demo._train_models()
+                success = demo._save_models()
+                if success:
+                    print("✅ Modelle wurden neu trainiert und gespeichert!")
+                    new_training_done = True
+                else:
+                    print("⚠️ Modelle wurden trainiert, aber es gab Probleme beim Speichern.")
+            elif choice == '6':
+                print("👋 Thank you for using TravelHunters!")
+                
+                # Beim Beenden automatisch speichern, wenn ein neues Training gemacht wurde
+                if new_training_done:
+                    print("Modelle wurden bereits während der Sitzung gespeichert.")
+                break
+            else:
+                print("❌ Invalid choice. Please enter 1-6.")
+                
+    except KeyboardInterrupt:
+        print("\n\n⚠️ Programm durch Benutzer unterbrochen")
         
-        choice = input("\nEnter your choice (1-5): ").strip()
+    except Exception as e:
+        print(f"\n\n❌ Unerwarteter Fehler: {e}")
         
-        if choice == '1':
-            demo.show_data_summary()
-        elif choice == '2':
-            demo.interactive_recommendation()
-        elif choice == '3':
-            demo.run_evaluation()
-        elif choice == '4':
-            demo.analyze_models()
-        elif choice == '5':
-            print("👋 Thank you for using TravelHunters!")
-            break
-        else:
-            print("❌ Invalid choice. Please enter 1-5.")
+    finally:
+        print("\n👋 Auf Wiedersehen!")
 
 if __name__ == "__main__":
     main()
