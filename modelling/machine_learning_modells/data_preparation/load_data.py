@@ -13,12 +13,12 @@ from typing import List, Dict, Optional, Tuple
 class HotelDataLoader:
     def __init__(self, db_path: str = None):
         """Initialize data loader with database path"""
-        # Set project root
-        self.project_root = Path(__file__).parent.parent.parent
+        # Set project root (geht eine Ebene höher, um den TravelHunters Hauptordner zu erreichen)
+        self.project_root = Path(__file__).parent.parent.parent.parent
         
         if db_path is None:
-            # Default path to database
-            self.db_path = self.project_root / "database" / "travelhunters.db"
+            # Default path to database - korrigierter Pfad
+            self.db_path = self.project_root / "data_acquisition" / "database" / "travelhunters.db"
         else:
             self.db_path = Path(db_path)
     
@@ -79,13 +79,24 @@ class HotelDataLoader:
     
     def _load_from_database(self) -> pd.DataFrame:
         """Load hotel data from the booking_worldwide table in SQLite database"""
-        # Correct path to database
-        db_path = self.project_root / "data_acquisition" / "database" / "travelhunters.db"
+        # Verwende den in __init__ gesetzten Datenbankpfad
+        if not self.db_path.exists():
+            # Versuche einen alternativen Pfad, falls der erste nicht funktioniert
+            alt_paths = [
+                self.project_root / "data_acquisition" / "database" / "travelhunters.db",
+                Path(__file__).parent.parent.parent.parent / "data_acquisition" / "database" / "travelhunters.db",
+                Path.home() / "PycharmProjects" / "SummerSchool" / "TravelHunters" / "data_acquisition" / "database" / "travelhunters.db"
+            ]
+            
+            for alt_path in alt_paths:
+                if alt_path.exists():
+                    print(f"⚠️ Ursprünglicher Pfad nicht gefunden, verwende alternativen Pfad: {alt_path}")
+                    self.db_path = alt_path
+                    break
+            else:
+                raise FileNotFoundError(f"Database file not found: {self.db_path}\nVersuchte alternative Pfade: {alt_paths}")
         
-        if not db_path.exists():
-            raise FileNotFoundError(f"Database file not found: {db_path}")
-        
-        conn = sqlite3.connect(db_path)
+        conn = sqlite3.connect(self.db_path)
         
         # Query the booking_worldwide table
         query = """
