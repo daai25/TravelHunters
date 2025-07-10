@@ -336,6 +336,25 @@ class ParameterBasedRecommender:
         """
         if not self.is_trained:
             raise ValueError("Model must be trained before making recommendations")
+            
+        # Sicherstellen, dass der Scaler richtig initialisiert ist
+        if not hasattr(self.scaler, 'n_samples_seen_') or self.scaler.n_samples_seen_ is None:
+            try:
+                if 'rating' in hotels_df.columns:
+                    self.scaler.fit(hotels_df[['rating']].values)
+                else:
+                    import numpy as np
+                    self.scaler.fit(np.array([[5.0], [10.0]]))
+            except Exception as e:
+                print(f"⚠️ Warnung bei Scaler-Initialisierung: {e}")
+                # Als Fallback neu erstellen
+                try:
+                    from sklearn.preprocessing import RobustScaler
+                    import numpy as np
+                    self.scaler = RobustScaler()
+                    self.scaler.fit(np.array([[5.0], [10.0]]))
+                except Exception as e2:
+                    print(f"❌ Fehler bei Scaler-Erstellung: {e2}")
         
         print(f"🎯 Generating parameter-based recommendations...")
         
@@ -770,10 +789,23 @@ class ParameterBasedRecommender:
         if not self.is_trained:
             raise ValueError("Model must be trained before saving")
         
+        # Ensure the scaler is fit before saving
+        if not hasattr(self.scaler, 'n_samples_seen_') or self.scaler.n_samples_seen_ is None:
+            try:
+                import numpy as np
+                self.scaler.fit(np.array([[5.0], [10.0]]))
+                print("⚠️ Initialized scaler with dummy data before saving")
+            except Exception as e:
+                print(f"⚠️ Warning: Could not initialize scaler: {e}")
+        
         model_data = {
             'model': self.model,
             'feature_columns': self.feature_columns,
-            'model_type': self.model_type
+            'model_type': self.model_type,
+            'scaler': self.scaler,  # Speichere auch den Skalierer
+            'feature_selector': self.feature_selector,
+            'best_params_': self.best_params_,
+            'feature_importance_': self.feature_importance_
         }
         joblib.dump(model_data, filepath)
         print(f"✅ Model saved to {filepath}")
@@ -784,6 +816,22 @@ class ParameterBasedRecommender:
         self.model = model_data['model']
         self.feature_columns = model_data['feature_columns']
         self.model_type = model_data['model_type']
+        
+        # Lade auch den Skalierer, wenn vorhanden
+        if 'scaler' in model_data:
+            self.scaler = model_data['scaler']
+            print("  ✓ Scaler loaded from saved model")
+        else:
+            print("  ⚠️ No scaler found in saved model, using default")
+            
+        # Lade weitere gespeicherte Attribute wenn vorhanden
+        if 'feature_selector' in model_data:
+            self.feature_selector = model_data['feature_selector']
+        if 'best_params_' in model_data:
+            self.best_params_ = model_data['best_params_']
+        if 'feature_importance_' in model_data:
+            self.feature_importance_ = model_data['feature_importance_']
+            
         self.is_trained = True
         print(f"✅ Model loaded from {filepath}")
 
