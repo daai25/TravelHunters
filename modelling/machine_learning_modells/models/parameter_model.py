@@ -339,39 +339,105 @@ class ParameterBasedRecommender:
         
         print(f"🎯 Generating parameter-based recommendations...")
         
-        # Get base predictions
-        predictions_df = self.predict_hotel_scores(hotels_df)
-        
-        # Apply user preference filters FIRST
-        filtered_df = self._apply_user_filters(predictions_df, user_preferences)
-        
-        if filtered_df.empty:
-            print("❌ No hotels match your criteria. Try relaxing your filters.")
+        try:
+            # Get base predictions
+            predictions_df = self.predict_hotel_scores(hotels_df)
+            
+            # Apply user preference filters FIRST
+            filtered_df = self._apply_user_filters(predictions_df, user_preferences)
+            
+            if filtered_df.empty:
+                print("❌ No hotels match your criteria. Trying relaxed filters.")
+                
+                # Automatisch Filter entspannen und erneut versuchen
+                relaxed_preferences = user_preferences.copy()
+                
+                # Stufenweise Entspannung der Filter
+                relaxation_steps = [
+                    {"min_rating_change": -1.0, "max_price_multiplier": 1.25, "message": "Etwas entspannte Filter anwenden..."},
+                    {"min_rating_change": -2.0, "max_price_multiplier": 1.5, "message": "Stark entspannte Filter anwenden..."},
+                    {"min_rating_change": -5.0, "max_price_multiplier": 2.0, "message": "Minimale Filter anwenden..."},
+                ]
+                
+                for step in relaxation_steps:
+                    print(f"⚠️ {step['message']}")
+                    
+                    # Bewertungsfilter entspannen
+                    if 'min_rating' in relaxed_preferences:
+                        original_rating = relaxed_preferences['min_rating']
+                        relaxed_preferences['min_rating'] = max(0.0, original_rating + step['min_rating_change'])
+                    
+                    # Preisfilter entspannen
+                    if 'max_price' in relaxed_preferences:
+                        original_price = relaxed_preferences['max_price']
+                        relaxed_preferences['max_price'] = original_price * step['max_price_multiplier']
+                    
+                    # Erneut mit entspannten Filtern versuchen
+                    filtered_df = self._apply_user_filters(predictions_df, relaxed_preferences)
+                    
+                    if not filtered_df.empty and len(filtered_df) >= 3:
+                        print(f"✅ Mit entspannten Filtern wurden {len(filtered_df)} Hotels gefunden.")
+                        break
+                
+                # Wenn immer noch leer, keine Filter anwenden
+                if filtered_df.empty:
+                    print("⚠️ Auch mit minimalen Filtern keine Hotels gefunden. Verwende alle verfügbaren Hotels.")
+                    filtered_df = predictions_df
+            
+            print(f"🔍 After filtering: {len(filtered_df)} hotels remain")
+            
+            # Apply sophisticated preference weighting
+            weighted_df = self._apply_preference_weighting(filtered_df, user_preferences)
+            
+            # Add diversity scoring to avoid too similar hotels
+            if len(weighted_df) > top_k:
+                try:
+                    weighted_df = self._add_diversity_scoring(weighted_df, top_k)
+                except Exception as e:
+                    print(f"⚠️ Fehler beim Diversity-Scoring: {e}")
+                    # Nicht kritisch, können ohne Diversity weitermachen
+            
+            # Sortieren und Top-K zurückgeben
+            if 'final_score' in weighted_df.columns:
+                sorted_df = weighted_df.sort_values('final_score', ascending=False)
+            else:
+                # Fallback wenn final_score nicht existiert
+                sorted_df = weighted_df.sort_values('predicted_score', ascending=False)
+                sorted_df['final_score'] = sorted_df['predicted_score']
+            
+            # Stelle sicher, dass wir Ergebnisse haben
+            if sorted_df.empty:
+                print("❌ Keine Hotels gefunden, die Ihren Kriterien entsprechen.")
+                return pd.DataFrame()
+            
+            results = sorted_df.head(top_k)
+            print(f"✅ Generated {len(results)} parameter-based recommendations")
+            
+            # Kopiere wichtige Spalten falls sie fehlen
+            for col_name in ['hotel_name', 'name']:
+                if col_name in results.columns:
+                    if 'hotel_name' not in results.columns:
+                        results['hotel_name'] = results[col_name]
+                    elif 'name' not in results.columns:
+                        results['name'] = results[col_name]
+                    break
+            
+            # Stelle sicher, dass hotel_id als Spalte existiert
+            if 'hotel_id' not in results.columns and 'id' in results.columns:
+                results['hotel_id'] = results['id']
+            
+            # Entferne Duplikate vor der Rückgabe
+            if 'name' in results.columns:
+                results = results.drop_duplicates(subset=['name'], keep='first')
+            elif 'hotel_name' in results.columns:
+                results = results.drop_duplicates(subset=['hotel_name'], keep='first')
+            
+            return results
+            
+        except Exception as e:
+            print(f"❌ Error in parameter-based recommendations: {e}")
+            # Im Fehlerfall ein leeres DataFrame zurückgeben
             return pd.DataFrame()
-        
-        print(f"🔍 After filtering: {len(filtered_df)} hotels remain")
-        
-        # Apply sophisticated preference weighting
-        weighted_df = self._apply_preference_weighting(filtered_df, user_preferences)
-        
-        # Add diversity scoring to avoid too similar hotels
-        if len(weighted_df) > top_k:
-            weighted_df = self._add_diversity_scoring(weighted_df, top_k)
-        
-        # Sort by final score and return top-k
-        recommendations = weighted_df.sort_values('final_score', ascending=False).head(top_k)
-        
-        # Remove duplicates by hotel name (keep highest score)
-        if 'name' in recommendations.columns:
-            recommendations = recommendations.drop_duplicates(subset=['name'], keep='first')
-        
-        # Add explanation scores for transparency
-        if len(recommendations) > 0:
-            recommendations = self._add_explanation_scores(recommendations, user_preferences)
-        
-        print(f"✅ Generated {len(recommendations)} parameter-based recommendations")
-        
-        return recommendations.reset_index(drop=True)
     
     def _add_diversity_scoring(self, df: pd.DataFrame, top_k: int) -> pd.DataFrame:
         """Add diversity scoring to avoid recommending too similar hotels"""
@@ -463,190 +529,218 @@ class ParameterBasedRecommender:
         
         return recommendations[available_columns]
     
-    def _apply_user_filters(self, predictions_df: pd.DataFrame, preferences: Dict) -> pd.DataFrame:
-        """Apply hard filters based on user preferences"""
-        # Now predictions_df contains all hotel data including predicted_score
+    def _apply_user_filters(self, predictions_df: pd.DataFrame, user_preferences: Dict) -> pd.DataFrame:
+        """
+        Apply user preference filters with improved error handling and more flexible filtering
+        
+        Args:
+            predictions_df: DataFrame with hotel predictions
+            user_preferences: User preference dictionary
+            
+        Returns:
+            Filtered DataFrame
+        """
         filtered_df = predictions_df.copy()
         
-        print(f"🔍 Starting with {len(filtered_df)} hotels")
-        
-        # Price filter
-        if 'max_price' in preferences:
-            max_price = preferences['max_price']
-            before_count = len(filtered_df)
-            filtered_df = filtered_df[filtered_df['price'] <= max_price]
-            print(f"🔍 Price filter (≤${max_price}): {before_count} → {len(filtered_df)} hotels")
-        
-        # Rating filter
-        if 'min_rating' in preferences:
-            min_rating = preferences['min_rating']
-            before_count = len(filtered_df)
-            filtered_df = filtered_df[filtered_df['rating'] >= min_rating]
-            print(f"🔍 Rating filter (≥{min_rating}): {before_count} → {len(filtered_df)} hotels")
-        
-        # Distance filter (if available)
-        if 'max_distance' in preferences and 'distance_km' in filtered_df.columns:
-            max_distance = preferences['max_distance']
-            before_count = len(filtered_df)
-            filtered_df = filtered_df[filtered_df['distance_km'] <= max_distance]
-            print(f"🔍 Distance filter (≤{max_distance}km): {before_count} → {len(filtered_df)} hotels")
-        
-        # Note: Amenities are now handled as preferences in scoring, not as hard filters
-        
-        return filtered_df
+        try:
+            # Price filter
+            if 'max_price' in user_preferences and pd.notna(user_preferences['max_price']):
+                max_price = float(user_preferences['max_price'])
+                price_mask = filtered_df['price'] <= max_price
+                filtered_df = filtered_df[price_mask]
+                print(f"  After price filter (≤${max_price}): {len(filtered_df)} hotels")
+                
+                # Wenn zu wenige Hotels übrig sind, Filter entspannen
+                if len(filtered_df) < 5 and len(predictions_df) > 5:
+                    relaxed_max_price = max_price * 1.3  # 30% höheres Budget
+                    price_mask = predictions_df['price'] <= relaxed_max_price
+                    filtered_df = predictions_df[price_mask]
+                    print(f"  Relaxed price filter (≤${relaxed_max_price:.2f}): {len(filtered_df)} hotels")
+            
+            # Rating filter (if available)
+            if 'min_rating' in user_preferences and pd.notna(user_preferences['min_rating']):
+                min_rating = float(user_preferences['min_rating'])
+                
+                # Prüfe, ob die Bewertungen in der richtigen Skala sind
+                # Manche Systeme verwenden 1-5 Sterne, andere 1-10
+                # Skalieren wenn nötig
+                max_rating_in_data = filtered_df['rating'].max()
+                
+                # Wenn das Maximum unter 5.5 ist, nutzen wir wahrscheinlich eine 5-Punkte-Skala
+                if max_rating_in_data <= 5.5 and min_rating > 5:
+                    adjusted_min_rating = min_rating / 2  # Konvertiere von 10er auf 5er Skala
+                    print(f"  Adjusting rating scale from 1-10 to 1-5. Min rating: {min_rating} → {adjusted_min_rating}")
+                    min_rating = adjusted_min_rating
+                
+                rating_mask = filtered_df['rating'] >= min_rating
+                filtered_df_with_rating = filtered_df[rating_mask]
+                print(f"  After rating filter (≥{min_rating}): {len(filtered_df_with_rating)} hotels")
+                
+                # Entspanne den Filter schrittweise, wenn zu wenige Hotels übrig bleiben
+                if len(filtered_df_with_rating) < 5:
+                    relaxation_steps = [0.5, 1.0, 1.5, 2.0]  # Entspanne in 0.5-Punkt-Schritten
+                    
+                    for step in relaxation_steps:
+                        relaxed_min_rating = max(0, min_rating - step)
+                        rating_mask = filtered_df['rating'] >= relaxed_min_rating
+                        relaxed_df = filtered_df[rating_mask]
+                        
+                        if len(relaxed_df) >= 5 or step == relaxation_steps[-1]:
+                            filtered_df = relaxed_df
+                            print(f"  Relaxed rating filter (≥{relaxed_min_rating}): {len(filtered_df)} hotels")
+                            break
+                else:
+                    filtered_df = filtered_df_with_rating
+            
+            # Warnungen ausgeben, wenn nach der Filterung keine Hotels übrig bleiben
+            if filtered_df.empty:
+                print("⚠️ No hotels match all filters. Trying with minimal filters.")
+                
+                # Versuche nur mit einem minimalen Preis-Filter
+                if 'max_price' in user_preferences and pd.notna(user_preferences['max_price']):
+                    max_price = float(user_preferences['max_price']) * 1.5  # 50% höheres Budget
+                    price_mask = predictions_df['price'] <= max_price
+                    filtered_df = predictions_df[price_mask]
+                    
+                    if filtered_df.empty:
+                        # Wenn immer noch leer, ignoriere auch den Preisfilter
+                        filtered_df = predictions_df.copy()
+                
+                print(f"  After minimal filtering: {len(filtered_df)} hotels")
+            
+            return filtered_df
+            
+        except Exception as e:
+            print(f"⚠️ Error in filter application: {e}")
+            return predictions_df  # Return unfiltered on error
     
-    def _apply_preference_weighting(self, filtered_df: pd.DataFrame, preferences: Dict) -> pd.DataFrame:
-        """Apply preference weighting to scores using ML model predictions"""
+    def _apply_preference_weighting(self, filtered_df: pd.DataFrame, user_preferences: Dict) -> pd.DataFrame:
+        """
+        Apply sophisticated preference weighting with error handling
+        
+        Args:
+            filtered_df: DataFrame with filtered hotels
+            user_preferences: User preference dictionary
+            
+        Returns:
+            DataFrame with preference-weighted scores
+        """
         weighted_df = filtered_df.copy()
         
-        # Get importance weights from preferences
-        price_weight = preferences.get('price_importance', 0.3)
-        rating_weight = preferences.get('rating_importance', 0.3)
-        model_weight = preferences.get('model_importance', 0.4)  # ML model gets significant weight
-        amenity_weight = preferences.get('amenity_importance', 0.1)  # New amenity weight
-        
-        # Normalize weights if amenities are included
-        total_weight = price_weight + rating_weight + model_weight + amenity_weight
-        price_weight = price_weight / total_weight
-        rating_weight = rating_weight / total_weight
-        model_weight = model_weight / total_weight
-        amenity_weight = amenity_weight / total_weight
-        
-        # Calculate individual scores
-        if len(weighted_df) > 1:
-            user_max_price = preferences.get('max_price', weighted_df['price'].max())
-            
-            # Price scoring - encourage full budget utilization
-            weighted_df['price_score'] = weighted_df['price'].apply(
-                lambda p: self._balanced_price_score(p, user_max_price)
-            )
-            
-            # Rating score (normalized to 0-1)
-            weighted_df['rating_score'] = weighted_df['rating'] / 10.0
-            
-            # ML model score - use trained model predictions
-            weighted_df['ml_score'] = self._get_ml_predictions(weighted_df)
-            
-            # Amenity score - bonus for preferred amenities
-            weighted_df['amenity_score'] = self._calculate_amenity_score(weighted_df, preferences)
-            
-            # Final score - combining all components
-            weighted_df['final_score'] = (
-                price_weight * weighted_df['price_score'] +
-                rating_weight * weighted_df['rating_score'] +
-                model_weight * weighted_df['ml_score'] +
-                amenity_weight * weighted_df['amenity_score']
-            )
-        else:
-            weighted_df['price_score'] = 1.0
-            weighted_df['rating_score'] = weighted_df['rating'] / 10.0
-            weighted_df['ml_score'] = 0.5  # Default ML score
-            weighted_df['amenity_score'] = 0.5  # Default amenity score
-            weighted_df['final_score'] = (
-                price_weight * weighted_df['price_score'] +
-                rating_weight * weighted_df['rating_score'] +
-                model_weight * weighted_df['ml_score'] +
-                amenity_weight * weighted_df['amenity_score']
-            )
-        
-        return weighted_df
-    
-    def _get_ml_predictions(self, filtered_df: pd.DataFrame) -> pd.Series:
-        """
-        Get ML model predictions for hotels
-        
-        Args:
-            filtered_df: Filtered hotels DataFrame
-            
-        Returns:
-            Series of normalized ML predictions (0-1 scale)
-        """
-        if not self.is_trained:
-            print("⚠️ Model not trained, using default ML scores")
-            return pd.Series([0.5] * len(filtered_df), index=filtered_df.index)
-        
-        # Use the predicted_score column that was already calculated
-        if 'predicted_score' in filtered_df.columns:
-            predictions = filtered_df['predicted_score'].values
-        else:
-            print("⚠️ No predicted_score column found, using default ML scores")
-            return pd.Series([0.5] * len(filtered_df), index=filtered_df.index)
-        
-        # Normalize predictions to 0-1 scale
-        if len(predictions) > 1:
-            min_pred = predictions.min()
-            max_pred = predictions.max()
-            if max_pred > min_pred:
-                normalized_preds = (predictions - min_pred) / (max_pred - min_pred)
+        try:
+            # Start with the ML predicted score
+            if 'predicted_score' in weighted_df.columns:
+                weighted_df['final_score'] = weighted_df['predicted_score'].copy()
             else:
-                normalized_preds = np.ones_like(predictions) * 0.5
-        else:
-            normalized_preds = np.array([0.5])
-        
-        return pd.Series(normalized_preds, index=filtered_df.index)
-    
-    def _calculate_amenity_score(self, filtered_df: pd.DataFrame, preferences: Dict) -> pd.Series:
-        """
-        Calculate amenity score based on preferred amenities
-        
-        Args:
-            filtered_df: Filtered hotels DataFrame
-            preferences: User preferences including preferred_amenities
+                # Fallback, wenn keine Vorhersagen vorhanden sind
+                print("⚠️ No predicted scores found, using ratings as base scores")
+                weighted_df['final_score'] = weighted_df['rating'] / 10.0  # Normalisieren auf 0-1 Skala
             
-        Returns:
-            Series of amenity scores (0-1 scale)
-        """
-        amenity_scores = pd.Series([0.5] * len(filtered_df), index=filtered_df.index)
-        
-        preferred_amenities = preferences.get('preferred_amenities', [])
-        if not preferred_amenities:
-            return amenity_scores
-        
-        # Calculate score based on how many preferred amenities the hotel has
-        for i, (idx, hotel) in enumerate(filtered_df.iterrows()):
-            matching_amenities = 0
-            total_amenities = len(preferred_amenities)
+            # Extract weights from user preferences with defaults
+            model_importance = user_preferences.get('model_importance', 0.4)
+            price_importance = user_preferences.get('price_importance', 0.25)
+            rating_importance = user_preferences.get('rating_importance', 0.25)
+            amenity_importance = user_preferences.get('amenity_importance', 0.1)
             
-            for amenity in preferred_amenities:
-                amenity_col = f'has_{amenity}'
-                if amenity_col in hotel.index and hotel[amenity_col] == 1:
-                    matching_amenities += 1
+            # Normalize weights
+            total_weight = model_importance + price_importance + rating_importance + amenity_importance
+            if total_weight == 0:
+                # Fallback Gewichte wenn alle 0 sind
+                model_importance = 0.4
+                price_importance = 0.3
+                rating_importance = 0.3
+                amenity_importance = 0.0
+                total_weight = 1.0
             
-            if total_amenities > 0:
-                # Score from 0.3 (no matches) to 1.0 (all matches)
-                base_score = 0.3
-                bonus = 0.7 * (matching_amenities / total_amenities)
-                amenity_scores.iloc[i] = base_score + bonus
+            model_weight = model_importance / total_weight
+            price_weight = price_importance / total_weight
+            rating_weight = rating_importance / total_weight
+            amenity_weight = amenity_importance / total_weight
+            
+            # Sichere Normalisierung von numerischen Werten
+            def safe_normalize(series):
+                if len(series) <= 1 or series.max() == series.min():
+                    return pd.Series(0.5, index=series.index)  # Default bei nur einem Wert
+                else:
+                    return (series - series.min()) / (series.max() - series.min())
+            
+            # Preiswichtung - niedrigere Preise bekommen höhere Scores
+            if 'price' in weighted_df.columns and price_importance > 0:
+                price_scores = 1 - safe_normalize(weighted_df['price'])
+                weighted_df['price_score'] = price_scores
+                weighted_df['final_score'] = (
+                    weighted_df['final_score'] * model_weight + 
+                    weighted_df['price_score'] * price_weight
+                )
+            
+            # Bewertungswichtung
+            if 'rating' in weighted_df.columns and rating_importance > 0:
+                # Normalize ratings to 0-1
+                max_rating = weighted_df['rating'].max()
+                if max_rating > 0:
+                    rating_scale = 10 if max_rating > 5 else 5  # Detect scale
+                    rating_scores = weighted_df['rating'] / rating_scale
+                    weighted_df['rating_score'] = rating_scores
+                    
+                    # Cubic function to emphasize high ratings (optional)
+                    weighted_df['rating_score'] = weighted_df['rating_score'] ** 2
+                    
+                    weighted_df['final_score'] = (
+                        weighted_df['final_score'] * (model_weight + price_weight) / (model_weight + price_weight + rating_weight) + 
+                        weighted_df['rating_score'] * rating_weight / (model_weight + price_weight + rating_weight)
+                    )
+            
+            # Amenity weighting
+            if 'amenity_importance' in user_preferences and amenity_importance > 0:
+                preferred_amenities = user_preferences.get('preferred_amenities', [])
+                
+                if preferred_amenities and 'amenities' in weighted_df.columns:
+                    # Calculate match score for amenities
+                    amenity_scores = []
+                    
+                    for _, hotel in weighted_df.iterrows():
+                        # Safely extract amenities
+                        if pd.isna(hotel['amenities']):
+                            amenity_scores.append(0)
+                            continue
+                            
+                        hotel_amenities = str(hotel['amenities']).lower()
+                        
+                        # Count matching amenities
+                        match_count = sum(1 for amenity in preferred_amenities 
+                                        if amenity.lower() in hotel_amenities)
+                        
+                        # Calculate score as proportion of matches
+                        score = match_count / len(preferred_amenities) if preferred_amenities else 0
+                        amenity_scores.append(score)
+                    
+                    weighted_df['amenity_score'] = amenity_scores
+                    
+                    if sum(amenity_scores) > 0:  # Only adjust if we have matches
+                        weighted_df['final_score'] = (
+                            weighted_df['final_score'] * (1 - amenity_weight) + 
+                            weighted_df['amenity_score'] * amenity_weight
+                        )
+            
+            # Apply logarithmic function to final scores to reduce extreme differences
+            if 'final_score' in weighted_df.columns:
+                min_score = weighted_df['final_score'].min()
+                weighted_df['final_score'] = weighted_df['final_score'] - min_score + 0.01
+                weighted_df['final_score'] = 0.1 + 0.9 * (weighted_df['final_score'] / weighted_df['final_score'].max())
+            
+            return weighted_df
+            
+        except Exception as e:
+            print(f"⚠️ Error in preference weighting: {e}")
+            # Fallback bei Fehler
+            if 'predicted_score' in weighted_df.columns:
+                weighted_df['final_score'] = weighted_df['predicted_score']
+            elif 'rating' in weighted_df.columns:
+                weighted_df['final_score'] = weighted_df['rating'] / 10.0
             else:
-                amenity_scores.iloc[i] = 0.5  # Neutral score if no preferences
-        
-        return amenity_scores
-
-    def _balanced_price_score(self, price: float, max_budget: float) -> float:
-        """
-        Balanced price scoring that allows hotels across the full budget range
-        
-        Args:
-            price: Hotel price
-            max_budget: User's maximum budget
+                weighted_df['final_score'] = 0.5  # Default wenn keine bessere Option verfügbar
             
-        Returns:
-            Price score between 0 and 1
-        """
-        if price > max_budget:
-            return 0.0
-        
-        # Use a more balanced approach that doesn't heavily favor expensive hotels
-        price_ratio = price / max_budget
-        
-        # Sigmoid-like function that gives reasonable scores across the full range
-        # but still provides some preference for using more of the budget
-        if price_ratio <= 0.5:
-            # For lower half of budget: score from 0.7 to 0.85
-            return 0.7 + (price_ratio / 0.5) * 0.15
-        else:
-            # For upper half of budget: score from 0.85 to 1.0
-            return 0.85 + ((price_ratio - 0.5) / 0.5) * 0.15
+            return weighted_df
     
     def get_feature_importance(self) -> pd.DataFrame:
         """Get feature importance (for tree-based models)"""

@@ -60,6 +60,24 @@ class TravelHuntersDemo:
         
         self.is_initialized = False
     
+    def _safe_float_convert(self, input_str, default_value):
+        """
+        Konvertiert eine Eingabezeichenfolge sicher in einen Gleitkommawert.
+        Behandelt leere Eingaben und ersetzt Kommas durch Punkte für Dezimalwerte.
+        
+        Args:
+            input_str: Die zu konvertierende Eingabezeichenfolge
+            default_value: Standardwert, wenn die Eingabe leer ist
+            
+        Returns:
+            Der konvertierte Gleitkommawert
+        """
+        if not input_str.strip():
+            return default_value
+        # Ersetze Kommas durch Punkte für Dezimalwerte
+        cleaned_input = input_str.strip().replace(',', '.')
+        return float(cleaned_input)
+    
     def initialize(self):
         """Initialize the demo with data and models"""
         print("🚀 Initializing TravelHunters Demo...")
@@ -405,8 +423,11 @@ class TravelHuntersDemo:
         
         try:
             # Get user preferences
-            max_price = float(input("Maximum price per night ($): ") or "200")
-            min_rating = float(input("Minimum rating (1-10): ") or "7.0")
+            price_input = input("Maximum price per night ($): ")
+            max_price = self._safe_float_convert(price_input, 200)
+            
+            rating_input = input("Minimum rating (1-10): ")
+            min_rating = self._safe_float_convert(rating_input, 7.0)
             
             print("\nWhich amenities are important to you? (y/n)")
             print("(These are preferences only and will improve recommendations, but are not required)")
@@ -434,8 +455,9 @@ class TravelHuntersDemo:
             
             self._display_recommendations(recommendations, "Parameter-Based")
             
-        except ValueError:
-            print("❌ Invalid input. Please enter valid numbers.")
+        except ValueError as e:
+            print(f"❌ Invalid input. Please enter valid numbers. Error: {e}")
+            print("Debug: Bitte überprüfen Sie Ihre Eingaben. Verwenden Sie Punkte (.) statt Kommas (,) für Dezimalwerte.")
     
     def _text_recommendation(self):
         """Text-based recommendation interface"""
@@ -477,14 +499,23 @@ class TravelHuntersDemo:
         
         try:
             print("\nFilter the results (optional):")
-            max_price = float(input("Maximum price per night ($): ") or "1000")
-            min_rating = float(input("Minimum rating (1-10): ") or "0")
+            price_input = input("Maximum price per night ($): ")
+            max_price = self._safe_float_convert(price_input, 1000)
+            
+            rating_input = input("Minimum rating (1-10): ")
+            min_rating = self._safe_float_convert(rating_input, 0)
             
             # Ask for extended preferences
             print("\nHow important are the following factors to you? (1-10)")
-            text_importance = float(input("  Match with your description: ") or "7") / 10
-            price_importance = float(input("  Price-value ratio: ") or "3") / 10
-            rating_importance = float(input("  Hotel ratings: ") or "3") / 10
+            text_input = input("  Match with your description: ")
+            text_importance = self._safe_float_convert(text_input, 7) / 10
+            
+            price_input = input("  Price-value ratio: ")
+            price_importance = self._safe_float_convert(price_input, 3) / 10
+            
+            rating_input = input("  Hotel ratings: ")
+            rating_importance = self._safe_float_convert(rating_input, 3) / 10
+            
             # ML predictions weight set automatically
             model_importance = 0.4  # Default value of 0.4
             
@@ -553,9 +584,10 @@ class TravelHuntersDemo:
                 print(f"  • Cities: {', '.join(locations.head(3).index)}")
                 
                 # ...existing code...
-        except ValueError:
-            print("❌ Invalid input. Please enter valid numbers.")
-            
+        except ValueError as e:
+            print(f"❌ Invalid input. Please enter valid numbers. Error: {e}")
+            print("Debug: Bitte überprüfen Sie Ihre Eingaben. Verwenden Sie Punkte (.) statt Kommas (,) für Dezimalwerte.")
+    
     def _apply_geographic_filter(self, hotels_df, region_filter, city_filter):
         """Apply geographic filtering to hotels"""
         filtered_df = hotels_df.copy()
@@ -616,14 +648,36 @@ class TravelHuntersDemo:
             return
         
         try:
-            max_price = float(input("Maximum price per night ($): ") or "200")
-            min_rating = float(input("Minimum rating (1-10): ") or "4.0")
+            # Preiseingabe
+            price_input = input("Maximum price per night ($): ")
+            max_price = self._safe_float_convert(price_input, 200)
+            
+            # Bewertungseingabe
+            rating_input = input("Minimum rating (1-10): ")
+            min_rating = self._safe_float_convert(rating_input, 4.0)
+            
+            # Warnung, wenn die Mindestbewertung zu hoch ist
+            if min_rating > 9.0:
+                print("\n⚠️ Hinweis: Eine Mindestbewertung von {:.1f} ist sehr hoch und könnte zu wenigen oder keinen Ergebnissen führen.".format(min_rating))
+                confirmation = input("Möchten Sie fortfahren? (j/n): ").lower()
+                if confirmation != 'j' and confirmation != 'ja':
+                    # Setze auf einen vernünftigeren Wert zurück
+                    min_rating = 7.0
+                    print(f"Mindestbewertung auf {min_rating:.1f} zurückgesetzt.")
             
             # Get weight preferences
             print("\nHow important are these factors? (1-10)")
-            text_importance = float(input("  Description match: ") or "7") / 10
-            price_importance = float(input("  Price considerations: ") or "3") / 10
-            rating_importance = float(input("  Hotel ratings: ") or "3") / 10
+            
+            # Wichtigkeitseingaben mit verbesserter Konvertierung
+            text_input = input("  Description match: ")
+            text_importance = self._safe_float_convert(text_input, 7) / 10
+            
+            price_input = input("  Price considerations: ")
+            price_importance = self._safe_float_convert(price_input, 3) / 10
+            
+            rating_input = input("  Hotel ratings: ")
+            rating_importance = self._safe_float_convert(rating_input, 3) / 10
+            
             # ML predictions weight set automatically
             model_importance = 0.4  # Default value of 0.4
             
@@ -641,23 +695,66 @@ class TravelHuntersDemo:
             # Set hybrid weights
             self.hybrid_model.set_weights(0.4, 0.6)  # Slightly favor text
             
-            recommendations = self.hybrid_model.recommend_hotels(
-                query, self.hotels_df, self.features_df, user_prefs, top_k=5
-            )
+            print("\n🔍 Suche nach passenden Hotels...")
+            print(f"Query: '{query}'")
+            print(f"Max. Preis: ${max_price:.0f}, Min. Bewertung: {min_rating:.1f}")
+            print("Dies kann einen Moment dauern...")
+            
+            # Rufe die Empfehlungen mit Fehlerbehandlung ab
+            try:
+                recommendations = self.hybrid_model.recommend_hotels(
+                    query, self.hotels_df, self.features_df, user_prefs, top_k=5
+                )
+            except Exception as e:
+                print(f"\n❌ Fehler bei der Empfehlungsgenerierung: {e}")
+                print("Versuche mit Standardeinstellungen...")
+                
+                # Versuche mit Standardeinstellungen
+                default_prefs = {
+                    'max_price': 1000,
+                    'min_rating': 0,
+                    'text_importance': 0.5,
+                    'price_importance': 0.2,
+                    'rating_importance': 0.2,
+                    'model_importance': 0.1
+                }
+                
+                try:
+                    recommendations = self.hybrid_model.recommend_hotels(
+                        query, self.hotels_df, self.features_df, default_prefs, top_k=5
+                    )
+                except Exception as e2:
+                    print(f"\n❌ Auch mit Standardeinstellungen fehlgeschlagen: {e2}")
+                    print("Bitte versuchen Sie es mit einem anderen Suchbegriff oder weniger strengen Filtern.")
+                    return
             
             print(f"\n🔍 Search Query: '{query}'")
+            
+            if recommendations.empty:
+                print("\n❌ Leider wurden keine Hotels gefunden, die Ihren Kriterien entsprechen.")
+                print("Tipps:")
+                print(" • Versuchen Sie eine allgemeinere Beschreibung")
+                print(" • Erhöhen Sie den maximalen Preis oder senken Sie die Mindestbewertung")
+                print(" • Verwenden Sie weniger spezifische Anforderungen")
+                return
+            
             self._display_recommendations(recommendations, "Hybrid", score_col='hybrid_score')
             
             # Show explanation for top recommendation
             if not recommendations.empty:
-                hotel_id = recommendations.iloc[0]['hotel_id']
-                explanation = self.hybrid_model.explain_recommendation(
-                    hotel_id, query, self.hotels_df, self.features_df, user_prefs
-                )
-                self._display_explanation(explanation)
+                try:
+                    hotel_id = recommendations.iloc[0]['hotel_id']
+                    explanation = self.hybrid_model.explain_recommendation(
+                        hotel_id, query, self.hotels_df, self.features_df, user_prefs
+                    )
+                    self._display_explanation(explanation)
+                except Exception as e:
+                    print(f"\n⚠️ Konnte keine detaillierte Erklärung generieren: {e}")
             
-        except ValueError:
-            print("❌ Invalid input. Please enter valid numbers.")
+        except ValueError as e:
+            print(f"❌ Invalid input. Please enter valid numbers. Error: {e}")
+            # Debug-Informationen ausgeben
+            print("Debug: Bitte überprüfen Sie Ihre Eingaben. Verwenden Sie Punkte (.) statt Kommas (,) für Dezimalwerte.")
     
     def _compare_models(self):
         """Compare all three models"""
@@ -669,98 +766,206 @@ class TravelHuntersDemo:
             print("❌ Please enter a query.")
             return
         
-        user_prefs = {
-            'max_price': 200,
-            'min_rating': 4.0,
-            'text_importance': 0.5,
-            'price_importance': 0.2,
-            'rating_importance': 0.2,
-            'model_importance': 0.1
-        }
+        # Standardwerte für Benutzereinstellungen
+        max_price = 200
+        min_rating = 4.0
         
-        print(f"\n🔍 Query: '{query}'")
-        print(f"💰 Budget: ${user_prefs['max_price']}")
-        print(f"⭐ Min Rating: {user_prefs['min_rating']}")
+        try:
+            # Optional: Abrufen benutzerdefinierter Einstellungen
+            print("\nFilter options (optional, press Enter for defaults):")
+            price_input = input(f"Maximum price per night (default: ${max_price}): ")
+            if price_input.strip():
+                max_price = self._safe_float_convert(price_input, max_price)
+                
+            rating_input = input(f"Minimum rating (default: {min_rating}): ")
+            if rating_input.strip():
+                min_rating = self._safe_float_convert(rating_input, min_rating)
         
-        # Get recommendations from all models
-        param_recs = self.param_model.recommend_hotels(self.features_df, user_prefs, top_k=3)
-        text_recs = self.text_model.recommend_hotels(query, self.hotels_df, user_prefs, top_k=3)
-        hybrid_recs = self.hybrid_model.recommend_hotels(
-            query, self.hotels_df, self.features_df, user_prefs, top_k=3
-        )
-        
-        # Display side by side
-        print("\n📊 Top 3 Recommendations from Each Model:")
-        print("=" * 80)
-        
-        models = [
-            ("Parameter", param_recs, 'final_score'),
-            ("Text", text_recs, 'final_score'),
-            ("Hybrid", hybrid_recs, 'hybrid_score')
-        ]
-        
-        for i in range(3):
-            print(f"\nRank {i+1}:")
-            for model_name, recs, score_col in models:
-                if i < len(recs):
-                    hotel = recs.iloc[i]
-                    name = hotel.get('hotel_name', hotel.get('name', 'Unknown'))
-                    score = hotel[score_col]
-                    price = hotel['price']
-                    rating = hotel['rating']
-                    print(f"  {model_name:8}: {name[:25]:25} (Score: {score:.3f}, ${price:.0f}, {rating:.1f}⭐)")
-                else:
-                    print(f"  {model_name:8}: {'No recommendation':25}")
+            user_prefs = {
+                'max_price': max_price,
+                'min_rating': min_rating,
+                'text_importance': 0.5,
+                'price_importance': 0.2,
+                'rating_importance': 0.2,
+                'model_importance': 0.1
+            }
+            
+            print(f"\n🔍 Query: '{query}'")
+            print(f"💰 Budget: ${user_prefs['max_price']}")
+            print(f"⭐ Min Rating: {user_prefs['min_rating']}")
+            
+            # Get recommendations from all models
+            param_recs = self.param_model.recommend_hotels(self.features_df, user_prefs, top_k=3)
+            text_recs = self.text_model.recommend_hotels(query, self.hotels_df, user_prefs, top_k=3)
+            hybrid_recs = self.hybrid_model.recommend_hotels(
+                query, self.hotels_df, self.features_df, user_prefs, top_k=3
+            )
+            
+            # Display side by side
+            print("\n📊 Top 3 Recommendations from Each Model:")
+            print("=" * 80)
+            
+            models = [
+                ("Parameter", param_recs, 'final_score'),
+                ("Text", text_recs, 'final_score'),
+                ("Hybrid", hybrid_recs, 'hybrid_score')
+            ]
+            
+            for i in range(3):
+                print(f"\nRank {i+1}:")
+                for model_name, recs, score_col in models:
+                    if i < len(recs):
+                        hotel = recs.iloc[i]
+                        name = hotel.get('hotel_name', hotel.get('name', 'Unknown'))
+                        score = hotel[score_col]
+                        price = hotel['price']
+                        rating = hotel['rating']
+                        print(f"  {model_name:8}: {name[:25]:25} (Score: {score:.3f}, ${price:.0f}, {rating:.1f}⭐)")
+                    else:
+                        print(f"  {model_name:8}: {'No recommendation':25}")
+                        
+        except ValueError as e:
+            print(f"❌ Invalid input. Please enter valid numbers. Error: {e}")
+            print("Debug: Bitte überprüfen Sie Ihre Eingaben. Verwenden Sie Punkte (.) statt Kommas (,) für Dezimalwerte.")
     
     def _display_recommendations(self, recommendations: pd.DataFrame, model_name: str, 
                                score_col: str = 'final_score'):
         """Display recommendations in a formatted way"""
-        if recommendations.empty:
+        if recommendations is None or recommendations.empty:
             print(f"\n❌ No recommendations found with your criteria.")
             return
         
-        # Entferne Duplikate vor der Anzeige
-        unique_recommendations = recommendations.drop_duplicates(subset=['name', 'location'], keep='first')
-        
-        # Wenn immer noch weniger als gewünscht, versuche nur nach Namen zu deduplizieren
-        if len(unique_recommendations) < len(recommendations) * 0.8:
-            unique_recommendations = recommendations.drop_duplicates(subset=['name'], keep='first')
-        
-        print(f"\n🏨 Top {len(unique_recommendations)} {model_name} Recommendations:")
-        print("=" * 60)
-        
-        for i, (_, hotel) in enumerate(unique_recommendations.iterrows(), 1):
-            name = hotel.get('hotel_name', hotel.get('name', 'Unknown Hotel'))
-            score = hotel[score_col]
-            price = hotel['price']
-            rating = hotel['rating']
-            location = hotel.get('location', 'Unknown Location')
+        try:
+            # Überprüfe, ob die benötigte Score-Spalte vorhanden ist
+            if score_col not in recommendations.columns:
+                print(f"⚠️ Warning: Score column '{score_col}' not found in results")
+                # Verwende eine alternative Score-Spalte wenn verfügbar
+                alternative_scores = [col for col in recommendations.columns 
+                                     if col.endswith('_score') or col.endswith('Score')]
+                if alternative_scores:
+                    score_col = alternative_scores[0]
+                    print(f"Using '{score_col}' instead")
+                else:
+                    # Erstelle einen Dummy-Score basierend auf der Position
+                    recommendations['dummy_score'] = [1.0 - (0.05 * i) for i in range(len(recommendations))]
+                    score_col = 'dummy_score'
+                    print("Using position-based dummy scores")
             
-            print(f"\n{i}. {name}")
-            print(f"   📍 {location}")
-            print(f"   💰 ${price:.0f}/night")
-            print(f"   ⭐ {rating:.1f}/10.0")
-            print(f"   🎯 Score: {score:.3f}")
+            # Entferne Duplikate vor der Anzeige
+            unique_recommendations = recommendations.copy()
             
-            # Show description if available
-            if 'description' in hotel and pd.notna(hotel['description']):
-                desc = str(hotel['description'])[:100] + "..." if len(str(hotel['description'])) > 100 else str(hotel['description'])
-                print(f"   📝 {desc}")
+            if 'name' in unique_recommendations.columns and 'location' in unique_recommendations.columns:
+                unique_recommendations = unique_recommendations.drop_duplicates(subset=['name', 'location'], keep='first')
+            
+                # Wenn immer noch weniger als gewünscht, versuche nur nach Namen zu deduplizieren
+                if len(unique_recommendations) < len(recommendations) * 0.8:
+                    unique_recommendations = recommendations.drop_duplicates(subset=['name'], keep='first')
+            
+            print(f"\n🏨 Top {len(unique_recommendations)} {model_name} Recommendations:")
+            print("=" * 60)
+            
+            # Stelle sicher, dass name/hotel_name konsistent ist
+            if 'hotel_name' not in unique_recommendations.columns and 'name' in unique_recommendations.columns:
+                unique_recommendations['hotel_name'] = unique_recommendations['name']
+            elif 'name' not in unique_recommendations.columns and 'hotel_name' in unique_recommendations.columns:
+                unique_recommendations['name'] = unique_recommendations['hotel_name']
+            
+            for i, (_, hotel) in enumerate(unique_recommendations.iterrows(), 1):
+                # Hole den Hotelnamen mit Fallbacks
+                if 'hotel_name' in hotel:
+                    name = hotel['hotel_name']
+                elif 'name' in hotel:
+                    name = hotel['name']
+                else:
+                    name = f"Hotel #{i}"
                 
-            if i >= 5:  # Beschränke auf maximal 5 Empfehlungen für bessere Übersicht
-                break
+                # Hole den Score mit Fallbacks
+                if score_col in hotel:
+                    score = hotel[score_col]
+                else:
+                    score = 0.0
+                
+                # Hole weitere Informationen mit Fallbacks
+                price = hotel.get('price', 0)
+                rating = hotel.get('rating', 0)
+                location = hotel.get('location', 'Unknown Location')
+                
+                print(f"\n{i}. {name}")
+                print(f"   📍 {location}")
+                print(f"   💰 ${price:.0f}/night")
+                print(f"   ⭐ {rating:.1f}/10.0")
+                print(f"   🎯 Score: {score:.3f}")
+                
+                # Show model contribution if hybrid model
+                if model_name.lower() == "hybrid" and 'param_contrib' in hotel and 'text_contrib' in hotel:
+                    param_percent = hotel['param_contrib'] * 100
+                    text_percent = hotel['text_contrib'] * 100
+                    print(f"   📊 Model Contribution: Parameter {param_percent:.0f}%, Text {text_percent:.0f}%")
+                
+                # Show description if available
+                if 'description' in hotel and pd.notna(hotel['description']):
+                    desc = str(hotel['description'])[:100] + "..." if len(str(hotel['description'])) > 100 else str(hotel['description'])
+                    print(f"   📝 {desc}")
+                    
+                if i >= 5:  # Beschränke auf maximal 5 Empfehlungen für bessere Übersicht
+                    break
+                    
+        except Exception as e:
+            print(f"⚠️ Fehler bei der Anzeige der Empfehlungen: {e}")
+            # Einfache Fallback-Anzeige
+            try:
+                print("\nEmpfehlungen (einfaches Format):")
+                for i, (_, hotel) in enumerate(recommendations.iterrows(), 1):
+                    hotel_info = []
+                    for key in ['hotel_name', 'name', 'location', 'price', 'rating']:
+                        if key in hotel and pd.notna(hotel[key]):
+                            hotel_info.append(f"{key}: {hotel[key]}")
+                    print(f"{i}. {', '.join(hotel_info)}")
+                    if i >= 5:
+                        break
+            except:
+                print("❌ Konnte Empfehlungen nicht anzeigen.")
     
     def _display_explanation(self, explanation: dict):
         """Display recommendation explanation"""
-        print(f"\n💡 Why we recommended {explanation['hotel_name']}:")
-        print("-" * 50)
+        if not explanation:
+            print("\n⚠️ Keine Erklärung für diese Empfehlung verfügbar.")
+            return
         
-        for exp in explanation['explanations']:
-            print(f"\n🔍 {exp['model'].title()} Model (Score: {exp['score']:.3f}):")
-            for reason in exp['reasons']:
-                print(f"    • {reason}")
-        
-        print(f"\n📋 Summary: {explanation['summary']}")
+        try:
+            # Überprüfe, ob wichtige Schlüssel vorhanden sind
+            if 'error' in explanation:
+                print(f"\n⚠️ Fehler bei der Erklärungsgenerierung: {explanation['error']}")
+                return
+            
+            hotel_name = explanation.get('hotel_name', 'Dieses Hotel')
+            print(f"\n💡 Why we recommended {hotel_name}:")
+            print("-" * 50)
+            
+            if 'explanations' not in explanation or not explanation['explanations']:
+                print("Keine detaillierten Erklärungen verfügbar.")
+                return
+                
+            for exp in explanation['explanations']:
+                model_type = exp.get('model', 'Unknown').title()
+                score = exp.get('score', 0.0)
+                
+                print(f"\n🔍 {model_type} Model (Score: {score:.3f}):")
+                
+                reasons = exp.get('reasons', [])
+                if not reasons:
+                    print("    • Keine Details verfügbar")
+                    continue
+                    
+                for reason in reasons:
+                    print(f"    • {reason}")
+            
+            summary = explanation.get('summary', "Dieses Hotel entspricht am besten Ihren angegebenen Präferenzen.")
+            print(f"\n📋 Summary: {summary}")
+            
+        except Exception as e:
+            print(f"\n⚠️ Fehler bei der Anzeige der Erklärung: {e}")
+            print("Detaillierte Erklärung konnte nicht angezeigt werden.")
     
     def run_evaluation(self):
         """Run model evaluation"""
