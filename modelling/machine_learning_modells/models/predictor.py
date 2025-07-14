@@ -8,7 +8,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
 # --- Configuration ---
-MODEL_PATH = r"C:\Users\evanb\city_classifier_model.h5"
+MODEL_PATH = r"city_classifier_model.h5"
 IMAGE_SIZE = (224, 224)  # Based on the error, this is what your model expects
 
 # List of cities for the predictor
