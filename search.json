@@ -84,126 +84,6 @@
     ]
   },
   {
-    "objectID": "project_charta.html",
-    "href": "project_charta.html",
-    "title": "",
-    "section": "",
-    "text": "Code",
-    "crumbs": [
-      "Home",
-      "Project Overview",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
-    "objectID": "project_charta.html#problem-definition",
-    "href": "project_charta.html#problem-definition",
-    "title": "",
-    "section": "1.1 Problem Definition",
-    "text": "1.1 Problem Definition\nDomain: Travel and Tourism Data Aggregation\nProblem Statement: Travelers today face information overload when planning trips, with relevant data scattered across multiple platforms (booking sites, travel guides, activity platforms). There is no centralized system that provides comprehensive, up-to-date travel information including accommodations, activities, and destinations with pricing, ratings, and visual content.\nExpected Benefits: - Centralized travel data repository for better decision-making - Automated data collection reducing manual research time - Comprehensive dataset enabling travel analytics and recommendations - Foundation for future travel recommendation systems\nTarget Users: - Travel enthusiasts seeking comprehensive trip planning information - Travel agencies requiring aggregated data for client recommendations - Data analysts researching travel trends and pricing patterns - Developers building travel-related applications\nStakeholders: - Primary Users: Travel planners and tourism professionals - Data Providers: Booking.com, TripAdvisor, Lonely Planet, activity platforms - Development Team: Data engineers, web scrapers, database administrators - End Beneficiaries: Travelers seeking better trip planning tools",
-    "crumbs": [
-      "Home",
-      "Project Overview",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
-    "objectID": "project_charta.html#situation-assessment",
-    "href": "project_charta.html#situation-assessment",
-    "title": "",
-    "section": "1.2 Situation Assessment",
-    "text": "1.2 Situation Assessment\nAvailable Resources: - Personnel: Development team with expertise in web scraping, data processing, and database management - Tools: Python ecosystem (Scrapy, SQLite, Pandas), Quarto for documentation - Infrastructure: Local development environment with capability for web scraping - Data Sources: Public travel websites (Booking.com, TripAdvisor, Lonely Planet)\nTime Constraints: - Project duration: July 2025 (Summer School timeframe) - Limited to proof-of-concept and initial data collection\nRestrictions and Constraints: - Legal: Must comply with website terms of service and robots.txt - Technical: Rate limiting to avoid overwhelming target websites - Data Quality: Dependent on source website structure and content quality - Scalability: Limited by computing resources for large-scale scraping\nIdentified Risks: - Website structure changes affecting scraper reliability - Rate limiting or IP blocking by target websites - Data quality inconsistencies across different sources - Storage limitations for large datasets with images",
-    "crumbs": [
-      "Home",
-      "Project Overview",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
-    "objectID": "project_charta.html#project-goals-and-success-criteria",
-    "href": "project_charta.html#project-goals-and-success-criteria",
-    "title": "",
-    "section": "1.3 Project Goals and Success Criteria",
-    "text": "1.3 Project Goals and Success Criteria\nPrimary Objectives: 1. Data Collection Success: Collect comprehensive travel data from multiple sources - Target: &gt;2,000 hotel listings with pricing and ratings - Target: &gt;500 activity listings with descriptions and images - Target: &gt;200 destination entries with coordinates and descriptions\n\nData Quality Standards:\n\n\n90% of entries have complete name and location information\n\n\n80% of hotels have pricing information\n\n\n70% of activities have rating information\n\n\n60% of entries include image URLs\n\n\nSystem Reliability:\n\nScrapers handle pagination and multiple pages successfully\nRobust error handling for website changes\nData cleaning pipeline removes duplicates effectively\n\nDatabase Integration:\n\nAll data successfully stored in structured SQLite database\nProper indexing for efficient queries\nData integrity constraints maintained\n\n\nSuccess Metrics: - Quantity: Total items collected across all categories - Coverage: Number of unique destinations covered - Completeness: Percentage of fields populated per category - Accuracy: Manual validation of sample data entries\nOut of Scope: - Real-time data updates or live synchronization - Advanced recommendation algorithms - User interface development - Commercial deployment or monetization",
-    "crumbs": [
-      "Home",
-      "Project Overview",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
-    "objectID": "project_charta.html#data-mining-goals",
-    "href": "project_charta.html#data-mining-goals",
-    "title": "",
-    "section": "1.4 Data Mining Goals",
-    "text": "1.4 Data Mining Goals\nPrimary Data Mining Task: Data Integration and Information Extraction\nTechnical Objectives: 1. Web Scraping and Data Extraction: - Extract structured data from unstructured web content - Handle dynamic content and pagination - Parse and normalize pricing, rating, and location data\n\nData Cleaning and Preprocessing:\n\nRemove duplicate entries based on name/location similarity\nStandardize pricing formats and currency conversions\nValidate and clean URLs, ratings, and text content\n\nData Integration:\n\nMerge data from multiple sources (hotels, activities, destinations)\nCreate unified schema across different data types\nEstablish relationships between accommodations, activities, and destinations\n\nFeature Engineering:\n\nGenerate unique identifiers for entities\nExtract location coordinates where available\nCategorize and tag content appropriately\n\n\nQuantitative Success Criteria: - Data Completeness Score: &gt;75% for critical fields (name, location, price/rating) - Duplicate Reduction: &lt;5% duplicate entries after cleaning - Data Integration Success: Successfully merge &gt;95% of collected data into unified schema - Processing Accuracy: &lt;2% data corruption during cleaning and transformation\nTechnical Requirements: - Scalable data processing pipeline handling 10,000+ records - Robust error handling with &lt;1% data loss due to processing errors - Database performance supporting sub-second queries on full dataset",
-    "crumbs": [
-      "Home",
-      "Project Overview",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
-    "objectID": "project_charta.html#project-plan",
-    "href": "project_charta.html#project-plan",
-    "title": "",
-    "section": "1.5 Project Plan",
-    "text": "1.5 Project Plan\nTravelHunters Data Collection and Integration Project\nThe project follows the CRISP-DM methodology adapted for web scraping and data integration:\n\n\n\n\n\n\nFigure 1: TravelHunters Project Timeline\n\n\n\ngantt\n    title TravelHunters Project Timeline - July 2025\n    dateFormat YYYY-07-DD\n    tickInterval 1day\n    section Project Setup\n        Define problem and goals     :done, a1, 2025-07-01, 1d\n        Setup development environment     :done, a2, 2025-07-01, 1d\n        Initial spider development     :done, a3, 2025-07-02, 1d\n        Project foundation: milestone, done, m1, 2025-07-03, 0d\n    section Data Acquisition\n        Booking.com spider development :done, a4, 2025-07-02, 2d\n        Activities spider implementation   :done, a5, 2025-07-03, 1d\n        Destinations data collection :done, a6, 2025-07-03, 1d\n        Worldwide data scraping :done, a7, 2025-07-04, 2d\n        Data collection complete: milestone, done, m2, 2025-07-06, 0d\n    section Data Processing\n        Data cleaning pipeline   :active, a8, 2025-07-03, 2d\n        Database integration :a9, 2025-07-03, 1d\n        Duplicate removal and validation :a10, 2025-07-04, 1d\n        Quality assurance :a11, 2025-07-04, 1d\n    section Analysis & Documentation\n        Exploratory data analysis :a12, 2025-07-05, 2d\n        Documentation completion :a13, 2025-07-06, 2d\n        Final evaluation :a14, 2025-07-07, 1d\n        Project completion : milestone, m3, 2025-07-08, 0d\nPhase Descriptions: - Project Setup (Days 1-3): Environment setup, initial spider development, proof of concept - Data Acquisition (Days 2-6): Large-scale data collection from multiple sources with pagination - Data Processing (Days 3-5): Cleaning, integration, and database storage - Analysis & Documentation (Days 5-8): Analysis, documentation, and final evaluation",
-    "crumbs": [
-      "Home",
-      "Project Overview",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
-    "objectID": "project_charta.html#roles-and-contact-details",
-    "href": "project_charta.html#roles-and-contact-details",
-    "title": "",
-    "section": "1.6 Roles and Contact Details",
-    "text": "1.6 Roles and Contact Details\nList the people involved in the development work here with their role titles, tasks and contact details",
-    "crumbs": [
-      "Home",
-      "Project Overview",
-      "Project Charta - TravelHunters"
-    ]
-  },
-  {
-    "objectID": "data_report.html",
-    "href": "data_report.html",
-    "title": "",
-    "section": "",
-    "text": "Code",
-    "crumbs": [
-      "Home",
-      "Data & Modelling",
-      "Data Report - TravelHunters Project"
-    ]
-  },
-  {
-    "objectID": "data_report.html#raw-data",
-    "href": "data_report.html#raw-data",
-    "title": "",
-    "section": "1.1 Raw Data",
-    "text": "1.1 Raw Data\n\n1.1.1 Overview of Raw Datasets\n\n\n\n\n\n\n\n\nName\nSource\nStorage Location\n\n\n\n\nBooking.com Hotels\nBooking.com via Scrapy Spider\ndata_acquisition/json_backup/booking_worldwide.json\n\n\nActivities Data\nGetYourGuide via Scrapy Spider\ndata_acquisition/json_backup/activities_worldwide.json\n\n\nDestinations Data\nTourism Websites via Scrapy Spider\ndata_acquisition/json_backup/destinations_worldwide.json\n\n\nAccommodations Data\nVarious Sources (Hostelworld, Airbnb)\ndata_acquisition/json_backup/hotels.json\n\n\n\n\n\n1.1.2 Details Booking.com Hotels Dataset\n\nDescription: Hotel data from Booking.com including names, ratings, prices, locations and image URLs\nData Source: Booking.com website via Scrapy Spider (scraping_data_files/spiders/booking.py)\nData Acquisition: Automated web scraping with pagination for worldwide coverage\nLegal Aspects: Publicly available data, respecting robots.txt\nData Classification: Public business data\nVariables: Hotel name, rating, price, location, image URLs, description\n\n\n1.1.2.1 Data Catalogue - Hotels\n\n\n\nColumn Index\nColumn Name\nDatatype\nValues\nDescription\n\n\n\n\n1\nname\nTEXT\nString\nHotel name\n\n\n2\nrating\nREAL\n0.0-10.0\nHotel rating\n\n\n3\nprice\nTEXT\nString/NULL\nPrice information\n\n\n4\nlocation\nTEXT\nString\nHotel location\n\n\n5\nimage_urls\nTEXT\nJSON Array\nHotel image URLs\n\n\n6\ndescription\nTEXT\nString/NULL\nHotel description\n\n\n7\nsource\nTEXT\nString\nData source (booking.com)\n\n\n\n\n\n\n1.1.3 Details Activities Dataset\n\nDescription: Activities and tours from GetYourGuide with prices, ratings and locations\nData Source: GetYourGuide website via Scrapy Spider (scraping_data_files/spiders/activities.py)\nData Acquisition: Web scraping with pagination for various destinations\nData Classification: Public business data\n\n\n1.1.3.1 Data Catalogue - Activities\n\n\n\nColumn Index\nColumn Name\nDatatype\nValues\nDescription\n\n\n\n\n1\ntitle\nTEXT\nString\nActivity title\n\n\n2\nprice\nTEXT\nString/NULL\nPrice information\n\n\n3\nrating\nREAL\n0.0-5.0\nActivity rating\n\n\n4\nlocation\nTEXT\nString\nActivity location\n\n\n5\nimage_urls\nTEXT\nJSON Array\nActivity image URLs\n\n\n6\nsource\nTEXT\nString\nData source (getyourguide.com)\n\n\n\n\n\n\n1.1.4 Entity Relationship Diagram\nThe ER diagram is located at docs/er_diagramm/er_diagramm-ER.svg and shows the relationships between Hotels, Activities and Destinations.\n\n\n1.1.5 Data Quality\n\nCompleteness: &gt;95% of hotels have names and locations, ~80% have ratings\nConsistency: Uniform data formats through validation and cleaning\nCurrency: Data regularly updated through re-scraping\nAccuracy: Automatic validation of URLs and data formats",
-    "crumbs": [
-      "Home",
-      "Data & Modelling",
-      "Data Report - TravelHunters Project"
-    ]
-  },
-  {
-    "objectID": "data_report.html#processed-data",
-    "href": "data_report.html#processed-data",
-    "title": "",
-    "section": "1.2 Processed Data",
-    "text": "1.2 Processed Data\n\n1.2.1 Overview of Processed Datasets\n\n\n\n\n\n\n\n\nName\nSource\nStorage Location\n\n\n\n\nMerged Travel Data\nConsolidation of all raw data\ndata_acquisition/merged_travel_data.json\n\n\nTravelHunters Database\nCleaned and structured data\ndatabase/travelhunters.db\n\n\n\n\n\n1.2.2 Details Merged Travel Data\n\nDescription: Consolidated and cleaned data from all sources in uniform format\nProcessing Steps:\n\nData loading from JSON files\nValidation and cleaning (URL validation, duplicate removal)\nData format normalization\nConsolidation into SQLite database\n\nAccess: Via data_cleaning_and_db_integration.py script\nStatistics:\n\n\n2,000 hotels from Booking.com\n\n~90 activities from GetYourGuide\n~671 destinations\nTotal: &gt;2,700 records\n\n\n\n1.2.2.1 Data Catalogue\n\n\n1.2.2.2 If applicable: Entity Relationship Diagram\n\n\n\n1.2.3 Details Processed Dataset 2\n…",
-    "crumbs": [
-      "Home",
-      "Data & Modelling",
-      "Data Report - TravelHunters Project"
-    ]
-  },
-  {
     "objectID": "evaluation.html",
     "href": "evaluation.html",
     "title": "",
@@ -285,6 +165,126 @@
       "Home",
       "Evaluation & Deployment",
       "Evaluation - TravelHunters Project"
+    ]
+  },
+  {
+    "objectID": "data_report.html",
+    "href": "data_report.html",
+    "title": "",
+    "section": "",
+    "text": "Code",
+    "crumbs": [
+      "Home",
+      "Data & Modelling",
+      "Data Report - TravelHunters Project"
+    ]
+  },
+  {
+    "objectID": "data_report.html#raw-data",
+    "href": "data_report.html#raw-data",
+    "title": "",
+    "section": "1.1 Raw Data",
+    "text": "1.1 Raw Data\n\n1.1.1 Overview of Raw Datasets\n\n\n\n\n\n\n\n\nName\nSource\nStorage Location\n\n\n\n\nBooking.com Hotels\nBooking.com via Scrapy Spider\ndata_acquisition/json_backup/booking_worldwide.json\n\n\nActivities Data\nGetYourGuide via Scrapy Spider\ndata_acquisition/json_backup/activities_worldwide.json\n\n\nDestinations Data\nTourism Websites via Scrapy Spider\ndata_acquisition/json_backup/destinations_worldwide.json\n\n\nAccommodations Data\nVarious Sources (Hostelworld, Airbnb)\ndata_acquisition/json_backup/hotels.json\n\n\n\n\n\n1.1.2 Details Booking.com Hotels Dataset\n\nDescription: Hotel data from Booking.com including names, ratings, prices, locations and image URLs\nData Source: Booking.com website via Scrapy Spider (scraping_data_files/spiders/booking.py)\nData Acquisition: Automated web scraping with pagination for worldwide coverage\nLegal Aspects: Publicly available data, respecting robots.txt\nData Classification: Public business data\nVariables: Hotel name, rating, price, location, image URLs, description\n\n\n1.1.2.1 Data Catalogue - Hotels\n\n\n\nColumn Index\nColumn Name\nDatatype\nValues\nDescription\n\n\n\n\n1\nname\nTEXT\nString\nHotel name\n\n\n2\nrating\nREAL\n0.0-10.0\nHotel rating\n\n\n3\nprice\nTEXT\nString/NULL\nPrice information\n\n\n4\nlocation\nTEXT\nString\nHotel location\n\n\n5\nimage_urls\nTEXT\nJSON Array\nHotel image URLs\n\n\n6\ndescription\nTEXT\nString/NULL\nHotel description\n\n\n7\nsource\nTEXT\nString\nData source (booking.com)\n\n\n\n\n\n\n1.1.3 Details Activities Dataset\n\nDescription: Activities and tours from GetYourGuide with prices, ratings and locations\nData Source: GetYourGuide website via Scrapy Spider (scraping_data_files/spiders/activities.py)\nData Acquisition: Web scraping with pagination for various destinations\nData Classification: Public business data\n\n\n1.1.3.1 Data Catalogue - Activities\n\n\n\nColumn Index\nColumn Name\nDatatype\nValues\nDescription\n\n\n\n\n1\ntitle\nTEXT\nString\nActivity title\n\n\n2\nprice\nTEXT\nString/NULL\nPrice information\n\n\n3\nrating\nREAL\n0.0-5.0\nActivity rating\n\n\n4\nlocation\nTEXT\nString\nActivity location\n\n\n5\nimage_urls\nTEXT\nJSON Array\nActivity image URLs\n\n\n6\nsource\nTEXT\nString\nData source (getyourguide.com)\n\n\n\n\n\n\n1.1.4 Entity Relationship Diagram\nThe ER diagram is located at docs/er_diagramm/er_diagramm-ER.svg and shows the relationships between Hotels, Activities and Destinations.\n\n\n1.1.5 Data Quality\n\nCompleteness: &gt;95% of hotels have names and locations, ~80% have ratings\nConsistency: Uniform data formats through validation and cleaning\nCurrency: Data regularly updated through re-scraping\nAccuracy: Automatic validation of URLs and data formats",
+    "crumbs": [
+      "Home",
+      "Data & Modelling",
+      "Data Report - TravelHunters Project"
+    ]
+  },
+  {
+    "objectID": "data_report.html#processed-data",
+    "href": "data_report.html#processed-data",
+    "title": "",
+    "section": "1.2 Processed Data",
+    "text": "1.2 Processed Data\n\n1.2.1 Overview of Processed Datasets\n\n\n\n\n\n\n\n\nName\nSource\nStorage Location\n\n\n\n\nMerged Travel Data\nConsolidation of all raw data\ndata_acquisition/merged_travel_data.json\n\n\nTravelHunters Database\nCleaned and structured data\ndatabase/travelhunters.db\n\n\n\n\n\n1.2.2 Details Merged Travel Data\n\nDescription: Consolidated and cleaned data from all sources in uniform format\nProcessing Steps:\n\nData loading from JSON files\nValidation and cleaning (URL validation, duplicate removal)\nData format normalization\nConsolidation into SQLite database\n\nAccess: Via data_cleaning_and_db_integration.py script\nStatistics:\n\n\n2,000 hotels from Booking.com\n\n~90 activities from GetYourGuide\n~671 destinations\nTotal: &gt;2,700 records\n\n\n\n1.2.2.1 Data Catalogue\n\n\n1.2.2.2 If applicable: Entity Relationship Diagram\n\n\n\n1.2.3 Details Processed Dataset 2\n…",
+    "crumbs": [
+      "Home",
+      "Data & Modelling",
+      "Data Report - TravelHunters Project"
+    ]
+  },
+  {
+    "objectID": "project_charta.html",
+    "href": "project_charta.html",
+    "title": "",
+    "section": "",
+    "text": "Code",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
+    ]
+  },
+  {
+    "objectID": "project_charta.html#problem-definition",
+    "href": "project_charta.html#problem-definition",
+    "title": "",
+    "section": "1.1 Problem Definition",
+    "text": "1.1 Problem Definition\nDomain: Travel and Tourism Data Aggregation\nProblem Statement: Travelers today face information overload when planning trips, with relevant data scattered across multiple platforms (booking sites, travel guides, activity platforms). There is no centralized system that provides comprehensive, up-to-date travel information including accommodations, activities, and destinations with pricing, ratings, and visual content.\nExpected Benefits: - Centralized travel data repository for better decision-making - Automated data collection reducing manual research time - Comprehensive dataset enabling travel analytics and recommendations - Foundation for future travel recommendation systems\nTarget Users: - Travel enthusiasts seeking comprehensive trip planning information - Travel agencies requiring aggregated data for client recommendations - Data analysts researching travel trends and pricing patterns - Developers building travel-related applications\nStakeholders: - Primary Users: Travel planners and tourism professionals - Data Providers: Booking.com, TripAdvisor, Lonely Planet, activity platforms - Development Team: Data engineers, web scrapers, database administrators - End Beneficiaries: Travelers seeking better trip planning tools",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
+    ]
+  },
+  {
+    "objectID": "project_charta.html#situation-assessment",
+    "href": "project_charta.html#situation-assessment",
+    "title": "",
+    "section": "1.2 Situation Assessment",
+    "text": "1.2 Situation Assessment\nAvailable Resources: - Personnel: Development team with expertise in web scraping, data processing, and database management - Tools: Python ecosystem (Scrapy, SQLite, Pandas), Quarto for documentation - Infrastructure: Local development environment with capability for web scraping - Data Sources: Public travel websites (Booking.com, TripAdvisor, Lonely Planet)\nTime Constraints: - Project duration: July 2025 (Summer School timeframe) - Limited to proof-of-concept and initial data collection\nRestrictions and Constraints: - Legal: Must comply with website terms of service and robots.txt - Technical: Rate limiting to avoid overwhelming target websites - Data Quality: Dependent on source website structure and content quality - Scalability: Limited by computing resources for large-scale scraping\nIdentified Risks: - Website structure changes affecting scraper reliability - Rate limiting or IP blocking by target websites - Data quality inconsistencies across different sources - Storage limitations for large datasets with images",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
+    ]
+  },
+  {
+    "objectID": "project_charta.html#project-goals-and-success-criteria",
+    "href": "project_charta.html#project-goals-and-success-criteria",
+    "title": "",
+    "section": "1.3 Project Goals and Success Criteria",
+    "text": "1.3 Project Goals and Success Criteria\nPrimary Objectives: 1. Data Collection Success: Collect comprehensive travel data from multiple sources - Target: &gt;2,000 hotel listings with pricing and ratings - Target: &gt;500 activity listings with descriptions and images - Target: &gt;200 destination entries with coordinates and descriptions\n\nData Quality Standards:\n\n\n90% of entries have complete name and location information\n\n\n80% of hotels have pricing information\n\n\n70% of activities have rating information\n\n\n60% of entries include image URLs\n\n\nSystem Reliability:\n\nScrapers handle pagination and multiple pages successfully\nRobust error handling for website changes\nData cleaning pipeline removes duplicates effectively\n\nDatabase Integration:\n\nAll data successfully stored in structured SQLite database\nProper indexing for efficient queries\nData integrity constraints maintained\n\n\nSuccess Metrics: - Quantity: Total items collected across all categories - Coverage: Number of unique destinations covered - Completeness: Percentage of fields populated per category - Accuracy: Manual validation of sample data entries\nOut of Scope: - Real-time data updates or live synchronization - Advanced recommendation algorithms - User interface development - Commercial deployment or monetization",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
+    ]
+  },
+  {
+    "objectID": "project_charta.html#data-mining-goals",
+    "href": "project_charta.html#data-mining-goals",
+    "title": "",
+    "section": "1.4 Data Mining Goals",
+    "text": "1.4 Data Mining Goals\nPrimary Data Mining Task: Data Integration and Information Extraction\nTechnical Objectives: 1. Web Scraping and Data Extraction: - Extract structured data from unstructured web content - Handle dynamic content and pagination - Parse and normalize pricing, rating, and location data\n\nData Cleaning and Preprocessing:\n\nRemove duplicate entries based on name/location similarity\nStandardize pricing formats and currency conversions\nValidate and clean URLs, ratings, and text content\n\nData Integration:\n\nMerge data from multiple sources (hotels, activities, destinations)\nCreate unified schema across different data types\nEstablish relationships between accommodations, activities, and destinations\n\nFeature Engineering:\n\nGenerate unique identifiers for entities\nExtract location coordinates where available\nCategorize and tag content appropriately\n\n\nQuantitative Success Criteria: - Data Completeness Score: &gt;75% for critical fields (name, location, price/rating) - Duplicate Reduction: &lt;5% duplicate entries after cleaning - Data Integration Success: Successfully merge &gt;95% of collected data into unified schema - Processing Accuracy: &lt;2% data corruption during cleaning and transformation\nTechnical Requirements: - Scalable data processing pipeline handling 10,000+ records - Robust error handling with &lt;1% data loss due to processing errors - Database performance supporting sub-second queries on full dataset",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
+    ]
+  },
+  {
+    "objectID": "project_charta.html#project-plan",
+    "href": "project_charta.html#project-plan",
+    "title": "",
+    "section": "1.5 Project Plan",
+    "text": "1.5 Project Plan\nTravelHunters Data Collection and Integration Project\nThe project follows the CRISP-DM methodology adapted for web scraping and data integration:\n\n\n\n\n\n\nFigure 1: TravelHunters Project Timeline\n\n\n\ngantt\n    title TravelHunters Project Timeline - July 2025\n    dateFormat YYYY-07-DD\n    tickInterval 1day\n    section Project Setup\n        Define problem and goals     :done, a1, 2025-07-01, 1d\n        Setup development environment     :done, a2, 2025-07-01, 1d\n        Initial spider development     :done, a3, 2025-07-02, 1d\n        Project foundation: milestone, done, m1, 2025-07-03, 0d\n    section Data Acquisition\n        Booking.com spider development :done, a4, 2025-07-02, 2d\n        Activities spider implementation   :done, a5, 2025-07-03, 1d\n        Destinations data collection :done, a6, 2025-07-03, 1d\n        Worldwide data scraping :done, a7, 2025-07-04, 2d\n        Data collection complete: milestone, done, m2, 2025-07-06, 0d\n    section Data Processing\n        Data cleaning pipeline   :active, a8, 2025-07-03, 2d\n        Database integration :a9, 2025-07-03, 1d\n        Duplicate removal and validation :a10, 2025-07-04, 1d\n        Quality assurance :a11, 2025-07-04, 1d\n    section Analysis & Documentation\n        Exploratory data analysis :a12, 2025-07-05, 2d\n        Documentation completion :a13, 2025-07-06, 2d\n        Final evaluation :a14, 2025-07-07, 1d\n        Project completion : milestone, m3, 2025-07-08, 0d\nPhase Descriptions: - Project Setup (Days 1-3): Environment setup, initial spider development, proof of concept - Data Acquisition (Days 2-6): Large-scale data collection from multiple sources with pagination - Data Processing (Days 3-5): Cleaning, integration, and database storage - Analysis & Documentation (Days 5-8): Analysis, documentation, and final evaluation",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
+    ]
+  },
+  {
+    "objectID": "project_charta.html#roles-and-contact-details",
+    "href": "project_charta.html#roles-and-contact-details",
+    "title": "",
+    "section": "1.6 Roles and Contact Details",
+    "text": "1.6 Roles and Contact Details\nList the people involved in the development work here with their role titles, tasks and contact details",
+    "crumbs": [
+      "Home",
+      "Project Overview",
+      "Project Charta - TravelHunters"
     ]
   },
   {
