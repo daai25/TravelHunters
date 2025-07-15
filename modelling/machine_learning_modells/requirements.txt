@@ -5,13 +5,28 @@ numpy>=1.21.0
 scikit-learn>=1.1.0
 scipy>=1.9.0
 
+# Deep Learning
+tensorflow>=2.9.0  # Für CNN-Bildklassifikation
+keras>=2.9.0  # Zusätzliches Keras-Interface (optional, da in TensorFlow enthalten)
+
 # Text Processing and NLP
 nltk>=3.7
 spacy>=3.4.0
 
+# Image Processing
+Pillow>=9.2.0  # PIL Fork für Bildverarbeitung
+opencv-python>=4.6.0  # Optional: für erweiterte Bildverarbeitung
+
 # Visualization
 matplotlib>=3.5.0
 seaborn>=0.11.0
+
+# Web Scraping
+scrapy>=2.7.0  # Für die Scraping-Komponente
+requests>=2.28.0  # Für HTTP-Anfragen
+
+# Progress Bars
+tqdm>=4.64.0  # Fortschrittsanzeige für lange Prozesse
 
 # Model Persistence
 joblib>=1.1.0
@@ -20,7 +35,7 @@ joblib>=1.1.0
 # surprise>=1.1.1
 
 # Data Storage
-sqlite3  # Part of Python standard library
+# sqlite3  # Teil der Python-Standardbibliothek (kein pip-Install nötig)
 
 # Jupyter Support (for development)
 notebook>=6.4.0
