@@ -1,14 +1,4 @@
-'''
-Multi-Modal-Recommender für TravelHunters
----------------------------------------
-Dieses Skript implementiert einen Multi-Modal-Ansatz für Reiseempfehlungen, der:
-1. CNN-basierte Bildfeatures aus predictor.py
-2. Text-basierte Features aus dem hybrid_model.py
-kombiniert und zu einem gemeinsamen Embedding-Vektor fusioniert.
 
-Autor: GitHub Copilot
-Datum: 15.07.2025
-'''
 
 import numpy as np
 import os
@@ -18,6 +8,10 @@ from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Union
 import importlib.util
 from scipy.spatial.distance import cosine
+import sqlite3
+import re
+import random
+import time
 
 # Erweiterte Pfadkonfiguration für die korrekte Modul-Erkennung
 # Diese sollte vor der Ausführung des Hauptskripts mit init_environment.py aktualisiert werden
@@ -568,7 +562,7 @@ class MultiModalRecommender:
             return 0.0
     
     def get_multimodal_recommendations(self, query_text=None, image_path=None, 
-                                     user_preferences=None, top_k=10):
+                                     user_preferences=None, top_k=5):
         """
         Get multimodal recommendations using the proven hybrid method
         
@@ -587,6 +581,9 @@ class MultiModalRecommender:
             
         if not query_text:
             query_text = "hotel accommodation"  # Default query
+            
+        # Ensure top_k is limited to maximum 5
+        top_k = min(5, top_k)
             
         # Load hotel data
         try:
@@ -634,62 +631,302 @@ class MultiModalRecommender:
             
         except ImportError as e:
             print(f"⚠️ Could not import data modules: {e}")
-            print("   Falling back to simulated data")
-            return self._generate_sample_recommendations(query_text, user_preferences, top_k)
+            print("   Loading hotels from database...")
+            hotels_from_db = self._generate_recommendations_from_database(query_text, user_preferences, top_k)
+            return pd.DataFrame(hotels_from_db)
         except Exception as e:
             print(f"❌ Error getting recommendations: {e}")
             return pd.DataFrame()
     
-    def _generate_sample_recommendations(self, query_text, user_preferences, top_k):
-        """Generate sample recommendations for demonstration"""
-        import random
-        random.seed(42)
+    def _load_hotels_from_database(self):
+        """Load all hotels from the TravelHunters database"""
+        import sqlite3
+        import re
+        import sqlite3
+        import re
         
-        # Sample cities with realistic hotel data
-        sample_hotels = [
-            {"hotel_name": "Seaside Resort & Spa", "location": "Barcelona, Spain", "rating": 8.5, "price": 180},
-            {"hotel_name": "Grand Palace Hotel", "location": "Paris, France", "rating": 9.1, "price": 280},
-            {"hotel_name": "Beach Paradise Resort", "location": "Bali, Indonesia", "rating": 8.8, "price": 150},
-            {"hotel_name": "City Center Boutique", "location": "Berlin, Germany", "rating": 8.2, "price": 120},
-            {"hotel_name": "Mountain View Lodge", "location": "Zurich, Switzerland", "rating": 8.7, "price": 240},
-            {"hotel_name": "Historic Charm Hotel", "location": "Prague, Czech Republic", "rating": 8.4, "price": 100},
-            {"hotel_name": "Luxury Beach Club", "location": "Miami, USA", "rating": 9.0, "price": 320},
-            {"hotel_name": "Wellness Retreat", "location": "Vienna, Austria", "rating": 8.6, "price": 190},
-            {"hotel_name": "Modern Business Hotel", "location": "Amsterdam, Netherlands", "rating": 8.3, "price": 160},
-            {"hotel_name": "Romantic Getaway Inn", "location": "Venice, Italy", "rating": 8.9, "price": 220}
-        ]
+        # Database path
+        db_path = "/Users/leonakryeziu/PycharmProjects/SummerSchool/TravelHunters/data_acquisition/database/travelhunters.db"
+        
+        try:
+            conn = sqlite3.connect(db_path)
+            cursor = conn.cursor()
+            
+            # Query all hotels
+            cursor.execute("""
+                SELECT id, name, link, rating, price, location, image_url, latitude, longitude
+                FROM booking_worldwide
+            """)
+            
+            rows = cursor.fetchall()
+            hotels = []
+            
+            for row in rows:
+                hotel_id, name, link, rating, price, location, image_url, latitude, longitude = row
+                
+                # Extract rating (assuming it's in format like "8.4" or "Scored 8.4")
+                rating_value = 0.0
+                if rating:
+                    if isinstance(rating, (int, float)):
+                        rating_value = float(rating)
+                    else:
+                        rating_match = re.search(r'(\d+\.?\d*)', str(rating))
+                        if rating_match:
+                            rating_value = float(rating_match.group(1))
+                
+                # Handle price - it's already a number in the database
+                price_value = 0.0
+                if price is not None:
+                    try:
+                        price_value = float(price)
+                        # Some prices might be in cents, convert if very high
+                        if price_value > 10000:
+                            price_value = price_value / 100
+                    except (ValueError, TypeError):
+                        # Fallback for string prices
+                        price_match = re.search(r'(\d+)', str(price))
+                        if price_match:
+                            price_value = float(price_match.group(1))
+                
+                # Clean location
+                location_clean = str(location) if location else "Unknown Location"
+                
+                # Extract city/country from location
+                location_parts = location_clean.split('|')
+                if len(location_parts) >= 4:
+                    location_clean = location_parts[3]  # Use the location part
+                
+                hotels.append({
+                    'hotel_id': hotel_id,
+                    'hotel_name': name,
+                    'location': location_clean,
+                    'rating': rating_value,
+                    'price': price_value,
+                    'url': link,
+                    'image_url': image_url,
+                    'latitude': latitude,
+                    'longitude': longitude
+                })
+            
+            conn.close()
+            
+            # Debug: Show price distribution
+            prices = [h['price'] for h in hotels if h['price'] > 0]
+            if prices:
+                print(f"💰 Price range: ${min(prices):.0f} - ${max(prices):.0f}")
+                print(f"📊 Hotels under $300: {len([p for p in prices if p <= 300])}")
+                print(f"📊 Hotels under $500: {len([p for p in prices if p <= 500])}")
+                print(f"📊 Hotels under $1000: {len([p for p in prices if p <= 1000])}")
+            
+            print(f"✅ Loaded {len(hotels)} hotels from database")
+            return hotels
+            
+        except Exception as e:
+            print(f"❌ Error loading hotels from database: {e}")
+            return []
+    
+    def _generate_recommendations_from_database(self, query_text, user_preferences, top_k):
+        """Generate recommendations from the actual hotel database"""
+        import random
+        import time
+        
+        # Ensure top_k is limited to maximum 5
+        top_k = min(5, top_k)
+        
+        # Load all hotels from database
+        all_hotels = self._load_hotels_from_database()
+        
+        if not all_hotels:
+            print("⚠️ No hotels loaded from database, falling back to sample data")
+            return self._generate_sample_recommendations_fallback(query_text, user_preferences, top_k)
+        
+        # Use dynamic seed for variety
+        seed = hash(query_text + str(time.time())) % 1000000
+        random.seed(seed)
         
         # Filter based on user preferences
         max_price = user_preferences.get('max_price', 1000)
         min_rating = user_preferences.get('min_rating', 0)
         
-        filtered_hotels = [
-            hotel for hotel in sample_hotels 
-            if hotel['price'] <= max_price and hotel['rating'] >= min_rating
-        ]
+        print(f"🔍 Filtering {len(all_hotels)} hotels with max_price=${max_price}, min_rating={min_rating}")
         
-        # Sort by a combination of rating and price value
+        # Filter hotels by price and rating - be more lenient with rating
+        filtered_hotels = []
+        for hotel in all_hotels:
+            price_ok = hotel['price'] <= max_price and hotel['price'] > 0
+            rating_ok = hotel['rating'] >= min_rating
+            
+            if price_ok and rating_ok:
+                filtered_hotels.append(hotel)
+        
+        print(f"📊 After filtering: {len(filtered_hotels)} hotels match criteria")
+        
+        if len(filtered_hotels) < top_k:
+            print(f"⚠️ Only {len(filtered_hotels)} hotels match criteria, relaxing rating filter...")
+            # If not enough results, be more lenient with rating
+            filtered_hotels = [h for h in all_hotels if h['price'] <= max_price and h['price'] > 0]
+            print(f"📊 After relaxed filtering: {len(filtered_hotels)} hotels available")
+        
+        if len(filtered_hotels) < 5:  # If still very few results
+            print(f"⚠️ Still only {len(filtered_hotels)} hotels, using all available hotels...")
+            # Use all hotels if filters are too restrictive
+            filtered_hotels = [h for h in all_hotels if h['price'] > 0][:100]  # Take first 100 with valid prices
+        
+        # Query-based text filtering
+        query_lower = query_text.lower()
+        query_words = query_lower.split()
+        
+        # Calculate relevance scores
         for hotel in filtered_hotels:
-            # Calculate a hybrid score (higher rating, lower price = better score)
-            price_score = 1.0 - (hotel['price'] / 400)  # Normalize price (assuming max 400)
-            rating_score = hotel['rating'] / 10.0  # Normalize rating
-            hotel['hybrid_score'] = 0.6 * rating_score + 0.4 * price_score
+            # Text relevance score
+            hotel_text = f"{hotel['hotel_name']} {hotel['location']}".lower()
+            relevance_score = 0.0
+            
+            for word in query_words:
+                if len(word) > 2:  # Skip very short words
+                    if word in hotel_text:
+                        relevance_score += 1.0
+                    elif any(word in part for part in hotel_text.split()):
+                        relevance_score += 0.5
+            
+            # Normalize relevance by query length
+            if len(query_words) > 0:
+                relevance_score = relevance_score / len(query_words)
+            
+            # NEW: Improved price scoring based on budget
+            price_score = self._calculate_budget_appropriate_price_score(hotel['price'], max_price)
+            
+            # Rating score
+            rating_score = hotel['rating'] / 10.0
+            
+            # Location bonus for popular destinations
+            location_lower = hotel['location'].lower()
+            location_bonus = 0.0
+            popular_cities = ['paris', 'london', 'berlin', 'amsterdam', 'rome', 'barcelona', 'vienna', 'prague']
+            for city in popular_cities:
+                if city in location_lower:
+                    location_bonus = 0.1
+                    break
+            
+            # Add small random factor for variety
+            random_factor = random.uniform(-0.05, 0.05)
+            
+            # Combined score
+            hotel['hybrid_score'] = (
+                0.4 * relevance_score +
+                0.3 * rating_score +
+                0.2 * price_score +
+                0.05 * location_bonus +
+                0.05 * random_factor
+            )
         
+        # Sort by hybrid score
         sorted_hotels = sorted(filtered_hotels, key=lambda x: x['hybrid_score'], reverse=True)
         
-        # Convert to DataFrame
+        # Ensure variety - mix top results with some random picks
+        if len(sorted_hotels) > top_k:
+            # Take top 70% from best matches
+            top_portion = int(top_k * 0.7)
+            top_results = sorted_hotels[:top_portion]
+            
+            # Add 30% variety from remaining results
+            remaining = sorted_hotels[top_portion:]
+            if remaining:
+                variety_count = top_k - top_portion
+                variety_picks = random.sample(remaining, min(variety_count, len(remaining)))
+                top_results.extend(variety_picks)
+            
+            sorted_hotels = top_results
+        
         result_hotels = sorted_hotels[:top_k]
-        df = pd.DataFrame(result_hotels)
+        return result_hotels
+    
+    def _calculate_budget_appropriate_price_score(self, hotel_price, max_budget):
+        """
+        Calculate price score that favors appropriate price range for the budget
         
-        if not df.empty:
-            df['hotel_id'] = range(1, len(df) + 1)
-            print(f"✅ Generated {len(df)} sample recommendations")
+        Args:
+            hotel_price: Price of the hotel
+            max_budget: User's maximum budget
+            
+        Returns:
+            price_score: Score between 0.0 and 1.0
+        """
+        if hotel_price <= 0 or max_budget <= 0:
+            return 0.0
         
-        return df
+        # Define price tiers based on budget
+        if max_budget <= 100:
+            # Budget traveler: prefer cheaper options
+            optimal_price = max_budget * 0.7
+            return max(0.0, 1.0 - abs(hotel_price - optimal_price) / max_budget)
+        elif max_budget <= 300:
+            # Mid-range traveler: prefer mid-range options
+            optimal_price = max_budget * 0.8
+            return max(0.0, 1.0 - abs(hotel_price - optimal_price) / max_budget)
+        elif max_budget <= 600:
+            # Upscale traveler: prefer higher-end options
+            optimal_price = max_budget * 0.85
+            return max(0.0, 1.0 - abs(hotel_price - optimal_price) / max_budget)
+        elif max_budget <= 1500:
+            # High-end traveler: prefer luxury options
+            target_range_min = max_budget * 0.65
+            target_range_max = max_budget * 0.95
+            
+            if hotel_price < target_range_min:
+                # Too cheap for high-end budget - lower score
+                return 0.2 + (hotel_price / target_range_min) * 0.3
+            elif hotel_price <= target_range_max:
+                # In optimal high-end range - high score
+                return 0.7 + (hotel_price - target_range_min) / (target_range_max - target_range_min) * 0.3
+            else:
+                # Near budget limit - still acceptable
+                overprice_factor = min(1.0, (hotel_price - target_range_max) / (max_budget - target_range_max))
+                return 0.85 - overprice_factor * 0.15
+        else:
+            # Ultra-luxury traveler (>$1500): prefer expensive, premium options
+            # For ultra-high budgets, favor hotels in the 70-95% of budget range
+            target_range_min = max_budget * 0.7
+            target_range_max = max_budget * 0.95
+            
+            if hotel_price < target_range_min:
+                # Too cheap for ultra-luxury budget - very low score
+                return 0.1 + (hotel_price / target_range_min) * 0.2
+            elif hotel_price <= target_range_max:
+                # In optimal ultra-luxury range - very high score
+                return 0.85 + (hotel_price - target_range_min) / (target_range_max - target_range_min) * 0.15
+            else:
+                # Near budget limit - still excellent but slightly lower
+                overprice_factor = min(1.0, (hotel_price - target_range_max) / (max_budget - target_range_max))
+                return 0.95 - overprice_factor * 0.1
+    
+    def _generate_sample_recommendations_fallback(self, query_text, user_preferences, top_k):
+        """Fallback to sample recommendations if database is not available"""
+        # Ensure top_k is limited to maximum 5
+        top_k = min(5, top_k)
+        
+        # Simplified sample data as fallback
+        sample_hotels = [
+            {"hotel_id": 1, "hotel_name": "Grand Palace Hotel", "location": "Paris, France", "rating": 9.1, "price": 280},
+            {"hotel_id": 2, "hotel_name": "City Center Boutique", "location": "Berlin, Germany", "rating": 8.2, "price": 120},
+            {"hotel_id": 3, "hotel_name": "Seaside Resort & Spa", "location": "Barcelona, Spain", "rating": 8.5, "price": 180},
+            {"hotel_id": 4, "hotel_name": "Mountain View Lodge", "location": "Zurich, Switzerland", "rating": 8.7, "price": 240},
+            {"hotel_id": 5, "hotel_name": "Historic Charm Hotel", "location": "Prague, Czech Republic", "rating": 8.4, "price": 100},
+        ]
+        
+        max_price = user_preferences.get('max_price', 1000)
+        min_rating = user_preferences.get('min_rating', 0)
+        
+        filtered = [h for h in sample_hotels if h['price'] <= max_price and h['rating'] >= min_rating]
+        
+        for hotel in filtered:
+            hotel['hybrid_score'] = (hotel['rating'] / 10.0) * 0.6 + (1.0 - hotel['price'] / 500) * 0.4
+        
+        return sorted(filtered, key=lambda x: x['hybrid_score'], reverse=True)[:top_k]
             
     def recommend_with_multimodal(self, image_path=None, query_text=None, 
                                user_id=None, hotels_df=None, features_df=None,
-                               user_preferences=None, top_k=10):
+                               user_preferences=None, top_k=5):
         """
         Generiert Empfehlungen basierend auf Multi-Modal-Input
         
@@ -836,252 +1073,7 @@ class MultiModalRecommender:
             print(f"❌ Fehler bei der Multi-Modal-Empfehlung: {e}")
             return []
 
-# --- Training-Funktionen ---
-
-def train_with_extracted_images(extracted_images_dir):
-    """
-    Trainiert das Multi-Modal-Modell mit den extrahierten Bildern aus der Datenbank
-    
-    Args:
-        extracted_images_dir: Pfad zum Verzeichnis mit extrahierten Bildern (organisiert nach Städten)
-        
-    Returns:
-        bool: True wenn Training erfolgreich, False sonst
-    """
-    print(f"\n🚀 Starte Training mit extrahierten Bildern aus: {extracted_images_dir}")
-    
-    try:
-        # Sammle alle Bilder und Städte
-        image_paths = []
-        city_names = []
-        text_descriptions = []
-        
-        print("📂 Durchsuche Bildverzeichnisse...")
-        
-        # Gehe durch alle Stadtordner
-        extracted_path = Path(extracted_images_dir)
-        city_folders = [f for f in extracted_path.iterdir() if f.is_dir()]
-        
-        print(f"🏙️ Gefunden: {len(city_folders)} Städte")
-        
-        for city_folder in city_folders:
-            city_name = city_folder.name
-            
-            # Finde alle Bilddateien in diesem Stadtordner
-            image_files = []
-            for ext in ['*.jpg', '*.jpeg', '*.png', '*.webp']:
-                image_files.extend(city_folder.glob(ext))
-            
-            # Begrenzen Sie die Anzahl der Bilder pro Stadt für das Training (für Performance)
-            max_images_per_city = 20
-            if len(image_files) > max_images_per_city:
-                print(f"   📸 {city_name}: Verwende {max_images_per_city} von {len(image_files)} Bildern")
-                image_files = image_files[:max_images_per_city]
-            else:
-                print(f"   📸 {city_name}: {len(image_files)} Bilder")
-            
-            # Füge Bilder zur Trainingsliste hinzu
-            for image_file in image_files:
-                image_paths.append(str(image_file))
-                city_names.append(city_name)
-                
-                # Erstelle Textbeschreibung basierend auf Stadtname
-                # Normalisiere den Stadtnamen für bessere Textbeschreibung
-                clean_city = city_name.replace('_', ' ').title()
-                description = f"Beautiful destination in {clean_city}, travel photography, tourism, vacation spot"
-                text_descriptions.append(description)
-        
-        print(f"\n📊 Training-Daten gesammelt:")
-        print(f"   🖼️ Bilder: {len(image_paths)}")
-        print(f"   🏙️ Städte: {len(set(city_names))}")
-        
-        if len(image_paths) == 0:
-            print("❌ Keine Bilder zum Training gefunden!")
-            return False
-        
-        # Initialisiere Multi-Modal Recommender
-        print("\n🔄 Initialisiere Multi-Modal Recommender für Training...")
-        recommender = MultiModalRecommender(
-            image_weight=0.5,  # Ausgewogene Gewichtung für Training
-            text_weight=0.5,
-            embedding_dim=256
-        )
-        
-        if not recommender.is_initialized:
-            print("❌ Konnte Multi-Modal Recommender nicht initialisieren")
-            return False
-        
-        # Starte das Training
-        print("\n🚀 Beginne Multi-Modal Training...")
-        
-        # Training-Parameter
-        epochs = 3  # Weniger Epochen für schnelleres Training
-        batch_size = 16  # Kleinere Batch-Größe für bessere Speichernutzung
-        
-        success = train_multimodal_model(
-            model=recommender,
-            image_paths=image_paths,
-            city_names=city_names,
-            text_descriptions=text_descriptions,
-            epochs=epochs,
-            batch_size=batch_size
-        )
-        
-        if success:
-            print("\n✅ Training erfolgreich abgeschlossen!")
-            
-            # Teste das trainierte Modell
-            print("\n🧪 Teste das trainierte Modell...")
-            test_trained_model(recommender, image_paths[:5], city_names[:5])
-            
-            # Speichere das trainierte Modell
-            save_path = Path(extracted_images_dir).parent / "trained_multimodal_model.joblib"
-            print(f"\n💾 Speichere trainiertes Modell: {save_path}")
-            try:
-                import joblib
-                
-                # Speichere relevante Teile des Modells
-                model_data = {
-                    'image_weight': recommender.image_weight,
-                    'text_weight': recommender.text_weight,
-                    'embedding_dim': recommender.embedding_dim,
-                    'has_image_features': recommender.has_image_features,
-                    'has_text_features': recommender.has_text_features,
-                    'training_cities': list(set(city_names)),
-                    'training_images_count': len(image_paths)
-                }
-                
-                joblib.dump(model_data, save_path)
-                print(f"✅ Modell gespeichert: {save_path}")
-                
-            except Exception as save_err:
-                print(f"⚠️ Fehler beim Speichern: {save_err}")
-            
-            return True
-        else:
-            print("❌ Training fehlgeschlagen")
-            return False
-            
-    except Exception as e:
-        print(f"❌ Fehler beim Training: {e}")
-        import traceback
-        traceback.print_exc()
-        return False
-
-def test_trained_model(recommender, test_image_paths, test_city_names):
-    """
-    Testet das trainierte Multi-Modal-Modell mit Beispielbildern
-    
-    Args:
-        recommender: Trainierter MultiModalRecommender
-        test_image_paths: Liste von Test-Bildpfaden
-        test_city_names: Liste von Test-Städtenamen
-    """
-    print("\n🧪 Teste trainiertes Multi-Modal-Modell...")
-    
-    for i, (img_path, city_name) in enumerate(zip(test_image_paths, test_city_names)):
-        print(f"\n  Test {i+1}: {city_name}")
-        
-        try:
-            # Erstelle Multi-Modal-Embedding
-            embedding = recommender.create_multimodal_embedding(
-                image_path=img_path,
-                query_text=f"travel to {city_name}",
-                city_name=city_name
-            )
-            
-            if embedding is not None:
-                print(f"    ✅ Embedding erstellt: Shape {embedding.shape}")
-                
-                # Teste Bildfeature-Extraktion
-                img_features = recommender.get_image_features(img_path)
-                if img_features is not None:
-                    print(f"    🖼️ Bild-Features: Shape {img_features.shape}")
-                
-                # Teste Textfeature-Extraktion
-                text_features = recommender.get_text_features(f"beautiful {city_name} tourism")
-                if text_features is not None:
-                    print(f"    📝 Text-Features: Shape {text_features.shape}")
-                    
-            else:
-                print(f"    ❌ Konnte kein Embedding erstellen")
-                
-        except Exception as e:
-            print(f"    ❌ Test fehlgeschlagen: {e}")
-    
-    print("\n✅ Modell-Test abgeschlossen")
-
-def train_multimodal_model(model, image_paths, city_names, text_descriptions=None, 
-                          epochs=10, batch_size=32):
-    """
-    Trainiert das Multi-Modal-Modell mit ähnlichen Bildern und Textbeschreibungen
-    
-    Args:
-        model: MultiModalRecommender Instanz
-        image_paths: Liste von Bildpfaden
-        city_names: Liste von Städtenamen (gleiche Länge wie image_paths)
-        text_descriptions: Optional - Liste von Textbeschreibungen
-        epochs: Anzahl der Trainingsepochen
-        batch_size: Batch-Größe
-    """
-    if len(image_paths) != len(city_names):
-        print("❌ Anzahl der Bilder und Städtenamen muss gleich sein")
-        return False
-    
-    if not model.is_initialized or model.fusion_model is None:
-        print("❌ Multi-Modal-Modell nicht korrekt initialisiert")
-        return False
-        
-    if text_descriptions is None:
-        # Verwende Städtenamen als Fallback
-        text_descriptions = city_names
-    elif len(text_descriptions) != len(image_paths):
-        print("⚠️ Anzahl der Textbeschreibungen stimmt nicht mit Bildanzahl überein")
-        print("   Verwende Städtenamen als Fallback")
-        text_descriptions = city_names
-    
-    print(f"\n🔄 Starte Training des Multi-Modal-Modells mit {len(image_paths)} Beispielen...")
-    
-    try:
-        # Erstelle Trainings-Batches
-        for epoch in range(epochs):
-            print(f"\nEpoche {epoch+1}/{epochs}")
-            
-            # Gehe durch alle Beispiele
-            for i in range(0, len(image_paths), batch_size):
-                batch_images = image_paths[i:i+batch_size]
-                batch_cities = city_names[i:i+batch_size]
-                batch_texts = text_descriptions[i:i+batch_size]
-                
-                print(f"  Batch {i//batch_size + 1}: Verarbeite {len(batch_images)} Beispiele")
-                
-                # Verarbeite jeden Eintrag im Batch
-                for img_path, city, text in zip(batch_images, batch_cities, batch_texts):
-                    # Extrahiere Features
-                    image_features = model.get_image_features(img_path)
-                    text_features = model.get_text_features(text, city)
-                    
-                    if image_features is not None and text_features is not None:
-                        # Füge Features zur Datenbank hinzu (falls implementiert)
-                        if model.image_feature_db:
-                            model.image_feature_db.add_feature(f"{city}_{i}", city, image_features)
-                            
-                        # Erstelle Multi-Modal-Embedding
-                        _ = model.create_multimodal_embedding(
-                            image_path=img_path,
-                            query_text=text,
-                            city_name=city
-                        )
-                        
-            # Speichere Features nach jeder Epoche
-            if model.image_feature_db:
-                model.image_feature_db.save_features()
-                
-        print("\n✅ Training des Multi-Modal-Modells abgeschlossen")
-        return True
-    except Exception as e:
-        print(f"❌ Fehler beim Training des Multi-Modal-Modells: {e}")
-        return False
+# --- Demo-Funktionen ---
 
 # --- Demo-Funktionen ---
 
@@ -1139,29 +1131,29 @@ def demo_multimodal_recommender():
             max_price = 200
     
     # Rating filter  
-    min_rating_input = input("Minimum rating (default: 4.0): ").strip()
-    min_rating = 4.0
+    min_rating_input = input("Minimum rating (default: 7.0): ").strip()
+    min_rating = 7.0
     if min_rating_input:
         try:
             min_rating = float(min_rating_input.replace(',', '.'))
         except ValueError:
-            print("⚠️ Invalid rating, using default value 4.0")
-            min_rating = 4.0
+            print("⚠️ Invalid rating, using default value 7.0")
+            min_rating = 7.0
     
     # Geographic preferences
     print("\n🗺️ Geographic Preferences (optional):")
     preferred_region = input("Preferred region/country (or press Enter for all): ").strip()
     
     # Number of recommendations
-    top_k_input = input("Number of recommendations (default: 10): ").strip()
-    top_k = 10
+    top_k_input = input("Number of recommendations (default: 5, max: 5): ").strip()
+    top_k = 5
     if top_k_input:
         try:
             top_k = int(top_k_input)
-            top_k = max(1, min(20, top_k))  # Limit to 1-20
+            top_k = max(1, min(5, top_k))  # Limit to 1-5 maximum
         except ValueError:
-            print("⚠️ Invalid number, using default value 10")
-            top_k = 10
+            print("⚠️ Invalid number, using default value 5")
+            top_k = 5
     
     # Create user preferences
     user_preferences = {
@@ -1203,10 +1195,13 @@ def demo_multimodal_recommender():
     if not recommendations.empty:
         print("✅ Recommendations generated successfully")
         
-        print(f"\n✅ Top {len(recommendations)} recommended hotels:")
+        # Limit recommendations to top_k for display
+        display_recommendations = recommendations.head(top_k)
+        
+        print(f"\n✅ Top {len(display_recommendations)} recommended hotels:")
         print("=" * 70)
         
-        for i, (_, hotel) in enumerate(recommendations.iterrows()):
+        for i, (_, hotel) in enumerate(display_recommendations.iterrows()):
             # Get hotel details
             hotel_name = hotel.get('hotel_name', f'Hotel {i+1}')
             location = hotel.get('location', 'Unknown Location')
@@ -1312,39 +1307,17 @@ def main():
         while True:
             print("\nWhat would you like to do?")
             print("1. Get hotel recommendations (Multi-Modal)")
-            print("2. Train model (for advanced users)")
-            print("3. Exit")
+            print("2. Exit")
             
-            choice = input("\nYour choice (1-3): ").strip()
+            choice = input("\nYour choice (1-2): ").strip()
             
             if choice == "1":
                 demo_multimodal_recommender()
             elif choice == "2":
-                print("\n⚠️ This function requires prepared training data.")
-                print("   Please ensure you have images and corresponding")
-                print("   city information prepared for training.")
-                
-                confirm = input("\nWould you like to continue? (y/n): ").strip().lower()
-                if confirm == 'y':
-                    print("\n🔄 Please provide the path to training data.")
-                    training_dir = input("Directory with images: ").strip()
-                    
-                    if os.path.isdir(training_dir):
-                        print("🔄 Preparing training...")
-                        success = train_with_extracted_images(training_dir)
-                        if success:
-                            print("✅ Training completed successfully!")
-                        else:
-                            print("❌ Training failed. Please check the logs.")
-                    else:
-                        print(f"❌ Directory not found: {training_dir}")
-                else:
-                    print("Training cancelled.")
-            elif choice == "3":
                 print("👋 Thank you for using TravelHunters!")
                 break
             else:
-                print("❌ Invalid choice. Please select 1-3.")
+                print("❌ Invalid choice. Please select 1-2.")
                 
     except KeyboardInterrupt:
         print("\n\n⚠️ Program interrupted by user")
