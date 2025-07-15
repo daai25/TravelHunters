@@ -176,7 +176,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## References
 
-- [Python Development Guide](refs/python_dev_guide.md)
+- [Python Development Guide](modelling/machine_learning_modells/models/refs/python_dev_guide.md)
 - Booking.com API Documentation
 - Scrapy Documentation
 - Scikit-learn Documentation
