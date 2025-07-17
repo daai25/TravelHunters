@@ -1,6 +1,6 @@
-# hotel_recommender_cli.py
 """
-Konsolen-Tool: Nutzer gibt eine Anfrage ein, das Skript schlägt das Hotel mit dem höchsten Similarity Score vor.
+hotel_recommender: Konsolen-Tool für Hotelempfehlungen basierend auf semantischer Suche.
+Nutzer gibt eine Anfrage ein, das Skript schlägt die Top 3 Hotels mit dem höchsten Similarity Score vor.
 """
 def recommend_hotel(user_query):
     import sqlite3
