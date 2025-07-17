@@ -18,38 +18,33 @@ warnings.filterwarnings('ignore')
 class TextBasedRecommender:
     """Advanced text-based hotel recommender with enhanced NLP capabilities and semantic understanding"""
     
-    # Definiere die Tokenizer-Funktion außerhalb der __init__-Methode für bessere Serialisierbarkeit
-    @staticmethod
-    def enhanced_tokenizer(text):
-        """Enhanced tokenization function with better multilingual support"""
-        # Normalize text and handle special characters
-        text = text.lower().strip()
-        
-        # Handle common abbreviations and special cases
-        text = re.sub(r'\b(dr|mr|mrs|ms)\b\.?', '', text)
-        text = re.sub(r'\b(hotel|resort|spa|suite)\b', r'\1 accommodation', text)
-        
-        # Split and clean tokens
-        tokens = text.split()
-        result_tokens = []
-        
-        for token in tokens:
-            # Enhanced cleaning for multilingual support
-            clean_token = re.sub(r'[^a-z0-9äöüßáéíóúñç]', '', token)
-            if clean_token and len(clean_token) > 1:
-                result_tokens.append(clean_token)
-                
-                # Add stemmed versions for common endings
-                if clean_token.endswith('ing'):
-                    stem = clean_token[:-3]
-                    if len(stem) > 2:
-                        result_tokens.append(stem)
-                elif clean_token.endswith('ed'):
-                    stem = clean_token[:-2]
-                    if len(stem) > 2:
-                        result_tokens.append(stem)
-        
-        return result_tokens
+    def enhanced_tokenizer(self, text):
+        """Verbesserte Tokenisierung mit Lemmatization und Synonym-Erweiterung (ohne multiprocessing)"""
+        # Fallback auf einfache Tokenisierung, falls spaCy nicht verfügbar ist
+        try:
+            doc = self.nlp(text.lower().strip())
+            tokens = [token.lemma_ for token in doc if not token.is_stop and token.is_alpha and len(token) > 1]
+        except Exception:
+            tokens = re.sub(r'[^a-z0-9äöüßáéíóúñç ]', '', text.lower()).split()
+        # Synonym-Erweiterung (kleines Mapping, kann erweitert werden)
+        synonym_map = {
+            'pool': ['swimmingpool', 'schwimmbad'],
+            'beach': ['strand', 'sea', 'ocean'],
+            'family': ['kids', 'children', 'familie', 'kinder'],
+            'spa': ['wellness', 'relaxation'],
+            'city': ['stadt', 'downtown', 'zentrum'],
+            'luxury': ['premium', 'highend', 'deluxe', 'luxus'],
+            'cheap': ['budget', 'affordable', 'günstig'],
+            'restaurant': ['dining', 'essen'],
+            'view': ['aussicht', 'blick'],
+        }
+        expanded = []
+        for t in tokens:
+            expanded.append(t)
+            for key, syns in synonym_map.items():
+                if t == key or t in syns:
+                    expanded.extend([key] + syns)
+        return list(set(expanded))
     
     def __init__(self, max_features: int = 2000, use_lsa: bool = True, lsa_components: int = 150, 
                  enable_clustering: bool = True, debug_mode: bool = False):
@@ -68,18 +63,26 @@ class TextBasedRecommender:
         self.lsa_components = lsa_components
         self.enable_clustering = enable_clustering
         self.debug_mode = debug_mode
-            
+
+        # spaCy-Modell nur einmal pro Instanz laden
+        try:
+            import spacy
+            self.nlp = spacy.load("en_core_web_sm", disable=["parser", "ner"])
+        except Exception as e:
+            print(f"⚠️ spaCy konnte nicht geladen werden: {e}")
+            self.nlp = None
+
         # Enhanced TF-IDF vectorizer with advanced settings
         self.tfidf_vectorizer = TfidfVectorizer(
-            max_features=max_features,
+            max_features=8000,  # Mehr Features für bessere Unterscheidung
             stop_words='english',
-            ngram_range=(1, 4),  # Extended to 4-grams for better phrase capturing
-            min_df=1,
-            max_df=0.95,
+            ngram_range=(1, 5),  # Bis 5-grams für bessere Kontext-Erfassung
+            min_df=2,  # Seltene Terme raus
+            max_df=0.90,  # Sehr häufige Terme raus
             lowercase=True,
             strip_accents='unicode',
             analyzer='word',
-            tokenizer=self.enhanced_tokenizer,  # Enhanced tokenization als statische Methode
+            tokenizer=self.enhanced_tokenizer,
             norm='l2',
             use_idf=True,
             smooth_idf=True,
@@ -96,9 +99,10 @@ class TextBasedRecommender:
         
         # Hotel clustering for diversity
         self.hotel_clusterer = KMeans(
-            n_clusters=min(20, max_features // 100), 
-            random_state=42, 
-            n_init=10
+            n_clusters=min(20, max_features // 100),
+            random_state=42,
+            n_init=10,
+            algorithm='lloyd'  # Kein multiprocessing
         ) if enable_clustering else None
         
         # Storage for processed data and models
@@ -1255,6 +1259,27 @@ class TextBasedRecommender:
             return False
     
     def _enhance_query(self, query: str) -> str:
+        """Query-Expansion: Synonyme und verwandte Begriffe ergänzen"""
+        # Synonym-Mapping wie im Tokenizer
+        synonym_map = {
+            'pool': ['swimmingpool', 'schwimmbad'],
+            'beach': ['strand', 'sea', 'ocean'],
+            'family': ['kids', 'children', 'familie', 'kinder'],
+            'spa': ['wellness', 'relaxation'],
+            'city': ['stadt', 'downtown', 'zentrum'],
+            'luxury': ['premium', 'highend', 'deluxe', 'luxus'],
+            'cheap': ['budget', 'affordable', 'günstig'],
+            'restaurant': ['dining', 'essen'],
+            'view': ['aussicht', 'blick'],
+        }
+        tokens = query.lower().split()
+        expanded = []
+        for t in tokens:
+            expanded.append(t)
+            for key, syns in synonym_map.items():
+                if t == key or t in syns:
+                    expanded.extend([key] + syns)
+        return ' '.join(list(set(expanded)))
         """
         Verbessert die Benutzeranfrage durch Synonyme und Rechtschreibkorrekturen
         
