@@ -5,6 +5,7 @@ Automatische Evaluation für hotel_recommender: Testet mehrere User-Queries, zei
 import sqlite3
 from sentence_transformers import SentenceTransformer
 import numpy as np
+import matplotlib.pyplot as plt
 
 DB_PATH = "/Users/leonakryeziu/PycharmProjects/SummerSchool/TravelHunters/data_acquisition/database/travelhunters.db"
 MODEL_NAME = "Alibaba-NLP/gte-multilingual-base"
@@ -12,7 +13,6 @@ MODEL_NAME = "Alibaba-NLP/gte-multilingual-base"
 def get_all_hotels():
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
-    # Passe die Spaltennamen an deine Datenbankstruktur an!
     cur.execute("SELECT id, name, location, price, rating, description FROM booking_worldwide WHERE description IS NOT NULL AND description != ''")
     hotels = cur.fetchall()
     conn.close()
@@ -33,6 +33,20 @@ def print_hotel_info(info, score, rank):
     print(f"   📝 {desc_short}")
     print("-" * 60)
 
+def plot_accuracy_table(testcases, hits):
+    labels = [f"TC{i+1}" for i in range(len(testcases))]
+    plt.figure(figsize=(10, 4))
+    bars = plt.bar(labels, hits, color=["green" if h else "red" for h in hits])
+    plt.ylim(0, 1.2)
+    plt.ylabel("Hit (1=Top-3, 0=Miss)")
+    plt.xlabel("Testcase")
+    plt.title(f"Top-3 Accuracy: {sum(hits)/len(hits):.2%}")
+    plt.xticks(rotation=45)
+    for bar, hit in zip(bars, hits):
+        plt.text(bar.get_x() + bar.get_width()/2, bar.get_height()+0.05, str(hit), ha='center', va='bottom')
+    plt.tight_layout()
+    plt.show()
+
 def evaluate_queries(testcases):
     hotels = get_all_hotels()
     hotel_ids = [h[0] for h in hotels]
@@ -41,6 +55,7 @@ def evaluate_queries(testcases):
     hotel_embs = model.encode(descriptions, normalize_embeddings=True)
 
     correct = 0
+    hits = []
     for i, (user_query, expected_id) in enumerate(testcases, 1):
         print(f"\n🔎 Testcase {i}:")
         print(f"User-Query: {user_query}")
@@ -50,6 +65,7 @@ def evaluate_queries(testcases):
         best_indices = np.argsort(scores)[-top_k:][::-1]
         top_ids = [hotel_ids[idx] for idx in best_indices]
         hit = expected_id in top_ids
+        hits.append(int(hit))
         print(f"\n🏨 Top {top_k} Empfehlungen:")
         print("=" * 60)
         for rank, idx in enumerate(best_indices, 1):
@@ -59,6 +75,7 @@ def evaluate_queries(testcases):
         correct += int(hit)
     accuracy = correct / len(testcases)
     print(f"\nTop-3-Accuracy: {accuracy:.2%} ({correct}/{len(testcases)})")
+    plot_accuracy_table(testcases, hits)
 
 if __name__ == "__main__":
     # Beispiel-Testcases: (User-Query, erwartete Hotel-ID)
@@ -73,7 +90,5 @@ if __name__ == "__main__":
         ("Radisson RED Hotel, Vienna Opens in new window Featured This property matches your criteria and may be ranked higher in your search results. It will pay us a higher commission if you make a booking.", 801), 
         ("i want a Luxory Familiy Hotel with minimum ration of 8 and 1 km from centre Metro access", 836),
         ("I want a hotel in Berlin at the Alexanderplatz with good reviews, max 200.", 449)
-
-
     ]
     evaluate_queries(testcases)
