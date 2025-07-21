@@ -1,0 +1,79 @@
+"""
+Automatische Evaluation für hotel_recommender: Testet mehrere User-Queries, zeigt Input/Output und berechnet Top-3-Accuracy.
+"""
+
+import sqlite3
+from sentence_transformers import SentenceTransformer
+import numpy as np
+
+DB_PATH = "/Users/leonakryeziu/PycharmProjects/SummerSchool/TravelHunters/data_acquisition/database/travelhunters.db"
+MODEL_NAME = "Alibaba-NLP/gte-multilingual-base"
+
+def get_all_hotels():
+    conn = sqlite3.connect(DB_PATH)
+    cur = conn.cursor()
+    # Passe die Spaltennamen an deine Datenbankstruktur an!
+    cur.execute("SELECT id, name, location, price, rating, description FROM booking_worldwide WHERE description IS NOT NULL AND description != ''")
+    hotels = cur.fetchall()
+    conn.close()
+    return hotels
+
+def print_hotel_info(info, score, rank):
+    name = info[1] or f"Hotel {info[0]}"
+    location = info[2]
+    price = info[3]
+    rating = info[4]
+    desc = info[5]
+    desc_short = (desc[:100] + "...") if len(desc) > 100 else desc
+    print(f"\n{rank}. {name}")
+    print(f"   📍 {location}")
+    print(f"   💰 {price} pro Nacht")
+    print(f"   ⭐ {rating}/10.0")
+    print(f"   🎯 Score: {score:.3f}")
+    print(f"   📝 {desc_short}")
+    print("-" * 60)
+
+def evaluate_queries(testcases):
+    hotels = get_all_hotels()
+    hotel_ids = [h[0] for h in hotels]
+    descriptions = [h[5] for h in hotels]
+    model = SentenceTransformer(MODEL_NAME, trust_remote_code=True)
+    hotel_embs = model.encode(descriptions, normalize_embeddings=True)
+
+    correct = 0
+    for i, (user_query, expected_id) in enumerate(testcases, 1):
+        print(f"\n🔎 Testcase {i}:")
+        print(f"User-Query: {user_query}")
+        user_emb = model.encode([user_query], normalize_embeddings=True)[0]
+        scores = np.dot(hotel_embs, user_emb)
+        top_k = 3
+        best_indices = np.argsort(scores)[-top_k:][::-1]
+        top_ids = [hotel_ids[idx] for idx in best_indices]
+        hit = expected_id in top_ids
+        print(f"\n🏨 Top {top_k} Empfehlungen:")
+        print("=" * 60)
+        for rank, idx in enumerate(best_indices, 1):
+            print_hotel_info(hotels[idx], scores[idx], rank)
+        print("=" * 60)
+        print(f"Erwartete Hotel-ID: {expected_id} {'✅ Treffer' if hit else '❌ Nicht unter Top 3'}")
+        correct += int(hit)
+    accuracy = correct / len(testcases)
+    print(f"\nTop-3-Accuracy: {accuracy:.2%} ({correct}/{len(testcases)})")
+
+if __name__ == "__main__":
+    # Beispiel-Testcases: (User-Query, erwartete Hotel-ID)
+    testcases = [
+        ("Hotel Saint-Louis Marais", 3),
+        ("I’d like to find a hotel close to the new central station in the Monti district", 289),
+        ("Renovated 2BD apartment in Parc Belleville", 1),
+        ("hotel at the renaissance Paris", 2),
+        ("Looking for a family-friendly hotel in Budapest, max 250", 850),
+        ("Can you recommend a hotel in Paris for less than 500 and 1 km from centre Metro and more than 8 scores", 3),
+        ("I need a hotel in London, not more than 480 a night.", 42),
+        ("Radisson RED Hotel, Vienna Opens in new window Featured This property matches your criteria and may be ranked higher in your search results. It will pay us a higher commission if you make a booking.", 801), 
+        ("i want a Luxory Familiy Hotel with minimum ration of 8 and 1 km from centre Metro access", 836),
+        ("I want a hotel in Berlin at the Alexanderplatz with good reviews, max 200.", 449)
+
+
+    ]
+    evaluate_queries(testcases)
