@@ -7,7 +7,7 @@ def recommend_hotel(user_query):
     from sentence_transformers import SentenceTransformer
     import numpy as np
 
-    DB_PATH = "/Users/leonakryeziu/PycharmProjects/SummerSchool/TravelHunters/data_acquisition/database/travelhunters.db"
+    DB_PATH = "../../../data_acquisition/database/travelhunters.db"
     MODEL_NAME = "Alibaba-NLP/gte-multilingual-base"
 
     import re
