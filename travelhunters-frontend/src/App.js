@@ -10,7 +10,12 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   // Set your API endpoint here (hidden from users)
-  const [apiEndpoint, setApiEndpoint] = useState("http://localhost:5000/analyze"); // Change this to your colleague's script path
+  const [apiEndpoint] = useState("http://localhost:8000/recommend");
+
+  // Debug: Log API calls
+  useEffect(() => {
+    console.log("🔗 API Endpoint:", apiEndpoint);
+  }, [apiEndpoint]);
 
   // Handle scroll effect for navigation
   useEffect(() => {
@@ -73,35 +78,65 @@ function App() {
     }
 
     setIsLoading(true);
+    console.log("🚀 Starting recommendation fetch...");
+    console.log("📝 Text input:", inputText);
+    console.log("📸 Images:", uploadedImages.length);
+    console.log("🔗 API URL:", apiEndpoint);
     
     try {
-      // If API endpoint is configured and images are uploaded, use your colleague's script
-      if (apiEndpoint && uploadedImages.length > 0) {
+      // FIXED: Use API if endpoint is set AND (text OR images are provided)
+      if (apiEndpoint && (inputText.trim() || uploadedImages.length > 0)) {
+        console.log("✅ Calling ML API...");
+        
         const formData = new FormData();
         
-        // Add text input
-        formData.append('text_input', inputText);
+        // Add text input (even if empty, API can handle it)
+        formData.append('text_input', inputText.trim());
         formData.append('language', language);
         
-        // Add images
+        // Add images if any
         uploadedImages.forEach((image, index) => {
           formData.append(`image_${index}`, image.file);
+          console.log(`📎 Added image_${index}:`, image.name);
         });
 
         try {
+          console.log("📡 Sending request to:", apiEndpoint);
           const response = await fetch(apiEndpoint, {
             method: 'POST',
             body: formData,
           });
+          
+          console.log("📥 Response status:", response.status);
           
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
           
           const data = await response.json();
-          setRecommendations(data.recommendations || []);
+          console.log("📊 API Response:", data);
+          
+          if (data.recommendations && data.recommendations.length > 0) {
+            // Convert ML response format to frontend format
+            const formattedRecommendations = data.recommendations.map(hotel => ({
+              id: hotel.id || hotel.rank,
+              name: hotel.name,
+              location: hotel.location,
+              rating: hotel.rating,
+              price: hotel.price, // Already formatted as "CHF 280"
+              image: hotel.image || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop", // Fallback image
+              description: hotel.description,
+              amenities: hotel.amenities || ["WiFi", "Service"]
+            }));
+            
+            setRecommendations(formattedRecommendations);
+            console.log("✅ Set ML recommendations:", formattedRecommendations.length);
+          } else {
+            console.log("⚠️ No recommendations in API response, using fallback");
+            await generateSampleRecommendations();
+          }
         } catch (error) {
-          console.error('API Error:', error);
+          console.error('❌ API Error:', error);
           alert(language === "de" ? 
             "Fehler beim Verarbeiten der Anfrage. Verwende Beispieldaten." : 
             "Error processing request. Using sample data."
@@ -110,11 +145,12 @@ function App() {
           await generateSampleRecommendations();
         }
       } else {
-        // Fallback to sample data when no API endpoint or no images
+        console.log("ℹ️ No API endpoint or input, using sample data");
+        // Fallback to sample data when no API endpoint
         await generateSampleRecommendations();
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('💥 General Error:', error);
       await generateSampleRecommendations();
     }
     
@@ -122,6 +158,7 @@ function App() {
   };
 
   const generateSampleRecommendations = async () => {
+    console.log("🔄 Generating sample recommendations...");
     // Simulate API call with realistic delay
     await new Promise(resolve => setTimeout(resolve, 1500));
     
@@ -185,6 +222,7 @@ function App() {
     ];
     
     setRecommendations(recommendationsData);
+    console.log("✅ Set sample recommendations");
   };
 
   const clearSearch = () => {
@@ -234,7 +272,7 @@ function App() {
       clearSearch: "Suche löschen",
       recommendations: "Unsere Empfehlungen",
       noResults: "Keine Ergebnisse gefunden",
-      loading: "Wir analysieren Ihre Bilder und suchen die besten Optionen für Sie...",
+      loading: "Wir analysieren Ihre Anfrage und suchen die besten Optionen für Sie...",
       perNight: "pro Nacht",
       bookNow: "Jetzt buchen",
       footerTitle: "TravelHunters",
@@ -257,7 +295,7 @@ function App() {
       clearSearch: "Clear Search",
       recommendations: "Our Recommendations",
       noResults: "No results found",
-      loading: "We're analyzing your images and finding the best options for you...",
+      loading: "We're analyzing your request and finding the best options for you...",
       perNight: "per night",
       bookNow: "Book Now",
       footerTitle: "TravelHunters",
@@ -276,9 +314,9 @@ function App() {
     <div className={`app ${darkMode ? "dark" : ""}`}>
       {/* Navigation */}
       <nav className={`nav ${scrolled ? "scrolled" : ""}`}>
-        <a href="#" className="logo">
+        <div className="logo" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--primary-color)' }}>
           🧭 {t.title}
-        </a>
+        </div>
         <div className="nav-controls">
           <button 
             className="btn-icon" 
@@ -372,15 +410,6 @@ function App() {
             </div>
           </div>
         </section>
-
-        {/* Hidden API Configuration - set your endpoint here in code */}
-        <div style={{ display: 'none' }}>
-          <input
-            value={apiEndpoint}
-            onChange={(e) => setApiEndpoint(e.target.value)}
-            placeholder="http://localhost:5000/analyze"
-          />
-        </div>
 
         {/* Search Section */}
         <section id="search-section" className="section">
