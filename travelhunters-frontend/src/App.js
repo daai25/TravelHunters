@@ -5,9 +5,12 @@ function App() {
   const [language, setLanguage] = useState("de");
   const [darkMode, setDarkMode] = useState(false);
   const [inputText, setInputText] = useState("");
+  const [uploadedImages, setUploadedImages] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // Set your API endpoint here (hidden from users)
+  const [apiEndpoint, setApiEndpoint] = useState("http://localhost:5000/analyze"); // Change this to your colleague's script path
 
   // Handle scroll effect for navigation
   useEffect(() => {
@@ -20,9 +23,6 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Note: localStorage removed for Claude.ai compatibility - using only React state
-  // In your own environment, you can add localStorage back if needed
-
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "de" ? "en" : "de"));
   };
@@ -31,17 +31,97 @@ function App() {
     setDarkMode((prev) => !prev);
   };
 
-  const fetchRecommendations = async () => {
-    if (!inputText.trim()) {
+  // Handle image upload
+  const handleImageUpload = (event) => {
+    const files = Array.from(event.target.files);
+    const validImages = files.filter(file => file.type.startsWith('image/'));
+    
+    if (validImages.length !== files.length) {
       alert(language === "de" ? 
-        "Bitte geben Sie Ihre Interessen ein!" : 
-        "Please enter your interests!"
+        "Bitte wählen Sie nur Bilddateien aus!" : 
+        "Please select only image files!"
+      );
+    }
+
+    validImages.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const newImage = {
+          id: Date.now() + Math.random(),
+          file: file,
+          preview: e.target.result,
+          name: file.name
+        };
+        setUploadedImages(prev => [...prev, newImage]);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  // Remove uploaded image
+  const removeImage = (imageId) => {
+    setUploadedImages(prev => prev.filter(img => img.id !== imageId));
+  };
+
+  const fetchRecommendations = async () => {
+    if (!inputText.trim() && uploadedImages.length === 0) {
+      alert(language === "de" ? 
+        "Bitte geben Sie Ihre Interessen ein oder laden Sie Bilder hoch!" : 
+        "Please enter your interests or upload images!"
       );
       return;
     }
 
     setIsLoading(true);
     
+    try {
+      // If API endpoint is configured and images are uploaded, use your colleague's script
+      if (apiEndpoint && uploadedImages.length > 0) {
+        const formData = new FormData();
+        
+        // Add text input
+        formData.append('text_input', inputText);
+        formData.append('language', language);
+        
+        // Add images
+        uploadedImages.forEach((image, index) => {
+          formData.append(`image_${index}`, image.file);
+        });
+
+        try {
+          const response = await fetch(apiEndpoint, {
+            method: 'POST',
+            body: formData,
+          });
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
+          const data = await response.json();
+          setRecommendations(data.recommendations || []);
+        } catch (error) {
+          console.error('API Error:', error);
+          alert(language === "de" ? 
+            "Fehler beim Verarbeiten der Anfrage. Verwende Beispieldaten." : 
+            "Error processing request. Using sample data."
+          );
+          // Fallback to sample data
+          await generateSampleRecommendations();
+        }
+      } else {
+        // Fallback to sample data when no API endpoint or no images
+        await generateSampleRecommendations();
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      await generateSampleRecommendations();
+    }
+    
+    setIsLoading(false);
+  };
+
+  const generateSampleRecommendations = async () => {
     // Simulate API call with realistic delay
     await new Promise(resolve => setTimeout(resolve, 1500));
     
@@ -105,11 +185,11 @@ function App() {
     ];
     
     setRecommendations(recommendationsData);
-    setIsLoading(false);
   };
 
   const clearSearch = () => {
     setInputText("");
+    setUploadedImages([]);
     setRecommendations([]);
   };
 
@@ -154,12 +234,16 @@ function App() {
       clearSearch: "Suche löschen",
       recommendations: "Unsere Empfehlungen",
       noResults: "Keine Ergebnisse gefunden",
-      loading: "Wir suchen die besten Optionen für Sie...",
+      loading: "Wir analysieren Ihre Bilder und suchen die besten Optionen für Sie...",
       perNight: "pro Nacht",
       bookNow: "Jetzt buchen",
       footerTitle: "TravelHunters",
       footerDescription: "Data Science Summer School 2025 – ZHAW School of Engineering",
-      team: "Ein Projekt von: Leona Kryeziu, Evan Blazo, Joan Felber, Jakub Baranec"
+      team: "Ein Projekt von: Leona Kryeziu, Evan Blazo, Joan Felber, Jakub Baranec",
+      uploadImages: "Bilder hochladen",
+      uploadDescription: "Laden Sie Bilder hoch, die Ihre Reisevorstellungen zeigen",
+      apiEndpoint: "API-Endpunkt",
+      apiPlaceholder: "Pfad zu Ihrem Kollegen-Skript (z.B. http://localhost:5000/analyze)"
     },
     en: {
       title: "TravelHunters",
@@ -173,12 +257,16 @@ function App() {
       clearSearch: "Clear Search",
       recommendations: "Our Recommendations",
       noResults: "No results found",
-      loading: "We're finding the best options for you...",
+      loading: "We're analyzing your images and finding the best options for you...",
       perNight: "per night",
       bookNow: "Book Now",
       footerTitle: "TravelHunters",
       footerDescription: "Data Science Summer School 2025 – ZHAW School of Engineering",
-      team: "A project by: Leona Kryeziu, Evan Blazo, Joan Felber, Jakub Baranec"
+      team: "A project by: Leona Kryeziu, Evan Blazo, Joan Felber, Jakub Baranec",
+      uploadImages: "Upload Images",
+      uploadDescription: "Upload images that represent your travel ideas",
+      apiEndpoint: "API Endpoint",
+      apiPlaceholder: "Path to your colleague's script (e.g., http://localhost:5000/analyze)"
     }
   };
 
@@ -188,7 +276,7 @@ function App() {
     <div className={`app ${darkMode ? "dark" : ""}`}>
       {/* Navigation */}
       <nav className={`nav ${scrolled ? "scrolled" : ""}`}>
-        <a href="/travelhunters-frontend/public/hero.jpeg" className="logo">
+        <a href="#" className="logo">
           🧭 {t.title}
         </a>
         <div className="nav-controls">
@@ -239,8 +327,8 @@ function App() {
             <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
               <p style={{ fontSize: "1.125rem", marginBottom: "1.5rem", color: "var(--text-light)" }}>
                 {language === "de" 
-                  ? "TravelHunters ist eine intelligente Reiseempfehlungsplattform, die Ihnen hilft, das perfekte Reiseziel basierend auf Ihren persönlichen Interessen zu finden."
-                  : "TravelHunters is an intelligent travel recommendation platform that helps you find the perfect destination based on your personal interests."
+                  ? "TravelHunters ist eine intelligente Reiseempfehlungsplattform, die Ihnen hilft, das perfekte Reiseziel basierend auf Ihren persönlichen Interessen und hochgeladenen Bildern zu finden."
+                  : "TravelHunters is an intelligent travel recommendation platform that helps you find the perfect destination based on your personal interests and uploaded images."
                 }
               </p>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "2rem", marginTop: "2rem" }}>
@@ -251,20 +339,20 @@ function App() {
                   </h3>
                   <p style={{ color: "var(--text-light)" }}>
                     {language === "de" 
-                      ? "Intelligente Algorithmen analysieren Ihre Präferenzen"
-                      : "Smart algorithms analyze your preferences"
+                      ? "Intelligente Algorithmen analysieren Ihre Präferenzen und Bilder"
+                      : "Smart algorithms analyze your preferences and images"
                     }
                   </p>
                 </div>
                 <div style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🎯</div>
+                  <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>📸</div>
                   <h3 style={{ marginBottom: "0.5rem", color: "var(--text-dark)" }}>
-                    {language === "de" ? "Personalisiert" : "Personalized"}
+                    {language === "de" ? "Bilderkennung" : "Image Recognition"}
                   </h3>
                   <p style={{ color: "var(--text-light)" }}>
                     {language === "de" 
-                      ? "Maßgeschneiderte Empfehlungen für jeden Reisetyp"
-                      : "Tailored recommendations for every type of traveler"
+                      ? "Erkennung von Reisevorstellungen aus Ihren Bildern"
+                      : "Recognition of travel ideas from your images"
                     }
                   </p>
                 </div>
@@ -285,6 +373,15 @@ function App() {
           </div>
         </section>
 
+        {/* Hidden API Configuration - set your endpoint here in code */}
+        <div style={{ display: 'none' }}>
+          <input
+            value={apiEndpoint}
+            onChange={(e) => setApiEndpoint(e.target.value)}
+            placeholder="http://localhost:5000/analyze"
+          />
+        </div>
+
         {/* Search Section */}
         <section id="search-section" className="section">
           <div className="search-section">
@@ -302,6 +399,48 @@ function App() {
                   disabled={isLoading}
                 />
               </div>
+
+              {/* Image Upload Section */}
+              <div className="input-group">
+                <label className="input-label">
+                  {t.uploadImages}
+                </label>
+                <p className="upload-description">
+                  {t.uploadDescription}
+                </p>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={handleImageUpload}
+                  disabled={isLoading}
+                  className="file-input"
+                />
+                
+                {/* Display uploaded images */}
+                {uploadedImages.length > 0 && (
+                  <div className="image-grid">
+                    {uploadedImages.map((image) => (
+                      <div key={image.id} className="image-preview">
+                        <img 
+                          src={image.preview} 
+                          alt={image.name}
+                          className="preview-image"
+                        />
+                        <button 
+                          onClick={() => removeImage(image.id)}
+                          className="remove-button"
+                          disabled={isLoading}
+                        >
+                          ✕
+                        </button>
+                        <p className="image-name">{image.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <div style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
                 <button 
                   onClick={fetchRecommendations}
@@ -310,7 +449,7 @@ function App() {
                 >
                   {isLoading ? "🔄" : "🔍"} {t.showRecommendations}
                 </button>
-                {(recommendations.length > 0 || inputText) && (
+                {(recommendations.length > 0 || inputText || uploadedImages.length > 0) && (
                   <button 
                     onClick={clearSearch}
                     className="btn btn-secondary"

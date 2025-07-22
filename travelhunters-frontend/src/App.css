@@ -1,4 +1,4 @@
-/* Professional TravelHunters CSS */
+/* Professional TravelHunters CSS with Image Upload Support */
 :root {
   --primary-color: #2563eb;
   --primary-hover: #1d4ed8;
@@ -14,6 +14,8 @@
   --border-radius: 12px;
   --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gradient-hero: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(79, 70, 229, 0.9) 100%);
+  --error-color: #ef4444;
+  --success-color: #10b981;
 }
 
 * {
@@ -84,7 +86,7 @@ body {
 
 /* Hero Section */
 .hero {
-  background-image: url('/public/hero.jpeg');
+  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -165,6 +167,12 @@ button:hover, .btn:hover {
   background: var(--primary-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-medium);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .btn-secondary {
@@ -281,6 +289,109 @@ textarea {
   min-height: 120px;
 }
 
+/* File Input Styling */
+.file-input {
+  position: relative;
+  padding: 2rem;
+  border: 2px dashed var(--border-color);
+  border-radius: var(--border-radius);
+  background: var(--bg-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-weight: 500;
+}
+
+.file-input:hover {
+  border-color: var(--primary-color);
+  background: rgba(37, 99, 235, 0.05);
+}
+
+.file-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.upload-description {
+  color: var(--text-light);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Image Grid and Preview */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+}
+
+.image-preview {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  background: var(--bg-light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  transition: all 0.2s ease;
+}
+
+.image-preview:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.preview-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.remove-button {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--error-color);
+  color: white;
+  border: 2px solid white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: var(--shadow-medium);
+  transition: all 0.2s ease;
+}
+
+.remove-button:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+.image-name {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-top: 0.5rem;
+  text-align: center;
+  word-break: break-all;
+  line-height: 1.2;
+}
+
 /* Cards Grid */
 .cards {
   display: grid;
@@ -365,7 +476,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 350px;
+  min-height: 250px;
   background: var(--bg-secondary);
   border: 2px dashed var(--border-color);
   border-radius: 20px;
@@ -455,6 +566,15 @@ footer {
     flex-direction: column;
     align-items: center;
   }
+
+  .image-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .preview-image {
+    height: 100px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -469,6 +589,14 @@ footer {
   button, .btn {
     padding: 0.75rem 1.25rem;
     font-size: 0.95rem;
+  }
+
+  .file-input {
+    padding: 1.5rem;
+  }
+
+  .image-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
 }
 
