@@ -68,6 +68,53 @@ function App() {
     setUploadedImages(prev => prev.filter(img => img.id !== imageId));
   };
 
+  // Handle booking button click - opens hotel link from database
+  const handleBooking = (hotel) => {
+    console.log("🎯 Booking button clicked for hotel:", hotel);
+    console.log("🔗 Available link fields:", {
+      link: hotel.link,
+      url: hotel.url, 
+      booking_url: hotel.booking_url
+    });
+
+    // Check if hotel has a link/URL from database - try multiple fields
+    const possibleLinks = [
+      hotel.link,
+      hotel.url, 
+      hotel.booking_url,
+      hotel.website,
+      hotel.hotel_url
+    ];
+
+    let hotelUrl = null;
+    for (const linkField of possibleLinks) {
+      if (linkField && typeof linkField === 'string' && linkField.trim()) {
+        hotelUrl = linkField.trim();
+        console.log("✅ Found valid link:", hotelUrl);
+        break;
+      }
+    }
+
+    if (hotelUrl) {
+      // Ensure URL has protocol
+      if (!hotelUrl.startsWith('http://') && !hotelUrl.startsWith('https://')) {
+        hotelUrl = 'https://' + hotelUrl;
+      }
+      
+      console.log("🚀 Opening URL:", hotelUrl);
+      // Open hotel link in new tab
+      window.open(hotelUrl, '_blank', 'noopener,noreferrer');
+    } else {
+      // Fallback if no link available
+      console.log("❌ No valid link found for hotel:", hotel.name);
+      const bookingMessage = language === "de" 
+        ? `Leider ist kein direkter Buchungslink für ${hotel.name} verfügbar. Bitte besuchen Sie deren Website direkt.`
+        : `Unfortunately, no direct booking link is available for ${hotel.name}. Please visit their website directly.`;
+      
+      alert(bookingMessage);
+    }
+  };
+
   const fetchRecommendations = async () => {
     if (!inputText.trim() && uploadedImages.length === 0) {
       alert(language === "de" ? 
@@ -126,7 +173,9 @@ function App() {
               price: hotel.price, // Already formatted as "CHF 280"
               image: hotel.image || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop", // Fallback image
               description: hotel.description,
-              amenities: hotel.amenities || ["WiFi", "Service"]
+              amenities: hotel.amenities || ["WiFi", "Service"],
+              // Add booking link from database
+              link: hotel.link || hotel.url || hotel.booking_url || null
             }));
             
             setRecommendations(formattedRecommendations);
@@ -175,7 +224,8 @@ function App() {
           : "Luxurious hotel in the heart of Zurich with breathtaking views",
         amenities: language === "de" 
           ? ["Spa", "Restaurant", "Fitnessraum"] 
-          : ["Spa", "Restaurant", "Fitness Center"]
+          : ["Spa", "Restaurant", "Fitness Center"],
+        link: "https://www.booking.com"
       },
       {
         id: 2,
@@ -189,7 +239,8 @@ function App() {
           : "Romantic hotel directly on Lake Lucerne",
         amenities: language === "de"
           ? ["Seeblick", "Wellness", "Gourmet Restaurant"]
-          : ["Lake View", "Wellness", "Gourmet Restaurant"]
+          : ["Lake View", "Wellness", "Gourmet Restaurant"],
+        link: "https://www.booking.com"
       },
       {
         id: 3,
@@ -203,7 +254,8 @@ function App() {
           : "Modern boutique hotel in the cultural city of Basel",
         amenities: language === "de"
           ? ["Zentrale Lage", "Coworking Space", "Rooftop Bar"]
-          : ["Central Location", "Coworking Space", "Rooftop Bar"]
+          : ["Central Location", "Coworking Space", "Rooftop Bar"],
+        link: "https://www.booking.com"
       },
       {
         id: 4,
@@ -217,7 +269,8 @@ function App() {
           : "Exclusive resort with direct access to ski slopes",
         amenities: language === "de"
           ? ["Ski-in/Ski-out", "Alpine Spa", "Bergpanorama"]
-          : ["Ski-in/Ski-out", "Alpine Spa", "Mountain Panorama"]
+          : ["Ski-in/Ski-out", "Alpine Spa", "Mountain Panorama"],
+        link: "https://www.booking.com"
       }
     ];
     
@@ -520,7 +573,7 @@ function App() {
                       </div>
                     )}
                     <div className="card-badge">
-                      {hotel.price} {t.perNight}
+                      ⭐ {hotel.rating}
                     </div>
                   </div>
                   <div className="card-content">
@@ -528,6 +581,15 @@ function App() {
                     <p className="card-location">
                       📍 {hotel.location}
                     </p>
+                    {/* Price moved above rating */}
+                    <div style={{ 
+                      fontSize: "1.25rem", 
+                      fontWeight: "600", 
+                      color: "var(--primary-color)", 
+                      marginBottom: "0.75rem" 
+                    }}>
+                      💰 {hotel.price} {t.perNight}
+                    </div>
                     <div className="rating">
                       {renderStars(hotel.rating)} 
                       <span style={{ marginLeft: "0.5rem", color: "var(--text-light)" }}>
@@ -563,7 +625,11 @@ function App() {
                         </span>
                       ))}
                     </div>
-                    <button className="btn" style={{ width: "100%" }}>
+                    <button 
+                      className="btn" 
+                      style={{ width: "100%" }}
+                      onClick={() => handleBooking(hotel)}
+                    >
                       🎯 {t.bookNow}
                     </button>
                   </div>
