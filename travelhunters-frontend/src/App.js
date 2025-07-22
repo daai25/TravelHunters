@@ -1,8 +1,5 @@
-// Professional TravelHunters App.js
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import hotel1 from './assets/hotel1.jpeg'; 
-import hotel2 from "./assets/hotel2.jpg";
 
 function App() {
   const [language, setLanguage] = useState("de");
@@ -23,20 +20,8 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Load saved preferences
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem("travelHunters_language");
-    const savedDarkMode = localStorage.getItem("travelHunters_darkMode");
-    
-    if (savedLanguage) setLanguage(savedLanguage);
-    if (savedDarkMode) setDarkMode(JSON.parse(savedDarkMode));
-  }, []);
-
-  // Save preferences
-  useEffect(() => {
-    localStorage.setItem("travelHunters_language", language);
-    localStorage.setItem("travelHunters_darkMode", JSON.stringify(darkMode));
-  }, [language, darkMode]);
+  // Note: localStorage removed for Claude.ai compatibility - using only React state
+  // In your own environment, you can add localStorage back if needed
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "de" ? "en" : "de"));
@@ -67,7 +52,7 @@ function App() {
         location: "Zürich, Schweiz",
         rating: 4.5,
         price: "CHF 280",
-        image: hotel1,
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
         description: language === "de" 
           ? "Luxuriöses Hotel im Herzen von Zürich mit atemberaubender Aussicht"
           : "Luxurious hotel in the heart of Zurich with breathtaking views",
@@ -81,7 +66,7 @@ function App() {
         location: "Luzern, Schweiz",
         rating: 4.8,
         price: "CHF 450",
-        image: hotel2,
+        image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop",
         description: language === "de"
           ? "Romantisches Hotel direkt am Vierwaldstättersee"
           : "Romantic hotel directly on Lake Lucerne",
@@ -95,7 +80,7 @@ function App() {
         location: "Basel, Schweiz",
         rating: 4.2,
         price: "CHF 180",
-        image: null,
+        image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=300&fit=crop",
         description: language === "de"
           ? "Modernes Boutique-Hotel in der Kulturstadt Basel"
           : "Modern boutique hotel in the cultural city of Basel",
@@ -109,7 +94,7 @@ function App() {
         location: "Grindelwald, Schweiz",
         rating: 4.7,
         price: "CHF 380",
-        image: null,
+        image: "https://images.unsplash.com/photo-1551218808-94e220e084d2?w=400&h=300&fit=crop",
         description: language === "de"
           ? "Exklusives Resort mit direktem Zugang zu den Skipisten"
           : "Exclusive resort with direct access to ski slopes",
@@ -130,6 +115,12 @@ function App() {
 
   const scrollToSearch = () => {
     document.getElementById('search-section').scrollIntoView({ 
+      behavior: 'smooth' 
+    });
+  };
+
+  const scrollToAbout = () => {
+    document.getElementById('about-section').scrollIntoView({ 
       behavior: 'smooth' 
     });
   };
@@ -197,7 +188,7 @@ function App() {
     <div className={`app ${darkMode ? "dark" : ""}`}>
       {/* Navigation */}
       <nav className={`nav ${scrolled ? "scrolled" : ""}`}>
-        <a href="#" className="logo">
+        <a href="/travelhunters-frontend/public/hero.jpeg" className="logo">
           🧭 {t.title}
         </a>
         <div className="nav-controls">
@@ -230,7 +221,7 @@ function App() {
             <button className="btn" onClick={scrollToSearch}>
               🔍 {t.searchButton}
             </button>
-            <button className="btn btn-secondary">
+            <button className="btn btn-secondary" onClick={scrollToAbout}>
               📖 {t.learnMore}
             </button>
           </div>
@@ -239,6 +230,61 @@ function App() {
 
       {/* Main Content */}
       <main>
+        {/* About Section */}
+        <section id="about-section" className="section">
+          <div className="search-section">
+            <h2 className="section-title">
+              {language === "de" ? "Über TravelHunters" : "About TravelHunters"}
+            </h2>
+            <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
+              <p style={{ fontSize: "1.125rem", marginBottom: "1.5rem", color: "var(--text-light)" }}>
+                {language === "de" 
+                  ? "TravelHunters ist eine intelligente Reiseempfehlungsplattform, die Ihnen hilft, das perfekte Reiseziel basierend auf Ihren persönlichen Interessen zu finden."
+                  : "TravelHunters is an intelligent travel recommendation platform that helps you find the perfect destination based on your personal interests."
+                }
+              </p>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "2rem", marginTop: "2rem" }}>
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🤖</div>
+                  <h3 style={{ marginBottom: "0.5rem", color: "var(--text-dark)" }}>
+                    {language === "de" ? "KI-Powered" : "AI-Powered"}
+                  </h3>
+                  <p style={{ color: "var(--text-light)" }}>
+                    {language === "de" 
+                      ? "Intelligente Algorithmen analysieren Ihre Präferenzen"
+                      : "Smart algorithms analyze your preferences"
+                    }
+                  </p>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🎯</div>
+                  <h3 style={{ marginBottom: "0.5rem", color: "var(--text-dark)" }}>
+                    {language === "de" ? "Personalisiert" : "Personalized"}
+                  </h3>
+                  <p style={{ color: "var(--text-light)" }}>
+                    {language === "de" 
+                      ? "Maßgeschneiderte Empfehlungen für jeden Reisetyp"
+                      : "Tailored recommendations for every type of traveler"
+                    }
+                  </p>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>⚡</div>
+                  <h3 style={{ marginBottom: "0.5rem", color: "var(--text-dark)" }}>
+                    {language === "de" ? "Schnell & Einfach" : "Fast & Simple"}
+                  </h3>
+                  <p style={{ color: "var(--text-light)" }}>
+                    {language === "de" 
+                      ? "Sofortige Ergebnisse mit wenigen Klicks"
+                      : "Instant results with just a few clicks"
+                    }
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Search Section */}
         <section id="search-section" className="section">
           <div className="search-section">
