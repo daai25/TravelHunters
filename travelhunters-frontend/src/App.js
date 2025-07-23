@@ -7,14 +7,16 @@ function App() {
   const [inputText, setInputText] = useState("");
   const [uploadedImages, setUploadedImages] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
+  const [cityPrediction, setCityPrediction] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  // Set your API endpoint here (hidden from users)
-  const [apiEndpoint] = useState("http://localhost:8000/recommend");
+  
+  // Updated API endpoint for unified travel API
+  const [apiEndpoint] = useState("http://localhost:5002/travel_recommendations");
 
   // Debug: Log API calls
   useEffect(() => {
-    console.log("🔗 API Endpoint:", apiEndpoint);
+    console.log("🔗 Unified Travel API Endpoint:", apiEndpoint);
   }, [apiEndpoint]);
 
   // Handle scroll effect for navigation
@@ -105,183 +107,217 @@ function App() {
       // Open hotel link in new tab
       window.open(hotelUrl, '_blank', 'noopener,noreferrer');
     } else {
-      // Fallback if no link available
-      console.log("❌ No valid link found for hotel:", hotel.name);
-      const bookingMessage = language === "de" 
-        ? `Leider ist kein direkter Buchungslink für ${hotel.name} verfügbar. Bitte besuchen Sie deren Website direkt.`
-        : `Unfortunately, no direct booking link is available for ${hotel.name}. Please visit their website directly.`;
+      // Fallback if no link available - try generic booking site search
+      const searchQuery = encodeURIComponent(`${hotel.name} ${hotel.location}`);
+      const fallbackUrl = `https://www.booking.com/search.html?ss=${searchQuery}`;
       
-      alert(bookingMessage);
+      console.log("❌ No direct link found, using booking.com search:", fallbackUrl);
+      window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
     }
   };
 
   const fetchRecommendations = async () => {
-    if (!inputText.trim() && uploadedImages.length === 0) {
+    // Check what inputs are provided
+    const hasText = inputText.trim().length > 0;
+    const hasImages = uploadedImages.length > 0;
+    
+    if (!hasText && !hasImages) {
       alert(language === "de" ? 
-        "Bitte geben Sie Ihre Interessen ein oder laden Sie Bilder hoch!" : 
-        "Please enter your interests or upload images!"
+        "Bitte geben Sie entweder Text ein oder laden Sie ein Bild hoch!" : 
+        "Please enter text or upload an image!"
       );
       return;
     }
 
     setIsLoading(true);
-    console.log("🚀 Starting recommendation fetch...");
-    console.log("📝 Text input:", inputText);
-    console.log("📸 Images:", uploadedImages.length);
-    console.log("🔗 API URL:", apiEndpoint);
+    setCityPrediction(null);
+    setRecommendations([]);
+    
+    console.log("🚀 Starting recommendation with:", { hasText, hasImages });
     
     try {
-      // FIXED: Use API if endpoint is set AND (text OR images are provided)
-      if (apiEndpoint && (inputText.trim() || uploadedImages.length > 0)) {
-        console.log("✅ Calling ML API...");
+      let apiUrl, formData;
+      
+      if (hasText && hasImages) {
+        // ✅ BOTH: Use complete pipeline (image + text)
+        console.log("🔄 Using complete pipeline (image + text)");
+        apiUrl = "http://localhost:5002/travel_recommendations";
         
-        const formData = new FormData();
+        formData = new FormData();
+        formData.append('query', inputText.trim());
+        formData.append('image', uploadedImages[0].file);
         
-        // Add text input (even if empty, API can handle it)
-        formData.append('text_input', inputText.trim());
-        formData.append('language', language);
+      } else if (hasImages && !hasText) {
+        // 🏙️ IMAGE ONLY: Just predict city, then use generic hotel search
+        console.log("🔄 Using image-only prediction");
+        apiUrl = "http://localhost:5002/predict_city";
         
-        // Add images if any
-        uploadedImages.forEach((image, index) => {
-          formData.append(`image_${index}`, image.file);
-          console.log(`📎 Added image_${index}:`, image.name);
-        });
+        formData = new FormData();
+        formData.append('image', uploadedImages[0].file);
+        
+      } else if (hasText && !hasImages) {
+        // 📝 TEXT ONLY: Just hotel recommendations
+        console.log("🔄 Using text-only hotel search");
+        apiUrl = "http://localhost:5002/recommend_hotels";
+        
+        // For hotel-only API, we need JSON
+        formData = null; // Will use JSON instead
+      }
 
-        try {
-          console.log("📡 Sending request to:", apiEndpoint);
-          const response = await fetch(apiEndpoint, {
-            method: 'POST',
-            body: formData,
-          });
-          
-          console.log("📥 Response status:", response.status);
-          
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          
-          const data = await response.json();
-          console.log("📊 API Response:", data);
-          
-          if (data.recommendations && data.recommendations.length > 0) {
-            // Convert ML response format to frontend format
-            const formattedRecommendations = data.recommendations.map(hotel => ({
-              id: hotel.id || hotel.rank,
-              name: hotel.name,
-              location: hotel.location,
-              rating: hotel.rating,
-              price: hotel.price, // Already formatted as "CHF 280"
-              image: hotel.image || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop", // Fallback image
-              description: hotel.description,
-              amenities: hotel.amenities || ["WiFi", "Service"],
-              // Add booking link from database
-              link: hotel.link || hotel.url || hotel.booking_url || null
-            }));
-            
-            setRecommendations(formattedRecommendations);
-            console.log("✅ Set ML recommendations:", formattedRecommendations.length);
-          } else {
-            console.log("⚠️ No recommendations in API response, using fallback");
-            await generateSampleRecommendations();
-          }
-        } catch (error) {
-          console.error('❌ API Error:', error);
-          alert(language === "de" ? 
-            "Fehler beim Verarbeiten der Anfrage. Verwende Beispieldaten." : 
-            "Error processing request. Using sample data."
-          );
-          // Fallback to sample data
-          await generateSampleRecommendations();
+      console.log("📡 Sending request to:", apiUrl);
+      
+      let response;
+      if (formData) {
+        // Multipart form data (for image uploads)
+        response = await fetch(apiUrl, {
+          method: 'POST',
+          body: formData,
+        });
+      } else {
+        // JSON data (for text-only)
+        response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ query: inputText.trim() })
+        });
+      }
+      
+      console.log("📥 Response status:", response.status);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("❌ HTTP Error Response:", errorText);
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log("📊 API Response:", data);
+      
+      if (data.success) {
+        // Handle different response types
+        if (hasText && hasImages) {
+          // Complete pipeline response
+          handleCompleteResponse(data);
+        } else if (hasImages && !hasText) {
+          // City prediction only - then do hotel search
+          await handleImageOnlyResponse(data);
+        } else if (hasText && !hasImages) {
+          // Hotel recommendations only
+          handleTextOnlyResponse(data);
         }
       } else {
-        console.log("ℹ️ No API endpoint or input, using sample data");
-        // Fallback to sample data when no API endpoint
-        await generateSampleRecommendations();
+        throw new Error(data.error || "API returned unsuccessful response");
       }
+      
     } catch (error) {
-      console.error('💥 General Error:', error);
-      await generateSampleRecommendations();
+      console.error('❌ API Error:', error);
+      
+      let errorMessage;
+      if (error.message.includes('Failed to fetch')) {
+        errorMessage = language === "de" ? 
+          "Verbindungsfehler: Ist der API-Server auf Port 5002 gestartet?" : 
+          "Connection error: Is the API server running on port 5002?";
+      } else {
+        errorMessage = language === "de" ? 
+          `Fehler: ${error.message}` : 
+          `Error: ${error.message}`;
+      }
+      
+      alert(errorMessage);
+      setCityPrediction(null);
+      setRecommendations([]);
     }
     
     setIsLoading(false);
   };
 
-  const generateSampleRecommendations = async () => {
-    console.log("🔄 Generating sample recommendations...");
-    // Simulate API call with realistic delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    const recommendationsData = [
-      {
-        id: 1,
-        name: language === "de" ? "Hotel Sonnenblick" : "Hotel Sonnenblick",
-        location: "Zürich, Schweiz",
-        rating: 4.5,
-        price: "CHF 280",
-        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
-        description: language === "de" 
-          ? "Luxuriöses Hotel im Herzen von Zürich mit atemberaubender Aussicht"
-          : "Luxurious hotel in the heart of Zurich with breathtaking views",
-        amenities: language === "de" 
-          ? ["Spa", "Restaurant", "Fitnessraum"] 
-          : ["Spa", "Restaurant", "Fitness Center"],
-        link: "https://www.booking.com"
-      },
-      {
-        id: 2,
-        name: language === "de" ? "Seehotel Panorama" : "Lake Hotel Panorama",
-        location: "Luzern, Schweiz",
-        rating: 4.8,
-        price: "CHF 450",
-        image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop",
-        description: language === "de"
-          ? "Romantisches Hotel direkt am Vierwaldstättersee"
-          : "Romantic hotel directly on Lake Lucerne",
-        amenities: language === "de"
-          ? ["Seeblick", "Wellness", "Gourmet Restaurant"]
-          : ["Lake View", "Wellness", "Gourmet Restaurant"],
-        link: "https://www.booking.com"
-      },
-      {
-        id: 3,
-        name: "Urban Stay Basel",
-        location: "Basel, Schweiz",
-        rating: 4.2,
-        price: "CHF 180",
-        image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=300&fit=crop",
-        description: language === "de"
-          ? "Modernes Boutique-Hotel in der Kulturstadt Basel"
-          : "Modern boutique hotel in the cultural city of Basel",
-        amenities: language === "de"
-          ? ["Zentrale Lage", "Coworking Space", "Rooftop Bar"]
-          : ["Central Location", "Coworking Space", "Rooftop Bar"],
-        link: "https://www.booking.com"
-      },
-      {
-        id: 4,
-        name: language === "de" ? "Bergresort Alpina" : "Alpine Resort Alpina",
-        location: "Grindelwald, Schweiz",
-        rating: 4.7,
-        price: "CHF 380",
-        image: "https://images.unsplash.com/photo-1551218808-94e220e084d2?w=400&h=300&fit=crop",
-        description: language === "de"
-          ? "Exklusives Resort mit direktem Zugang zu den Skipisten"
-          : "Exclusive resort with direct access to ski slopes",
-        amenities: language === "de"
-          ? ["Ski-in/Ski-out", "Alpine Spa", "Bergpanorama"]
-          : ["Ski-in/Ski-out", "Alpine Spa", "Mountain Panorama"],
-        link: "https://www.booking.com"
+  // Handle complete pipeline response (text + image)
+  const handleCompleteResponse = (data) => {
+    if (data.city_prediction) {
+      setCityPrediction({
+        city: data.city_prediction.city,
+        confidence: data.city_prediction.confidence,
+        thresholdMet: data.query.confidence_threshold_met,
+        originalQuery: data.query.original,
+        modifiedQuery: data.query.modified
+      });
+    }
+
+    if (data.hotel_recommendations && data.hotel_recommendations.length > 0) {
+      setRecommendations(formatHotelRecommendations(data.hotel_recommendations));
+    }
+  };
+
+  // Handle image-only response - predict city then search hotels
+  const handleImageOnlyResponse = async (data) => {
+    if (data.prediction) {
+      const cityData = {
+        city: data.prediction.city,
+        confidence: data.prediction.confidence,
+        thresholdMet: false,
+        originalQuery: "",
+        modifiedQuery: ""
+      };
+      setCityPrediction(cityData);
+
+      // Now search for hotels in the predicted city
+      try {
+        console.log("🏨 Searching hotels for predicted city:", data.prediction.city);
+        const hotelQuery = language === "de" ? 
+          `Hotels in ${data.prediction.city}` : 
+          `Hotels in ${data.prediction.city}`;
+        
+        const hotelResponse = await fetch("http://localhost:5002/recommend_hotels", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ query: hotelQuery })
+        });
+
+        if (hotelResponse.ok) {
+          const hotelData = await hotelResponse.json();
+          if (hotelData.success && hotelData.recommendations) {
+            setRecommendations(formatHotelRecommendations(hotelData.recommendations));
+          }
+        }
+      } catch (error) {
+        console.error("❌ Error fetching hotels for predicted city:", error);
       }
-    ];
-    
-    setRecommendations(recommendationsData);
-    console.log("✅ Set sample recommendations");
+    }
+  };
+
+  // Handle text-only response
+  const handleTextOnlyResponse = (data) => {
+    if (data.recommendations && data.recommendations.length > 0) {
+      setRecommendations(formatHotelRecommendations(data.recommendations));
+    }
+  };
+
+  // Helper function to format hotel recommendations
+  const formatHotelRecommendations = (hotels) => {
+    return hotels.map(hotel => ({
+      id: hotel.id || hotel.rank,
+      name: hotel.name,
+      location: hotel.location,
+      rating: hotel.rating,
+      price: hotel.price,
+      image: hotel.image || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      description: hotel.description,
+      amenities: hotel.amenities || ["WiFi", "Service"],
+      link: hotel.link || hotel.url || hotel.booking_url || null,
+      similarity_score: hotel.similarity_score,
+      rank: hotel.rank
+    }));
   };
 
   const clearSearch = () => {
     setInputText("");
     setUploadedImages([]);
     setRecommendations([]);
+    setCityPrediction(null);
   };
 
   const scrollToSearch = () => {
@@ -297,19 +333,13 @@ function App() {
   };
 
   const renderStars = (rating) => {
-    const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
-
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(<span key={`full-${i}`}>⭐</span>);
-    }
-    
-    if (hasHalfStar) {
-      stars.push(<span key="half">⭐</span>);
-    }
-
-    return stars;
+    // Just return single star with rating number
+    return (
+      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <span style={{ fontSize: "1.25rem" }}>⭐</span>
+        <span style={{ fontWeight: "600", color: "var(--text-dark)" }}>{rating}</span>
+      </div>
+    );
   };
 
   const translations = {
@@ -325,16 +355,18 @@ function App() {
       clearSearch: "Suche löschen",
       recommendations: "Unsere Empfehlungen",
       noResults: "Keine Ergebnisse gefunden",
-      loading: "Wir analysieren Ihre Anfrage und suchen die besten Optionen für Sie...",
+      loading: "Wir analysieren Ihre Anfrage und suchen die besten Hotels für Sie...",
       perNight: "pro Nacht",
       bookNow: "Jetzt buchen",
       footerTitle: "TravelHunters",
       footerDescription: "Data Science Summer School 2025 – ZHAW School of Engineering",
-      team: "Ein Projekt von: Leona Kryeziu, Evan Blazo, Joan Felber, Jakub Baranec",
-      uploadImages: "Bilder hochladen",
-      uploadDescription: "Laden Sie Bilder hoch, die Ihre Reisevorstellungen zeigen",
-      apiEndpoint: "API-Endpunkt",
-      apiPlaceholder: "Pfad zu Ihrem Kollegen-Skript (z.B. http://localhost:5000/analyze)"
+      team: "Ein Projekt von: Leona Kryeziu, Evan Blazo, Jolan Felber, Jakub Baranec",
+      uploadImages: "Bilder hochladen (erforderlich)",
+      uploadDescription: "Laden Sie ein Bild Ihres Traumreiseziels hoch - unsere KI erkennt die Stadt",
+      cityPrediction: "Erkannte Stadt",
+      confidence: "Sicherheit",
+      queryModified: "Suchanfrage wurde erweitert",
+      bothRequired: "Sowohl Text als auch Bild sind erforderlich"
     },
     en: {
       title: "TravelHunters",
@@ -348,16 +380,18 @@ function App() {
       clearSearch: "Clear Search",
       recommendations: "Our Recommendations",
       noResults: "No results found",
-      loading: "We're analyzing your request and finding the best options for you...",
+      loading: "We're analyzing your request and finding the best hotels for you...",
       perNight: "per night",
       bookNow: "Book Now",
       footerTitle: "TravelHunters",
       footerDescription: "Data Science Summer School 2025 – ZHAW School of Engineering",
-      team: "A project by: Leona Kryeziu, Evan Blazo, Joan Felber, Jakub Baranec",
-      uploadImages: "Upload Images",
-      uploadDescription: "Upload images that represent your travel ideas",
-      apiEndpoint: "API Endpoint",
-      apiPlaceholder: "Path to your colleague's script (e.g., http://localhost:5000/analyze)"
+      team: "A project by: Leona Kryeziu, Evan Blazo, Jolan Felber, Jakub Baranec",
+      uploadImages: "Upload Images (required)",
+      uploadDescription: "Upload an image of your dream destination - our AI will recognize the city",
+      cityPrediction: "Detected City",
+      confidence: "Confidence",
+      queryModified: "Search query was enhanced",
+      bothRequired: "Both text and image are required"
     }
   };
 
@@ -413,52 +447,95 @@ function App() {
         <section id="about-section" className="section">
           <div className="search-section">
             <h2 className="section-title">
-              {language === "de" ? "Über TravelHunters" : "About TravelHunters"}
+              {language === "de" ? "Warum TravelHunters?" : "Why TravelHunters?"}
             </h2>
             <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
-              <p style={{ fontSize: "1.125rem", marginBottom: "1.5rem", color: "var(--text-light)" }}>
+              <p style={{ fontSize: "1.25rem", marginBottom: "2.5rem", color: "var(--text-dark)", fontWeight: "500" }}>
                 {language === "de" 
-                  ? "TravelHunters ist eine intelligente Reiseempfehlungsplattform, die Ihnen hilft, das perfekte Reiseziel basierend auf Ihren persönlichen Interessen und hochgeladenen Bildern zu finden."
-                  : "TravelHunters is an intelligent travel recommendation platform that helps you find the perfect destination based on your personal interests and uploaded images."
+                  ? "Verwandeln Sie Ihre Reiseträume in unvergessliche Erlebnisse - mit der Kraft des Machine Learning."
+                  : "Transform your travel dreams into unforgettable experiences - powered by machine learning."
                 }
               </p>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "2rem", marginTop: "2rem" }}>
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🤖</div>
-                  <h3 style={{ marginBottom: "0.5rem", color: "var(--text-dark)" }}>
-                    {language === "de" ? "KI-Powered" : "AI-Powered"}
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "3rem", marginTop: "3rem" }}>
+                <div style={{ textAlign: "center", padding: "2rem 1rem" }}>
+                  <div style={{ fontSize: "4rem", marginBottom: "1.5rem", filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.1))" }}>✨</div>
+                  <h3 style={{ marginBottom: "1rem", color: "var(--primary-color)", fontSize: "1.5rem", fontWeight: "700" }}>
+                    {language === "de" ? "Magische Entdeckungen" : "Magical Discoveries"}
                   </h3>
-                  <p style={{ color: "var(--text-light)" }}>
+                  <p style={{ color: "var(--text-light)", fontSize: "1.1rem", lineHeight: "1.7" }}>
                     {language === "de" 
-                      ? "Intelligente Algorithmen analysieren Ihre Präferenzen und Bilder"
-                      : "Smart algorithms analyze your preferences and images"
+                      ? "Zeigen Sie uns ein Bild Ihres Traumziels - unser CNN-Modell erkennt sofort, wohin Ihr Herz Sie führt und findet die perfekten Hotels dafür."
+                      : "Show us a picture of your dream destination - our CNN model instantly recognizes where your heart wants to go and finds the perfect hotels for it."
                     }
                   </p>
                 </div>
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>📸</div>
-                  <h3 style={{ marginBottom: "0.5rem", color: "var(--text-dark)" }}>
-                    {language === "de" ? "Bilderkennung" : "Image Recognition"}
+                <div style={{ textAlign: "center", padding: "2rem 1rem" }}>
+                  <div style={{ fontSize: "4rem", marginBottom: "1.5rem", filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.1))" }}>🎯</div>
+                  <h3 style={{ marginBottom: "1rem", color: "var(--primary-color)", fontSize: "1.5rem", fontWeight: "700" }}>
+                    {language === "de" ? "Perfekte Matches" : "Perfect Matches"}
                   </h3>
-                  <p style={{ color: "var(--text-light)" }}>
+                  <p style={{ color: "var(--text-light)", fontSize: "1.1rem", lineHeight: "1.7" }}>
                     {language === "de" 
-                      ? "Erkennung von Reisevorstellungen aus Ihren Bildern"
-                      : "Recognition of travel ideas from your images"
+                      ? "Beschreiben Sie Ihre Reiseträume in Ihren eigenen Worten - wir verstehen sie und finden Hotels, die genau zu Ihnen passen."
+                      : "Describe your travel dreams in your own words - we understand them and find hotels that match you perfectly."
                     }
                   </p>
                 </div>
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>⚡</div>
-                  <h3 style={{ marginBottom: "0.5rem", color: "var(--text-dark)" }}>
-                    {language === "de" ? "Schnell & Einfach" : "Fast & Simple"}
+                <div style={{ textAlign: "center", padding: "2rem 1rem" }}>
+                  <div style={{ fontSize: "4rem", marginBottom: "1.5rem", filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.1))" }}>🌍</div>
+                  <h3 style={{ marginBottom: "1rem", color: "var(--primary-color)", fontSize: "1.5rem", fontWeight: "700" }}>
+                    {language === "de" ? "Weltweite Auswahl" : "Global Selection"}
                   </h3>
-                  <p style={{ color: "var(--text-light)" }}>
+                  <p style={{ color: "var(--text-light)", fontSize: "1.1rem", lineHeight: "1.7" }}>
                     {language === "de" 
-                      ? "Sofortige Ergebnisse mit wenigen Klicks"
-                      : "Instant results with just a few clicks"
+                      ? "Von den Malediven bis nach New York - entdecken Sie über 127 Destinationen weltweit mit tausenden handverlesenen Hotels."
+                      : "From the Maldives to New York - discover over 127 destinations worldwide with thousands of hand-picked hotels."
                     }
                   </p>
                 </div>
+                <div style={{ textAlign: "center", padding: "2rem 1rem" }}>
+                  <div style={{ fontSize: "4rem", marginBottom: "1.5rem", filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.1))" }}>⚡</div>
+                  <h3 style={{ marginBottom: "1rem", color: "var(--primary-color)", fontSize: "1.5rem", fontWeight: "700" }}>
+                    {language === "de" ? "Sofortige Inspiration" : "Instant Inspiration"}
+                  </h3>
+                  <p style={{ color: "var(--text-light)", fontSize: "1.1rem", lineHeight: "1.7" }}>
+                    {language === "de" 
+                      ? "Ein Klick, unendliche Möglichkeiten. Von der Idee bis zur Buchung - entdecken Sie Ihr nächstes Abenteuer in Sekunden."
+                      : "One click, endless possibilities. From idea to booking - discover your next adventure in seconds."
+                    }
+                  </p>
+                </div>
+              </div>
+              
+              {/* Call to Action */}
+              <div style={{ 
+                marginTop: "3rem", 
+                padding: "2.5rem", 
+                background: "linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(79, 70, 229, 0.05) 100%)",
+                borderRadius: "20px",
+                border: "1px solid rgba(37, 99, 235, 0.1)"
+              }}>
+                <h3 style={{ color: "var(--primary-color)", marginBottom: "1rem", fontSize: "1.4rem" }}>
+                  {language === "de" ? "Bereit für Ihr nächstes Abenteuer?" : "Ready for your next adventure?"}
+                </h3>
+                <p style={{ color: "var(--text-light)", marginBottom: "2rem", fontSize: "1.1rem" }}>
+                  {language === "de" 
+                    ? "Lassen Sie sich von der Magie des Machine Learning zu Ihrem perfekten Reiseziel führen."
+                    : "Let the magic of machine learning guide you to your perfect destination."
+                  }
+                </p>
+                <button 
+                  className="btn"
+                  onClick={scrollToSearch}
+                  style={{ 
+                    padding: "1rem 2rem",
+                    fontSize: "1.1rem",
+                    background: "linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%)",
+                    boxShadow: "0 8px 25px rgba(37, 99, 235, 0.3)"
+                  }}
+                >
+                  🚀 {language === "de" ? "Jetzt entdecken" : "Discover Now"}
+                </button>
               </div>
             </div>
           </div>
@@ -468,10 +545,28 @@ function App() {
         <section id="search-section" className="section">
           <div className="search-section">
             <h2 className="section-title">{t.searchTitle}</h2>
+            
+            {/* Important notice - Updated */}
+            <div style={{ 
+              background: "var(--bg-secondary)", 
+              border: "2px solid var(--primary-color)", 
+              borderRadius: "12px", 
+              padding: "1rem", 
+              marginBottom: "2rem", 
+              textAlign: "center" 
+            }}>
+              <p style={{ color: "var(--primary-color)", fontWeight: "600", margin: 0 }}>
+                {language === "de" ? 
+                  "💡 Geben Sie Text ein, laden Sie ein Bild hoch, oder beides für beste Ergebnisse!" :
+                  "💡 Enter text, upload an image, or both for best results!"
+                }
+              </p>
+            </div>
+
             <div className="search-form">
               <div className="input-group">
                 <label htmlFor="interests" className="input-label">
-                  {language === "de" ? "Ihre Interessen" : "Your Interests"}
+                  {language === "de" ? "Ihre Reiseinteressen (optional wenn Bild hochgeladen)" : "Your Travel Interests (optional if image uploaded)"}
                 </label>
                 <textarea
                   id="interests"
@@ -485,7 +580,7 @@ function App() {
               {/* Image Upload Section */}
               <div className="input-group">
                 <label className="input-label">
-                  {t.uploadImages}
+                  {language === "de" ? "Bilder hochladen (optional wenn Text eingegeben)" : "Upload Images (optional if text provided)"}
                 </label>
                 <p className="upload-description">
                   {t.uploadDescription}
@@ -497,12 +592,13 @@ function App() {
                   onChange={handleImageUpload}
                   disabled={isLoading}
                   className="file-input"
+                  key={uploadedImages.length === 0 ? 'empty' : 'has-files'} // Force re-render
                 />
                 
                 {/* Display uploaded images */}
                 {uploadedImages.length > 0 && (
                   <div className="image-grid">
-                    {uploadedImages.map((image) => (
+                    {uploadedImages.map((image, index) => (
                       <div key={image.id} className="image-preview">
                         <img 
                           src={image.preview} 
@@ -516,7 +612,9 @@ function App() {
                         >
                           ✕
                         </button>
-                        <p className="image-name">{image.name}</p>
+                        <p className="image-name">
+                          {image.name} {index === 0 && <span style={{color: 'var(--primary-color)'}}>(Primary)</span>}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -526,12 +624,12 @@ function App() {
               <div style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
                 <button 
                   onClick={fetchRecommendations}
-                  disabled={isLoading}
+                  disabled={isLoading || (!inputText.trim() && uploadedImages.length === 0)}
                   className="btn"
                 >
                   {isLoading ? "🔄" : "🔍"} {t.showRecommendations}
                 </button>
-                {(recommendations.length > 0 || inputText || uploadedImages.length > 0) && (
+                {(recommendations.length > 0 || inputText || uploadedImages.length > 0 || cityPrediction) && (
                   <button 
                     onClick={clearSearch}
                     className="btn btn-secondary"
@@ -553,10 +651,44 @@ function App() {
           </div>
         )}
 
+        {/* City Prediction Results */}
+        {cityPrediction && !isLoading && (
+          <section className="section">
+            <div className="search-section">
+              <h2 className="section-title">🏙️ {t.cityPrediction}</h2>
+              <div style={{ 
+                background: "var(--bg-secondary)", 
+                borderRadius: "12px", 
+                padding: "1.5rem", 
+                textAlign: "center",
+                border: "1px solid var(--border-color)"
+              }}>
+                <h3 style={{ color: "var(--primary-color)", marginBottom: "1rem" }}>
+                  {cityPrediction.city}
+                </h3>
+                <p style={{ color: "var(--text-light)", marginBottom: "1rem" }}>
+                  {t.confidence}: {(cityPrediction.confidence * 100).toFixed(1)}%
+                </p>
+                {cityPrediction.thresholdMet && (
+                  <div style={{ 
+                    background: "var(--primary-color)", 
+                    color: "white", 
+                    padding: "0.5rem 1rem", 
+                    borderRadius: "8px",
+                    display: "inline-block"
+                  }}>
+                    ✅ {t.queryModified}
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Results Section */}
         {recommendations.length > 0 && !isLoading && (
           <section className="section">
-            <h2 className="section-title">{t.recommendations}</h2>
+            <h2 className="section-title">🏨 {t.recommendations}</h2>
             <div className="cards">
               {recommendations.map((hotel) => (
                 <div className="card animate-fade-in-up" key={hotel.id}>
@@ -575,6 +707,15 @@ function App() {
                     <div className="card-badge">
                       ⭐ {hotel.rating}
                     </div>
+                    {hotel.rank && (
+                      <div className="card-badge" style={{ 
+                        top: '10px', 
+                        left: '10px', 
+                        background: 'var(--primary-color)' 
+                      }}>
+                        #{hotel.rank}
+                      </div>
+                    )}
                   </div>
                   <div className="card-content">
                     <h3 className="card-title">{hotel.name}</h3>
@@ -591,10 +732,12 @@ function App() {
                       💰 {hotel.price} {t.perNight}
                     </div>
                     <div className="rating">
-                      {renderStars(hotel.rating)} 
-                      <span style={{ marginLeft: "0.5rem", color: "var(--text-light)" }}>
-                        ({hotel.rating})
-                      </span>
+                      {renderStars(hotel.rating)}
+                      {hotel.similarity_score && (
+                        <span style={{ marginLeft: "1rem", color: "var(--primary-color)", fontSize: "0.8rem" }}>
+                          Match: {(hotel.similarity_score * 100).toFixed(0)}%
+                        </span>
+                      )}
                     </div>
                     <p style={{ 
                       margin: "1rem 0", 
