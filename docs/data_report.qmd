@@ -5,83 +5,160 @@ The TravelHunters project collects and processes travel data from various source
 
 ## Raw Data
 ### Overview of Raw Datasets
-| Name | Source | Storage Location |
-|----------------|-----------------------------------------|--------------------------------------------------------------------------|
-| Booking.com Hotels | Booking.com via Scrapy Spider | `data_acquisition/json_backup/booking_worldwide.json` |
-| Activities Data | GetYourGuide via Scrapy Spider | `data_acquisition/json_backup/activities_worldwide.json` |
-| Destinations Data | Tourism Websites via Scrapy Spider | `data_acquisition/json_backup/destinations_worldwide.json` |
-| Accommodations Data | Various Sources (Hostelworld, Airbnb) | `data_acquisition/json_backup/hotels.json` |
 
-### Details Booking.com Hotels Dataset
-- **Description**: Hotel data from Booking.com including names, ratings, prices, locations and image URLs
-- **Data Source**: Booking.com website via Scrapy Spider (`scraping_data_files/spiders/booking.py`)
-- **Data Acquisition**: Automated web scraping with pagination for worldwide coverage
-- **Legal Aspects**: Publicly available data, respecting robots.txt
-- **Data Classification**: Public business data
-- **Variables**: Hotel name, rating, price, location, image URLs, description
+| Name                     | Source                              | Storage Location                                                   |
+|--------------------------|-------------------------------------|--------------------------------------------------------------------|
+| Booking.com Hotels       | Booking.com via Scrapy Spider      | `data_acquisition/json_final/booking_worldwide.json`              |
+| Activities Data          | GetYourGuide via Scrapy Spider         | `data_acquisition/json_final/activities_worldwide.json`           |
+| Destinations Data        | Tourism Websites via Scrapy Spider | `data_acquisition/json_final/destinations_worldwide.json`         |
+| Accommodations Data      | Various Sources (Hostelworld, Airbnb) | `data_acquisition/json_final/hotels.json`                         |
+| Google Maps Street View  | Street View Images via Google API  | `onedrive`                                                        |
+| DuckDuckGo City Images   | Images of Cities via DDG_search     | `onedrive`                                                        |
+| Wikipedia City Images    | Wikipedia pages of cities          | `data_acquisition/json_final/wikipedia_images.json`               |
+| GetYourGuide City Images | GetYourGuide Explorer Pages         | `data_acquisition/json_final/images.txt`                          |
 
-#### Data Catalogue - Hotels
-| Column Index | Column Name | Datatype | Values | Description |
-|---|---|---|---|---|
-| 1 | name | TEXT | String | Hotel name |
-| 2 | rating | REAL | 0.0-10.0 | Hotel rating |
-| 3 | price | TEXT | String/NULL | Price information |
-| 4 | location | TEXT | String | Hotel location |
-| 5 | image_urls | TEXT | JSON Array | Hotel image URLs |
-| 6 | description | TEXT | String/NULL | Hotel description |
-| 7 | source | TEXT | String | Data source (booking.com) |
+---
 
-### Details Activities Dataset
-- **Description**: Activities and tours from GetYourGuide with prices, ratings and locations
-- **Data Source**: GetYourGuide website via Scrapy Spider (`scraping_data_files/spiders/activities.py`)
-- **Data Acquisition**: Web scraping with pagination for various destinations
-- **Data Classification**: Public business data
 
-#### Data Catalogue - Activities
-| Column Index | Column Name | Datatype | Values | Description |
-|---|---|---|---|---|
-| 1 | title | TEXT | String | Activity title |
-| 2 | price | TEXT | String/NULL | Price information |
-| 3 | rating | REAL | 0.0-5.0 | Activity rating |
-| 4 | location | TEXT | String | Activity location |
-| 5 | image_urls | TEXT | JSON Array | Activity image URLs |
-| 6 | source | TEXT | String | Data source (getyourguide.com) |
+#### Booking.com Hotels Dataset
+- **Description**: Hotel data from Booking.com, including names, ratings, prices, locations, and image URLs.
+- **Data Source**: Booking.com website via Scrapy Spider (`scraping_data_files/spiders/booking.py`).
+- **Data Acquisition**: Automated web scraping with pagination for worldwide coverage.
+- **Legal Aspects**: Publicly available data, respecting robots.txt.
+- **Data Classification**: Public business data.
+- **Variables**: 
+  - Hotel name
+  - Rating
+  - Price
+  - Location
+  - Image URLs
+  - Description
 
-### Entity Relationship Diagram
-The ER diagram is located at `docs/er_diagramm/er_diagramm-ER.svg` and shows the relationships between Hotels, Activities and Destinations.
+#### Activities Dataset
+- **Description**: Activities and tours from GetYourGuide, including prices, ratings, and locations.
+- **Data Source**: GetYourGuide website via Scrapy(`scraping_data_files/spiders/activities.py`).
+- **Data Acquisition**: Web scraping with pagination for various destinations.
+- **Data Classification**: Public business data.
+- **Variables**: 
+  - Activity title
+  - Price
+  - Rating
+  - Locationz
+  - Image URLs
+  - Source
 
-### Data Quality
-- **Completeness**: >95% of hotels have names and locations, ~80% have ratings
-- **Consistency**: Uniform data formats through validation and cleaning
-- **Currency**: Data regularly updated through re-scraping
-- **Accuracy**: Automatic validation of URLs and data formats
+### Details of Image Datasets
+
+#### GetYourGuide City Images
+- **Description**: Images of cities and activities scraped from GetYourGuide Explorer pages.
+- **Data Source**: GetYourGuide website via Selenium ([`scraping_data_files/spiders/selescrape_img.py`](scraping_data_files/spiders/selescrape_img.py)).
+- **Storage Location**: `data_acquisition/json_final/images.txt`
+- **Variables**:
+  - City name
+  - Image URL
+  - Activity link
+
+#### DuckDuckGo City Images
+- **Description**: Images of cities retrieved using DuckDuckGo search.
+- **Data Source**: DuckDuckGo API ([`scraping_data_files/spiders/cityImageScraper.py`](scraping_data_files/spiders/cityImageScraper.py)).
+- **Storage Location**: `onedrive`
+- **Variables**:
+  - City name
+  - Image URL
+
+#### Google Maps Street View Images
+- **Description**: Street View images of hotels and destinations.
+- **Data Source**: Google Maps API ([`scraping_data_files/spiders/googlescraping.py`](scraping_data_files/spiders/googlescraping.py)).
+- **Storage Location**: `onedrive`
+- **Variables**:
+  - Latitude
+  - Longitude
+  - Image URL
+
+#### Wikipedia City Images
+- **Description**: Main images from Wikipedia pages of cities.
+- **Data Source**: Wikipedia pages via Scrapy Spider ([`scraping_data_files/spiders/wikipedia_destination_scraper.py`](scraping_data_files/spiders/wikipedia_destination_scraper.py)).
+- **Storage Location**: `data_acquisition/json_final/wikipedia_images.json`
+- **Variables**:
+  - City name
+  - Image URL
+  - Description
+  - Coordinates
+
+---
 
 ## Processed Data
+
 ### Overview of Processed Datasets
-| Name | Source | Storage Location |
-|----------------|-----------------------------------------|--------------------------------------------------------------------------|
-| Merged Travel Data | Consolidation of all raw data | `data_acquisition/merged_travel_data.json` |
-| TravelHunters Database | Cleaned and structured data | `database/travelhunters.db` |
 
-### Details Merged Travel Data
-- **Description**: Consolidated and cleaned data from all sources in uniform format
+| Name                   | Source                        | Storage Location                     |
+|------------------------|-------------------------------|--------------------------------------|
+| Merged Travel Data     | Consolidation of all raw data | `data_acquisition/merged_travel_data.json` |
+| TravelHunters Database | Cleaned and structured data   | `database/travelhunters.db`          |
+
+### Details of Processed Datasets
+
+#### Merged Travel Data
+- **Description**: Consolidated and cleaned data from all sources in a uniform format.
 - **Processing Steps**: 
-  - Data loading from JSON files
-  - Validation and cleaning (URL validation, duplicate removal)
-  - Data format normalization
-  - Consolidation into SQLite database
-- **Access**: Via `data_cleaning_and_db_integration.py` script
+  - Data loading from JSON files.
+  - Validation and cleaning (URL validation, duplicate removal).
+  - Data format normalization.
+  - Consolidation into SQLite database.
+- **Access**: Via `data_cleaning_and_db_integration.py` script.
 - **Statistics**: 
-  - >2,000 hotels from Booking.com
-  - ~90 activities from GetYourGuide
-  - ~671 destinations
-  - Total: >2,700 records
-
-#### Data Catalogue
-
-
-#### If applicable: Entity Relationship Diagram
+  - />2,000 hotels from Booking.com.
+  - ~90 activities from GetYourGuide.
+  - ~671 destinations.
+  - Total: >2,700 records.
+  - **Cities Used**: 129 unique cities.
 
 
-### Details Processed Dataset 2
-...
+### Database structures
+
+#### Travelhunters.db
+The following Tables are contained within the Travelhunters.db each representing information for the denoted fields
+
+**Cities Table**  
+
+|    ID                |            Name            |       Latitude              |   longitude  |
+|------------------------|-------------------------------|--------------------------------------|------|
+|      25              |      Chicago            |      41.875              |   -87.624  |  
+
+**Hotel Table**  
+
+|    ID  | Name  | Link |   Rating  | Price | Location| Description | Image_url | Latitude | Longitude |  
+|--------|-------|------|-----------|-------|---------|-------------|-----------|----------|-----------|  
+|      70  |      Hotel Elide  |      Link        |   7.6  | 191 | Central Station, Rome | Description | Image URL | 41.9023 | 12.4940 | 
+  
+#### Image Databases
+Four databases for each dataset of images (Wikipedia, Getyourguide, Duckduckgo, Google Street view Images). Photos are seperated into seperate databases because Git Large File Storage can only upload single files with size of 2 GB or less. Images are stored into database because each peerson had the same images and because the data was structured for each city allowing us to make a script to create the folder structure to train the model.
+
+- **Database Files**: 
+  - byg_images.db
+  - city_images.db
+  - geo_city_images.db
+  - wiki_images.db
+
+Each image database follows the same structure below
+
+|    ID | filename  | extension |   file  | bytes| width| height | city_id | 
+|--------|-------|------|-----------|-------|---------|-------------|-----------| 
+|      252  |      berlin_north_west.jpg  |     jpg      |   BLOB  | 9821 | 224 | 224 | 14 |
+
+
+![Graph of amount of photos in each image database](pics/city_images.png)
+
+## Data Quality
+
+### Key Metrics
+- **Completeness**: >95% of hotels have names and locations, ~80% have ratings.
+- **Consistency**: Uniform data formats through validation and cleaning.
+- **Accuracy**: Automatic validation of URLs and data formats.
+
+---
+
+
+## Conclusion
+
+This report provides a detailed overview of the data used in the TravelHunters project, including raw data sources, processed datasets, and data quality metrics. The structured and validated data serves as the foundation for building intelligent travel recommendation systems.

@@ -1,0 +1,103 @@
+# Data Scraping Spiders
+
+This section provides an overview of the web scraping spiders used in the TravelHunters project to collect data from various sources.
+
+
+## Overview of Spiders
+
+| Spider Name                  | Purpose                          | Source Website                  | Script Location                          |
+|------------------------------|----------------------------------|----------------------------------|------------------------------------------|
+| `booking.py`                 | Scrapes hotel data              | Booking.com                     | `scraping_data_files/spiders/booking.py` |
+| `activities.py`              | Scrapes activities and tours    | GetYourGuide                    | `scraping_data_files/spiders/activities.py` |
+| `destinations.py`            | Scrapes destination details     | Tourism websites                | `scraping_data_files/spiders/destinations.py` |
+| `wikipedia_destination_scraper.py` | Scrapes city images and descriptions | Wikipedia pages                | `scraping_data_files/spiders/wikipedia_destination_scraper.py` |
+| `cityImageScraper.py`        | Scrapes city images             | DuckDuckGo                      | `scraping_data_files/spiders/cityImageScraper.py` |
+| `googlescraping.py`          | Scrapes Street View images      | Google Maps API                 | `scraping_data_files/spiders/googlescraping.py` |
+| `selescrape_img.py`          | Scrapes activity images         | GetYourGuide Explorer Pages     | `scraping_data_files/spiders/selescrape_img.py` |
+
+---
+
+## Details of Key Spiders
+
+### `booking.py`
+- **Purpose**: Scrapes hotel data from Booking.com, including names, ratings, prices, and locations.
+- **Notable Libraries**: 
+    - Scrapy
+- **Key Features**:
+  - Handles pagination for worldwide coverage.
+  - Extracts structured data such as hotel names, prices, and image URLs.
+- **Challenges**:
+  - Dynamic content loading handled using Scrapy's middleware.
+
+  ### `activities.py`
+- **Purpose**: Scrapes activities and tours from GetYourGuide.
+- **Notable Libraries**: 
+    - Scrapy
+- **Key Features**:
+  - Uses Scrapy to handle static and paginated content.
+  - Extracts activity titles, prices, ratings, and image URLs.
+- **Challenges**:
+  - Handling rate-limiting and ensuring efficient scraping of large datasets.
+
+### `wikipedia_destination_scraper.py`
+- **Purpose**: Scrapes city descriptions and images from Wikipedia pages.
+- **Notable Libraries**: 
+    - hashlib
+    - urllib
+    - beautiful soup
+    - wikipedia_destination_links
+- **Key Features**:
+  - Extracts main images, coordinates, and descriptions for cities.
+  - Handles multilingual pages where applicable.
+- **Challenges**:
+  - Ensuring data consistency across different Wikipedia page structures.
+
+### `destinations.py`
+- **Purpose**: Scrapes destination details from various tourism websites.
+- **Notable Libraries**: 
+    - Scrapy
+- **Key Features**:
+  - Extracts destination names, descriptions, and geographical coordinates.
+  - Handles multiple website structures using Scrapy's flexible selectors.
+- **Challenges**:
+  - Ensuring consistency across data from different sources.
+
+### `cityImageScraper.py`
+- **Purpose**: Scrapes city images using DuckDuckGo search.
+- **Notable Libraries**: 
+    - duckduckgo_search
+- **Key Features**:
+  - Retrieves image URLs for cities based on search queries.
+  - Filters and validates image links to ensure quality.
+- **Challenges**:
+  - Handling rate-limiting and ensuring relevant search results.
+
+### `googlescraping.py`
+- **Purpose**: Scrapes Street View images of hotels and destinations using the Google Maps API.
+- **Notable Libraries**: 
+    - Google Maps API client
+- **Key Features**:
+  - Retrieves Street View images based on latitude and longitude.
+  - Extracts metadata such as coordinates and image timestamps.
+- **Challenges**:
+  - Managing API quotas and ensuring accurate geolocation data.
+
+### `geoscrapr.py`
+- **Purpose**: Sub-script of googlescraping.py. Create perimeter of coordinates for googlescraping.py
+- **Key Features**: 
+    - Takes coordinates of each city and creates a perimeter of coordinates based of city center
+    - formats them into a json
+- **Challenges**: assuring quality in image sets
+
+### `selescrape_img.py`
+- **Purpose**: Scrapes activity images from GetYourGuide Explorer pages.
+- **Notable Libraries**: 
+    - Selenium
+- **Key Features**:
+  - Extracts image URLs for activities and tours.
+  - Handles pagination and structured data extraction.
+  - downloads jpg from image URLs, renames with city name, and stores in folder
+- **Challenges**:
+  - Bypassing getyourguide anti scraping features
+
+---
