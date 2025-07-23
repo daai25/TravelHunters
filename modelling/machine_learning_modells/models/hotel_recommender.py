@@ -21,15 +21,15 @@ MODEL_NAME = "Alibaba-NLP/gte-multilingual-base"
 
 # Globale Variablen für Performance
 model = None
-print("🤖 Lade ML-Modell...")
+print("Lade ML-Modell...")
 
 def load_model():
     """Lädt das Sentence-Transformer Modell einmalig beim Start"""
     global model
     if model is None:
-        print(f"📦 Lade Modell: {MODEL_NAME}")
+        print(f"Lade Modell: {MODEL_NAME}")
         model = SentenceTransformer(MODEL_NAME, trust_remote_code=True)
-        print("✅ Modell erfolgreich geladen!")
+        print("Modell erfolgreich geladen!")
     return model
 
 def extract_price_limit(user_query):
@@ -73,7 +73,7 @@ def get_hotels_from_db(price_limit=None):
             hotels = cur.fetchall()
             
             if not hotels:
-                print(f"⚠️  Keine Hotels mit Preis <= {price_limit} gefunden. Verwende alle Hotels.")
+                print(f"Keine Hotels mit Preis <= {price_limit} gefunden. Verwende alle Hotels.")
                 cur.execute("""
                     SELECT id, description, price 
                     FROM booking_worldwide 
@@ -139,7 +139,7 @@ def recommend_hotels():
                 "recommendations": []
             }), 400
         
-        print(f"📝 Query: '{text_input}' (Sprache: {language})")
+        print(f"Query: '{text_input}' (Sprache: {language})")
         
         # Modell laden
         ml_model = load_model()
@@ -151,7 +151,7 @@ def recommend_hotels():
         
         # Hotels aus DB laden
         hotels, cur, conn = get_hotels_from_db(price_limit)
-        print(f"📊 {len(hotels)} Hotels gefunden")
+        print(f"{len(hotels)} Hotels gefunden")
         
         if not hotels:
             return jsonify({
@@ -192,7 +192,7 @@ def recommend_hotels():
         
         conn.close()
         
-        print(f"✅ {len(recommendations)} Empfehlungen generiert")
+        print(f"{len(recommendations)} Empfehlungen generiert")
         
         return jsonify({
             "query": text_input,
@@ -208,7 +208,7 @@ def recommend_hotels():
         }), 500
         
     except Exception as e:
-        print(f"❌ Fehler: {str(e)}")
+        print(f"Fehler: {str(e)}")
         return jsonify({
             "error": f"Serverfehler: {str(e)}",
             "recommendations": []
@@ -235,18 +235,18 @@ def test_endpoint():
     })
 
 if __name__ == "__main__":
-    print("🚀 Starte Hotel Recommender Server...")
-    print(f"📂 Datenbank: {DB_PATH}")
-    print(f"🤖 Modell: {MODEL_NAME}")
+    print(" Starte Hotel Recommender Server...")
+    print(f" Datenbank: {DB_PATH}")
+    print(f" Modell: {MODEL_NAME}")
     
     # Modell beim Start laden
     load_model()
     
     print("\n" + "="*50)
-    print("🌐 Server läuft auf:")
+    print("Server läuft auf:")
     print("   http://localhost:8000")
     print("   http://127.0.0.1:8000")
-    print("\n📡 Endpoints:")
+    print("\n Endpoints:")
     print("   GET  /health  - Health Check")
     print("   GET  /test    - Test mit Beispieldaten") 
     print("   POST /recommend - Hotelempfehlungen")
