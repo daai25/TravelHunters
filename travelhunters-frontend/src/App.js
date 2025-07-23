@@ -344,7 +344,7 @@ function App() {
 
   const translations = {
     de: {
-      title: "TravelHunters",
+      title: "Travel Hunters",
       subtitle: "Entdecken Sie Ihre nächste Traumreise",
       description: "Von den majestätischen Alpen bis zu pulsierenden Städten - finden Sie das perfekte Reiseziel für Ihr nächstes Abenteuer",
       searchButton: "Reise entdecken",
