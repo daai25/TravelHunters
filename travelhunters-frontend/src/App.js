@@ -13,31 +13,30 @@ function App() {
   
   // Updated API endpoint for unified travel API
   const [apiEndpoint] = useState("http://localhost:5002/travel_recommendations");
-
+  
   // Debug: Log API calls
   useEffect(() => {
     console.log("🔗 Unified Travel API Endpoint:", apiEndpoint);
   }, [apiEndpoint]);
-
+  
   // Handle scroll effect for navigation
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50;
       setScrolled(isScrolled);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
+  
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "de" ? "en" : "de"));
   };
-
+  
   const toggleDarkMode = () => {
     setDarkMode((prev) => !prev);
   };
-
+  
   // Handle image upload
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
@@ -49,7 +48,7 @@ function App() {
         "Please select only image files!"
       );
     }
-
+    
     validImages.forEach(file => {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -64,12 +63,12 @@ function App() {
       reader.readAsDataURL(file);
     });
   };
-
+  
   // Remove uploaded image
   const removeImage = (imageId) => {
     setUploadedImages(prev => prev.filter(img => img.id !== imageId));
   };
-
+  
   // Handle booking button click - opens hotel link from database
   const handleBooking = (hotel) => {
     console.log("🎯 Booking button clicked for hotel:", hotel);
@@ -78,7 +77,7 @@ function App() {
       url: hotel.url, 
       booking_url: hotel.booking_url
     });
-
+    
     // Check if hotel has a link/URL from database - try multiple fields
     const possibleLinks = [
       hotel.link,
@@ -87,7 +86,7 @@ function App() {
       hotel.website,
       hotel.hotel_url
     ];
-
+    
     let hotelUrl = null;
     for (const linkField of possibleLinks) {
       if (linkField && typeof linkField === 'string' && linkField.trim()) {
@@ -96,7 +95,7 @@ function App() {
         break;
       }
     }
-
+    
     if (hotelUrl) {
       // Ensure URL has protocol
       if (!hotelUrl.startsWith('http://') && !hotelUrl.startsWith('https://')) {
@@ -115,7 +114,7 @@ function App() {
       window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
     }
   };
-
+  
   const fetchRecommendations = async () => {
     // Check what inputs are provided
     const hasText = inputText.trim().length > 0;
@@ -128,7 +127,7 @@ function App() {
       );
       return;
     }
-
+    
     setIsLoading(true);
     setCityPrediction(null);
     setRecommendations([]);
@@ -163,7 +162,7 @@ function App() {
         // For hotel-only API, we need JSON
         formData = null; // Will use JSON instead
       }
-
+      
       console.log("📡 Sending request to:", apiUrl);
       
       let response;
@@ -232,7 +231,7 @@ function App() {
     
     setIsLoading(false);
   };
-
+  
   // Handle complete pipeline response (text + image)
   const handleCompleteResponse = (data) => {
     if (data.city_prediction) {
@@ -244,12 +243,11 @@ function App() {
         modifiedQuery: data.query.modified
       });
     }
-
     if (data.hotel_recommendations && data.hotel_recommendations.length > 0) {
       setRecommendations(formatHotelRecommendations(data.hotel_recommendations));
     }
   };
-
+  
   // Handle image-only response - predict city then search hotels
   const handleImageOnlyResponse = async (data) => {
     if (data.prediction) {
@@ -261,7 +259,7 @@ function App() {
         modifiedQuery: ""
       };
       setCityPrediction(cityData);
-
+      
       // Now search for hotels in the predicted city
       try {
         console.log("🏨 Searching hotels for predicted city:", data.prediction.city);
@@ -276,7 +274,7 @@ function App() {
           },
           body: JSON.stringify({ query: hotelQuery })
         });
-
+        
         if (hotelResponse.ok) {
           const hotelData = await hotelResponse.json();
           if (hotelData.success && hotelData.recommendations) {
@@ -288,14 +286,14 @@ function App() {
       }
     }
   };
-
+  
   // Handle text-only response
   const handleTextOnlyResponse = (data) => {
     if (data.recommendations && data.recommendations.length > 0) {
       setRecommendations(formatHotelRecommendations(data.recommendations));
     }
   };
-
+  
   // Helper function to format hotel recommendations
   const formatHotelRecommendations = (hotels) => {
     return hotels.map(hotel => ({
@@ -312,26 +310,26 @@ function App() {
       rank: hotel.rank
     }));
   };
-
+  
   const clearSearch = () => {
     setInputText("");
     setUploadedImages([]);
     setRecommendations([]);
     setCityPrediction(null);
   };
-
+  
   const scrollToSearch = () => {
     document.getElementById('search-section').scrollIntoView({ 
       behavior: 'smooth' 
     });
   };
-
+  
   const scrollToAbout = () => {
     document.getElementById('about-section').scrollIntoView({ 
       behavior: 'smooth' 
     });
   };
-
+  
   const renderStars = (rating) => {
     // Just return single star with rating number
     return (
@@ -341,7 +339,7 @@ function App() {
       </div>
     );
   };
-
+  
   const translations = {
     de: {
       title: "Travel Hunters",
@@ -394,9 +392,9 @@ function App() {
       bothRequired: "Both text and image are required"
     }
   };
-
+  
   const t = translations[language];
-
+  
   return (
     <div className={`app ${darkMode ? "dark" : ""}`}>
       {/* Navigation */}
@@ -541,6 +539,100 @@ function App() {
           </div>
         </section>
 
+        {/* User Experience / Testimonials Section */}
+        <section id="testimonials-section" className="section">
+          <div className="testimonials-container">
+            <h2 className="section-title">
+              {language === "de" 
+                ? "TravelHunters wird geliebt von den besten Reisenden weltweit"
+                : "TravelHunters is loved by the best travelers around the world"
+              }
+            </h2>
+            
+            <div className="testimonials-grid">
+              <div className="testimonial-card">
+                <div className="testimonial-text">
+                  {language === "de" 
+                    ? "Diese App hat mein Reiseleben revolutioniert! Ich fühle mich organisierter und selbstbewusster bei meinen Reiseplänen als je zuvor."
+                    : "This app has revolutionized my travel life! I feel more organized and confident in my travel plans than ever before."
+                  }
+                </div>
+                <div className="user-info">
+                  <div className="user-avatar">S</div>
+                  <div className="user-details">
+                    <h3>Sophie</h3>
+                    <p>{language === "de" ? "Digital Nomadin" : "Digital Nomad"}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="testimonial-card">
+                <div className="testimonial-text">
+                  {language === "de" 
+                    ? "Endlich eine Reise-App, die funktioniert! Sie passt sich meinem Tempo an und hält mich auf Kurs."
+                    : "Finally, a travel app that works for me! It adjusts to my pace and keeps me on track."
+                  }
+                </div>
+                <div className="user-info">
+                  <div className="user-avatar">A</div>
+                  <div className="user-details">
+                    <h3>Alex</h3>
+                    <p>{language === "de" ? "Softwareentwickler" : "Software Developer"}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="testimonial-card">
+                <div className="testimonial-text">
+                  {language === "de" 
+                    ? "Die KI-Empfehlungen sind ein Game-Changer. Ich weiß immer, wo ich stehe und worauf ich mich konzentrieren muss."
+                    : "The AI recommendations are a game-changer. I always know where I stand and what I need to focus on."
+                  }
+                </div>
+                <div className="user-info">
+                  <div className="user-avatar">M</div>
+                  <div className="user-details">
+                    <h3>Maya</h3>
+                    <p>{language === "de" ? "Reisebloggerin" : "Travel Blogger"}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="testimonial-card">
+                <div className="testimonial-text">
+                  {language === "de" 
+                    ? "Ich kann mir nicht vorstellen, eine Reise ohne diese App zu planen. Es ist wie ein persönlicher Reiseberater."
+                    : "I can't imagine planning a trip without this. It's like having a personal travel advisor."
+                  }
+                </div>
+                <div className="user-info">
+                  <div className="user-avatar">L</div>
+                  <div className="user-details">
+                    <h3>Liam</h3>
+                    <p>{language === "de" ? "Abenteurer" : "Adventure Seeker"}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="testimonial-card">
+                <div className="testimonial-text">
+                  {language === "de" 
+                    ? "Das Beste ist, wie stressfrei die Planung wird. Meine Reiseerfahrungen waren noch nie so gut!"
+                    : "The best part is how stress-free it makes planning. My travel experiences have never been better!"
+                  }
+                </div>
+                <div className="user-info">
+                  <div className="user-avatar">E</div>
+                  <div className="user-details">
+                    <h3>Emma</h3>
+                    <p>{language === "de" ? "Fotografin" : "Photographer"}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Search Section */}
         <section id="search-section" className="section">
           <div className="search-section">
@@ -562,7 +654,7 @@ function App() {
                 }
               </p>
             </div>
-
+            
             <div className="search-form">
               <div className="input-group">
                 <label htmlFor="interests" className="input-label">
@@ -576,7 +668,7 @@ function App() {
                   disabled={isLoading}
                 />
               </div>
-
+              
               {/* Image Upload Section */}
               <div className="input-group">
                 <label className="input-label">
@@ -620,7 +712,7 @@ function App() {
                   </div>
                 )}
               </div>
-
+              
               <div style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
                 <button 
                   onClick={fetchRecommendations}
