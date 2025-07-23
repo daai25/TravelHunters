@@ -20,8 +20,8 @@ if __name__ == "__main__":
     user_text = input("Enter your text query: ").strip()
 
 
-    predictor_path = r".\predictor.py"
-    recommender_path = r"C:\Users\evanb\TravelHunters\modelling\machine_learning_modells\models\hotel_recommender.py"
+    predictor_path = "./predictor.py"
+    recommender_path = "./hotel_recommender.py"
 
     print("\nRunning predictor.py...")
     pred_out, pred_err = run_script_with_input(predictor_path, image_path)
