@@ -358,7 +358,7 @@ function App() {
       loading: "Wir analysieren Ihre Anfrage und suchen die besten Hotels für Sie...",
       perNight: "pro Nacht",
       bookNow: "Jetzt buchen",
-      footerTitle: "TravelHunters",
+      footerTitle: "Travel Hunters",
       footerDescription: "Data Science Summer School 2025 – ZHAW School of Engineering",
       team: "Ein Projekt von: Leona Kryeziu, Evan Blazo, Jolan Felber, Jakub Baranec",
       uploadImages: "Bilder hochladen (erforderlich)",
@@ -369,7 +369,7 @@ function App() {
       bothRequired: "Sowohl Text als auch Bild sind erforderlich"
     },
     en: {
-      title: "TravelHunters",
+      title: "Travel Hunters",
       subtitle: "Discover Your Next Dream Journey",
       description: "From majestic Alps to vibrant cities - find the perfect destination for your next adventure",
       searchButton: "Discover Travel",
@@ -383,7 +383,7 @@ function App() {
       loading: "We're analyzing your request and finding the best hotels for you...",
       perNight: "per night",
       bookNow: "Book Now",
-      footerTitle: "TravelHunters",
+      footerTitle: "Travel Hunters",
       footerDescription: "Data Science Summer School 2025 – ZHAW School of Engineering",
       team: "A project by: Leona Kryeziu, Evan Blazo, Jolan Felber, Jakub Baranec",
       uploadImages: "Upload Images (required)",
@@ -447,7 +447,7 @@ function App() {
         <section id="about-section" className="section">
           <div className="search-section">
             <h2 className="section-title">
-              {language === "de" ? "Warum TravelHunters?" : "Why TravelHunters?"}
+              {language === "de" ? "Warum Travel Hunters?" : "Why Travel Hunters?"}
             </h2>
             <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
               <p style={{ fontSize: "1.25rem", marginBottom: "2.5rem", color: "var(--text-dark)", fontWeight: "500" }}>
