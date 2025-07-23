@@ -12,7 +12,10 @@ website:
       - text: "Home"
         file: index.qmd
       - text: "Project Charter"
-        file: project_charta.qmd
+        file: project_charter.qmd
+      -
+        text: Data Collection
+        file: data_collection.qmd
       - text: "Data Report"
         file: data_report.qmd
       - text: "Modelling"
@@ -26,7 +29,7 @@ website:
       - section: "Project Overview"
         contents:
           - index.qmd
-          - project_charta.qmd
+          - project_charter.qmd
       - section: "Data & Modelling"
         contents:
           - data_report.qmd
