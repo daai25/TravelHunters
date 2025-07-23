@@ -5,7 +5,7 @@ from PIL import Image
 import os
 
 # --- Configuration ---
-MODEL_PATH = r"C:\Users\evanb\TravelHunters\modelling\cnn\city_model.pth"
+MODEL_PATH = "../../cnn/city_model.pth"
 IMAGE_SIZE = (224, 224)
 NUM_CLASSES = 127  # Adjust to match your number of classes
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
