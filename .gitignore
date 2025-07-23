@@ -146,3 +146,6 @@ dmypy.json
 
 *api_key.txt*
 .idea
+
+# Do not ignore the following icon
+!travelhunters-frontend/public/img_1.png
