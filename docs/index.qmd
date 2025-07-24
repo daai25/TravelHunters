@@ -145,40 +145,44 @@ This documentation is structured according to the Data Science process:
 ## Key Performance Indicators
 
 ```{python}
-#| label: fig-kpis
-#| fig-cap: "TravelHunters - Key Performance Indicators"
-#| echo: true
-#| code-fold: true
-import matplotlib.pyplot as plt
-import numpy as np
+# Filtered KPI data
+filtered_kpis = [
+    "Top-3 Accuracy",
+    "Overall Accuracy (CNN)",
+    "Overall Accuracy (Total)",
+    "Data Pipeline Success Rate",
+    "User Satisfaction"
+]
 
-# KPI data
-metrics = ['Data Coverage', 'Model Precision', 'User Satisfaction', 'Data Quality', 'Scalability']
-values = [85, 78, 84, 95, 72]  # Percentage values
-targets = [80, 70, 80, 90, 70]  # Target values
+filtered_values = [
+    60,   # Top-3 Accuracy %
+    26,   # CNN Accuracy %
+    70,   # Overall Accuracy Total %
+    95,   # Data Pipeline %
+    90    # User Satisfaction converted to % (4.5/5 * 100)
+]
 
-x = np.arange(len(metrics))
-width = 0.35
+# Create a DataFrame
+filtered_df = pd.DataFrame({
+    "KPI": filtered_kpis,
+    "Value (%)": filtered_values
+})
 
-fig, ax = plt.subplots(figsize=(12, 6))
-bars1 = ax.bar(x - width/2, values, width, label='Current Values', color='#4ECDC4', alpha=0.8)
-bars2 = ax.bar(x + width/2, targets, width, label='Target Values', color='#FF6B6B', alpha=0.6)
+# Plot
+plt.figure(figsize=(9, 5.5))
+bars = plt.barh(filtered_df["KPI"], filtered_df["Value (%)"], color="mediumseagreen")
+plt.xlabel("Value (%)")
+plt.title("Selected Key Performance Indicators")
 
-ax.set_ylabel('Performance (%)')
-ax.set_title('TravelHunters - Performance Metrics vs. Targets')
-ax.set_xticks(x)
-ax.set_xticklabels(metrics, rotation=45, ha='right')
-ax.legend()
-ax.grid(axis='y', alpha=0.3)
+# Add value labels
+for bar in bars:
+    width = bar.get_width()
+    plt.text(width + 1, bar.get_y() + bar.get_height()/2,
+             f'{width}%', va='center')
 
-# Show values on bars
-for bars in [bars1, bars2]:
-    for bar in bars:
-        height = bar.get_height()
-        ax.text(bar.get_x() + bar.get_width()/2., height + 1,
-                f'{height}%', ha='center', va='bottom', fontweight='bold')
-
+plt.xlim(0, 110)
 plt.tight_layout()
+plt.grid(axis='x', linestyle='--', alpha=0.6)
 plt.show()
 ```
 
