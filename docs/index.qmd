@@ -139,7 +139,7 @@ This documentation is structured according to the Data Science process:
 - **[Project Charter](project_charter.qmd)**: Project definition, goals and planning
 - **[Data Collection](data_collection.qmd)**: Details on spiders & process of the collection of data
 - **[Data Report](data_report.qmd)**: Detailed description of all used datasets
-- **[Modelling Report](modelling_report.qmd)**: Development and evaluation of recommendation models  
+- **[Modeling Report](modelling_report.qmd)**: Development and evaluation of recommendation models  
 - **[Evaluation](evaluation.qmd)**: Project evaluation and deployment decisions
 
 ## Key Performance Indicators
