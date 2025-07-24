@@ -51,11 +51,6 @@ format:
     code-fold: true
     code-tools: true
   
-  pdf:
-    documentclass: scrreprt
-    number-sections: true
-    toc: true
-    colorlinks: true
 
 jupyter: python3
 
