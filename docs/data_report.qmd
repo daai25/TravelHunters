@@ -150,6 +150,33 @@ Each image database follows the same structure below
 ![Graph of amount of photos in each image database](pics/city_images.png)
 
 ## Data Quality
+### Image augmentation
+- Class-balance stability  
+  Ensures each city class is represented evenly, reducing bias toward over-represented classes.
+
+- Increased data diversity  
+Synthetic variations (e.g. flips, rotations, color adjustments) expose the model to a wider range of visual conditions, improving generalization.
+
+- Robustness to common transformations  
+  Training on augmented samples helps the classifier tolerate minor rotations, scale changes, and viewpoint shifts.
+
+- Smoother learning curves  
+  Balanced and diversified batches lead to more stable convergence, with fewer sudden jumps or stalls during training.
+  
+### Image Clustering
+
+#### Image Outlier Removal with CLIP + DBSCAN
+  This script processes folders of city-based images to identify and remove outliers using OpenAI's CLIP model and DBSCAN clustering. It copies only **inlier images** (those that form a consistent cluster) to a clean destination folder.
+
+1. **Feature Extraction**  
+   Uses the CLIP `ViT-B/32` model to extract visual embeddings for each image.
+
+2. **Clustering**  
+   Applies DBSCAN to group similar images and flag outliers (`label = -1`).
+
+3. **Filtering**  
+   Skips folders with too few valid images. Only inliers are copied to the destination folder.
+
 
 ### Key Metrics
 - **Completeness**: >95% of hotels have names and locations, ~80% have ratings.
