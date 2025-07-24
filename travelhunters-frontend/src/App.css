@@ -1,4 +1,4 @@
-/* Professional TravelHunters CSS with Image Upload Support */
+/* Professional TravelHunters CSS with Image Upload Support & Testimonials */
 :root {
   --primary-color: #2563eb;
   --primary-hover: #1d4ed8;
@@ -392,6 +392,118 @@ textarea {
   line-height: 1.2;
 }
 
+/* Testimonials Section */
+.testimonials-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.testimonial-card {
+  background: var(--bg-light);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-large);
+}
+
+.testimonial-text {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  position: relative;
+}
+
+.testimonial-text::before {
+  content: '"';
+  font-size: 4rem;
+  color: var(--primary-color);
+  opacity: 0.2;
+  position: absolute;
+  top: -1rem;
+  left: -0.5rem;
+  font-family: Georgia, serif;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: white;
+  box-shadow: var(--shadow-medium);
+  flex-shrink: 0;
+}
+
+.user-details h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.25rem;
+}
+
+.user-details p {
+  color: var(--text-light);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Dark mode support for testimonials */
+.app.dark .testimonial-card {
+  background: var(--bg-light);
+  border-color: var(--border-color);
+}
+
+.app.dark .testimonial-text {
+  color: var(--text-dark);
+}
+
+.app.dark .user-details h3 {
+  color: var(--text-dark);
+}
+
+.app.dark .user-details p {
+  color: var(--text-light);
+}
+
 /* Cards Grid */
 .cards {
   display: grid;
@@ -575,6 +687,31 @@ footer {
   .preview-image {
     height: 100px;
   }
+
+  /* Testimonials responsive */
+  .testimonials-container {
+    padding: 0 1rem;
+  }
+  
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .testimonial-card {
+    padding: 1.5rem;
+  }
+  
+  .testimonial-text {
+    font-size: 1rem;
+  }
+  
+  .user-avatar {
+    width: 45px;
+    height: 45px;
+    font-size: 1.125rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -597,6 +734,34 @@ footer {
 
   .image-grid {
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
+  /* Testimonials mobile */
+  .testimonial-card {
+    padding: 1.25rem;
+  }
+  
+  .testimonial-text {
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .user-info {
+    gap: 0.75rem;
+  }
+  
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .user-details h3 {
+    font-size: 1rem;
+  }
+  
+  .user-details p {
+    font-size: 0.8rem;
   }
 }
 
