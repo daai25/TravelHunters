@@ -144,47 +144,7 @@ This documentation is structured according to the Data Science process:
 
 ## Key Performance Indicators
 
-```{python}
-# Filtered KPI data
-filtered_kpis = [
-    "Top-3 Accuracy",
-    "Overall Accuracy (CNN)",
-    "Overall Accuracy (Total)",
-    "Data Pipeline Success Rate",
-    "User Satisfaction"
-]
-
-filtered_values = [
-    60,   # Top-3 Accuracy %
-    26,   # CNN Accuracy %
-    70,   # Overall Accuracy Total %
-    95,   # Data Pipeline %
-    90    # User Satisfaction converted to % (4.5/5 * 100)
-]
-
-# Create a DataFrame
-filtered_df = pd.DataFrame({
-    "KPI": filtered_kpis,
-    "Value (%)": filtered_values
-})
-
-# Plot
-plt.figure(figsize=(9, 5.5))
-bars = plt.barh(filtered_df["KPI"], filtered_df["Value (%)"], color="mediumseagreen")
-plt.xlabel("Value (%)")
-plt.title("Selected Key Performance Indicators")
-
-# Add value labels
-for bar in bars:
-    width = bar.get_width()
-    plt.text(width + 1, bar.get_y() + bar.get_height()/2,
-             f'{width}%', va='center')
-
-plt.xlim(0, 110)
-plt.tight_layout()
-plt.grid(axis='x', linestyle='--', alpha=0.6)
-plt.show()
-```
+![Graph of model stats](pics/cell-4-output-1.png)
 
 ## Technical Stack
 
