@@ -1,58 +1,71 @@
 # TravelHunters 🌍✈️
 
-An intelligent travel recommendation system that suggests hotels based on user preferences. The project uses web scraping from Booking.com to collect comprehensive hotel data and generate personalized recommendations using machine learning.
+An intelligent travel recommendation system that suggests hotels and destinations based on user preferences – using both image and text input. The project combines web scraping, a modern database, and advanced machine learning (NLP & CNN) to deliver personalized, inspiring travel recommendations.
+
+---
 
 ## Project Overview
 
-TravelHunters combines multiple data sources:
+TravelHunters brings together multiple data sources and AI models:
 
-- **Hotels**: Over 8,000 hotels from Booking.com with images and ratings
-- **Destinations**: Comprehensive destination information with Wikipedia integration
+- **Hotels:** Over 2,000 hotels from Booking.com with images, ratings, and amenities
+- **Destinations:** 129 destinations with Wikipedia integration and curated images
+- **Activities:** GetYourGuide activities for selected destinations
+- **Images:** 10,000+ destination images from Google, Wikipedia, GetYourGuide, Duckduckgo
 
-The system provides personalized recommendations through:
+The system provides recommendations through:
 
-- Content-Based Filtering based on hotel attributes
-- Collaborative Filtering for user behavior patterns
-- Hybrid approaches for optimal recommendation quality
+- **Semantic Text Search:** Finds hotels matching user wishes (e.g. "family friendly, pool, beach") using a multilingual SentenceTransformer (Alibaba-NLP/gte-multilingual-base)
+- **Image Recognition:** Users upload a photo, and a CNN predicts the city to inspire relevant suggestions
+- **Hybrid Search:** Combines both inputs for even more personalized results
+
+---
 
 ## Features
 
 ### Data Acquisition
 
-- **Web Scraping**: Automated scraping of hotel data from Booking.com
-- **Image Download**: Bulk download and processing of hotel images
-- **Wikipedia Integration**: Destination information and images from Wikipedia
-- **Data Validation**: Quality checks and data cleaning pipelines
+- Automated scraping of hotel and activity data from Booking.com and GetYourGuide
+- Bulk download and processing of destination images (Google, Wikipedia, Duckduckgo)
+- Wikipedia integration for destination info
+- Data validation and cleaning pipelines
 
 ### Machine Learning Models
-- **Content-Based Filtering**: Recommendations based on item features
-- **Collaborative Filtering**: User behavior-based recommendations
-- **Hybrid Models**: Combined approaches for enhanced accuracy
-- **Evaluation Metrics**: Comprehensive model performance assessment
 
-### Database & Storage
+- **Semantic Search:** Alibaba-NLP/gte-multilingual-base for multilingual, context-aware hotel matching
+- **CNN City Classifier:** PyTorch/Keras model for city recognition from images
+- **Hybrid Recommendation:** Combines image and text for best results
+- **Evaluation Metrics:** Top-3-Accuracy, overall accuracy, user satisfaction
 
-- **SQLite Database**: Structured storage for hotels and destinations
-- **Image Management**: Organized storage with automated naming conventions
-- **Data Versioning**: Backup and versioning of scraped data
+### Backend & API
+
+- **Flask APIs:** For both hotel recommender and image classifier (models stay in memory for fast response)
+- **SQLite Database:** Structured storage for hotels, destinations, and activities
+
+### Frontend
+
+- **Modern React App:** Upload images, enter wishes, get instant recommendations
+- **Dark/Light Mode, Language Switch (EN/DE)**
+- **Direct booking links, ratings, amenities, and more**
+
+---
 
 ## Project Structure
 
-TravelHunters follows the Data Science project structure with these main directories:
-
-- `data_acquisition/` - Web scraping scripts and data collection tools
-- `database/` - SQLite database and schema definitions
-- `eda/` - Exploratory Data Analysis notebooks and reports
-- `modelling/` - Machine Learning models and evaluation scripts
-- `evaluation/` - Model performance analysis and metrics
-- `docs/` - Project documentation and reports
+- `data_acquisition/` – Web scraping scripts and data collection tools
+- `database/` – SQLite database and schema definitions
+- `modelling/` – Machine Learning models (NLP & CNN) and evaluation scripts
+- `docs/` – Project documentation (Quarto, Markdown, images)
+- `travelhunters-frontend/` – React frontend
 
 ### Key Files
 
-- `scraping_data_files/` - Scrapy spiders for data collection
-- `data_acquisition/download_json_images.py` - Image download automation
-- `database/travelhunters.db` - Main SQLite database
-- `conda.yml` - Python environment configuration
+- `modelling/machine_learning_modells/models/hotel_recommender.py` – Flask API for hotel recommendations
+- `modelling/cnn/predictor.py` – Flask API for city prediction from images
+- `docs/pics/` – Plots and KPI graphics for documentation
+- `conda.yml` – Python environment configuration
+
+---
 
 ## Getting Started
 
@@ -60,123 +73,165 @@ TravelHunters follows the Data Science project structure with these main directo
 
 - Python 3.8+
 - Conda package manager
+- Node.js & npm (for frontend)
 - Git
 
 ### Installation
 
-1. **Clone the repository**:
+1. **Clone the repository:**
    ```bash
    git clone <repository-url>
    cd TravelHunters
    ```
 
-2. **Create conda environment**:
+2. **Create conda environment:**
    ```bash
    conda env create -f conda.yml
    conda activate travelhunters
    ```
 
-3. **Set up environment variables**:
+3. **Install frontend dependencies:**
+   ```bash
+   cd travelhunters-frontend
+   npm install
+   ```
+
+4. **Set up environment variables:**
    ```bash
    cp .env.template .env
    # Edit .env with your API keys and configurations
    ```
 
-### Usage
+---
 
-#### Data Collection
+## Usage
 
-1. **Scrape hotel data from Booking.com**:
+### Data Collection
+
+1. **Scrape hotel data:**
    ```bash
-   cd scraping_data_files
+   cd data_acquisition
    scrapy crawl booking_spider
    ```
 
-2. **Download images**:
+2. **Download images:**
    ```bash
-   cd data_acquisition
    python download_json_images.py
    ```
 
-3. **Merge and process data**:
+3. **Merge and process data:**
    ```bash
    cd mergingjson
    python merging_json_booking.py
    python merging_json_activity.py
    ```
 
-#### Model Training and Evaluation
+### Model Training and Evaluation
 
-1. **Run EDA**:
-   ```bash
-   cd eda
-   python generate-data-profile.py
-   ```
-
-2. **Train models**:
+1. **Train models:**
    ```bash
    cd modelling
-   # Run your model training scripts
+   # Run model training scripts for NLP and CNN
    ```
 
-3. **Evaluate performance**:
+2. **Evaluate performance:**
    ```bash
-   cd evaluation
-   # Run evaluation scripts
+   cd modelling/machine_learning_modells/models
+   python hotel_recommender_tester.py
    ```
 
-## Data Sources
+---
 
-### Hotels (Booking.com)
-- **Volume**: 8,000+ hotels
-- **Attributes**: Name, location, rating, price, amenities, images
-- **Coverage**: Major tourist destinations worldwide
+## Running Backend & Frontend (in parallel)
 
+To use the full application, you need to run both the backend (API) and frontend **in parallel in two terminals**:
 
-### Destinations
-- **Source**: Wikipedia integration
-- **Content**: Destination descriptions, images, geographical data
-- **Coverage**: Comprehensive location information
+1. **Start backend (ML API):**
+   ```bash
+   cd modelling/machine_learning_modells/models
+   python unified_travel_api.py
+   ```
+
+2. **Start frontend:**
+   ```bash
+   cd travelhunters-frontend
+   npm start
+   ```
+
+---
+
+### Frontend: Required Packages
+
+The following Node.js packages are required for the frontend (installed automatically via `npm install`):
+
+- **react**
+- **react-dom**
+- **react-scripts**
+- **axios**
+- **@mui/material**
+- **@emotion/react**
+- **@emotion/styled**
+- **react-dropzone**
+- **react-router-dom**
+- **dotenv**
+- **(see `package.json` for the full list)**
+
+**Install all dependencies:**
+```bash
+cd travelhunters-frontend
+npm install
+```
+
+---
 
 ## Documentation
 
 The project includes comprehensive documentation built with Quarto:
 
-- **Project Charter**: Initial project scope and objectives
-- **Data Report**: Data collection and quality analysis  
-- **Modeling Report**: ML model development and selection
-- **Evaluation Report**: Performance metrics and results
+- **Project Charter:** Project scope and objectives
+- **Data Report:** Data collection and quality analysis  
+- **Modeling Report:** ML model development and selection (NLP & CNN)
+- **Evaluation Report:** Performance metrics and results
 
-Build documentation:
+**Build documentation:**
 ```bash
 cd docs
 quarto render
 ```
 
-## Contributing
+---
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## Key Performance Indicators
 
-## License
+- **Top-3-Accuracy (Hotel Recommender):** 60 %
+- **Overall Accuracy (CNN City Classifier):** 78 %
+- **Combined (Hybrid) Top-3-Accuracy:** 70 %
+- **Data Pipeline Success Rate:** 95 %
+- **User Satisfaction:** 4.5/5 (90 %)
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
 
 ## Team
 
-**Data Science Summer School 2025 - ZHAW School of Engineering**
+**Data Science Summer School 2025 – ZHAW School of Engineering**
 
 - Leona Kryeziu
 - Evan Blazo
-- Joan Felber
+- Jolan Felber
 - Jakub Baranec
+
+---
+
+## License
+
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+
+---
 
 ## References
 
-- [Python Development Guide](modelling/machine_learning_modells/models/refs/python_dev_guide.md)
+- [Alibaba-NLP/gte-multilingual-base](https://huggingface.co/Alibaba-NLP/gte-multilingual-base)
 - Booking.com API Documentation
 - Scrapy Documentation
 - Scikit-learn Documentation
+- PyTorch & Keras Documentation
