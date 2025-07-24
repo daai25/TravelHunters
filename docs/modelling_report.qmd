@@ -7,96 +7,124 @@ This report summarizes the modeling activities of the TravelHunters project, inc
   - Booking.com Hotels Dataset (>2,000 hotels)
   - GetYourGuide Activities Dataset (~90 activities) 
   - Destinations Dataset (~671 destinations)
+  - Google Street View (~2000 images)
+  - Wikipedia (~129 images) 
+  - GetYourGuide Image dataset (~200 images)
+  - Duckduckgo Images (~8000 images)
   - Reference: See Data Report (`docs/data_report.qmd`)
 - **Variables**:
   - **Independent Variables**: Location, price, ratings, categories, image features
   - **Target Variables**: User interaction, booking probability, recommendation relevance
-- **Model Type**: Collaborative Filtering, Content-Based Filtering, Hybrid Recommendation System
+- **Model Type**: Collaborative Filtering, Content-Based Filtering, Hybrid Recommendation System, convolutional Neural Network
 
 ## Model Descriptions
-### Overview of Used Models
+## Language Model
 
-#### 1. Content-Based Filtering Model
-- **Description**: Recommendations based on similarity of hotels/activities using their properties
-- **Implementation**: Cosine-Similarity on normalized features (location, price, rating, category)
-- **Pipeline**: 
-  1. Feature extraction from text data (TF-IDF for descriptions)
-  2. Numerical feature normalization
-  3. Similarity calculation
-  4. Ranking and filtering
-- **Code Reference**: `modelling/content_based_recommender.py`
-- **Hyperparameters**: 
-  - TF-IDF max_features: 1000
-  - Cosine-Similarity Threshold: 0.3
-  - Top-K Recommendations: 10
+### 🏗️ System Overview
 
-#### 2. Collaborative Filtering Model
-- **Description**: Recommendations based on user behavior and preferences of similar users
-- **Implementation**: Matrix Factorization (SVD) with Surprise Library
-- **Pipeline**:
-  1. User-Item Interaction Matrix from rating data
-  2. SVD-Decomposition
-  3. Prediction of missing ratings
-  4. Recommendation generation
-- **Code Reference**: `modelling/collaborative_filtering.py`
-- **Hyperparameters**:
-  - Factors: 50
-  - Regularization: 0.05
-  - Learning Rate: 0.01
+- **Database:** SQLite with >8,000 hotels (`booking_worldwide`)
+- **Models:** Embedding-based (SentenceTransformer), parameter-based, text-based, hybrid
+- **Recommendation:** Semantic search using vector similarity (Cosine Similarity)
+- **CLI Tools:** Direct hotel recommendation and automated evaluation
+- **Evaluation:** Top-3-Accuracy with test cases
 
-#### 3. Hybrid Recommendation System
-- **Description**: Combination of Content-Based and Collaborative Filtering for improved recommendations
-- **Weighting**: 60% Content-Based, 40% Collaborative Filtering
-- **Cold-Start Problem**: Fallback to Content-Based for new users/items
+### 🔑 Main Features
 
-### Graphical Representation
-```
-Raw Data → Feature Engineering → [Content-Based Model] → 
-                                ↓
-                          Hybrid Combiner → Final Recommendations
-                                ↑
-         User Ratings → [Collaborative Filtering] →
-```
+- **hotel_recommender.py:** CLI tool that suggests the Top 3 hotels for any user query (semantic search, price filter, formatted output)
+- **hotel_recommender_tester.py:** Automated test cases, shows input/output and calculates Top-3-Accuracy
+- **embedding_score_generator.py:** Calculates similarity scores between user queries and hotel descriptions and stores them in the database
 
-## Results
-### Key Performance Indicators
+### 🧪 Evaluation
 
-#### Content-Based Filtering
-- **Precision@10**: 0.75
-- **Recall@10**: 0.68
-- **NDCG@10**: 0.72
-- **Coverage**: 85% of items covered
+- Test cases are defined directly in the tester script (query + expected hotel ID)
+- Output shows Top-3 recommendations and whether the expected hotel was found
+- **Current Top-3-Accuracy:** **60%** (based on recent test runs)
 
-#### Collaborative Filtering  
-- **RMSE**: 0.92 (on 5-point rating scale)
-- **MAE**: 0.71
-- **Precision@10**: 0.69
-- **Recall@10**: 0.61
+### 📈 Additional Info
 
-#### Hybrid System
-- **Precision@10**: 0.78 (4% improvement over best individual model)
-- **Recall@10**: 0.71
-- **NDCG@10**: 0.75
-- **User Satisfaction Score**: 4.2/5.0 (user test with 50 participants)
+- **Embedding model:** We use Alibaba-NLP/gte-multilingual-base, a powerful multilingual SentenceTransformer. This model converts both user queries and hotel descriptions into high-dimensional vector embeddings. By comparing these vectors using cosine similarity, the system can semantically match user preferences to the most relevant hotels—even if the wording is different or the query is complex.
+- **Price filter:** Automatically extracted from user input and applied before semantic matching.
+- **Output:** User-friendly, well formatted, and shows all relevant hotel details.
+- **Extensibility:** Easily extendable for more models, test cases, and new recommendation logic.
 
-### Hyperparameter Screening
-- Optimal TF-IDF Features: 500-1000 (plateau effect from 1000)
-- SVD Factors: Sweet spot at 50 (overfitting from 100)
-- Hybrid Weighting: 60/40 shows best balance between precision and recall
+## Convolutional Neural Network
 
-## Model Interpretation
-### Explainable AI Components
-- **Feature Importance**: Ratings (35%), Location (30%), Price (20%), Category (15%)
-- **Similarity Analysis**: Hotels in the same city show highest similarity (Cosine > 0.7)
-- **User Groups**: Identification of 5 main user types (Budget, Luxury, Adventure, Family, Business)
+### Configuration
+
+Adjust the following parameters in the script as needed:
+
+- `IMG_SIZE`: 224 × 224  
+- `BATCH_SIZE`: 32  
+- `EPOCHS`: 8  
+- `LEARNING_RATE`: 0.001  
+- `NUM_WORKERS`: 2  
+- `TRAIN_DIR`: `C:\Users\evanb\Training`  
+- `VAL_DIR`: `C:\Users\evanb\Validation`
+
+### How It Works
+
+1. **Data Preparation**  
+   Loads image paths and maps city folder names to class indices.
+
+2. **Dataset Class**  
+   Uses a custom `CityDataset` class with torchvision transforms.
+
+3. **Model Architecture**  
+   A ResNet-18 model is used, with the final fully connected layer adapted to the number of cities.
+
+4. **Training**  
+   Trains the model for a set number of epochs using cross-entropy loss and SGD optimizer.
+
+5. **Evaluation**  
+   Evaluates the model and prints overall and per-city accuracy.
+
+### Evaluation Output
+
+After the model completes training and validation, the script prints evaluation results including:
+
+- **Overall Accuracy**  
+  The percentage of all validation images classified correctly.
+
+- **Per-City Accuracy**  
+  A breakdown of model performance for each city class. Example format:
+
+  | City      | Accuracy (%) |
+  |-----------|--------------|
+  | New York  | 82.4         |
+  | Tokyo     | 79.1         |
+  | Paris     | 85.7         |
+  | London    | 80.3         |
+
+- **Correct Predictions Per City**  
+  The total number of correctly classified images per city, e.g.:
+
+  | City      | Correct Predictions |
+  |-----------|---------------------|
+  | New York  | 247                 |
+  | Tokyo     | 221                 |
+  | Paris     | 269                 |
+  | London    | 233                 |
+
+These statistics help analyze where the model performs well and where it may need improvement.
+
+### Model Architecture: ResNet18
+
+The script uses **ResNet-18** (Residual Networks with 18 layers), a convolutional neural network (CNN) architecture, known for its ability to train very deep networks effectively by using **residual connections**. These connections help to avoid the vanishing gradient problem, enabling the network to learn from much deeper architectures without significant performance degradation.
+
+### Why ResNet-18?
+
+- **Shallow Depth**: ResNet-18 is a relatively lightweight architecture with 18 layers, making it suitable for tasks that do not require excessively deep networks, but still benefit from the residual connection design.
+- **Transfer Learning**: By leveraging a pretrained ResNet-18 model, the classifier benefits from the learned features of a large-scale dataset (like ImageNet) without requiring training from scratch. This significantly speeds up the training process and improves performance, especially with limited data.
 
 ### Goal Achievement
 - **Primary Goal Achieved**: Automated travel recommendations with >75% precision
 - **Secondary Goals**: 
-  ✅ Global coverage achieved
-  ✅ Multi-domain recommendations (Hotels + Activities)
-  ⚠️ Real-time recommendations still need optimization (>2s latency)
+  - Global coverage achieved
+  - Multi-domain recommendations (Hotels + Activities)
+  - Real-time recommendations still need optimization (>2s latency)
 
+
+## Conclusions
 ### Insights and Application
 - **Main Insight**: Hybrid approach significantly outperforms individual models
 - **Limitations**: 
@@ -105,7 +133,6 @@ Raw Data → Feature Engineering → [Content-Based Model] →
   - Limited real-time capability for large datasets
 - **Applicability**: Production-ready for batch recommendations, optimization required for online scenarios
 
-## Conclusions and Next Steps
 ### Key Insights
 1. **Hybrid models** show best performance for travel recommendations
 2. **Ratings and location** are most important factors for user decisions
@@ -115,12 +142,6 @@ Raw Data → Feature Engineering → [Content-Based Model] →
 - **Data Bias**: Overrepresentation of popular destinations
 - **Scalability**: Performance degradation with >10,000 items
 - **Currency**: Static models, no dynamic adaptation
-
-### Enhancement Suggestions
-1. **Deep Learning**: Implementation of Neural Collaborative Filtering
-2. **Real-time Learning**: Online learning for dynamic preference adaptation
-3. **Multi-Modal Features**: Integration of image analysis for better content features
-4. **Context-Aware**: Consideration of season, weather, events
 
 ### Deployment Proposal
 - **Phase 1**: Batch recommendations (weekly) for registered users
